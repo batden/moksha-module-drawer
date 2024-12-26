@@ -992,6 +992,11 @@ target: "bg";
 	       color: 255 15 0 255;
 	    }
 	    description {
+	       state: "active" 0.0;
+	       inherit: "default" 0.0;
+	       color: 255 15 0 255;
+	    }
+	    description {
 	       state: "hidden" 0.0;
 	       inherit: "default" 0.0;
 	       color: 0 0 0 0;
@@ -2709,6 +2714,11 @@ target: "e.text.label";
 		  elipsis: 0;
 		  text_class: "module_normal";
 	       }
+	    }
+	    description {
+	       state: "active" 0.0;
+	       inherit: "default" 0.0;
+	       color: 255 15 0 255;
 	    }
 	    description {
 	       state: "activate" 0.0;
