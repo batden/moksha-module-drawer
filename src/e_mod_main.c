@@ -1495,7 +1495,7 @@ _drawer_thumbnail_swallow(Evas_Object *thumbnail, Evas_Object *swallow)
 	if (!w || !h)
 	  edje_object_size_min_calc(swallow, &w, &h);
 
-	edje_extern_object_min_size_set(swallow, w, h);
+	evas_object_size_hint_min_set(swallow, w, h);
      }
    else if (!(strcmp(type, "e_icon")))
      e_icon_scale_up_set(swallow, 0);
