@@ -19,6 +19,15 @@ extern int _e_drawer_log_dom;
 #define ERR(...)            EINA_LOG_DOM_ERR(_e_drawer_log_dom, __VA_ARGS__)
 #define CRI(...)            EINA_LOG_DOM_CRIT(_e_drawer_log_dom, __VA_ARGS__)
 
+#ifdef ENABLE_NLS
+# include <libintl.h>
+# define D_(string) dgettext(PACKAGE, string)
+#else
+# define bindtextdomain(domain,dir)
+# define bind_textdomain_codeset(domain,codeset)
+# define D_(string) (string)
+#endif
+
 typedef enum
 {
      DRAWER_SOURCES,
