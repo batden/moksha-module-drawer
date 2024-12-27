@@ -1502,7 +1502,7 @@ _drawer_thumbnail_swallow(Evas_Object *thumbnail, Evas_Object *swallow)
 }
 
 static void
-_drawer_thumb_exist_cb(Ethumb_Client *client, Ethumb_Exists *thread, Eina_Bool exists, void *data)
+_drawer_thumb_exist_cb(void *data, Ethumb_Client *client, Ethumb_Exists *thread, Eina_Bool exists)
 {
    Drawer_Thumb_Data *td = data;
 
