@@ -128,6 +128,7 @@ static void _smart_show(Evas_Object *obj);
 static void _smart_hide(Evas_Object *obj);
 
 /* Local Variables */
+EINTERN int _e_drawer_log_dom = -1;
 static Eina_List *instances = NULL;
 static E_Config_DD *conf_edd = NULL;
 static E_Config_DD *conf_item_edd = NULL;
@@ -165,6 +166,9 @@ e_modapi_init(E_Module *m)
    snprintf(buf, sizeof(buf), "%s/locale", e_module_dir_get(m));
    bindtextdomain(PACKAGE, buf);
    bind_textdomain_codeset(PACKAGE, "UTF-8");
+   
+   _e_drawer_log_dom = eina_log_domain_register("Drawer", EINA_COLOR_ORANGE);
+   eina_log_domain_level_set("Drawer", EINA_LOG_LEVEL_DBG);
    const char *homedir;
 
 #ifdef HAVE_ETHUMB
@@ -338,6 +342,8 @@ e_modapi_shutdown(E_Module *m)
    ethumb_client_shutdown();
 #endif
 
+   eina_log_domain_unregister(_e_drawer_log_dom);
+   _e_drawer_log_dom = -1;
    return 1;
 }
 
