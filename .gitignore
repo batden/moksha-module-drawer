@@ -58,6 +58,14 @@ src/e_mod*.o
 src/e_mod*.lo
 src/module.la
 src/plugins/sources/.deps/
+src/plugins/sources/.libs/
+src/plugins/sources/*.la
+src/plugins/sources/*.lo
+src/plugins/sources/*.o
 src/plugins/views/.deps/
+src/plugins/views/.libs/
+src/plugins/views/*.la
+src/plugins/views/*.lo
+src/plugins/views/*.o
 stamp-h1
 mkdeb_editing
