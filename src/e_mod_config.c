@@ -1,6 +1,6 @@
 #include "e_mod_main.h"
 
-struct _E_Config_Dialog_Data 
+struct _E_Config_Dialog_Data
 {
    Evas_Object *toolbar, *main_list;
    Evas_Object *sources_comment, *views_comment;
@@ -27,7 +27,7 @@ static void _views_list_cb_change(void *data, Evas_Object *obj);
 
 /* External Functions */
 E_Config_Dialog *
-e_int_config_drawer_module(E_Container *con, Config_Item *ci) 
+e_int_config_drawer_module(E_Container *con, Config_Item *ci)
 {
    E_Config_Dialog *cfd = NULL;
    E_Config_Dialog_View *v = NULL;
@@ -48,7 +48,7 @@ e_int_config_drawer_module(E_Container *con, Config_Item *ci)
    snprintf(buf, sizeof(buf), "%s/e-module-drawer.edj", drawer_conf->module->dir);
 
    /* create new config dialog */
-   cfd = e_config_dialog_new(con, D_("Drawer Module"), "Drawer", 
+   cfd = e_config_dialog_new(con, D_("Drawer Module"), "Drawer",
                              "_e_module_drawer_cfg_dlg", buf, 0, v, ci);
 
    e_dialog_resizable_set(cfd->dia, 1);
@@ -58,7 +58,7 @@ e_int_config_drawer_module(E_Container *con, Config_Item *ci)
 
 /* Local Functions */
 static void *
-_create_data(E_Config_Dialog *cfd) 
+_create_data(E_Config_Dialog *cfd)
 {
    E_Config_Dialog_Data *cfdata = NULL;
 
@@ -68,8 +68,8 @@ _create_data(E_Config_Dialog *cfd)
    return cfdata;
 }
 
-static void 
-_free_data(E_Config_Dialog *cfd, E_Config_Dialog_Data *cfdata) 
+static void
+_free_data(E_Config_Dialog *cfd, E_Config_Dialog_Data *cfdata)
 {
    drawer_plugins_list_free(cfdata->views);
    drawer_plugins_list_free(cfdata->sources);
@@ -81,15 +81,15 @@ _free_data(E_Config_Dialog *cfd, E_Config_Dialog_Data *cfdata)
    E_FREE(cfdata);
 }
 
-static void 
-_fill_data(E_Config_Dialog_Data *cfdata) 
+static void
+_fill_data(E_Config_Dialog_Data *cfdata)
 {
    cfdata->view = eina_stringshare_add(cfdata->ci->view);
    cfdata->source = eina_stringshare_add(cfdata->ci->source);
 }
 
 static Evas_Object *
-_basic_create(E_Config_Dialog *cfd, Evas *evas, E_Config_Dialog_Data *cfdata) 
+_basic_create(E_Config_Dialog *cfd, Evas *evas, E_Config_Dialog_Data *cfdata)
 {
    Evas_Object *o = NULL, *of = NULL, *oi = NULL;
 
@@ -121,8 +121,8 @@ _basic_create(E_Config_Dialog *cfd, Evas *evas, E_Config_Dialog_Data *cfdata)
    return o;
 }
 
-static int 
-_basic_apply(E_Config_Dialog *cfd, E_Config_Dialog_Data *cfdata) 
+static int
+_basic_apply(E_Config_Dialog *cfd, E_Config_Dialog_Data *cfdata)
 {
    eina_stringshare_del(cfdata->ci->view);
    eina_stringshare_del(cfdata->ci->source);
@@ -218,8 +218,8 @@ _conf_plugin_sel(void *data1, void *data2)
    evas_event_thaw(evas);
 }
 
-static void 
-_sources_list_cb_change(void *data, Evas_Object *obj) 
+static void
+_sources_list_cb_change(void *data, Evas_Object *obj)
 {
    E_Config_Dialog_Data *cfdata = NULL;
    Drawer_Plugin_Type *pi;

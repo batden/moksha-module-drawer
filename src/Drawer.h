@@ -81,11 +81,11 @@ struct _Drawer_Plugin_Type
 struct _Drawer_Plugin
 {
    Drawer_Plugin_Api   *api;
-   
+
    const char          *name;
    const char          *dir;
    void                *handle;
-   
+
    Eina_Bool            enabled : 1;
    Eina_Bool            error : 1;
 
@@ -132,7 +132,7 @@ struct _Drawer_Source
 struct _Drawer_View
 {
    Drawer_Plugin	plugin;
-   
+
    struct
      {
         /* Returns an Evas_Object from the given Drawer_Source_Items */

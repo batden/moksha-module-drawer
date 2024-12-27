@@ -21,7 +21,7 @@ typedef enum
    LIST_SMALL
 } List_View_Type;
 
-struct _Instance 
+struct _Instance
 {
    Drawer_View *view;
 
@@ -64,7 +64,7 @@ struct _Conf
    List_View_Type view_type;
 };
 
-struct _E_Config_Dialog_Data 
+struct _E_Config_Dialog_Data
 {
    Instance *inst;
 
@@ -308,7 +308,7 @@ EAPI void
 drawer_view_orient_set(Drawer_View *v, E_Gadcon_Orient orient)
 {
    Instance *inst = NULL;
-   
+
    inst = DRAWER_PLUGIN(v)->data;
 
    switch (orient)
@@ -501,13 +501,13 @@ _list_horizontal_entry_create(Instance *inst, Drawer_Source_Item *si)
    e->inst = inst;
    e->si = si;
 
-   edje_object_signal_callback_add(e->o_holder, "e,action,select", "drawer", 
+   edje_object_signal_callback_add(e->o_holder, "e,action,select", "drawer",
 				   _list_entry_select_cb, e);
-   edje_object_signal_callback_add(e->o_holder, "e,action,deselect", "drawer", 
+   edje_object_signal_callback_add(e->o_holder, "e,action,deselect", "drawer",
 				   _list_entry_deselect_cb, e);
-   edje_object_signal_callback_add(e->o_holder, "e,action,activate", "drawer", 
+   edje_object_signal_callback_add(e->o_holder, "e,action,activate", "drawer",
 				   _list_entry_activate_cb, e);
-   edje_object_signal_callback_add(e->o_holder, "e,action,context", "drawer", 
+   edje_object_signal_callback_add(e->o_holder, "e,action,context", "drawer",
 				   _list_entry_context_cb, e);
 
    return e;
@@ -525,13 +525,13 @@ _list_vertical_entry_create(Instance *inst, Drawer_Source_Item *si)
    e->inst = inst;
    e->si = si;
 
-   edje_object_signal_callback_add(e->o_holder, "e,action,select", "drawer", 
+   edje_object_signal_callback_add(e->o_holder, "e,action,select", "drawer",
 				   _list_entry_select_cb, e);
-   edje_object_signal_callback_add(e->o_holder, "e,action,deselect", "drawer", 
+   edje_object_signal_callback_add(e->o_holder, "e,action,deselect", "drawer",
 				   _list_entry_deselect_cb, e);
-   edje_object_signal_callback_add(e->o_holder, "e,action,activate", "drawer", 
+   edje_object_signal_callback_add(e->o_holder, "e,action,activate", "drawer",
 				   _list_entry_activate_cb, e);
-   edje_object_signal_callback_add(e->o_holder, "e,action,context", "drawer", 
+   edje_object_signal_callback_add(e->o_holder, "e,action,context", "drawer",
 				   _list_entry_context_cb, e);
 
    return e;
@@ -615,7 +615,7 @@ static void
 _list_autoscroll_update(Instance *inst, Evas_Coord x, Evas_Coord y, Evas_Coord w, Evas_Coord h)
 {
    double d;
-   
+
    if (e_box_orientation_get(inst->o_box))
      {
 	if (w > 1) d = (double)x / (double)(w - 1);
@@ -629,10 +629,10 @@ _list_autoscroll_update(Instance *inst, Evas_Coord x, Evas_Coord y, Evas_Coord w
    if (d < 0.0) d = 0.0;
    else if (d > 1.0) d = 1.0;
    if (!inst->scroll_timer)
-     inst->scroll_timer = 
+     inst->scroll_timer =
      ecore_timer_add(0.01, _list_scroll_timer, inst);
    if (!inst->scroll_animator)
-     inst->scroll_animator = 
+     inst->scroll_animator =
      ecore_animator_add(_list_scroll_animator, inst);
    inst->scroll_wanted = d;
 }
@@ -642,7 +642,7 @@ _list_scroll_timer(void *data)
 {
    Instance *inst = NULL;
    double d;
-   
+
    inst = data;
    d = inst->scroll_wanted - inst->scroll_pos;
    if (d < 0) d = -d;
@@ -660,7 +660,7 @@ static Eina_Bool
 _list_scroll_animator(void *data)
 {
    Instance *inst = NULL;
-   
+
    inst = data;
    if (e_box_orientation_get(inst->o_box))
      e_box_align_set(inst->o_box, 1.0 - inst->scroll_pos, 0.5);
@@ -683,11 +683,11 @@ _list_cb_list_mouse_move(void *data, Evas *e, Evas_Object *obj, void *event_info
    Instance *inst = NULL;
    Evas_Event_Mouse_Move *ev;
    Evas_Coord x, y, w, h;
-   
+
    ev = event_info;
    inst = data;
    evas_object_geometry_get(inst->o_box, &x, &y, &w, &h);
-   _list_autoscroll_update(inst, ev->cur.output.x - x, 
+   _list_autoscroll_update(inst, ev->cur.output.x - x,
 			   ev->cur.output.y - y, w, h);
 }
 
@@ -705,7 +705,7 @@ _list_sort_by_category_cb(const void *d1, const void *d2)
    if (!si2->category) return 1;
 
    ret = strcmp(si1->category, si2->category);
-   
+
    return ret > 0 ? 1 : -1;
 }
 
@@ -818,7 +818,7 @@ _list_conf_activation_cb(void *data1, void *data2 __UNUSED__)
 
    /* create new config dialog */
    _cfd = e_config_dialog_new(e_container_current_get(e_manager_current_get()),
-	 D_("Drawer Plugin : List"), "Drawer_List", 
+	 D_("Drawer Plugin : List"), "Drawer_List",
 	 "_e_module_drawer_cfg_dlg", buf, 0, v, inst);
 
    e_dialog_resizable_set(_cfd->dia, 1);
@@ -835,14 +835,14 @@ _list_cf_create_data(E_Config_Dialog *cfd)
    return cfdata;
 }
 
-static void 
+static void
 _list_cf_free_data(E_Config_Dialog *cfd, E_Config_Dialog_Data *cfdata)
 {
    _cfd = NULL;
    E_FREE(cfdata);
 }
 
-static void 
+static void
 _list_cf_fill_data(E_Config_Dialog_Data *cfdata)
 {
    cfdata->view_type = cfdata->inst->conf->view_type;
@@ -866,7 +866,7 @@ _list_cf_basic_create(E_Config_Dialog *cfd, Evas *evas, E_Config_Dialog_Data *cf
    return of;
 }
 
-static int 
+static int
 _list_cf_basic_apply(E_Config_Dialog *cfd, E_Config_Dialog_Data *cfdata)
 {
    cfdata->inst->conf->view_type = cfdata->view_type;

@@ -14,7 +14,7 @@ typedef enum
    SORT_SIZE,
 } Sort_Type;
 
-struct _Instance 
+struct _Instance
 {
    Drawer_Source *source;
 
@@ -57,7 +57,7 @@ struct _Dirwatcher_Priv
    Instance *inst;
 };
 
-struct _E_Config_Dialog_Data 
+struct _E_Config_Dialog_Data
 {
    Instance *inst;
 
@@ -142,7 +142,7 @@ EAPI int
 drawer_plugin_shutdown(Drawer_Plugin *p)
 {
    Instance *inst = NULL;
-   
+
    inst = p->data;
 
    if (inst->monitor)
@@ -153,7 +153,7 @@ drawer_plugin_shutdown(Drawer_Plugin *p)
    eina_stringshare_del(inst->conf->dir);
    eina_stringshare_del(inst->conf->fm);
 
-   if (inst->menu) 
+   if (inst->menu)
      {
         e_menu_post_deactivate_callback_set(inst->menu, NULL, NULL);
         e_object_del(E_OBJECT(inst->menu));
@@ -369,7 +369,7 @@ _dirwatcher_source_items_free(Instance *inst)
    while (inst->items)
      {
 	Drawer_Source_Item *si = NULL;
-	
+
 	si = inst->items->data;
 	inst->items = eina_list_remove_list(inst->items, inst->items);
 	eina_stringshare_del(si->label);
@@ -473,7 +473,7 @@ _dirwatcher_monitor_cb(void *data, Ecore_File_Monitor *em __UNUSED__, Ecore_File
    ecore_event_add(DRAWER_EVENT_SOURCE_UPDATE, ev, _dirwatcher_event_update_free, NULL);
 }
 
-static void 
+static void
 _dirwatcher_cb_menu_post(void *data, E_Menu *menu)
 {
    Instance *inst = NULL;
@@ -521,7 +521,7 @@ _dirwatcher_conf_activation_cb(void *data1, void *data2 __UNUSED__)
 
    /* create new config dialog */
    _cfd = e_config_dialog_new(e_container_current_get(e_manager_current_get()),
-	 D_("Drawer Plugin : Directory Watcher"), "Drawer_Dirwatcher", 
+	 D_("Drawer Plugin : Directory Watcher"), "Drawer_Dirwatcher",
 	 "_e_module_drawer_cfg_dlg", buf, 0, v, inst);
 
    e_dialog_resizable_set(_cfd->dia, 1);
@@ -538,7 +538,7 @@ _dirwatcher_cf_create_data(E_Config_Dialog *cfd)
    return cfdata;
 }
 
-static void 
+static void
 _dirwatcher_cf_free_data(E_Config_Dialog *cfd, E_Config_Dialog_Data *cfdata)
 {
    if (cfdata->dir) E_FREE(cfdata->dir);
@@ -548,7 +548,7 @@ _dirwatcher_cf_free_data(E_Config_Dialog *cfd, E_Config_Dialog_Data *cfdata)
    E_FREE(cfdata);
 }
 
-static void 
+static void
 _dirwatcher_cf_fill_data(E_Config_Dialog_Data *cfdata)
 {
    cfdata->dir = strdup(cfdata->inst->conf->dir);
@@ -566,7 +566,7 @@ _dirwatcher_cf_basic_create(E_Config_Dialog *cfd, Evas *evas, E_Config_Dialog_Da
 
    of = e_widget_framelist_add(evas, D_("Watch path"), 1);
    ob = e_widget_entry_add(evas, &cfdata->dir, NULL, NULL, NULL);
-   e_widget_framelist_object_append(of, ob);  
+   e_widget_framelist_object_append(of, ob);
 
    e_widget_list_object_append(o, of, 1, 0, 0.5);
 
@@ -597,7 +597,7 @@ _dirwatcher_cf_basic_create(E_Config_Dialog *cfd, Evas *evas, E_Config_Dialog_Da
    return o;
 }
 
-static int 
+static int
 _dirwatcher_cf_basic_apply(E_Config_Dialog *cfd, E_Config_Dialog_Data *cfdata)
 {
    Instance *inst = NULL;

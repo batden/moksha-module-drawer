@@ -10,7 +10,7 @@ typedef struct _Instance Instance;
 typedef struct _Drawer_Thumb_Data Drawer_Thumb_Data;
 typedef struct _Smart_Data Smart_Data;
 
-struct _Instance 
+struct _Instance
 {
    /* pointer to this gadget's container */
    E_Gadcon_Client *gcc;
@@ -144,9 +144,9 @@ EAPI int DRAWER_EVENT_SOURCE_MAIN_ICON_UPDATE = 0;
 EAPI int DRAWER_EVENT_VIEW_ITEM_ACTIVATE = 0;
 EAPI int DRAWER_EVENT_VIEW_ITEM_CONTEXT = 0;
 
-static const E_Gadcon_Client_Class _drawer_gc_class = 
+static const E_Gadcon_Client_Class _drawer_gc_class =
 {
-   GADCON_CLIENT_CLASS_VERSION, "drawer", 
+   GADCON_CLIENT_CLASS_VERSION, "drawer",
    {
       _drawer_gc_init, _drawer_gc_shutdown, _drawer_gc_orient, _drawer_gc_label,
       _drawer_gc_icon, _drawer_gc_id_new, NULL, e_gadcon_site_is_not_toolbar
@@ -160,13 +160,13 @@ EAPI E_Module_Api e_modapi = {E_MODULE_API_VERSION, "Drawer"};
  * Module Functions
  */
 EAPI void *
-e_modapi_init(E_Module *m) 
+e_modapi_init(E_Module *m)
 {
    char buf[4096];
    snprintf(buf, sizeof(buf), "%s/locale", e_module_dir_get(m));
    bindtextdomain(PACKAGE, buf);
    bind_textdomain_codeset(PACKAGE, "UTF-8");
-   
+
    _e_drawer_log_dom = eina_log_domain_register("Drawer", EINA_COLOR_ORANGE);
    eina_log_domain_level_set("Drawer", EINA_LOG_LEVEL_DBG);
    const char *homedir;
@@ -176,7 +176,7 @@ e_modapi_init(E_Module *m)
 #endif
 
    homedir = e_user_homedir_get();
-   snprintf(buf, sizeof(buf), "%s/.e/e/config/%s/module.drawer", 
+   snprintf(buf, sizeof(buf), "%s/.e/e/config/%s/module.drawer",
 	    homedir, e_config_profile_get());
    ecore_file_mkdir(buf);
 
@@ -204,10 +204,10 @@ e_modapi_init(E_Module *m)
 
    /* Tell E to find any existing module data. First run ? */
    drawer_conf = e_config_domain_load("module.drawer", conf_edd);
-   if (drawer_conf) 
+   if (drawer_conf)
      {
         /* Check config version */
-        if ((drawer_conf->version >> 16) < MOD_CONFIG_FILE_EPOCH) 
+        if ((drawer_conf->version >> 16) < MOD_CONFIG_FILE_EPOCH)
           {
              /* config too old */
              _drawer_conf_free();
@@ -227,11 +227,11 @@ e_modapi_init(E_Module *m)
           }
 
         /* Ardvarks */
-        else if (drawer_conf->version > MOD_CONFIG_FILE_VERSION) 
+        else if (drawer_conf->version > MOD_CONFIG_FILE_VERSION)
           {
              /* config too new...wtf ? */
              _drawer_conf_free();
-	     ecore_timer_add(1.0, _drawer_conf_timer, 
+	     ecore_timer_add(1.0, _drawer_conf_timer,
 			     D_("Your Drawer Module configuration is NEWER "
 			     "than the module version. This is "
 			     "very<br>strange. This should not happen unless"
@@ -267,7 +267,7 @@ e_modapi_init(E_Module *m)
 	  }
      }
 
-   /* if we don't have a config yet, or it got erased above, 
+   /* if we don't have a config yet, or it got erased above,
     * then create a default one */
    if (!drawer_conf) _drawer_conf_new();
 
@@ -295,8 +295,8 @@ e_modapi_init(E_Module *m)
 /*
  * Function to unload the module
  */
-EAPI int 
-e_modapi_shutdown(E_Module *m) 
+EAPI int
+e_modapi_shutdown(E_Module *m)
 {
    /* Unregister the config dialog from the main panel */
    e_configure_registry_item_del("extensions/drawer");
@@ -314,7 +314,7 @@ e_modapi_shutdown(E_Module *m)
    e_gadcon_provider_unregister(&_drawer_gc_class);
 
    /* Cleanup our item list */
-   while (drawer_conf->conf_items) 
+   while (drawer_conf->conf_items)
      {
         Config_Item *ci = NULL;
 
@@ -322,8 +322,8 @@ e_modapi_shutdown(E_Module *m)
         ci = drawer_conf->conf_items->data;
 
         /* remove it */
-        drawer_conf->conf_items = 
-          eina_list_remove_list(drawer_conf->conf_items, 
+        drawer_conf->conf_items =
+          eina_list_remove_list(drawer_conf->conf_items,
                                 drawer_conf->conf_items);
 
 	_drawer_conf_item_free(ci);
@@ -349,9 +349,9 @@ e_modapi_shutdown(E_Module *m)
 
 /*
  * Function to Save the modules config
- */ 
-EAPI int 
-e_modapi_save(E_Module *m) 
+ */
+EAPI int
+e_modapi_save(E_Module *m)
 {
    Eina_List *l = NULL;
    Instance *inst = NULL;
@@ -405,7 +405,7 @@ drawer_plugins_list(Drawer_Plugin_Category cat)
 
 	snprintf(buf2, sizeof(buf2), "%s%s", moddir, mod);
 	if (!(desk = efreet_desktop_new(buf2))) goto end;
-	if (desk->x) 
+	if (desk->x)
 	  pi->title = eina_stringshare_add(eina_hash_find(desk->x, "X-Drawer-Title"));
 	if (!pi->title) pi->title = eina_stringshare_add(desk->name);
 
@@ -442,7 +442,7 @@ Drawer_Plugin *
 drawer_plugin_load(Config_Item *ci, Drawer_Plugin_Category cat, const char *name)
 {
    Instance *inst = NULL;
-   
+
    inst = _drawer_instance_get(ci);
 
    if (cat == DRAWER_SOURCES)
@@ -644,10 +644,10 @@ _drawer_shelf_update(Instance *inst, Drawer_Source_Item *si)
      {
 	char buf[4096];
 
-	snprintf(buf, sizeof(buf), "%s/e-module-drawer.edj", 
+	snprintf(buf, sizeof(buf), "%s/e-module-drawer.edj",
 	      drawer_conf->module->dir);
 	inst->o_content = edje_object_add(evas);
-	if (!e_theme_edje_object_set(inst->o_content, "base/theme/modules/drawer", 
+	if (!e_theme_edje_object_set(inst->o_content, "base/theme/modules/drawer",
 				     "modules/drawer/main/icon"))
 	  edje_object_file_set(inst->o_content, buf, "modules/drawer/main/icon");
      }
@@ -689,9 +689,9 @@ _drawer_popup_create(Instance *inst)
    e_popup_name_set(inst->popup->win, "drawer");
    _drawer_popup_theme_set(inst);
    e_popup_edje_bg_object_set(inst->popup->win, inst->popup->o_bg);
-   edje_object_signal_callback_add(inst->popup->o_bg, "e,action,popup,hidden", "drawer", 
+   edje_object_signal_callback_add(inst->popup->o_bg, "e,action,popup,hidden", "drawer",
 				   _drawer_popup_hidden_cb, inst);
-   edje_object_signal_callback_add(inst->popup->o_bg, "e,action,popup,shown", "drawer", 
+   edje_object_signal_callback_add(inst->popup->o_bg, "e,action,popup,shown", "drawer",
 				   _drawer_popup_shown_cb, inst);
 
    _drawer_popup_update(inst);
@@ -869,7 +869,7 @@ _drawer_content_generate(Instance *inst, Evas *evas)
      {
         char buf[4096];
 
-        snprintf(buf, sizeof(buf), "%s/e-module-drawer.edj", 
+        snprintf(buf, sizeof(buf), "%s/e-module-drawer.edj",
                  drawer_conf->module->dir);
         con = _drawer_content_new(evas, o);
         evas_object_show(con);
@@ -893,20 +893,20 @@ _drawer_container_setup(Instance *inst, E_Gadcon_Orient orient)
    inst->flags.is_floating = (orient == E_GADCON_ORIENT_FLOAT);
 
    /* theme file */
-   snprintf(buf, sizeof(buf), "%s/e-module-drawer.edj", 
+   snprintf(buf, sizeof(buf), "%s/e-module-drawer.edj",
             drawer_conf->module->dir);
 
    if (inst->o_content)
      edje_object_part_unswallow(inst->o_drawer, inst->o_content);
    if (inst->flags.is_floating)
      {
-	if (!e_theme_edje_object_set(inst->o_drawer, "base/theme/modules/drawer", 
+	if (!e_theme_edje_object_set(inst->o_drawer, "base/theme/modules/drawer",
 		 "modules/drawer/main_float"))
 	  edje_object_file_set(inst->o_drawer, buf, "modules/drawer/main_float");
      }
    else
      {
-	if (!e_theme_edje_object_set(inst->o_drawer, "base/theme/modules/drawer", 
+	if (!e_theme_edje_object_set(inst->o_drawer, "base/theme/modules/drawer",
 		 "modules/drawer/main"))
 	  edje_object_file_set(inst->o_drawer, buf, "modules/drawer/main");
 	switch(orient)
@@ -1204,7 +1204,7 @@ init_done:
 
 /* Called when Gadget_Container says go */
 static E_Gadcon_Client *
-_drawer_gc_init(E_Gadcon *gc, const char *name, const char *id, const char *style) 
+_drawer_gc_init(E_Gadcon *gc, const char *name, const char *id, const char *style)
 {
    Instance *inst = NULL;
 
@@ -1221,7 +1221,7 @@ _drawer_gc_init(E_Gadcon *gc, const char *name, const char *id, const char *styl
    inst->gcc->data = inst;
 
    /* hook a mouse down. we want/have a popup menu, right ? */
-   evas_object_event_callback_add(inst->o_drawer, EVAS_CALLBACK_MOUSE_DOWN, 
+   evas_object_event_callback_add(inst->o_drawer, EVAS_CALLBACK_MOUSE_DOWN,
                                   _drawer_mouse_down_cb, inst);
 
    /* add to list of running instances so we can cleanup later */
@@ -1264,8 +1264,8 @@ _drawer_gc_init(E_Gadcon *gc, const char *name, const char *id, const char *styl
 }
 
 /* Called when Gadget_Container says stop */
-static void 
-_drawer_gc_shutdown(E_Gadcon_Client *gcc) 
+static void
+_drawer_gc_shutdown(E_Gadcon_Client *gcc)
 {
    Instance *inst = NULL;
 
@@ -1285,17 +1285,17 @@ _drawer_gc_shutdown(E_Gadcon_Client *gcc)
 	evas_object_del(inst->o_content);
      }
    /* kill popup menu */
-   if (inst->menu) 
+   if (inst->menu)
      {
         e_menu_post_deactivate_callback_set(inst->menu, NULL, NULL);
         e_object_del(E_OBJECT(inst->menu));
         inst->menu = NULL;
      }
    /* delete the visual */
-   if (inst->o_drawer) 
+   if (inst->o_drawer)
      {
         /* remove mouse down callback hook */
-        evas_object_event_callback_del(inst->o_drawer, EVAS_CALLBACK_MOUSE_DOWN, 
+        evas_object_event_callback_del(inst->o_drawer, EVAS_CALLBACK_MOUSE_DOWN,
                                        _drawer_mouse_down_cb);
         evas_object_del(inst->o_drawer);
      }
@@ -1315,11 +1315,11 @@ _drawer_gc_shutdown(E_Gadcon_Client *gcc)
 }
 
 /* For for when container says we are changing position */
-static void 
-_drawer_gc_orient(E_Gadcon_Client *gcc, E_Gadcon_Orient orient) 
+static void
+_drawer_gc_orient(E_Gadcon_Client *gcc, E_Gadcon_Orient orient)
 {
    Instance *inst = NULL;
-   
+
    inst = gcc->data;
    _drawer_container_setup(inst, orient);
    if (inst->composite && inst->composite->enabled)
@@ -1339,14 +1339,14 @@ _drawer_gc_orient(E_Gadcon_Client *gcc, E_Gadcon_Orient orient)
 
 /* Gadget/Module label */
 static const char *
-_drawer_gc_label(const E_Gadcon_Client_Class *client_class) 
+_drawer_gc_label(const E_Gadcon_Client_Class *client_class)
 {
    return D_("Drawer");
 }
 
 /* so E can keep a unique instance per-container */
 static const char *
-_drawer_gc_id_new(const E_Gadcon_Client_Class *client_class) 
+_drawer_gc_id_new(const E_Gadcon_Client_Class *client_class)
 {
    Config_Item *ci = NULL;
 
@@ -1355,7 +1355,7 @@ _drawer_gc_id_new(const E_Gadcon_Client_Class *client_class)
 }
 
 static Evas_Object *
-_drawer_gc_icon(const E_Gadcon_Client_Class *client_class, Evas *evas) 
+_drawer_gc_icon(const E_Gadcon_Client_Class *client_class, Evas *evas)
 {
    Evas_Object *o = NULL;
    char buf[4096];
@@ -1373,8 +1373,8 @@ _drawer_gc_icon(const E_Gadcon_Client_Class *client_class, Evas *evas)
 }
 
 /* new module needs a new config :), or config too old and we need one anyway */
-static void 
-_drawer_conf_new(void) 
+static void
+_drawer_conf_new(void)
 {
    drawer_conf = E_NEW(Config, 1);
    drawer_conf->version = (MOD_CONFIG_FILE_EPOCH << 16);
@@ -1395,17 +1395,17 @@ _drawer_conf_new(void)
    e_config_save_queue();
 }
 
-static void 
-_drawer_conf_free(void) 
+static void
+_drawer_conf_free(void)
 {
    /* cleanup any stringshares here */
-   while (drawer_conf->conf_items) 
+   while (drawer_conf->conf_items)
      {
         Config_Item *ci = NULL;
 
         ci = drawer_conf->conf_items->data;
-        drawer_conf->conf_items = 
-          eina_list_remove_list(drawer_conf->conf_items, 
+        drawer_conf->conf_items =
+          eina_list_remove_list(drawer_conf->conf_items,
                                 drawer_conf->conf_items);
 	_drawer_conf_item_free(ci);
      }
@@ -1431,8 +1431,8 @@ _drawer_container_init_timer(void *data)
 }
 
 /* timer for the config oops dialog */
-static Eina_Bool 
-_drawer_conf_timer(void *data) 
+static Eina_Bool
+_drawer_conf_timer(void *data)
 {
    e_util_dialog_internal(D_("Drawer Configuration Updated"), (char *) data);
    return EINA_FALSE;
@@ -1441,7 +1441,7 @@ _drawer_conf_timer(void *data)
 /* function to search for any Config_Item struct for this Item
  * create if needed */
 static Config_Item *
-_drawer_conf_item_get(const char *id) 
+_drawer_conf_item_get(const char *id)
 {
    Config_Item *ci;
 
@@ -1473,12 +1473,12 @@ _drawer_instance_get(Config_Item *ci)
 static void
 _drawer_thumbnail_theme(Evas_Object *thumbnail, Drawer_Source_Item *si)
 {
-   if (!e_theme_edje_object_set(thumbnail, "base/theme/modules/drawer", 
+   if (!e_theme_edje_object_set(thumbnail, "base/theme/modules/drawer",
 				"modules/drawer/icon/thumbnail"))
      {
 	char buf[4096];
 
-	snprintf(buf, sizeof(buf), "%s/e-module-drawer.edj", 
+	snprintf(buf, sizeof(buf), "%s/e-module-drawer.edj",
 		 drawer_conf->module->dir);
 	edje_object_file_set(thumbnail, buf, "modules/drawer/icon/thumbnail");
      }
@@ -1724,8 +1724,8 @@ _drawer_popup_shown_cb(void *data, Evas_Object *obj __UNUSED__, const char *emis
    inst->flags.pop_showing = EINA_FALSE;
 }
 
-static void 
-_drawer_mouse_down_cb(void *data, Evas *evas, Evas_Object *obj, void *event) 
+static void
+_drawer_mouse_down_cb(void *data, Evas *evas, Evas_Object *obj, void *event)
 {
    Instance *inst = NULL;
    Evas_Event_Mouse_Down *ev = NULL;
@@ -1775,7 +1775,7 @@ _drawer_mouse_down_cb(void *data, Evas *evas, Evas_Object *obj, void *event)
 	  _drawer_popup_hide(inst);
 
      }
-   else if ((ev->button == 3) && (!inst->menu)) 
+   else if ((ev->button == 3) && (!inst->menu))
      {
 	E_Zone *zone = NULL;
 	E_Menu *m;
@@ -1800,17 +1800,17 @@ _drawer_mouse_down_cb(void *data, Evas *evas, Evas_Object *obj, void *event)
         e_gadcon_canvas_zone_geometry_get(inst->gcc->gadcon, &x, &y, NULL, NULL);
 
         /* show the menu relative to gadgets position */
-        e_menu_activate_mouse(m, zone, (x + ev->output.x), 
-                              (y + ev->output.y), 1, 1, 
+        e_menu_activate_mouse(m, zone, (x + ev->output.x),
+                              (y + ev->output.y), 1, 1,
                               E_MENU_POP_DIRECTION_AUTO, ev->timestamp);
-        evas_event_feed_mouse_up(inst->gcc->gadcon->evas, ev->button, 
+        evas_event_feed_mouse_up(inst->gcc->gadcon->evas, ev->button,
                                  EVAS_BUTTON_NONE, ev->timestamp, NULL);
      }
 }
 
 /* popup menu closing, cleanup */
-static void 
-_drawer_menu_post_cb(void *data, E_Menu *menu) 
+static void
+_drawer_menu_post_cb(void *data, E_Menu *menu)
 {
    Instance *inst = NULL;
 
@@ -1821,11 +1821,11 @@ _drawer_menu_post_cb(void *data, E_Menu *menu)
 }
 
 /* call configure from popup */
-static void 
-_drawer_menu_configure_cb(void *data, E_Menu *mn, E_Menu_Item *mi) 
+static void
+_drawer_menu_configure_cb(void *data, E_Menu *mn, E_Menu_Item *mi)
 {
    Instance *inst = NULL;
-   
+
    inst = data;
    if (!drawer_conf) return;
    if (drawer_conf->cfd) return;
@@ -1877,8 +1877,8 @@ _drawer_thumb_generate_cb(void *data, Ethumb_Client *client, int id, const char 
    Drawer_Thumb_Data *td = data;
    Evas_Object *o = NULL;
    Evas *evas;
-  
-  
+
+
    if (td->object_deleted)
      return _drawer_thumb_data_free(td);
    evas = evas_object_evas_get(td->o_icon);

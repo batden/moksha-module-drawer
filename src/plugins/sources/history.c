@@ -11,7 +11,7 @@ typedef enum _History_Sort_Type
 typedef struct _Instance Instance;
 typedef struct _Conf Conf;
 
-struct _Instance 
+struct _Instance
 {
    Drawer_Source *source;
 
@@ -35,7 +35,7 @@ struct _Conf
    History_Sort_Type sort_type;
 };
 
-struct _E_Config_Dialog_Data 
+struct _E_Config_Dialog_Data
 {
    Instance *inst;
 
@@ -114,7 +114,7 @@ EAPI int
 drawer_plugin_shutdown(Drawer_Plugin *p)
 {
    Instance *inst = NULL;
-   
+
    inst = p->data;
 
    _history_source_items_free(inst);
@@ -317,7 +317,7 @@ _history_source_items_free(Instance *inst)
    while (inst->items)
      {
 	Drawer_Source_Item *si = NULL;
-	
+
 	si = inst->items->data;
 	inst->items = eina_list_remove_list(inst->items, inst->items);
 	switch(si->data_type)
@@ -370,11 +370,11 @@ _history_efreet_desktop_list_change_cb(void *data, int ev_type __UNUSED__, void 
    ev->source = inst->source;
    ev->id = eina_stringshare_add(inst->conf->id);
    ecore_event_add(DRAWER_EVENT_SOURCE_UPDATE, ev, _history_event_update_free, NULL);
-   
+
    return EINA_TRUE;
 }
 
-static void 
+static void
 _history_cb_menu_post(void *data, E_Menu *menu)
 {
    Instance *inst = NULL;
@@ -399,7 +399,7 @@ static void
 _history_cb_menu_item_remove(void *data, E_Menu *m, E_Menu_Item *mi)
 {
    Drawer_Source_Item *si = data;
-   
+
    e_exehist_del((const char *) si->priv);
 }
 
@@ -430,7 +430,7 @@ _history_conf_activation_cb(void *data1, void *data2 __UNUSED__)
 
    /* create new config dialog */
    _cfd = e_config_dialog_new(e_container_current_get(e_manager_current_get()),
-	 D_("Drawer Plugin : History"), "Drawer_History", 
+	 D_("Drawer Plugin : History"), "Drawer_History",
 	 "_e_module_drawer_cfg_dlg", buf, 0, v, inst);
 
    e_dialog_resizable_set(_cfd->dia, 1);
@@ -448,14 +448,14 @@ _history_cf_create_data(E_Config_Dialog *cfd)
    return cfdata;
 }
 
-static void 
+static void
 _history_cf_free_data(E_Config_Dialog *cfd, E_Config_Dialog_Data *cfdata)
 {
    _cfd = NULL;
    E_FREE(cfdata);
 }
 
-static void 
+static void
 _history_cf_fill_data(E_Config_Dialog_Data *cfdata)
 {
    cfdata->sort_type = cfdata->inst->conf->sort_type;
@@ -483,7 +483,7 @@ _history_cf_basic_create(E_Config_Dialog *cfd, Evas *evas, E_Config_Dialog_Data 
    return o;
 }
 
-static int 
+static int
 _history_cf_basic_apply(E_Config_Dialog *cfd, E_Config_Dialog_Data *cfdata)
 {
    Instance *inst = NULL;

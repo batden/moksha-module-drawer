@@ -14,7 +14,7 @@ typedef enum
    GRID_FLOAT
 } Grid_Orient;
 
-struct _Instance 
+struct _Instance
 {
    Drawer_View *view;
 
@@ -186,7 +186,7 @@ drawer_view_container_resized(Drawer_View *v)
    Item *e;
 
    inst = DRAWER_PLUGIN(v)->data;
-   
+
 calculate:
    e_scrollframe_child_viewport_size_get(inst->o_scroll, &vw, &vh);
    evas_object_resize(inst->o_box, vw, vh);
@@ -249,7 +249,7 @@ EAPI void
 drawer_view_orient_set(Drawer_View *v, E_Gadcon_Orient orient)
 {
    Instance *inst = NULL;
-   
+
    inst = DRAWER_PLUGIN(v)->data;
 
    switch (orient)
@@ -286,7 +286,7 @@ EAPI void
 drawer_view_toggle_visibility(Drawer_View *v, Eina_Bool show)
 {
    Instance *inst = NULL;
-   
+
    inst = DRAWER_PLUGIN(v)->data;
 
    if (show)
@@ -427,13 +427,13 @@ _grid_item_create(Instance *inst, Drawer_Source_Item *si)
    e->si = si;
    e->isa_category = EINA_FALSE;
 
-   edje_object_signal_callback_add(e->o_holder, "e,action,select", "drawer", 
+   edje_object_signal_callback_add(e->o_holder, "e,action,select", "drawer",
 				   _grid_entry_select_cb, e);
-   edje_object_signal_callback_add(e->o_holder, "e,action,deselect", "drawer", 
+   edje_object_signal_callback_add(e->o_holder, "e,action,deselect", "drawer",
 				   _grid_entry_deselect_cb, e);
-   edje_object_signal_callback_add(e->o_holder, "e,action,activate", "drawer", 
+   edje_object_signal_callback_add(e->o_holder, "e,action,activate", "drawer",
 				   _grid_entry_activate_cb, e);
-   edje_object_signal_callback_add(e->o_holder, "e,action,context", "drawer", 
+   edje_object_signal_callback_add(e->o_holder, "e,action,context", "drawer",
 				   _grid_entry_context_cb, e);
 
    return e;
@@ -497,7 +497,7 @@ _grid_sort_by_category_cb(const void *d1, const void *d2)
    if (!si2->category) return 1;
 
    ret = strcmp(si1->category, si2->category);
-   
+
    return ret > 0 ? 1 : -1;
 }
 
