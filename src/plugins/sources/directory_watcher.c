@@ -246,14 +246,14 @@ drawer_source_activate(Drawer_Source *s, Drawer_Source_Item *si, E_Zone *zone)
                   char pcwd[4096];
                   Eina_List *files = NULL;
 
-                  getcwd(pcwd, sizeof(pcwd));
+                  if (!getcwd(pcwd, sizeof(pcwd))) return;
                   if (!chdir(inst->conf->dir)) return;
 
                   files = eina_list_append(files, si->data);
                   e_exec(zone, desktop, NULL, files, "drawer");
                   eina_list_free(files);
 
-                  chdir(pcwd);
+                  if (!chdir(pcwd))return;
                   return;
                }
           }
