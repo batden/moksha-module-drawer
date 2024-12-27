@@ -429,10 +429,10 @@ _list_reconfigure(Instance *inst)
      }
 
    e_box_size_min_get(inst->o_box, &bw, &bh);
-   edje_extern_object_min_size_set(inst->o_box, bw, bh);
+   evas_object_size_hint_min_set(inst->o_box, bw, bh);
    edje_object_size_min_calc(inst->o_con, &w, &h);
-   edje_extern_object_min_size_set(inst->o_box, 1, 1);
-   edje_extern_object_min_size_set(inst->o_con, w, h);
+   evas_object_size_hint_min_set(inst->o_box, 1, 1);
+   evas_object_size_hint_min_set(inst->o_con, w, h);
 }
 
 static void
