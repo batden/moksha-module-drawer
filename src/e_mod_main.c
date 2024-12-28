@@ -108,7 +108,6 @@ static void _drawer_popup_hidden_cb(void *data, Evas_Object *obj __UNUSED__, con
 static void _drawer_popup_shown_cb(void *data, Evas_Object *obj __UNUSED__, const char *emission __UNUSED__, const char *source __UNUSED__);
 
 static void _drawer_mouse_down_cb(void *data, Evas *evas, Evas_Object *obj, void *event);
-static void _drawer_menu_post_cb(void *data, E_Menu *menu);
 static void _drawer_menu_configure_cb(void *data, E_Menu *mn, E_Menu_Item *mi);
 static void _drawer_thumbnail_del_cb(void *data, Evas *e __UNUSED__, Evas_Object *obj __UNUSED__, void *event __UNUSED__);
 static void _drawer_changed_size_hints_cb(void *data, Evas *e, Evas_Object *obj, void *event_info);
@@ -1284,13 +1283,7 @@ _drawer_gc_shutdown(E_Gadcon_Client *gcc)
 	edje_object_part_unswallow(inst->o_drawer, inst->o_content);
 	evas_object_del(inst->o_content);
      }
-   /* kill popup menu */
-   if (inst->menu)
-     {
-        e_menu_post_deactivate_callback_set(inst->menu, NULL, NULL);
-        e_object_del(E_OBJECT(inst->menu));
-        inst->menu = NULL;
-     }
+
    /* delete the visual */
    if (inst->o_drawer)
      {
@@ -1775,7 +1768,7 @@ _drawer_mouse_down_cb(void *data, Evas *evas, Evas_Object *obj, void *event)
 	  _drawer_popup_hide(inst);
 
      }
-   else if ((ev->button == 3) && (!inst->menu))
+   else if (ev->button == 3)
      {
 	E_Zone *zone = NULL;
 	E_Menu *m;
@@ -1794,7 +1787,6 @@ _drawer_mouse_down_cb(void *data, Evas *evas, Evas_Object *obj, void *event)
 
         /* Each Gadget Client has a utility menu from the Container */
         m = e_gadcon_client_util_menu_items_append(inst->gcc, m, 0);
-        e_menu_post_deactivate_callback_set(m, _drawer_menu_post_cb, inst);
         inst->menu = m;
 
         e_gadcon_canvas_zone_geometry_get(inst->gcc->gadcon, &x, &y, NULL, NULL);
@@ -1806,18 +1798,6 @@ _drawer_mouse_down_cb(void *data, Evas *evas, Evas_Object *obj, void *event)
         evas_event_feed_mouse_up(inst->gcc->gadcon->evas, ev->button,
                                  EVAS_BUTTON_NONE, ev->timestamp, NULL);
      }
-}
-
-/* popup menu closing, cleanup */
-static void
-_drawer_menu_post_cb(void *data, E_Menu *menu)
-{
-   Instance *inst = NULL;
-
-   if (!(inst = data)) return;
-   if (!inst->menu) return;
-   e_object_del(E_OBJECT(inst->menu));
-   inst->menu = NULL;
 }
 
 /* call configure from popup */
