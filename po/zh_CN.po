@@ -1,6 +1,6 @@
-# Chinese translations for drawer package
-# drawer 软件包的简体中文翻译.
+# Chinese translations for the Drawer Module.
 # This file is put in the public domain.
+#
 # Aron Xu <aronmalache@163.com>, 2009.
 #
 msgid ""

@@ -1,8 +1,8 @@
-# Esperanto translations for drawer package.
-# Copyright (C) 2009 Enlightenment development team
-# This file is distributed under the same license as the drawer package.
+# Esperanto translations for the Drawer Module.
+# This file is put in the public domain.
 #
 # Olivier <eliovir@nospam.gmail.com>, 2009.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: drawer 0.0.1\n"

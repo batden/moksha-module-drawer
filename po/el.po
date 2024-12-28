@@ -1,5 +1,8 @@
-# Drawer module (e17), Greek translation.
+# Greek translation for the Drawer Module.
 # This file is put in the public domain.
+#
+# Giorgos Koutsikos <ragecryx@yahoo.gr>, 2009.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Drawer module\n"

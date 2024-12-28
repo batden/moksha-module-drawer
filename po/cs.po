@@ -1,7 +1,8 @@
-# Czech translation.
+# Czech translation  for the Drawer Module.
 # This file is put in the public domain.
-# quaker66@gmail.com
-# Vít Pelčák <vit@pelcak.org>, 2011.
+#
+# quaker66@gmail.com 2011.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Drawer\n"

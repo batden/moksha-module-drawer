@@ -1,7 +1,6 @@
-# German translations for drawer package
-# German messages for drawer.
-# Copyright (C) 2010 Enlightenment development team
-# This file is distributed under the same license as the drawer package.
+# German translations for the Drawer Module.
+# This file is put in the public domain.
+#
 # Fabian Nowak <timystery@arcor.de>, 2010.
 #
 msgid ""

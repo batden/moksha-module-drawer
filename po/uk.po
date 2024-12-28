@@ -1,6 +1,8 @@
+# Ukrainian translation for the Drawer Module.
 # This file is put in the public domain.
+#
 # Daniel Korostil <ted.korostiled@gmail.com>, 2009.
-# Korostil Daniel <ted.korostiled@gmail.com>, 2011.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: drawer.HEAD\n"

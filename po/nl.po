@@ -1,6 +1,7 @@
-# SOME DESCRIPTIVE TITLE.
+# Dutch translation for the Drawer Module.
 # This file is put in the public domain.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# Heimen Stoffels <vistausss@gmail.com>, 2011.
 #
 msgid ""
 msgstr ""

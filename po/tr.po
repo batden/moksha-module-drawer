@@ -1,7 +1,7 @@
-# Turkish translation for enlightenment
-# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
-# This file is distributed under the same license as the enlightenment package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
+# Turkish translation for the Drawer Module.
+# This file is put in the public domain.
+#
+# Mustafa Yılmaz <apshalasha@gmail.com>, 2009.
 #
 msgid ""
 msgstr ""

@@ -1,5 +1,6 @@
-# Italian translation for E17 drawer module.
+# Italian translation for the Drawer Module.
 # This file is put in the public domain.
+#
 # Massimo Maiurana <maiurana@gmail.com>, 2008.
 #
 msgid ""
