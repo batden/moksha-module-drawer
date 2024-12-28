@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Drawer module\n"
-"Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
+"Report-Msgid-Bugs-To: moksha@bodhilinux.com\n"
 "POT-Creation-Date: 2009-08-25 17:14+0800\n"
 "PO-Revision-Date: 2009-12-14 17:39+0200\n"
 "Last-Translator: Giorgos Koutsikos <ragecryx@yahoo.gr>\n"

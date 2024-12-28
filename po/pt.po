@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: drawer\n"
-"Report-Msgid-Bugs-To: http://trac.enlightenment.org/e\n"
+"Report-Msgid-Bugs-To: moksha@bodhilinux.com\n"
 "POT-Creation-Date: 2010-09-25 17:00-0700\n"
 "PO-Revision-Date: 2012-08-24 14:45+0100\n"
 "Last-Translator: Sérgio Marques <smarquespt@gmail.com>\n"

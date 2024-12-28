@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: enlightenment\n"
-"Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
+"Report-Msgid-Bugs-To: moksha@bodhilinux.com\n"
 "POT-Creation-Date: 2009-12-01 15:38+0800\n"
 "PO-Revision-Date: 2009-12-02 09:37+0000\n"
 "Last-Translator: Miro Glavić <glavicmiro@gmail.com>\n"
