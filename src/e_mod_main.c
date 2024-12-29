@@ -1977,7 +1977,7 @@ _smart_add(Evas_Object *obj, Evas_Object *child)
    sd = E_NEW(Smart_Data, 1);
    if (!sd) return;
    sd->child = child;
-   evas_object_clip_set(child, obj);
+   //~evas_object_clip_set(child, obj);
    evas_object_smart_data_set(obj, sd);
    evas_object_data_set(child, "con_parent", obj);
 }
