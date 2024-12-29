@@ -657,7 +657,7 @@ target: "bg";
 	 program {
 	    name: "popup_show2";
 	    action: STATE_SET "default" 0.0;
-	    transition: DECELERATE 0.5;
+	    //~ transition: DECELERATE 0.5;
 	    TARGETS
 	    after: "popup_show3";
 	 }
@@ -676,7 +676,7 @@ target: "bg";
 	 program {
 	    name: "popup_hide2_bottom";
 	    action: STATE_SET "hidden_bottom" 0.0;
-	    transition: ACCELERATE 0.5;
+	    //~ transition: ACCELERATE 0.5;
 	    TARGETS
 	    after: "popup_hide3";
 	 }
@@ -699,7 +699,7 @@ target: "bg";
 	 program {
 	    name: "popup_hide2_left";
 	    action: STATE_SET "hidden_left" 0.0;
-	    transition: ACCELERATE 0.5;
+	    //~ transition: ACCELERATE 0.5;
 	    TARGETS
 	    after: "popup_hide3";
 	 }
@@ -722,7 +722,7 @@ target: "bg";
 	 program {
 	    name: "popup_hide2_top";
 	    action: STATE_SET "hidden_top" 0.0;
-	    transition: ACCELERATE 0.5;
+	    //~ transition: ACCELERATE 0.5;
 	    TARGETS
 	    after: "popup_hide3";
 	 }
@@ -745,7 +745,7 @@ target: "bg";
 	 program {
 	    name: "popup_hide2_right";
 	    action: STATE_SET "hidden_right" 0.0;
-	    transition: ACCELERATE 0.5;
+	    //~ transition: ACCELERATE 0.5;
 	    TARGETS
 	    after: "popup_hide3";
 	 }
