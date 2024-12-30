@@ -52,7 +52,6 @@ static void _history_source_items_free(Instance *inst);
 static void _history_event_update_free(void *data __UNUSED__, void *event);
 static void _history_event_update_icon_free(void *data __UNUSED__, void *event);
 static Eina_Bool  _history_efreet_desktop_list_change_cb(void *data, int ev_type __UNUSED__, void *event __UNUSED__);
-static void _history_cb_menu_post(void *data, E_Menu *menu);
 static void _history_cb_menu_item_properties(void *data, E_Menu *m, E_Menu_Item *mi);
 static void _history_cb_menu_item_remove(void *data, E_Menu *m, E_Menu_Item *mi);
 static void _history_conf_activation_cb(void *data1, void *data2 __UNUSED__);
@@ -290,7 +289,6 @@ drawer_source_context(Drawer_Source *s, Drawer_Source_Item *si, E_Zone *zone, Dr
    inst = DRAWER_PLUGIN(s)->data;
 
    inst->menu = e_menu_new();
-   e_menu_post_deactivate_callback_set(inst->menu, _history_cb_menu_post, inst);
 
    mi = e_menu_item_new(inst->menu);
    e_menu_item_label_set(mi, D_("Change Item Properties"));
@@ -425,17 +423,6 @@ _history_efreet_desktop_list_change_cb(void *data, int ev_type __UNUSED__, void 
    ecore_event_add(DRAWER_EVENT_SOURCE_UPDATE, ev, _history_event_update_free, NULL);
 
    return EINA_TRUE;
-}
-
-static void
-_history_cb_menu_post(void *data, E_Menu *menu)
-{
-   Instance *inst = NULL;
-
-   if (!(inst = data)) return;
-   if (!inst->menu) return;
-   e_object_del(E_OBJECT(inst->menu));
-   inst->menu = NULL;
 }
 
 static void
