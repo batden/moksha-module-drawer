@@ -314,6 +314,8 @@ _history_source_item_fill(Instance *inst, Efreet_Desktop *desktop, const char *f
 static void
 _history_source_items_free(Instance *inst)
 {
+   EINA_SAFETY_ON_NULL_RETURN(inst);
+   EINA_SAFETY_ON_NULL_RETURN(inst->items);
    while (inst->items)
      {
 	Drawer_Source_Item *si = NULL;
