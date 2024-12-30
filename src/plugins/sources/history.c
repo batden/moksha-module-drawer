@@ -232,7 +232,7 @@ drawer_source_list(Drawer_Source *s)
     {  char* norm_exe = NULL;
 		norm_exe = _normalize_exe(file);
 		desktop = efreet_util_desktop_exec_find(norm_exe);
-		free(norm_exe);
+		//free(norm_exe);
 	}
 	/* Instead of desktops, work with executables directly */
 	si = _history_source_item_fill(inst, desktop, file);
