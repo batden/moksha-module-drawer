@@ -152,13 +152,6 @@ drawer_plugin_shutdown(Drawer_Plugin *p)
    eina_stringshare_del(inst->conf->dir);
    eina_stringshare_del(inst->conf->fm);
 
-   if (inst->menu)
-     {
-        e_menu_post_deactivate_callback_set(inst->menu, NULL, NULL);
-        e_object_del(E_OBJECT(inst->menu));
-        inst->menu = NULL;
-     }
-
    E_CONFIG_DD_FREE(inst->edd.conf);
    E_FREE(inst->conf);
    E_FREE(inst);
