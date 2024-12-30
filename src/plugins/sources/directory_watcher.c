@@ -78,7 +78,6 @@ static void _dirwatcher_event_update_free(void *data __UNUSED__, void *event);
 static void _dirwatcher_event_update_icon_free(void *data __UNUSED__, void *event);
 
 static void _dirwatcher_monitor_cb(void *data, Ecore_File_Monitor *em __UNUSED__, Ecore_File_Event event __UNUSED__, const char *path);
-static void _dirwatcher_cb_menu_post(void *data, E_Menu *menu);
 static void _dirwatcher_cb_menu_open_dir(void *data, E_Menu *m, E_Menu_Item *mi);
 static void _dirwatcher_conf_activation_cb(void *data1, void *data2 __UNUSED__);
 
@@ -278,7 +277,6 @@ drawer_source_context(Drawer_Source *s, Drawer_Source_Item *si, E_Zone *zone, Dr
    inst = DRAWER_PLUGIN(s)->data;
 
    inst->menu = e_menu_new();
-   e_menu_post_deactivate_callback_set(inst->menu, _dirwatcher_cb_menu_post, inst);
 
    mi = e_menu_item_new(inst->menu);
    e_menu_item_label_set(mi, D_("Open Containing Directory"));
@@ -471,17 +469,6 @@ _dirwatcher_monitor_cb(void *data, Ecore_File_Monitor *em __UNUSED__, Ecore_File
    ev->source = inst->source;
    ev->id = eina_stringshare_add(inst->conf->id);
    ecore_event_add(DRAWER_EVENT_SOURCE_UPDATE, ev, _dirwatcher_event_update_free, NULL);
-}
-
-static void
-_dirwatcher_cb_menu_post(void *data, E_Menu *menu)
-{
-   Instance *inst = NULL;
-
-   if (!(inst = data)) return;
-   if (!inst->menu) return;
-   e_object_del(E_OBJECT(inst->menu));
-   inst->menu = NULL;
 }
 
 static void
