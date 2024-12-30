@@ -151,6 +151,53 @@ drawer_plugin_config_save(Drawer_Plugin *p)
    e_config_domain_save(buf, inst->edd.conf, inst->conf);
 }
 
+static char *
+_normalize_exe(const char *exe)
+{
+   char *base, *buf, *cp, *space = NULL;
+   const char *ret;
+   Eina_Bool flag = EINA_FALSE;
+
+   buf = strdup(exe);
+   base = basename(buf);
+   if ((base[0] == '.') && (base[1] == '\0'))
+     {
+        free(buf);
+        return NULL;
+     }
+
+   cp = base;
+   while (*cp)
+     {
+        if (isspace(*cp))
+          {
+             if (!space) space = cp;
+             if (flag) flag = EINA_FALSE;
+          }
+        else if (!flag)
+          {
+             /* usually a variable in the desktop exe field */
+             if (space && *cp == '%')
+               flag = EINA_TRUE;
+             else
+               {
+                  char lower = tolower(*cp);
+
+                  space = NULL;
+                  if (lower != *cp) *cp = lower;
+               }
+          }
+        cp++;
+     }
+
+   if (space) *space = '\0';
+
+   //ret = eina_stringshare_add(base);
+   //free(buf);
+
+   return base;
+}
+
 EAPI Eina_List *
 drawer_source_list(Drawer_Source *s)
 {
@@ -181,9 +228,13 @@ drawer_source_list(Drawer_Source *s)
      {
 	Drawer_Source_Item *si = NULL;
 	Efreet_Desktop *desktop = efreet_util_desktop_exec_find(file);
-
+    if (!desktop)
+    {  char* norm_exe = NULL;
+		norm_exe = _normalize_exe(file);
+		desktop = efreet_util_desktop_exec_find(norm_exe);
+		free(norm_exe);
+	}
 	/* Instead of desktops, work with executables directly */
-
 	si = _history_source_item_fill(inst, desktop, file);
 	inst->items = eina_list_append(inst->items, si);
      }
