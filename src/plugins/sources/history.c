@@ -150,7 +150,7 @@ drawer_plugin_config_save(Drawer_Plugin *p)
    e_config_domain_save(buf, inst->edd.conf, inst->conf);
 }
 
-static char *
+static const char *
 _normalize_exe(const char *exe)
 {
    char *base, *buf, *cp, *space = NULL;
@@ -191,10 +191,10 @@ _normalize_exe(const char *exe)
 
    if (space) *space = '\0';
 
-   //ret = eina_stringshare_add(base);
-   //free(buf);
+   ret = eina_stringshare_add(base);
+   free(buf);
 
-   return base;
+   return ret;
 }
 
 EAPI Eina_List *
@@ -228,10 +228,9 @@ drawer_source_list(Drawer_Source *s)
 	Drawer_Source_Item *si = NULL;
 	Efreet_Desktop *desktop = efreet_util_desktop_exec_find(file);
     if (!desktop)
-    {  char* norm_exe = NULL;
-		norm_exe = _normalize_exe(file);
+    {  const char *norm_exe = _normalize_exe(file);
 		desktop = efreet_util_desktop_exec_find(norm_exe);
-		//free(norm_exe);
+		eina_stringshare_del(norm_exe);
 	}
 	/* Instead of desktops, work with executables directly */
 	si = _history_source_item_fill(inst, desktop, file);
