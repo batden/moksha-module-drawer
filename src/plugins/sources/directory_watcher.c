@@ -117,7 +117,7 @@ drawer_plugin_init(Drawer_Plugin *p, const char *id)
    inst->conf = e_config_domain_load(buf, inst->edd.conf);
    if (!inst->conf)
      {
-	char buf2[4096];
+	char buf2[PATH_MAX];
 
 	snprintf(buf2, sizeof(buf2), "%s/Desktop", e_user_homedir_get());
 
@@ -235,7 +235,7 @@ drawer_source_activate(Drawer_Source *s, Drawer_Source_Item *si, E_Zone *zone)
              desktop = e_exehist_mime_desktop_get(p->mime);
              if (desktop)
                {
-                  char pcwd[4096];
+                  char pcwd[PATH_MAX];
                   Eina_List *files = NULL;
 
                   if (!getcwd(pcwd, sizeof(pcwd))) return;
@@ -337,12 +337,12 @@ static void
 _dirwatcher_description_create(Instance *inst)
 {
    char buf[1024];
-   char path[4096];
+   char path[PATH_MAX];
    const char *homedir;
 
    eina_stringshare_del(inst->description);
    homedir = e_user_homedir_get();
-   if (!(strncmp(inst->conf->dir, homedir, 4096)))
+   if (!(strncmp(inst->conf->dir, homedir, PATH_MAX)))
      snprintf(buf, sizeof(buf), D_("Home"));
    else if (!(strncmp(inst->conf->dir, homedir, strlen(homedir))))
      {
@@ -377,7 +377,7 @@ _dirwatcher_source_item_fill(Instance *inst, const char *file)
 {
    Drawer_Source_Item *si = NULL;
    Dirwatcher_Priv *p = NULL;
-   char buf[4096];
+   char buf[PATH_MAX];
    const char *mime, *file_path;
 
    si = E_NEW(Drawer_Source_Item, 1);
@@ -480,7 +480,7 @@ _dirwatcher_conf_activation_cb(void *data1, void *data2 __UNUSED__)
    Drawer_Plugin *p = NULL;
    Instance *inst = NULL;
    E_Config_Dialog_View *v = NULL;
-   char buf[4096];
+   char buf[PATH_MAX];
 
    p = data1;
    inst = p->data;

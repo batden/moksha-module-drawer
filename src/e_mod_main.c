@@ -161,7 +161,7 @@ EAPI E_Module_Api e_modapi = {E_MODULE_API_VERSION, "Drawer"};
 EAPI void *
 e_modapi_init(E_Module *m)
 {
-   char buf[4096];
+   char buf[PATH_MAX];
    snprintf(buf, sizeof(buf), "%s/locale", e_module_dir_get(m));
    bindtextdomain(PACKAGE, buf);
    bind_textdomain_codeset(PACKAGE, "UTF-8");
@@ -372,7 +372,7 @@ e_modapi_save(E_Module *m)
 Eina_List *
 drawer_plugins_list(Drawer_Plugin_Category cat)
 {
-   char buf[4096];
+   char buf[PATH_MAX];
    const char *moddir;
    Eina_List *files = NULL;
    Eina_List *ret = NULL;
@@ -393,7 +393,7 @@ drawer_plugins_list(Drawer_Plugin_Category cat)
      {
 	Efreet_Desktop *desk = NULL;
 	Drawer_Plugin_Type *pi = NULL;
-	char buf2[4096];
+	char buf2[PATH_MAX];
 	char *ri;
 
 	ri = rindex(mod, '.');
@@ -641,7 +641,7 @@ _drawer_shelf_update(Instance *inst, Drawer_Source_Item *si)
      }
    else
      {
-	char buf[4096];
+	char buf[PATH_MAX];
 
 	snprintf(buf, sizeof(buf), "%s/e-module-drawer.edj",
 	      drawer_conf->module->dir);
@@ -671,7 +671,7 @@ _drawer_popup_theme_set(Instance *inst)
    if (!(e_theme_edje_object_set(inst->popup->o_bg,
 	       "base/theme/modules/drawer", theme)))
      {
-	char buf[4096];
+	char buf[PATH_MAX];
 
 	snprintf(buf, sizeof(buf), "%s/e-module-drawer.edj", drawer_conf->module->dir);
 	if (edje_file_group_exists(buf, theme))
@@ -866,7 +866,7 @@ _drawer_content_generate(Instance *inst, Evas *evas)
 
    if (o)
      {
-        char buf[4096];
+        char buf[PATH_MAX];
 
         snprintf(buf, sizeof(buf), "%s/e-module-drawer.edj",
                  drawer_conf->module->dir);
@@ -887,7 +887,7 @@ _drawer_content_generate(Instance *inst, Evas *evas)
 static void
 _drawer_container_setup(Instance *inst, E_Gadcon_Orient orient)
 {
-   char buf[4096];
+   char buf[PATH_MAX];
 
    inst->flags.is_floating = (orient == E_GADCON_ORIENT_FLOAT);
 
@@ -961,7 +961,7 @@ static Drawer_Plugin *
 _drawer_plugin_new(Instance *inst, const char *name, const char *category, size_t size)
 {
    Drawer_Plugin *p;
-   char buf[4096];
+   char buf[PATH_MAX];
    const char *modpath;
 
    p = calloc(1, size);
@@ -1351,7 +1351,7 @@ static Evas_Object *
 _drawer_gc_icon(const E_Gadcon_Client_Class *client_class, Evas *evas)
 {
    Evas_Object *o = NULL;
-   char buf[4096];
+   char buf[PATH_MAX];
 
    /* theme */
    snprintf(buf, sizeof(buf), "%s/e-module-drawer.edj", drawer_conf->module->dir);
@@ -1469,7 +1469,7 @@ _drawer_thumbnail_theme(Evas_Object *thumbnail, Drawer_Source_Item *si)
    if (!e_theme_edje_object_set(thumbnail, "base/theme/modules/drawer",
 				"modules/drawer/icon/thumbnail"))
      {
-	char buf[4096];
+	char buf[PATH_MAX];
 
 	snprintf(buf, sizeof(buf), "%s/e-module-drawer.edj",
 		 drawer_conf->module->dir);

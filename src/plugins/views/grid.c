@@ -24,7 +24,7 @@ struct _Instance
 
    Evas_Object *o_box, *o_con, *o_scroll;
 
-   char theme_file[4096];
+   char theme_file[PATH_MAX];
 
    const char *parent_id;
 

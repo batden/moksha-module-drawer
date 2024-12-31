@@ -31,7 +31,7 @@ e_int_config_drawer_module(E_Container *con, Config_Item *ci)
 {
    E_Config_Dialog *cfd = NULL;
    E_Config_Dialog_View *v = NULL;
-   char buf[4096];
+   char buf[PATH_MAX];
 
    /* is this config dialog already visible ? */
    if (e_config_dialog_find("Drawer", "_e_module_drawer_cfg_dlg")) return NULL;

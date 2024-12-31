@@ -449,7 +449,7 @@ _history_conf_activation_cb(void *data1, void *data2 __UNUSED__)
    Drawer_Plugin *p = NULL;
    Instance *inst = NULL;
    E_Config_Dialog_View *v = NULL;
-   char buf[4096];
+   char buf[PATH_MAX];
 
    p = data1;
    inst = p->data;

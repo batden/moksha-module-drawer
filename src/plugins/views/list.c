@@ -36,7 +36,7 @@ struct _Instance
    double scroll_wanted;
    double scroll_pos;
 
-   char theme_file[4096];
+   char theme_file[PATH_MAX];
    char item_group[43];
 
    const char *parent_id;
@@ -797,7 +797,7 @@ _list_conf_activation_cb(void *data1, void *data2 __UNUSED__)
    Drawer_Plugin *p = NULL;
    Instance *inst = NULL;
    E_Config_Dialog_View *v = NULL;
-   char buf[4096];
+   char buf[PATH_MAX];
 
    p = data1;
    inst = p->data;

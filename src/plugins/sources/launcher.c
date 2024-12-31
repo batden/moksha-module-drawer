@@ -215,7 +215,7 @@ drawer_source_list(Drawer_Source *s)
 {
    Instance *inst = NULL;
    Drawer_Event_Source_Main_Icon_Update *ev;
-   char buf[4096];
+   char buf[PATH_MAX];
    const char *homedir;
    int min = 0;
 
@@ -505,7 +505,7 @@ _launcher_conf_activation_cb(void *data1, void *data2 __UNUSED__)
    Drawer_Plugin *p = NULL;
    Instance *inst = NULL;
    E_Config_Dialog_View *v = NULL;
-   char buf[4096];
+   char buf[PATH_MAX];
 
    p = data1;
    inst = p->data;
@@ -656,7 +656,7 @@ _cb_add(void *data, void *data2)
 static void
 _cb_del(void *data, void *data2)
 {
-   char buf[4096];
+   char buf[PATH_MAX];
    E_Config_Dialog_Data *cfdata;
    E_Confirm_Dialog *dialog;
 
@@ -691,8 +691,8 @@ _cb_config(void *data, void *data2)
 static void
 _cb_entry_ok(void *data, char *text)
 {
-   char buf[4096];
-   char tmp[4096];
+   char buf[PATH_MAX];
+   char tmp[PATH_MAX];
    FILE *f;
    
    snprintf(buf, sizeof(buf), "%s/.e/e/applications/bar/%s", 
@@ -722,7 +722,7 @@ static void
 _cb_confirm_dialog_yes(void *data)
 {
    E_Config_Dialog_Data *cfdata;
-   char buf[4096];
+   char buf[PATH_MAX];
    
    cfdata = data;
    snprintf(buf, sizeof(buf), "%s/.e/e/applications/bar/%s", e_user_homedir_get(), cfdata->dir);
@@ -746,7 +746,7 @@ _launcher_cf_load_ilist(E_Config_Dialog_Data *cfdata)
 {
    Eina_List *dirs;
    const char *home;
-   char buf[4096], *file;
+   char buf[PATH_MAX], *file;
    int selnum = -1;
    int i = 0;
 
