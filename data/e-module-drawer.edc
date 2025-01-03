@@ -517,7 +517,7 @@ target: "fg";
    group {
       name: "modules/drawer/container";
       data {
-	 item: "shaped" "1";
+	 item: "shaped" "0";
       }
       parts {
 #undef TARGETS
