@@ -189,7 +189,7 @@ drawer_view_container_resized(Drawer_View *v)
 
 calculate:
    e_scrollframe_child_viewport_size_get(inst->o_scroll, &vw, &vh);
-   evas_object_resize(inst->o_box, vw, vh);
+   evas_object_resize(inst->o_box, vw + 1, vh + 1);
    /* XXX: switch to size_min_calc when it starts working
     *
     * edje_object_size_min_calc(inst->o_box, &ww, &hh);
