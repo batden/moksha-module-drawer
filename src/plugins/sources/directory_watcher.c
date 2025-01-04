@@ -262,7 +262,7 @@ drawer_source_trigger(Drawer_Source *s, E_Zone *zone)
 }
 
 EAPI void
-drawer_source_context(Drawer_Source *s, Drawer_Source_Item *si, E_Zone *zone, Drawer_Event_View_Context *ev)
+drawer_source_context(Drawer_Source *s, Drawer_Source_Item *si __UNUSED__, E_Zone *zone, Drawer_Event_View_Context *ev)
 {
    Instance *inst = NULL;
    E_Menu_Item *mi = NULL;
@@ -465,7 +465,7 @@ _dirwatcher_monitor_cb(void *data, Ecore_File_Monitor *em __UNUSED__, Ecore_File
 }
 
 static void
-_dirwatcher_cb_menu_open_dir(void *data, E_Menu *m, E_Menu_Item *mi)
+_dirwatcher_cb_menu_open_dir(void *data, E_Menu *m __UNUSED__, E_Menu_Item *mi __UNUSED__)
 {
    Instance *inst = NULL;
 
@@ -519,7 +519,7 @@ _dirwatcher_cf_create_data(E_Config_Dialog *cfd)
 }
 
 static void
-_dirwatcher_cf_free_data(E_Config_Dialog *cfd, E_Config_Dialog_Data *cfdata)
+_dirwatcher_cf_free_data(E_Config_Dialog *cfd __UNUSED__, E_Config_Dialog_Data *cfdata)
 {
    if (cfdata->dir) E_FREE(cfdata->dir);
    if (cfdata->fm) E_FREE(cfdata->fm);
@@ -537,7 +537,7 @@ _dirwatcher_cf_fill_data(E_Config_Dialog_Data *cfdata)
 }
 
 static Evas_Object *
-_dirwatcher_cf_basic_create(E_Config_Dialog *cfd, Evas *evas, E_Config_Dialog_Data *cfdata)
+_dirwatcher_cf_basic_create(E_Config_Dialog *cfd __UNUSED__, Evas *evas, E_Config_Dialog_Data *cfdata)
 {
    Evas_Object *o, *of, *ob;
    E_Radio_Group *gr;
@@ -578,7 +578,7 @@ _dirwatcher_cf_basic_create(E_Config_Dialog *cfd, Evas *evas, E_Config_Dialog_Da
 }
 
 static int
-_dirwatcher_cf_basic_apply(E_Config_Dialog *cfd, E_Config_Dialog_Data *cfdata)
+_dirwatcher_cf_basic_apply(E_Config_Dialog *cfd __UNUSED__, E_Config_Dialog_Data *cfdata)
 {
    Instance *inst = NULL;
    Drawer_Event_Source_Update *ev;
