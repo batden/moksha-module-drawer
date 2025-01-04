@@ -245,7 +245,7 @@ drawer_source_list(Drawer_Source* s)
 }
 
 EAPI void
-drawer_source_activate(Drawer_Source* s, Drawer_Source_Item* si, E_Zone* zone)
+drawer_source_activate(Drawer_Source* s __UNUSED__, Drawer_Source_Item* si, E_Zone* zone)
 {
    Efreet_Desktop* desktop;
 
@@ -415,7 +415,7 @@ _history_efreet_desktop_list_change_cb(void* data, int ev_type __UNUSED__, void*
 }
 
 static void
-_history_cb_menu_item_properties(void* data, E_Menu* m, E_Menu_Item* mi)
+_history_cb_menu_item_properties(void* data, E_Menu* m __UNUSED__, E_Menu_Item* mi __UNUSED__)
 {
    Drawer_Source_Item* si = data;
 
@@ -424,7 +424,7 @@ _history_cb_menu_item_properties(void* data, E_Menu* m, E_Menu_Item* mi)
 }
 
 static void
-_history_cb_menu_item_remove(void* data, E_Menu* m, E_Menu_Item* mi)
+_history_cb_menu_item_remove(void* data, E_Menu* m __UNUSED__, E_Menu_Item* mi __UNUSED__)
 {
    Drawer_Source_Item* si = data;
 
@@ -481,7 +481,7 @@ _history_cf_create_data(E_Config_Dialog* cfd)
 }
 
 static void
-_history_cf_free_data(E_Config_Dialog* cfd, E_Config_Dialog_Data* cfdata)
+_history_cf_free_data(E_Config_Dialog* cfd __UNUSED__, E_Config_Dialog_Data* cfdata)
 {
    _cfd = NULL;
    E_FREE(cfdata);
@@ -494,7 +494,7 @@ _history_cf_fill_data(E_Config_Dialog_Data* cfdata)
 }
 
 static Evas_Object*
-_history_cf_basic_create(E_Config_Dialog* cfd, Evas* evas, E_Config_Dialog_Data* cfdata)
+_history_cf_basic_create(E_Config_Dialog* cfd __UNUSED__, Evas* evas, E_Config_Dialog_Data* cfdata)
 {
    Evas_Object *o, *of, *ob;
    E_Radio_Group* rg;
@@ -516,7 +516,7 @@ _history_cf_basic_create(E_Config_Dialog* cfd, Evas* evas, E_Config_Dialog_Data*
 }
 
 static int
-_history_cf_basic_apply(E_Config_Dialog* cfd, E_Config_Dialog_Data* cfdata)
+_history_cf_basic_apply(E_Config_Dialog* cfd __UNUSED__, E_Config_Dialog_Data* cfdata)
 {
    Instance* inst = NULL;
    Drawer_Event_Source_Update* ev;
