@@ -15,5 +15,6 @@ Comment[el]=Ένα συστατικό που λειτουργεί ως χώρο�
 Comment[eo]=Akcesoraĵo kiu agas kiel recivilo.
 Comment[fr]=Un gadget faisant office de réceptacle.
 Comment[it]=Un modulo che fa da contenitore per dati.
-Comment[pt]=Um "gadget" utilizado para armazenar dados
+Comment[pt]=Um "gadget" utilizado para armazenar dados.
+Comment[sk]=Gadget slúžiaci ako kontajner pre rôzne zobrazenia dát.
 X-Enlightenment-ModuleType=utils
