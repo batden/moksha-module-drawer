@@ -332,6 +332,11 @@ _grid_reconfigure(Instance *inst)
      }
    if (!max_item_count) return;
 
+   /* Calculate a symetric grid from max items count*/
+   int row_item_count = ceil((float) sqrt(max_item_count));
+   cw = ew * row_item_count;
+   ch = eh * ceil((float) max_item_count / row_item_count) + cath;
+
    /*
    do
      {
@@ -343,34 +348,35 @@ _grid_reconfigure(Instance *inst)
    catw = cw;
    */
 
-   iter_count = max_item_count;
-   while ((!hh || ((double) ww / (double) hh) < 1.5) && cw < (zw - ew / 2) && (ww < catw || (iter_count && ww <= max_item_count * ew + ew / 2)))
-     {
-        if (max_item_count == 1 && ww < catw)
-          cw = catw;
-        else
-          cw += ew;
-        ch += eh;
-        EINA_LIST_FOREACH(inst->items, l, e)
-          {
-             if (e->isa_category)
-               evas_object_resize(e->o_holder, cw, cath);
-          }
-        /* Rough approximation, since we don't know the box's
-         * padding settings, and we don't care */
-        evas_object_resize(inst->o_box, cw + ew / 2, ch + eh / 2);
-        evas_object_size_hint_min_get(edje_object_part_object_get(inst->o_box, "e.box.content"), &ww, &hh);
-        iter_count--;
-     };
+   //~ iter_count = max_item_count;
+   //~ while ((!hh || ((double) ww / (double) hh) < 1.5) && cw < (zw - ew / 2) && (ww < catw || (iter_count && ww <= max_item_count * ew + ew / 2)))
+     //~ {
+        //~ if (max_item_count == 1 && ww < catw)
+          //~ cw = catw;
+        //~ else
+          //~ cw += ew;
+        //~ ch += eh;
+        //~ EINA_LIST_FOREACH(inst->items, l, e)
+          //~ {
+             //~ if (e->isa_category)
+               //~ evas_object_resize(e->o_holder, cw, cath);
+          //~ }
+        //~ /* Rough approximation, since we don't know the box's
+         //~ * padding settings, and we don't care */
+        //~ evas_object_resize(inst->o_box, cw + ew / 2, ch + eh / 2);
+        //~ evas_object_size_hint_min_get(edje_object_part_object_get(inst->o_box, "e.box.content"), &ww, &hh);
+        //~ iter_count--;
+     //~ };
 
    /* XXX: switch to size_min_calc when it starts working
     *
     * edje_object_size_min_calc(inst->o_box, &ww, &hh);
     *
     */
-   evas_object_size_hint_min_get(edje_object_part_object_get(inst->o_box, "e.box.content"), &ww, &hh);
-   evas_object_resize(inst->o_box, ww, hh);
-   evas_object_size_hint_min_set(inst->o_scroll, ww, hh);
+   //~ evas_object_size_hint_min_get(edje_object_part_object_get(inst->o_box, "e.box.content"), &ww, &hh);
+   //~ evas_object_resize(inst->o_box, ww, hh);
+   evas_object_resize(inst->o_box, cw + ew, ch + eh / 2);
+   evas_object_size_hint_min_set(inst->o_scroll, cw,  ch + eh / 2);
    edje_object_size_min_calc(inst->o_con, &w, &h);
    evas_object_size_hint_min_set(inst->o_con, w, h);
    evas_object_size_hint_min_set(inst->o_scroll, 0, 0);
