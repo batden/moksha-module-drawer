@@ -517,7 +517,7 @@ target: "fg";
    group {
       name: "modules/drawer/container";
       data {
-	 item: "shaped" "0";
+	 item: "shaped" "1";
       }
       parts {
 #undef TARGETS
@@ -781,8 +781,8 @@ target: "bg";
 	       rel1.relative: 0 0;
 	       rel2.relative: 1 1;
 	       image {
-		  normal: "base_bg.png";
-		  border: 2 2 2 2;
+		  normal: "popup_bg.png";
+		  border: 10 10 15 10;
 	       }
 	    }
 	    description {
