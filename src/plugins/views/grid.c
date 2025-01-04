@@ -17,17 +17,11 @@ typedef enum
 struct _Instance
 {
    Drawer_View *view;
-
    Evas *evas;
-
    Eina_List *items;
-
    Evas_Object *o_box, *o_con, *o_scroll;
-
    char theme_file[PATH_MAX];
-
    const char *parent_id;
-
    Grid_Orient orient;
 };
 
@@ -35,9 +29,7 @@ struct _Item
 {
    Instance *inst;
    Evas_Object *o_holder, *o_icon;
-
    Drawer_Source_Item *si;
-
    Eina_Bool isa_category;
 };
 
@@ -66,11 +58,9 @@ drawer_plugin_init(Drawer_Plugin *p, const char *id)
    inst = E_NEW(Instance, 1);
 
    inst->view = DRAWER_VIEW(p);
-
    inst->parent_id = eina_stringshare_add(id);
-
    snprintf(inst->theme_file, sizeof(inst->theme_file),
-	    "%s/e-module-drawer.edj", drawer_module_dir_get());
+           "%s/e-module-drawer.edj", drawer_module_dir_get());
 
    return inst;
 }
@@ -122,43 +112,43 @@ drawer_view_render(Drawer_View *v, Evas *evas, Eina_List *items)
      {
       case GRID_BOTTOM:
       case GRID_RIGHT:
-	 ll = eina_list_reverse(ll);
-	 break;
+         ll = eina_list_reverse(ll);
+         break;
       default:
-	 break;
+         break;
      }
 
    EINA_LIST_FOREACH(ll, l, si)
      {
-	if (!cat && si->category)
-	  {
-	     cat = eina_stringshare_add(si->category);
-	     change = EINA_TRUE;
-	  }
-	else if (cat && !si->category)
-	  {
-	     eina_stringshare_del(cat);
-	     cat = NULL;
-	     change = EINA_TRUE;
-	  }
-	else if (cat && si->category && (strcmp(cat, si->category)))
-	  {
-	     eina_stringshare_del(cat);
-	     cat = eina_stringshare_add(si->category);
-	     change = EINA_TRUE;
-	  }
-	else
-	  change = EINA_FALSE;
+        if (!cat && si->category)
+          {
+             cat = eina_stringshare_add(si->category);
+             change = EINA_TRUE;
+          }
+        else if (cat && !si->category)
+          {
+             eina_stringshare_del(cat);
+             cat = NULL;
+             change = EINA_TRUE;
+          }
+        else if (cat && si->category && (strcmp(cat, si->category)))
+          {
+             eina_stringshare_del(cat);
+             cat = eina_stringshare_add(si->category);
+             change = EINA_TRUE;
+          }
+        else
+          change = EINA_FALSE;
 
-	if (change)
-	  {
-	     e = _grid_category_create(inst, si);
-	     inst->items = eina_list_append(inst->items, e);
-	     edje_object_part_box_append(inst->o_box, "e.box.content", e->o_holder);
-	  }
-	e = _grid_item_create(inst, si);
-	inst->items = eina_list_append(inst->items, e);
-	edje_object_part_box_append(inst->o_box, "e.box.content", e->o_holder);
+        if (change)
+          {
+             e = _grid_category_create(inst, si);
+             inst->items = eina_list_append(inst->items, e);
+             edje_object_part_box_append(inst->o_box, "e.box.content", e->o_holder);
+          }
+        e = _grid_item_create(inst, si);
+        inst->items = eina_list_append(inst->items, e);
+        edje_object_part_box_append(inst->o_box, "e.box.content", e->o_holder);
      }
    eina_stringshare_del(cat);
 
@@ -166,8 +156,8 @@ drawer_view_render(Drawer_View *v, Evas *evas, Eina_List *items)
    e_scrollframe_child_set(inst->o_scroll, inst->o_box);
    edje_object_part_swallow(inst->o_con, "e.swallow.content", inst->o_scroll);
    if (!e_scrollframe_custom_theme_set(
-	   inst->o_scroll, "base/theme/modules/drawer",
-	   "modules/drawer/grid/scrollframe"))
+        inst->o_scroll, "base/theme/modules/drawer",
+        "modules/drawer/grid/scrollframe"))
      e_scrollframe_custom_edje_file_set(inst->o_scroll, inst->theme_file, "modules/drawer/grid/scrollframe");
    evas_object_show(inst->o_scroll);
 
@@ -200,49 +190,48 @@ calculate:
 
    if (vw >= mw)
      {
-	if (w != vw)
-	  {
-	     w = vw;
-	     resize = EINA_TRUE;
-	  }
+        if (w != vw)
+          {
+             w = vw;
+             resize = EINA_TRUE;
+          }
      }
    else if (w != mw)
      {
-	w = mw;
-	resize = EINA_TRUE;
+        w = mw;
+        resize = EINA_TRUE;
      }
 
    if (vh >= mh)
      {
-	if (h != vh)
-	  {
-	     h = vh;
-	     resize = EINA_TRUE;
-	  }
+        if (h != vh)
+          {
+             h = vh;
+             resize = EINA_TRUE;
+          }
      }
    else if (h != mh)
      {
-	h = mh;
-	resize = EINA_TRUE;
+        h = mh;
+        resize = EINA_TRUE;
      }
 
    if (resize) evas_object_resize(inst->o_box, w, h);
    if (inst->items && !cath)
      {
-	EINA_LIST_FOREACH(inst->items, l, e)
-	  {
-	     if (e->isa_category)
-	       {
-		  if (!cath)
-		    edje_object_size_max_get(e->o_holder, NULL, &cath);
+        EINA_LIST_FOREACH(inst->items, l, e)
+          {
+             if (e->isa_category)
+               {
+                  if (!cath)
+                    edje_object_size_max_get(e->o_holder, NULL, &cath);
 
-		  evas_object_resize(e->o_holder, w - 1, cath);
-	       }
-	  }
-	if (cath)
-	  goto calculate;
+                  evas_object_resize(e->o_holder, w - 1, cath);
+               }
+          }
+        if (cath)
+          goto calculate;
      }
-
 }
 
 EAPI void
@@ -257,28 +246,28 @@ drawer_view_orient_set(Drawer_View *v, E_Gadcon_Orient orient)
       case E_GADCON_ORIENT_CORNER_RT:
       case E_GADCON_ORIENT_CORNER_RB:
       case E_GADCON_ORIENT_RIGHT:
-	inst->orient = GRID_RIGHT;
-	break;
+        inst->orient = GRID_RIGHT;
+        break;
       case E_GADCON_ORIENT_LEFT:
       case E_GADCON_ORIENT_CORNER_LT:
       case E_GADCON_ORIENT_CORNER_LB:
-	inst->orient = GRID_LEFT;
-	break;
+        inst->orient = GRID_LEFT;
+        break;
       case E_GADCON_ORIENT_TOP:
       case E_GADCON_ORIENT_CORNER_TL:
       case E_GADCON_ORIENT_CORNER_TR:
-	inst->orient = GRID_TOP;
-	break;
+        inst->orient = GRID_TOP;
+        break;
       case E_GADCON_ORIENT_BOTTOM:
       case E_GADCON_ORIENT_CORNER_BL:
       case E_GADCON_ORIENT_CORNER_BR:
-	inst->orient = GRID_BOTTOM;
-	break;
+        inst->orient = GRID_BOTTOM;
+        break;
       case E_GADCON_ORIENT_FLOAT:
-	inst->orient = GRID_FLOAT;
-	break;
+        inst->orient = GRID_FLOAT;
+        break;
       default:
-	break;
+        break;
      }
 }
 
@@ -311,24 +300,24 @@ _grid_reconfigure(Instance *inst)
    evas_object_smart_calculate(inst->o_box);
    EINA_LIST_FOREACH(inst->items, l, e)
      {
-	if (e->isa_category)
-	  {
-	     if (!cath)
-	       edje_object_size_min_calc(e->o_holder, &catw, &cath);
+        if (e->isa_category)
+          {
+             if (!cath)
+               edje_object_size_min_calc(e->o_holder, &catw, &cath);
 
-	     cat_count++;
+             cat_count++;
 
-	     item_count = 0;
-	  }
-	else
-	  {
-	     if (!ew && !eh)
-	       evas_object_geometry_get(e->o_holder, NULL, NULL, &ew, &eh);
+             item_count = 0;
+          }
+        else
+          {
+             if (!ew && !eh)
+               evas_object_geometry_get(e->o_holder, NULL, NULL, &ew, &eh);
              evas_object_resize(e->o_holder, ew, eh);
 
-	     if (max_item_count < ++item_count)
-	       max_item_count = item_count;
-	  }
+             if (max_item_count < ++item_count)
+               max_item_count = item_count;
+          }
      }
    if (!max_item_count) return;
 
@@ -340,10 +329,10 @@ _grid_reconfigure(Instance *inst)
    /*
    do
      {
-	cw = ew * row_item_count;
-	ch = eh * ceil((float) max_item_count / row_item_count--) + cath;
-	if (cat_count)
-	  ch *= cat_count;
+        cw = ew * row_item_count;
+        ch = eh * ceil((float) max_item_count / row_item_count--) + cath;
+        if (cat_count)
+          ch *= cat_count;
      } while (row_item_count && (cw > (zw - ew / 2) || ((double) cw / (double) ch) > 1.6));
    catw = cw;
    */
@@ -409,9 +398,9 @@ _grid_item_create(Instance *inst, Drawer_Source_Item *si)
 
    e->o_holder = edje_object_add(inst->evas);
    if (!e_theme_edje_object_set(e->o_holder, "base/theme/modules/drawer",
-				"modules/drawer/grid/item"))
+                                "modules/drawer/grid/item"))
      edje_object_file_set(e->o_holder, inst->theme_file,
-			  "modules/drawer/grid/item");
+                          "modules/drawer/grid/item");
 
    edje_object_part_geometry_get(e->o_holder, "e.swallow.content", NULL, NULL, &w, &h);
    e->o_icon = drawer_util_icon_create(si, inst->evas, w, h);
@@ -434,13 +423,13 @@ _grid_item_create(Instance *inst, Drawer_Source_Item *si)
    e->isa_category = EINA_FALSE;
 
    edje_object_signal_callback_add(e->o_holder, "e,action,select", "drawer",
-				   _grid_entry_select_cb, e);
+                                   _grid_entry_select_cb, e);
    edje_object_signal_callback_add(e->o_holder, "e,action,deselect", "drawer",
-				   _grid_entry_deselect_cb, e);
+                                   _grid_entry_deselect_cb, e);
    edje_object_signal_callback_add(e->o_holder, "e,action,activate", "drawer",
-				   _grid_entry_activate_cb, e);
+                                   _grid_entry_activate_cb, e);
    edje_object_signal_callback_add(e->o_holder, "e,action,context", "drawer",
-				   _grid_entry_context_cb, e);
+                                   _grid_entry_context_cb, e);
 
    return e;
 }
@@ -455,9 +444,9 @@ _grid_category_create(Instance *inst, Drawer_Source_Item *si)
 
    e->o_holder = edje_object_add(inst->evas);
    if (!e_theme_edje_object_set(e->o_holder, "base/theme/modules/drawer",
-				"modules/drawer/grid/category"))
+                                "modules/drawer/grid/category"))
      edje_object_file_set(e->o_holder, inst->theme_file,
-			  "modules/drawer/grid/category");
+                          "modules/drawer/grid/category");
 
    if (si->category)
      snprintf(buf, sizeof(buf), "%s", si->category);
@@ -481,11 +470,11 @@ static void _grid_items_free(Instance *inst)
 
    EINA_LIST_FREE(inst->items, e)
      {
-	if (e->o_icon)
-	  evas_object_del(e->o_icon);
-	if (e->o_holder)
-	  evas_object_del(e->o_holder);
-	E_FREE(e);
+        if (e->o_icon)
+          evas_object_del(e->o_icon);
+        if (e->o_holder)
+          evas_object_del(e->o_holder);
+        E_FREE(e);
      }
 }
 
