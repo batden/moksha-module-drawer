@@ -481,7 +481,7 @@ _history_cf_create_data(E_Config_Dialog* cfd)
 }
 
 static void
-_history_cf_free_data(E_Config_Dialog* cfd __UNUSED__, E_Config_Dialog_Data* cfdata)
+_history_cf_free_data(E_Config_Dialog* cfd, E_Config_Dialog_Data* cfdata)
 {
    _cfd = NULL;
    E_FREE(cfdata);
