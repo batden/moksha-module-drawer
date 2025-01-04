@@ -96,8 +96,8 @@ drawer_plugin_init(Drawer_Plugin* p, const char* id)
             _history_efreet_desktop_list_change_cb, inst));
 #endif
    inst->handlers = eina_list_append(inst->handlers,
-				     ecore_event_handler_add(E_EVENT_EXEHIST_UPDATE,
-							     _history_efreet_desktop_list_change_cb, inst));
+         ecore_event_handler_add(E_EVENT_EXEHIST_UPDATE,
+            _history_efreet_desktop_list_change_cb, inst));
    _history_description_create(inst);
 
    return inst;
@@ -225,9 +225,13 @@ drawer_source_list(Drawer_Source* s)
          desktop = efreet_util_desktop_exec_find(norm_exe);
          eina_stringshare_del(norm_exe);
       }
-      /* Instead of desktops, work with executables directly */
-      si = _history_source_item_fill(inst, desktop, file);
-      inst->items = eina_list_append(inst->items, si);
+      /* FIXME: SKIP files*/
+      if (desktop)
+      {
+       /* Instead of desktops, work with executables directly */
+       si = _history_source_item_fill(inst, desktop, file);
+       inst->items = eina_list_append(inst->items, si);
+      }
    }
 
    ev = E_NEW(Drawer_Event_Source_Main_Icon_Update, 1);
