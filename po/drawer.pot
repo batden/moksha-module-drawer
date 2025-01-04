@@ -1,14 +1,14 @@
-# Drawer Module
-# Copyright (C) 2024 Bodhi Linux
-# This file is distributed under the same license as the Drawer Module.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Enlightenment development team
+# This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: drawer\n"
-"Report-Msgid-Bugs-To: moksha@bodhilinux.com\n"
-"POT-Creation-Date: 2024-12-27 12:09-0500\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
+"POT-Creation-Date: 2025-01-04 12:39+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,7 +49,7 @@ msgstr ""
 msgid "View settings"
 msgstr ""
 
-#: src/e_mod_main.c:215
+#: src/e_mod_main.c:214
 msgid ""
 "Drawer Module Configuration data needed upgrading. Your old "
 "configuration<br> has been wiped and a new set of defaults initialized. "
@@ -60,7 +60,7 @@ msgid ""
 "things now to your<br>liking. Sorry for the inconvenience.<br>"
 msgstr ""
 
-#: src/e_mod_main.c:235
+#: src/e_mod_main.c:234
 msgid ""
 "Your Drawer Module configuration is NEWER than the module version. This is "
 "very<br>strange. This should not happen unless you downgraded<br>the module "
@@ -69,198 +69,198 @@ msgid ""
 "has been now restored to<br>defaults. Sorry for the inconvenience.<br>"
 msgstr ""
 
-#: src/e_mod_main.c:483
+#: src/e_mod_main.c:482
 msgid "The plugin is not configurable"
 msgstr ""
 
-#: src/e_mod_main.c:973 src/e_mod_main.c:981 src/e_mod_main.c:995
-#: src/e_mod_main.c:1007 src/e_mod_main.c:1075 src/e_mod_main.c:1126
-#: src/e_mod_main.c:1172
+#: src/e_mod_main.c:972 src/e_mod_main.c:980 src/e_mod_main.c:994
+#: src/e_mod_main.c:1006 src/e_mod_main.c:1074 src/e_mod_main.c:1125
+#: src/e_mod_main.c:1171
 msgid "Drawer Plugins"
 msgstr ""
 
-#: src/e_mod_main.c:974
+#: src/e_mod_main.c:973
 #, c-format
 msgid "The plugin '%s' was not found."
 msgstr ""
 
-#: src/e_mod_main.c:982
+#: src/e_mod_main.c:981
 #, c-format
 msgid "The plugin '%s' could not be opened."
 msgstr ""
 
-#: src/e_mod_main.c:996 src/e_mod_main.c:1076 src/e_mod_main.c:1127
-#: src/e_mod_main.c:1173
+#: src/e_mod_main.c:995 src/e_mod_main.c:1075 src/e_mod_main.c:1126
+#: src/e_mod_main.c:1172
 #, c-format
 msgid "The plugin '%s' does not contain all required functions."
 msgstr ""
 
-#: src/e_mod_main.c:1008
+#: src/e_mod_main.c:1007
 #, c-format
 msgid "The plugin '%s' does not have the required API version."
 msgstr ""
 
-#: src/e_mod_main.c:1344
+#: src/e_mod_main.c:1337
 msgid "Drawer"
 msgstr ""
 
-#: src/e_mod_main.c:1437
+#: src/e_mod_main.c:1430
 msgid "Drawer Configuration Updated"
 msgstr ""
 
-#: src/e_mod_main.c:1791
+#: src/e_mod_main.c:1785
 msgid "Settings"
 msgstr ""
 
-#: src/plugins/sources/directory_watcher.c:284
+#: src/plugins/sources/directory_watcher.c:275
 msgid "Open Containing Directory"
 msgstr ""
 
-#: src/plugins/sources/directory_watcher.c:296
+#: src/plugins/sources/directory_watcher.c:287
 msgid "Directory Watcher settings"
 msgstr ""
 
-#: src/plugins/sources/directory_watcher.c:355
+#: src/plugins/sources/directory_watcher.c:346
 msgid "Home"
 msgstr ""
 
-#: src/plugins/sources/directory_watcher.c:422
+#: src/plugins/sources/directory_watcher.c:413
 #, c-format
 msgid "Directory (%s)"
 msgstr ""
 
-#: src/plugins/sources/directory_watcher.c:524
+#: src/plugins/sources/directory_watcher.c:504
 msgid "Drawer Plugin : Directory Watcher"
 msgstr ""
 
-#: src/plugins/sources/directory_watcher.c:567
+#: src/plugins/sources/directory_watcher.c:547
 msgid "Watch path"
 msgstr ""
 
-#: src/plugins/sources/directory_watcher.c:573
+#: src/plugins/sources/directory_watcher.c:553
 msgid "Custom file manager"
 msgstr ""
 
-#: src/plugins/sources/directory_watcher.c:579
+#: src/plugins/sources/directory_watcher.c:559
 msgid "Sort Options"
 msgstr ""
 
-#: src/plugins/sources/directory_watcher.c:580
+#: src/plugins/sources/directory_watcher.c:560
 msgid "Sort directories first"
 msgstr ""
 
-#: src/plugins/sources/directory_watcher.c:584
+#: src/plugins/sources/directory_watcher.c:564
 msgid "Sort by name"
 msgstr ""
 
-#: src/plugins/sources/directory_watcher.c:586
+#: src/plugins/sources/directory_watcher.c:566
 msgid "Sort by access time"
 msgstr ""
 
-#: src/plugins/sources/directory_watcher.c:588
+#: src/plugins/sources/directory_watcher.c:568
 msgid "Sort by modification time"
 msgstr ""
 
-#: src/plugins/sources/directory_watcher.c:590
+#: src/plugins/sources/directory_watcher.c:570
 msgid "Sort by change time"
 msgstr ""
 
-#: src/plugins/sources/directory_watcher.c:592
+#: src/plugins/sources/directory_watcher.c:572
 msgid "Sort by size"
 msgstr ""
 
-#: src/plugins/sources/launcher.c:205
+#: src/plugins/sources/launcher.c:197
 msgid "Launcher settings"
 msgstr ""
 
-#: src/plugins/sources/launcher.c:327
+#: src/plugins/sources/launcher.c:318
 msgid "Change Item Properties"
 msgstr ""
 
-#: src/plugins/sources/launcher.c:332
+#: src/plugins/sources/launcher.c:323
 msgid "Remove Item"
 msgstr ""
 
-#: src/plugins/sources/launcher.c:355
+#: src/plugins/sources/launcher.c:346
 #, c-format
 msgid "%s source"
 msgstr ""
 
-#: src/plugins/sources/launcher.c:538
+#: src/plugins/sources/launcher.c:529
 msgid "Drawer Plugin : Launcher"
 msgstr ""
 
-#: src/plugins/sources/launcher.c:609
+#: src/plugins/sources/launcher.c:587
 msgid "Selected Bar Source"
 msgstr ""
 
-#: src/plugins/sources/launcher.c:617
+#: src/plugins/sources/launcher.c:595
 msgid "Add"
 msgstr ""
 
-#: src/plugins/sources/launcher.c:619
+#: src/plugins/sources/launcher.c:597
 msgid "Delete"
 msgstr ""
 
-#: src/plugins/sources/launcher.c:621
+#: src/plugins/sources/launcher.c:599
 msgid "Configure"
 msgstr ""
 
-#: src/plugins/sources/launcher.c:631
+#: src/plugins/sources/launcher.c:609
 msgid "Sorting options"
 msgstr ""
 
-#: src/plugins/sources/launcher.c:632
+#: src/plugins/sources/launcher.c:610
 msgid "Unsorted"
 msgstr ""
 
-#: src/plugins/sources/launcher.c:634
+#: src/plugins/sources/launcher.c:612
 msgid "Sort applications by local rating"
 msgstr ""
 
-#: src/plugins/sources/launcher.c:636
+#: src/plugins/sources/launcher.c:614
 msgid "Sort applications by overall popularity"
 msgstr ""
 
-#: src/plugins/sources/launcher.c:673
+#: src/plugins/sources/launcher.c:651
 msgid "Create new Launcher source"
 msgstr ""
 
-#: src/plugins/sources/launcher.c:674
+#: src/plugins/sources/launcher.c:652
 msgid "Enter a name for this new source:"
 msgstr ""
 
-#: src/plugins/sources/launcher.c:689
+#: src/plugins/sources/launcher.c:667
 #, c-format
 msgid ""
 "You requested to delete \"%s\".<br><br>Are you sure you want to delete this "
 "bar source?"
 msgstr ""
 
-#: src/plugins/sources/launcher.c:693
+#: src/plugins/sources/launcher.c:671
 msgid "Are you sure you want to delete this bar source?"
 msgstr ""
 
-#: src/plugins/views/list.c:177
+#: src/plugins/views/list.c:168
 msgid "List settings"
 msgstr ""
 
-#: src/plugins/views/list.c:821
+#: src/plugins/views/list.c:811
 msgid "Drawer Plugin : List"
 msgstr ""
 
-#: src/plugins/views/list.c:858
+#: src/plugins/views/list.c:848
 msgid "Item size options"
 msgstr ""
 
-#: src/plugins/views/list.c:859
+#: src/plugins/views/list.c:849
 msgid "Large"
 msgstr ""
 
-#: src/plugins/views/list.c:861
+#: src/plugins/views/list.c:851
 msgid "Medium"
 msgstr ""
 
-#: src/plugins/views/list.c:863
+#: src/plugins/views/list.c:853
 msgid "Small"
 msgstr ""

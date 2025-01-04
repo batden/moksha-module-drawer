@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: drawer\n"
-"Report-Msgid-Bugs-To: moksha@bodhilinux.com\n"
-"POT-Creation-Date: 2011-10-16 14:36+0200\n"
+"Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
+"POT-Creation-Date: 2025-01-04 12:39+0100\n"
 "PO-Revision-Date: 2011-10-09 13:47+0200\n"
 "Last-Translator: Vít Pelčák <vit@pelcak.org>\n"
 "Language-Team: Czech\n"
@@ -18,40 +18,39 @@ msgstr ""
 "X-Generator: Lokalize 1.2\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#. create new config dialog
-#: ../src/e_mod_config.c:51
+#: src/e_mod_config.c:51
 msgid "Drawer Module"
 msgstr "Modul Drawer"
 
-#: ../src/e_mod_config.c:104
+#: src/e_mod_config.c:104
 msgid "Plugins selection"
 msgstr "Výběr modulů"
 
-#: ../src/e_mod_config.c:107
+#: src/e_mod_config.c:107
 msgid "Plugins settings"
 msgstr "Nastavení modulů"
 
-#: ../src/e_mod_config.c:167
+#: src/e_mod_config.c:167
 msgid "Source plugins"
 msgstr "Zdrojové moduly"
 
-#: ../src/e_mod_config.c:192
+#: src/e_mod_config.c:192
 msgid "View plugins"
 msgstr "Zobrazovací moduly"
 
-#: ../src/e_mod_config.c:239 ../src/e_mod_config.c:260
+#: src/e_mod_config.c:239 src/e_mod_config.c:260
 msgid "Description: Unavailable"
 msgstr "Popis: Nedostupný"
 
-#: ../src/e_mod_config.c:286
+#: src/e_mod_config.c:286
 msgid "Source settings"
 msgstr "Nastavení zdroje"
 
-#: ../src/e_mod_config.c:291
+#: src/e_mod_config.c:291
 msgid "View settings"
 msgstr "Nastavení zobrazení"
 
-#: ../src/e_mod_main.c:211
+#: src/e_mod_main.c:214
 msgid ""
 "Drawer Module Configuration data needed upgrading. Your old "
 "configuration<br> has been wiped and a new set of defaults initialized. "
@@ -68,7 +67,7 @@ msgstr ""
 "nastavení<br>to spraví. Nyní si můžete modul nastavit, jak<br>chcete. "
 "Omlouváme se za vzniklé potíže.<br>"
 
-#: ../src/e_mod_main.c:231
+#: src/e_mod_main.c:234
 msgid ""
 "Your Drawer Module configuration is NEWER than the module version. This is "
 "very<br>strange. This should not happen unless you downgraded<br>the module "
@@ -82,201 +81,199 @@ msgstr ""
 "protiopatření<br>bylo vaše nastavení obnoveno na<br>výchozí. Omlouváme se za "
 "vzniklé potíže.<br>"
 
-#: ../src/e_mod_main.c:477
+#: src/e_mod_main.c:482
 msgid "The plugin is not configurable"
 msgstr "Modul nelze nastavovat"
 
-#: ../src/e_mod_main.c:967 ../src/e_mod_main.c:975 ../src/e_mod_main.c:989
-#: ../src/e_mod_main.c:1001 ../src/e_mod_main.c:1069 ../src/e_mod_main.c:1120
-#: ../src/e_mod_main.c:1166
+#: src/e_mod_main.c:972 src/e_mod_main.c:980 src/e_mod_main.c:994
+#: src/e_mod_main.c:1006 src/e_mod_main.c:1074 src/e_mod_main.c:1125
+#: src/e_mod_main.c:1171
 msgid "Drawer Plugins"
 msgstr "Moduly pro Drawer"
 
-#: ../src/e_mod_main.c:968
+#: src/e_mod_main.c:973
 #, c-format
 msgid "The plugin '%s' was not found."
 msgstr "Modul '%s' nebyl nalezen."
 
-#: ../src/e_mod_main.c:976
+#: src/e_mod_main.c:981
 #, c-format
 msgid "The plugin '%s' could not be opened."
 msgstr "Modul '%s' nemůže být otevřen."
 
-#: ../src/e_mod_main.c:990 ../src/e_mod_main.c:1070 ../src/e_mod_main.c:1121
-#: ../src/e_mod_main.c:1167
+#: src/e_mod_main.c:995 src/e_mod_main.c:1075 src/e_mod_main.c:1126
+#: src/e_mod_main.c:1172
 #, c-format
 msgid "The plugin '%s' does not contain all required functions."
 msgstr "Modul '%s' neobsahuje všechny důležité funkce."
 
-#: ../src/e_mod_main.c:1002
+#: src/e_mod_main.c:1007
 #, c-format
 msgid "The plugin '%s' does not have the required API version."
 msgstr "Modul '%s' nemá vyžadovanou verzi API."
 
-#: ../src/e_mod_main.c:1338
+#: src/e_mod_main.c:1337
 msgid "Drawer"
 msgstr "Drawer"
 
-#: ../src/e_mod_main.c:1431
+#: src/e_mod_main.c:1430
 msgid "Drawer Configuration Updated"
 msgstr "Drawer konfigurace aktualizována"
 
-#: ../src/e_mod_main.c:1785
+#: src/e_mod_main.c:1785
 msgid "Settings"
 msgstr "Nastavení"
 
-#: ../src/plugins/sources/directory_watcher.c:284
+#: src/plugins/sources/directory_watcher.c:275
 msgid "Open Containing Directory"
 msgstr "Otevřít obsahující adresář"
 
-#: ../src/plugins/sources/directory_watcher.c:296
+#: src/plugins/sources/directory_watcher.c:287
 msgid "Directory Watcher settings"
 msgstr "Nastavení hlídače složek"
 
-#: ../src/plugins/sources/directory_watcher.c:355
+#: src/plugins/sources/directory_watcher.c:346
 msgid "Home"
 msgstr "Domov"
 
-#: ../src/plugins/sources/directory_watcher.c:422
+#: src/plugins/sources/directory_watcher.c:413
 #, c-format
 msgid "Directory (%s)"
 msgstr "Adresář (%s)"
 
-#: ../src/plugins/sources/directory_watcher.c:524
+#: src/plugins/sources/directory_watcher.c:504
 msgid "Drawer Plugin : Directory Watcher"
 msgstr "Drawer modul: hlídač složek"
 
-#: ../src/plugins/sources/directory_watcher.c:567
+#: src/plugins/sources/directory_watcher.c:547
 msgid "Watch path"
 msgstr "Cesta"
 
-#: ../src/plugins/sources/directory_watcher.c:573
+#: src/plugins/sources/directory_watcher.c:553
 msgid "Custom file manager"
 msgstr "Vlastní správce souborů"
 
-#: ../src/plugins/sources/directory_watcher.c:579
+#: src/plugins/sources/directory_watcher.c:559
 msgid "Sort Options"
 msgstr "Nastavení řazení"
 
-#: ../src/plugins/sources/directory_watcher.c:580
+#: src/plugins/sources/directory_watcher.c:560
 msgid "Sort directories first"
 msgstr "Seřadit první adresáře"
 
-#: ../src/plugins/sources/directory_watcher.c:584
+#: src/plugins/sources/directory_watcher.c:564
 msgid "Sort by name"
 msgstr "Seřadit podle jména"
 
-#: ../src/plugins/sources/directory_watcher.c:586
+#: src/plugins/sources/directory_watcher.c:566
 msgid "Sort by access time"
 msgstr "Seřadit podle času přístupu"
 
-#: ../src/plugins/sources/directory_watcher.c:588
+#: src/plugins/sources/directory_watcher.c:568
 msgid "Sort by modification time"
 msgstr "Seřadit podle času úpravy"
 
-#: ../src/plugins/sources/directory_watcher.c:590
+#: src/plugins/sources/directory_watcher.c:570
 msgid "Sort by change time"
 msgstr "Seřadit podle času změny"
 
-#: ../src/plugins/sources/directory_watcher.c:592
+#: src/plugins/sources/directory_watcher.c:572
 msgid "Sort by size"
 msgstr "Seřadit podle velikosti"
 
-#: ../src/plugins/sources/launcher.c:205
+#: src/plugins/sources/launcher.c:197
 msgid "Launcher settings"
 msgstr "Nastavení spouštěče"
 
-#: ../src/plugins/sources/launcher.c:327
+#: src/plugins/sources/launcher.c:318
 msgid "Change Item Properties"
 msgstr "Změnit vlastnosti"
 
-#: ../src/plugins/sources/launcher.c:332
+#: src/plugins/sources/launcher.c:323
 msgid "Remove Item"
 msgstr "Vymazat"
 
-#: ../src/plugins/sources/launcher.c:355
+#: src/plugins/sources/launcher.c:346
 #, c-format
 msgid "%s source"
 msgstr "%s zdroj"
 
-#: ../src/plugins/sources/launcher.c:538
+#: src/plugins/sources/launcher.c:529
 msgid "Drawer Plugin : Launcher"
 msgstr "Drawer Modul : Spouštěč"
 
-#: ../src/plugins/sources/launcher.c:609
+#: src/plugins/sources/launcher.c:587
 msgid "Selected Bar Source"
 msgstr "Vybraný zdroj lišty"
 
-#: ../src/plugins/sources/launcher.c:617
+#: src/plugins/sources/launcher.c:595
 msgid "Add"
 msgstr "Přidat"
 
-#: ../src/plugins/sources/launcher.c:619
+#: src/plugins/sources/launcher.c:597
 msgid "Delete"
 msgstr "Smazat"
 
-#: ../src/plugins/sources/launcher.c:621
+#: src/plugins/sources/launcher.c:599
 msgid "Configure"
 msgstr "Nastavit"
 
-#: ../src/plugins/sources/launcher.c:631
+#: src/plugins/sources/launcher.c:609
 msgid "Sorting options"
 msgstr "Nastavení řazení"
 
-#: ../src/plugins/sources/launcher.c:632
+#: src/plugins/sources/launcher.c:610
 msgid "Unsorted"
 msgstr "Neseřazeno"
 
-#: ../src/plugins/sources/launcher.c:634
+#: src/plugins/sources/launcher.c:612
 msgid "Sort applications by local rating"
 msgstr "Seřadit podle lokální oblíbenosti"
 
-#: ../src/plugins/sources/launcher.c:636
+#: src/plugins/sources/launcher.c:614
 msgid "Sort applications by overall popularity"
 msgstr "Seřadit podle celkové oblíbenosti"
 
-#: ../src/plugins/sources/launcher.c:673
+#: src/plugins/sources/launcher.c:651
 msgid "Create new Launcher source"
 msgstr "Vytvořit nový zdroj spouštěče"
 
-#: ../src/plugins/sources/launcher.c:674
+#: src/plugins/sources/launcher.c:652
 msgid "Enter a name for this new source:"
 msgstr "Zadejte jméno pro tento zdroj:"
 
-#: ../src/plugins/sources/launcher.c:689
+#: src/plugins/sources/launcher.c:667
 #, c-format
 msgid ""
 "You requested to delete \"%s\".<br><br>Are you sure you want to delete this "
 "bar source?"
 msgstr "Zadali jste smazat \"%s\".<br><br>Opravdu to chcete udělat?"
 
-#: ../src/plugins/sources/launcher.c:693
+#: src/plugins/sources/launcher.c:671
 msgid "Are you sure you want to delete this bar source?"
 msgstr "Opravdu chcete smazat tento zdroj lišty?"
 
-#: ../src/plugins/views/list.c:177
+#: src/plugins/views/list.c:168
 msgid "List settings"
 msgstr "Nastavení seznamu"
 
-#: ../src/plugins/views/list.c:821
+#: src/plugins/views/list.c:811
 msgid "Drawer Plugin : List"
 msgstr "Drawer Modul : Seznam"
 
-#: ../src/plugins/views/list.c:858
+#: src/plugins/views/list.c:848
 msgid "Item size options"
 msgstr "Možnosti velikosti položky"
 
-#: ../src/plugins/views/list.c:859
+#: src/plugins/views/list.c:849
 msgid "Large"
 msgstr "Velký"
 
-#: ../src/plugins/views/list.c:861
+#: src/plugins/views/list.c:851
 msgid "Medium"
 msgstr "Střední"
 
-#: ../src/plugins/views/list.c:863
+#: src/plugins/views/list.c:853
 msgid "Small"
 msgstr "Malý"
 
-#~ msgid "Show rating/popularity"
-#~ msgstr "Zobrazit oblíbenost"
