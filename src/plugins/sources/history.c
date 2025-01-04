@@ -51,7 +51,7 @@ static void _history_cb_menu_item_remove(void *data, E_Menu *m, E_Menu_Item *mi)
 static void _history_conf_activation_cb(void *data1, void *data2 __UNUSED__);
 
 static void *_history_cf_create_data(E_Config_Dialog *cfd);
-static void _history_cf_free_data(E_Config_Dialog *cfd, E_Config_Dialog_Data *cfdata);
+static void _history_cf_free_data(E_Config_Dialog *cfd __UNUSED__, E_Config_Dialog_Data *cfdata);
 static void _history_cf_fill_data(E_Config_Dialog_Data *cfdata);
 static Evas_Object *_history_cf_basic_create(E_Config_Dialog *cfd, Evas *evas, E_Config_Dialog_Data *cfdata);
 static int _history_cf_basic_apply(E_Config_Dialog *cfd, E_Config_Dialog_Data *cfdata);
@@ -481,7 +481,7 @@ _history_cf_create_data(E_Config_Dialog* cfd)
 }
 
 static void
-_history_cf_free_data(E_Config_Dialog* cfd, E_Config_Dialog_Data* cfdata)
+_history_cf_free_data(E_Config_Dialog* cfd __UNUSED__, E_Config_Dialog_Data* cfdata)
 {
    _cfd = NULL;
    E_FREE(cfdata);
