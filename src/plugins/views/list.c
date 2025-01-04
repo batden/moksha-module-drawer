@@ -24,11 +24,8 @@ typedef enum
 struct _Instance
 {
    Drawer_View *view;
-
    Evas *evas;
-
    Eina_List *entries;
-
    Evas_Object *o_box, *o_con;
 
    Ecore_Timer *scroll_timer;
@@ -38,11 +35,9 @@ struct _Instance
 
    char theme_file[PATH_MAX];
    char item_group[43];
-
    const char *parent_id;
 
    List_Orient orient;
-
    Conf        *conf;
    E_Config_DD *edd_conf;
 };
@@ -51,23 +46,19 @@ struct _Entry
 {
    Instance *inst;
    Evas_Object *o_holder, *o_icon;
-
    Drawer_Source_Item *si;
-
    Eina_Bool isa_cat;
 };
 
 struct _Conf
 {
    const char *id;
-
    List_View_Type view_type;
 };
 
 struct _E_Config_Dialog_Data
 {
    Instance *inst;
-
    int view_type;
 };
 
@@ -124,17 +115,17 @@ drawer_plugin_init(Drawer_Plugin *p, const char *id)
    inst->parent_id = eina_stringshare_add(id);
 
    snprintf(inst->theme_file, sizeof(inst->theme_file),
-	    "%s/e-module-drawer.edj", drawer_module_dir_get());
+            "%s/e-module-drawer.edj", drawer_module_dir_get());
 
    snprintf(buf, sizeof(buf), "module.drawer/%s.list", id);
    inst->conf = e_config_domain_load(buf, inst->edd_conf);
    if (!inst->conf)
      {
-	inst->conf = E_NEW(Conf, 1);
+        inst->conf = E_NEW(Conf, 1);
         inst->conf->view_type = LIST_LARGE;
-	inst->conf->id = eina_stringshare_add(id);
+        inst->conf->id = eina_stringshare_add(id);
 
-	e_config_save_queue();
+        e_config_save_queue();
      }
 
    return inst;
@@ -150,11 +141,11 @@ drawer_plugin_shutdown(Drawer_Plugin *p)
 
    EINA_LIST_FREE(inst->entries, e)
      {
-	if (e->o_icon)
-	  evas_object_del(e->o_icon);
-	if (e->o_holder)
-	  evas_object_del(e->o_holder);
-	E_FREE(e);
+        if (e->o_icon)
+          evas_object_del(e->o_icon);
+        if (e->o_holder)
+          evas_object_del(e->o_holder);
+        E_FREE(e);
      }
 
    eina_stringshare_del(inst->parent_id);
@@ -209,11 +200,11 @@ drawer_view_render(Drawer_View *v, Evas *evas, Eina_List *items)
 
    EINA_LIST_FREE(inst->entries, e)
      {
-	if (e->o_icon)
-	  evas_object_del(e->o_icon);
-	if (e->o_holder)
-	  evas_object_del(e->o_holder);
-	E_FREE(e);
+        if (e->o_icon)
+          evas_object_del(e->o_icon);
+        if (e->o_holder)
+          evas_object_del(e->o_holder);
+        E_FREE(e);
      }
 
    if (!items) return NULL;
@@ -228,68 +219,68 @@ drawer_view_render(Drawer_View *v, Evas *evas, Eina_List *items)
      {
       case LIST_BOTTOM:
       case LIST_RIGHT:
-	 ll = eina_list_reverse(ll);
-	 break;
+         ll = eina_list_reverse(ll);
+         break;
       default:
-	 break;
+         break;
      }
 
    EINA_LIST_FOREACH(ll, l, si)
      {
 
-	if (!cat && si->category)
-	  {
-	     cat = eina_stringshare_add(si->category);
-	     change = EINA_TRUE;
-	  }
-	else if (cat && !si->category)
-	  {
-	     eina_stringshare_del(cat);
-	     cat = NULL;
-	     change = EINA_TRUE;
-	  }
-	else if (cat && si->category && (strcmp(cat, si->category)))
-	  {
-	     eina_stringshare_del(cat);
-	     cat = eina_stringshare_add(si->category);
-	     change = EINA_TRUE;
-	  }
-	else
-	  change = EINA_FALSE;
+        if (!cat && si->category)
+          {
+             cat = eina_stringshare_add(si->category);
+             change = EINA_TRUE;
+          }
+        else if (cat && !si->category)
+          {
+             eina_stringshare_del(cat);
+             cat = NULL;
+             change = EINA_TRUE;
+          }
+        else if (cat && si->category && (strcmp(cat, si->category)))
+          {
+             eina_stringshare_del(cat);
+             cat = eina_stringshare_add(si->category);
+             change = EINA_TRUE;
+          }
+        else
+          change = EINA_FALSE;
 
-	switch(inst->orient)
-	  {
-	   case LIST_TOP:
-	   case LIST_BOTTOM:
-	   case LIST_FLOAT:
-	      if (change)
-		{
-		   Entry *c;
+        switch(inst->orient)
+          {
+           case LIST_TOP:
+           case LIST_BOTTOM:
+           case LIST_FLOAT:
+              if (change)
+                {
+                   Entry *c;
 
-		   c = _list_vertical_cat_create(inst, si);
-		   inst->entries = eina_list_append(inst->entries, c);
-		   e_box_pack_end(inst->o_box, c->o_holder);
-		   _list_item_pack_options(inst, c);
-		}
-	      e = _list_vertical_entry_create(inst, si);
-	      break;
-	   case LIST_RIGHT:
-	   case LIST_LEFT:
-	      if (change)
-		{
-		   Entry *c;
+                   c = _list_vertical_cat_create(inst, si);
+                   inst->entries = eina_list_append(inst->entries, c);
+                   e_box_pack_end(inst->o_box, c->o_holder);
+                   _list_item_pack_options(inst, c);
+                }
+              e = _list_vertical_entry_create(inst, si);
+              break;
+           case LIST_RIGHT:
+           case LIST_LEFT:
+              if (change)
+                {
+                   Entry *c;
 
-		   c = _list_horizontal_cat_create(inst, si);
-		   inst->entries = eina_list_append(inst->entries, c);
-		   e_box_pack_end(inst->o_box, c->o_holder);
-		   _list_item_pack_options(inst, c);
-		}
-	      e = _list_horizontal_entry_create(inst, si);
-	      break;
+                   c = _list_horizontal_cat_create(inst, si);
+                   inst->entries = eina_list_append(inst->entries, c);
+                   e_box_pack_end(inst->o_box, c->o_holder);
+                   _list_item_pack_options(inst, c);
+                }
+              e = _list_horizontal_entry_create(inst, si);
+              break;
            default:
               e = NULL;
               break;
-	  }
+          }
         if (e)
           {
              inst->entries = eina_list_append(inst->entries, e);
@@ -315,33 +306,33 @@ drawer_view_orient_set(Drawer_View *v, E_Gadcon_Orient orient)
       case E_GADCON_ORIENT_CORNER_RT:
       case E_GADCON_ORIENT_CORNER_RB:
       case E_GADCON_ORIENT_RIGHT:
-	e_box_orientation_set(inst->o_box, 1);
-	inst->orient = LIST_RIGHT;
-	break;
+        e_box_orientation_set(inst->o_box, 1);
+        inst->orient = LIST_RIGHT;
+        break;
       case E_GADCON_ORIENT_LEFT:
       case E_GADCON_ORIENT_CORNER_LT:
       case E_GADCON_ORIENT_CORNER_LB:
-	e_box_orientation_set(inst->o_box, 1);
-	inst->orient = LIST_LEFT;
-	break;
+        e_box_orientation_set(inst->o_box, 1);
+        inst->orient = LIST_LEFT;
+        break;
       case E_GADCON_ORIENT_TOP:
       case E_GADCON_ORIENT_CORNER_TL:
       case E_GADCON_ORIENT_CORNER_TR:
-	e_box_orientation_set(inst->o_box, 0);
-	inst->orient = LIST_TOP;
-	break;
+        e_box_orientation_set(inst->o_box, 0);
+        inst->orient = LIST_TOP;
+        break;
       case E_GADCON_ORIENT_BOTTOM:
       case E_GADCON_ORIENT_CORNER_BL:
       case E_GADCON_ORIENT_CORNER_BR:
-	e_box_orientation_set(inst->o_box, 0);
-	inst->orient = LIST_BOTTOM;
-	break;
+        e_box_orientation_set(inst->o_box, 0);
+        inst->orient = LIST_BOTTOM;
+        break;
       case E_GADCON_ORIENT_FLOAT:
-	e_box_orientation_set(inst->o_box, 0);
-	inst->orient = LIST_FLOAT;
-	break;
+        e_box_orientation_set(inst->o_box, 0);
+        inst->orient = LIST_FLOAT;
+        break;
       default:
-	break;
+        break;
      }
 
    _list_reconfigure(inst);
@@ -449,30 +440,30 @@ _list_containers_create(Instance *inst)
      {
       case LIST_TOP:
       case LIST_FLOAT:
-	 e_box_orientation_set(inst->o_box, 0);
-	 e_box_align_set(inst->o_box, 0.5, 1);
-	 group = eina_stringshare_add("modules/drawer/list/vertical");
-	 break;
+         e_box_orientation_set(inst->o_box, 0);
+         e_box_align_set(inst->o_box, 0.5, 1);
+         group = eina_stringshare_add("modules/drawer/list/vertical");
+         break;
       case LIST_BOTTOM:
-	 e_box_orientation_set(inst->o_box, 0);
-	 e_box_align_set(inst->o_box, 0.5, 0);
-	 group = eina_stringshare_add("modules/drawer/list/vertical");
-	 break;
+         e_box_orientation_set(inst->o_box, 0);
+         e_box_align_set(inst->o_box, 0.5, 0);
+         group = eina_stringshare_add("modules/drawer/list/vertical");
+         break;
       case LIST_LEFT:
-	 e_box_orientation_set(inst->o_box, 1);
-	 e_box_align_set(inst->o_box, 1, 0.5);
-	 group = eina_stringshare_add("modules/drawer/list/horizontal");
-	 break;
+         e_box_orientation_set(inst->o_box, 1);
+         e_box_align_set(inst->o_box, 1, 0.5);
+         group = eina_stringshare_add("modules/drawer/list/horizontal");
+         break;
       case LIST_RIGHT:
-	 e_box_orientation_set(inst->o_box, 1);
-	 e_box_align_set(inst->o_box, 0, 0.5);
-	 group = eina_stringshare_add("modules/drawer/list/horizontal");
-	 break;
+         e_box_orientation_set(inst->o_box, 1);
+         e_box_align_set(inst->o_box, 0, 0.5);
+         group = eina_stringshare_add("modules/drawer/list/horizontal");
+         break;
       default:
-	 e_box_orientation_set(inst->o_box, 0);
-	 e_box_align_set(inst->o_box, 0.5, 0.5);
-	 group = eina_stringshare_add("modules/drawer/list/vertical");
-	 break;
+         e_box_orientation_set(inst->o_box, 0);
+         e_box_align_set(inst->o_box, 0.5, 0.5);
+         group = eina_stringshare_add("modules/drawer/list/vertical");
+         break;
      }
 
    if (!e_theme_edje_object_set(inst->o_con, "base/theme/modules/drawer", group))
@@ -485,7 +476,7 @@ _list_containers_create(Instance *inst)
    evas_object_propagate_events_set(inst->o_con, 0);
 
    evas_object_event_callback_add(inst->o_con, EVAS_CALLBACK_MOUSE_MOVE,
-				  _list_cb_list_mouse_move, inst);
+                                  _list_cb_list_mouse_move, inst);
 }
 
 static Entry *
@@ -501,13 +492,13 @@ _list_horizontal_entry_create(Instance *inst, Drawer_Source_Item *si)
    e->si = si;
 
    edje_object_signal_callback_add(e->o_holder, "e,action,select", "drawer",
-				   _list_entry_select_cb, e);
+                                   _list_entry_select_cb, e);
    edje_object_signal_callback_add(e->o_holder, "e,action,deselect", "drawer",
-				   _list_entry_deselect_cb, e);
+                                   _list_entry_deselect_cb, e);
    edje_object_signal_callback_add(e->o_holder, "e,action,activate", "drawer",
-				   _list_entry_activate_cb, e);
+                                   _list_entry_activate_cb, e);
    edje_object_signal_callback_add(e->o_holder, "e,action,context", "drawer",
-				   _list_entry_context_cb, e);
+                                   _list_entry_context_cb, e);
 
    return e;
 }
@@ -525,13 +516,13 @@ _list_vertical_entry_create(Instance *inst, Drawer_Source_Item *si)
    e->si = si;
 
    edje_object_signal_callback_add(e->o_holder, "e,action,select", "drawer",
-				   _list_entry_select_cb, e);
+                                   _list_entry_select_cb, e);
    edje_object_signal_callback_add(e->o_holder, "e,action,deselect", "drawer",
-				   _list_entry_deselect_cb, e);
+                                   _list_entry_deselect_cb, e);
    edje_object_signal_callback_add(e->o_holder, "e,action,activate", "drawer",
-				   _list_entry_activate_cb, e);
+                                   _list_entry_activate_cb, e);
    edje_object_signal_callback_add(e->o_holder, "e,action,context", "drawer",
-				   _list_entry_context_cb, e);
+                                   _list_entry_context_cb, e);
 
    return e;
 }
@@ -546,9 +537,9 @@ _list_horizontal_cat_create(Instance *inst, Drawer_Source_Item *si)
 
    e->o_holder = edje_object_add(inst->evas);
    if (!e_theme_edje_object_set(e->o_holder, "base/theme/modules/drawer",
-				"modules/drawer/list/horizontal_category"))
+                                "modules/drawer/list/horizontal_category"))
      edje_object_file_set(e->o_holder, inst->theme_file,
-			  "modules/drawer/list/horizontal_category");
+                          "modules/drawer/list/horizontal_category");
 
    if (si->category)
      snprintf(buf, sizeof(buf), "%s", si->category);
@@ -574,9 +565,9 @@ _list_vertical_cat_create(Instance *inst, Drawer_Source_Item *si)
 
    e->o_holder = edje_object_add(inst->evas);
    if (!e_theme_edje_object_set(e->o_holder, "base/theme/modules/drawer",
-				"modules/drawer/list/vertical_category"))
+                                "modules/drawer/list/vertical_category"))
      edje_object_file_set(e->o_holder, inst->theme_file,
-			  "modules/drawer/list/vertical_category");
+                          "modules/drawer/list/vertical_category");
 
    if (si->category)
      snprintf(buf, sizeof(buf), "%s", si->category);
@@ -601,12 +592,12 @@ _list_item_pack_options(Instance *inst, Entry *e)
    edje_object_size_min_calc(e->o_holder, &w, &h);
    edje_object_size_max_get(e->o_holder, &mw, &mh);
    e_box_pack_options_set(e->o_holder,
-			  1, 1, /* fill */
-			  1, 1, /* expand */
-			  0.5, 0.5, /* align */
-			  w, h, /* min */
-			  mw, mh /* max */
-			 );
+                          1, 1, /* fill */
+                          1, 1, /* expand */
+                          0.5, 0.5, /* align */
+                          w, h, /* min */
+                          mw, mh /* max */
+                         );
    evas_object_show(e->o_holder);
 }
 
@@ -617,13 +608,13 @@ _list_autoscroll_update(Instance *inst, Evas_Coord x, Evas_Coord y, Evas_Coord w
 
    if (e_box_orientation_get(inst->o_box))
      {
-	if (w > 1) d = (double)x / (double)(w - 1);
-	else d = 0;
+        if (w > 1) d = (double)x / (double)(w - 1);
+        else d = 0;
      }
    else
      {
-	if (h > 1) d = (double)y / (double)(h - 1);
-	else d = 0;
+        if (h > 1) d = (double)y / (double)(h - 1);
+        else d = 0;
      }
    if (d < 0.0) d = 0.0;
    else if (d > 1.0) d = 1.0;
@@ -647,9 +638,9 @@ _list_scroll_timer(void *data)
    if (d < 0) d = -d;
    if (d < 0.001)
      {
-	inst->scroll_pos =  inst->scroll_wanted;
-	inst->scroll_timer = NULL;
-	return EINA_FALSE;
+        inst->scroll_pos =  inst->scroll_wanted;
+        inst->scroll_timer = NULL;
+        return EINA_FALSE;
      }
    inst->scroll_pos = (inst->scroll_pos * 0.95) + (inst->scroll_wanted * 0.05);
    return EINA_TRUE;
@@ -667,8 +658,8 @@ _list_scroll_animator(void *data)
      e_box_align_set(inst->o_box, 0.5, 1.0 - inst->scroll_pos);
    if (!inst->scroll_timer)
      {
-	inst->scroll_animator = NULL;
-	return EINA_FALSE;
+        inst->scroll_animator = NULL;
+        return EINA_FALSE;
      }
 
    /* Have scroll_cb func if d&d is ever implemented. See e_gadcon.c */
@@ -687,7 +678,7 @@ _list_cb_list_mouse_move(void *data, Evas *e, Evas_Object *obj, void *event_info
    inst = data;
    evas_object_geometry_get(inst->o_box, &x, &y, &w, &h);
    _list_autoscroll_update(inst, ev->cur.output.x - x,
-			   ev->cur.output.y - y, w, h);
+                           ev->cur.output.y - y, w, h);
 }
 
 static int
@@ -817,8 +808,8 @@ _list_conf_activation_cb(void *data1, void *data2 __UNUSED__)
 
    /* create new config dialog */
    _cfd = e_config_dialog_new(e_container_current_get(e_manager_current_get()),
-	 D_("Drawer Plugin : List"), "Drawer_List",
-	 "_e_module_drawer_cfg_dlg", buf, 0, v, inst);
+         D_("Drawer Plugin : List"), "Drawer_List",
+         "_e_module_drawer_cfg_dlg", buf, 0, v, inst);
 
    e_dialog_resizable_set(_cfd->dia, 1);
 }
