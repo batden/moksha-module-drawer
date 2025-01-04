@@ -496,7 +496,7 @@ _grid_sort_by_category_cb(const void *d1, const void *d2)
 }
 
 static void
-_grid_entry_select_cb(void *data, Evas_Object *obj, const char *emission __UNUSED__, const char *source __UNUSED__)
+_grid_entry_select_cb(void *data, Evas_Object *obj __UNUSED__, const char *emission __UNUSED__, const char *source __UNUSED__)
 {
    Item *e = NULL;
    Instance *inst = NULL;
@@ -510,7 +510,7 @@ _grid_entry_select_cb(void *data, Evas_Object *obj, const char *emission __UNUSE
 }
 
 static void
-_grid_entry_deselect_cb(void *data, Evas_Object *obj, const char *emission __UNUSED__, const char *source __UNUSED__)
+_grid_entry_deselect_cb(void *data, Evas_Object *obj __UNUSED__, const char *emission __UNUSED__, const char *source __UNUSED__)
 {
    Item *e = NULL;
    Instance *inst = NULL;
@@ -522,7 +522,7 @@ _grid_entry_deselect_cb(void *data, Evas_Object *obj, const char *emission __UNU
 }
 
 static void
-_grid_entry_activate_cb(void *data, Evas_Object *obj, const char *emission __UNUSED__, const char *source __UNUSED__)
+_grid_entry_activate_cb(void *data, Evas_Object *obj __UNUSED__, const char *emission __UNUSED__, const char *source __UNUSED__)
 {
    Item *e = NULL;
    Drawer_Event_View_Activate *ev;
