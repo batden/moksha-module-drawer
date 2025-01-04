@@ -533,7 +533,7 @@ _launcher_conf_activation_cb(void *data1, void *data2 __UNUSED__)
 }
 
 static void
-_launcher_cb_menu_item_properties(void *data, E_Menu *m, E_Menu_Item *mi)
+_launcher_cb_menu_item_properties(void *data, E_Menu *m __UNUSED__, E_Menu_Item *mi __UNUSED__)
 {
    Drawer_Source_Item *si = data;
 
@@ -541,7 +541,7 @@ _launcher_cb_menu_item_properties(void *data, E_Menu *m, E_Menu_Item *mi)
 }
 
 static void
-_launcher_cb_menu_item_remove(void *data, E_Menu *m, E_Menu_Item *mi)
+_launcher_cb_menu_item_remove(void *data, E_Menu *m __UNUSED__, E_Menu_Item *mi __UNUSED__)
 {
    Launcher_Menu_Data *m_data = data;
    
@@ -561,7 +561,7 @@ _launcher_cf_create_data(E_Config_Dialog *cfd)
 }
 
 static void 
-_launcher_cf_free_data(E_Config_Dialog *cfd, E_Config_Dialog_Data *cfdata)
+_launcher_cf_free_data(E_Config_Dialog *cfd __UNUSED__, E_Config_Dialog_Data *cfdata)
 {
    eina_stringshare_del(cfdata->dir);
 
@@ -577,7 +577,7 @@ _launcher_cf_fill_data(E_Config_Dialog_Data *cfdata)
 }
 
 static Evas_Object *
-_launcher_cf_basic_create(E_Config_Dialog *cfd, Evas *evas, E_Config_Dialog_Data *cfdata)
+_launcher_cf_basic_create(E_Config_Dialog *cfd __UNUSED__, Evas *evas, E_Config_Dialog_Data *cfdata)
 {
    Evas_Object *o, *of, *ol, *ob, *ot;
    E_Radio_Group *rg;
@@ -620,7 +620,7 @@ _launcher_cf_basic_create(E_Config_Dialog *cfd, Evas *evas, E_Config_Dialog_Data
 }
 
 static int 
-_launcher_cf_basic_apply(E_Config_Dialog *cfd, E_Config_Dialog_Data *cfdata)
+_launcher_cf_basic_apply(E_Config_Dialog *cfd __UNUSED__, E_Config_Dialog_Data *cfdata)
 {
    Instance *inst = NULL;
    Drawer_Event_Source_Update *ev;
@@ -643,7 +643,7 @@ _launcher_cf_basic_apply(E_Config_Dialog *cfd, E_Config_Dialog_Data *cfdata)
 }
 
 static void
-_cb_add(void *data, void *data2)
+_cb_add(void *data, void *data2 __UNUSED__)
 {
    E_Config_Dialog_Data *cfdata;
    
@@ -654,7 +654,7 @@ _cb_add(void *data, void *data2)
 }
 
 static void
-_cb_del(void *data, void *data2)
+_cb_del(void *data, void *data2 __UNUSED__)
 {
    char buf[PATH_MAX];
    E_Config_Dialog_Data *cfdata;
@@ -675,7 +675,7 @@ _cb_del(void *data, void *data2)
 }
 
 static void
-_cb_config(void *data, void *data2)
+_cb_config(void *data, void *data2 __UNUSED__)
 {
    char path[PATH_MAX];
    E_Config_Dialog_Data *cfdata;
