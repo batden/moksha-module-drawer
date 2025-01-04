@@ -236,7 +236,6 @@ drawer_view_render(Drawer_View *v, Evas *evas, Eina_List *items)
 
    EINA_LIST_FOREACH(ll, l, si)
      {
-	Entry *e;
 
 	if (!cat && si->category)
 	  {
