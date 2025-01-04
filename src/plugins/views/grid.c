@@ -287,15 +287,14 @@ drawer_view_toggle_visibility(Drawer_View *v, Eina_Bool show)
 static void
 _grid_reconfigure(Instance *inst)
 {
-   Evas_Coord zw;
-   Evas_Coord cath = 0, catw = 0, ew = 0, eh = 0, cw = 0, ch = 0,
-              ww = 0, hh = 0, w = 0, h = 0;
-   E_Zone *zone = e_util_zone_current_get(e_manager_current_get());
+   //Evas_Coord zw;
+   Evas_Coord cath = 0, catw = 0, ew = 0, eh = 0, cw = 0, ch = 0, w = 0, h = 0;
+   //E_Zone *zone = e_util_zone_current_get(e_manager_current_get());
    Eina_List *l;
    Item *e;
-   int max_item_count = 0, item_count = 0, cat_count = 0, iter_count;
+   int max_item_count = 0, item_count = 0, cat_count = 0; // iter_count;
 
-   zw = zone->w;
+   //zw = zone->w;
 
    evas_object_smart_calculate(inst->o_box);
    EINA_LIST_FOREACH(inst->items, l, e)
