@@ -355,7 +355,8 @@ static void
 _history_source_items_free(Instance* inst)
 {
    EINA_SAFETY_ON_NULL_RETURN(inst);
-   EINA_SAFETY_ON_NULL_RETURN(inst->items);
+   if (!inst->items) return;
+
    while (inst->items) {
       Drawer_Source_Item* si = NULL;
 
