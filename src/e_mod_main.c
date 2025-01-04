@@ -295,7 +295,7 @@ e_modapi_init(E_Module *m)
  * Function to unload the module
  */
 EAPI int
-e_modapi_shutdown(E_Module *m)
+e_modapi_shutdown(E_Module *m __UNUSED__)
 {
    /* Unregister the config dialog from the main panel */
    e_configure_registry_item_del("extensions/drawer");
@@ -350,7 +350,7 @@ e_modapi_shutdown(E_Module *m)
  * Function to Save the modules config
  */
 EAPI int
-e_modapi_save(E_Module *m)
+e_modapi_save(E_Module *m __UNUSED__)
 {
    Eina_List *l = NULL;
    Instance *inst = NULL;
@@ -940,7 +940,7 @@ _drawer_container_setup(Instance *inst, E_Gadcon_Orient orient)
 
 /* Called when the floating container is resized */
 static void
-_drawer_container_resize_cb(void *data, Evas *evas, Evas_Object *obj, void *event_info)
+_drawer_container_resize_cb(void *data, Evas *evas __UNUSED__, Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
 {
    Instance *inst;
 
@@ -958,7 +958,7 @@ _drawer_container_resize_cb(void *data, Evas *evas, Evas_Object *obj, void *even
 }
 
 static Drawer_Plugin *
-_drawer_plugin_new(Instance *inst, const char *name, const char *category, size_t size)
+_drawer_plugin_new(Instance *inst __UNUSED__, const char *name, const char *category, size_t size)
 {
    Drawer_Plugin *p;
    char buf[PATH_MAX];
@@ -1332,14 +1332,14 @@ _drawer_gc_orient(E_Gadcon_Client *gcc, E_Gadcon_Orient orient)
 
 /* Gadget/Module label */
 static const char *
-_drawer_gc_label(const E_Gadcon_Client_Class *client_class)
+_drawer_gc_label(const E_Gadcon_Client_Class *client_class __UNUSED__)
 {
    return D_("Drawer");
 }
 
 /* so E can keep a unique instance per-container */
 static const char *
-_drawer_gc_id_new(const E_Gadcon_Client_Class *client_class)
+_drawer_gc_id_new(const E_Gadcon_Client_Class *client_class __UNUSED__)
 {
    Config_Item *ci = NULL;
 
@@ -1348,7 +1348,7 @@ _drawer_gc_id_new(const E_Gadcon_Client_Class *client_class)
 }
 
 static Evas_Object *
-_drawer_gc_icon(const E_Gadcon_Client_Class *client_class, Evas *evas)
+_drawer_gc_icon(const E_Gadcon_Client_Class *client_class __UNUSED__, Evas *evas)
 {
    Evas_Object *o = NULL;
    char buf[PATH_MAX];
@@ -1464,7 +1464,7 @@ _drawer_instance_get(Config_Item *ci)
 }
 
 static void
-_drawer_thumbnail_theme(Evas_Object *thumbnail, Drawer_Source_Item *si)
+_drawer_thumbnail_theme(Evas_Object *thumbnail, Drawer_Source_Item *si __UNUSED__)
 {
    if (!e_theme_edje_object_set(thumbnail, "base/theme/modules/drawer",
 				"modules/drawer/icon/thumbnail"))
@@ -1501,7 +1501,7 @@ _drawer_thumbnail_swallow(Evas_Object *thumbnail, Evas_Object *swallow)
 }
 
 static void
-_drawer_thumb_exist_cb(void *data, Ethumb_Client *client, Ethumb_Exists *thread, Eina_Bool exists)
+_drawer_thumb_exist_cb(void *data, Ethumb_Client *client __UNUSED__, Ethumb_Exists *thread __UNUSED__, Eina_Bool exists)
 {
    Drawer_Thumb_Data *td = data;
 
@@ -1680,7 +1680,7 @@ _drawer_view_context_cb(void *data __UNUSED__, int ev_type, void *event)
 }
 
 static Eina_Bool
-_drawer_global_mouse_down_cb(void *data, int type, void *event)
+_drawer_global_mouse_down_cb(void *data, int type __UNUSED__, void *event)
 {
    Ecore_Event_Mouse_Button *ev;
    Instance *inst;
@@ -1719,7 +1719,7 @@ _drawer_popup_shown_cb(void *data, Evas_Object *obj __UNUSED__, const char *emis
 }
 
 static void
-_drawer_mouse_down_cb(void *data, Evas *evas, Evas_Object *obj, void *event)
+_drawer_mouse_down_cb(void *data, Evas *evas __UNUSED__, Evas_Object *obj __UNUSED__, void *event)
 {
    Instance *inst = NULL;
    Evas_Event_Mouse_Down *ev = NULL;
@@ -1803,7 +1803,7 @@ _drawer_mouse_down_cb(void *data, Evas *evas, Evas_Object *obj, void *event)
 
 /* call configure from popup */
 static void
-_drawer_menu_configure_cb(void *data, E_Menu *mn, E_Menu_Item *mi)
+_drawer_menu_configure_cb(void *data, E_Menu *mn, E_Menu_Item *mi __UNUSED__)
 {
    Instance *inst = NULL;
 
@@ -1824,7 +1824,7 @@ _drawer_thumbnail_del_cb(void *data, Evas *e __UNUSED__, Evas_Object *obj __UNUS
 }
 
 static void
-_drawer_changed_size_hints_cb(void *data, Evas *e, Evas_Object *obj, void *event_info)
+_drawer_changed_size_hints_cb(void *data, Evas *e __UNUSED__, Evas_Object *obj, void *event_info __UNUSED__)
 {
    Evas_Object *parent = evas_object_data_get(obj, "con_parent");
    if (parent)
@@ -1846,14 +1846,14 @@ _drawer_thumb_connect_cb(void *data, Ethumb_Client *e, Eina_Bool success)
 }
 
 static void
-_drawer_thumb_die_cb(void *data, Ethumb_Client *e)
+_drawer_thumb_die_cb(void *data, Ethumb_Client *e __UNUSED__)
 {
    ethumb_client = NULL;
    ethumb_client_connect(_drawer_thumb_connect_cb, data, _drawer_thumb_data_free);
 }
 
 static void
-_drawer_thumb_generate_cb(void *data, Ethumb_Client *client, int id, const char *file, const char *key, const char *thumb_path, const char *thumb_key, Eina_Bool success)
+_drawer_thumb_generate_cb(void *data, Ethumb_Client *client __UNUSED__, int id __UNUSED__, const char *file, const char *key __UNUSED__, const char *thumb_path, const char *thumb_key __UNUSED__, Eina_Bool success)
 {
    Drawer_Thumb_Data *td = data;
    Evas_Object *o = NULL;
@@ -1921,7 +1921,7 @@ _drawer_thumb_generate_cb(void *data, Ethumb_Client *client, int id, const char 
 }
 
 static void
-_drawer_thumb_object_del_cb(void *data, Evas *evas, Evas_Object *obj, void *event_info)
+_drawer_thumb_object_del_cb(void *data, Evas *evas __UNUSED__, Evas_Object *obj __UNUSED__, void *event_info __UNUSED__)
 {
    Drawer_Thumb_Data *td = data;
    td->object_deleted = EINA_TRUE;
