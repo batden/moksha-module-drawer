@@ -584,7 +584,7 @@ _list_vertical_cat_create(Instance *inst, Drawer_Source_Item *si)
 }
 
 static void
-_list_item_pack_options(Instance *inst, Entry *e)
+_list_item_pack_options(Instance *inst __UNUSED__, Entry *e __UNUSED__)
 {
    Evas_Coord w, h, mw, mh;
 
@@ -668,7 +668,7 @@ _list_scroll_animator(void *data)
 }
 
 static void
-_list_cb_list_mouse_move(void *data, Evas *e, Evas_Object *obj, void *event_info)
+_list_cb_list_mouse_move(void *data, Evas *e __UNUSED__, Evas_Object *obj __UNUSED__, void *event_info)
 {
    Instance *inst = NULL;
    Evas_Event_Mouse_Move *ev;
@@ -700,7 +700,7 @@ _list_sort_by_category_cb(const void *d1, const void *d2)
 }
 
 static void
-_list_entry_select_cb(void *data, Evas_Object *obj, const char *emission __UNUSED__, const char *source __UNUSED__)
+_list_entry_select_cb(void *data, Evas_Object *obj __UNUSED__, const char *emission __UNUSED__, const char *source __UNUSED__)
 {
    Entry *e = NULL;
    Instance *inst = NULL;
@@ -714,7 +714,7 @@ _list_entry_select_cb(void *data, Evas_Object *obj, const char *emission __UNUSE
 }
 
 static void
-_list_entry_deselect_cb(void *data, Evas_Object *obj, const char *emission __UNUSED__, const char *source __UNUSED__)
+_list_entry_deselect_cb(void *data, Evas_Object *obj __UNUSED__, const char *emission __UNUSED__, const char *source __UNUSED__)
 {
    Entry *e = NULL;
    Instance *inst = NULL;
@@ -726,7 +726,7 @@ _list_entry_deselect_cb(void *data, Evas_Object *obj, const char *emission __UNU
 }
 
 static void
-_list_entry_activate_cb(void *data, Evas_Object *obj, const char *emission __UNUSED__, const char *source __UNUSED__)
+_list_entry_activate_cb(void *data, Evas_Object *obj __UNUSED__, const char *emission __UNUSED__, const char *source __UNUSED__)
 {
    Entry *e = NULL;
    Drawer_Event_View_Activate *ev;
@@ -826,7 +826,7 @@ _list_cf_create_data(E_Config_Dialog *cfd)
 }
 
 static void
-_list_cf_free_data(E_Config_Dialog *cfd, E_Config_Dialog_Data *cfdata)
+_list_cf_free_data(E_Config_Dialog *cfd __UNUSED__, E_Config_Dialog_Data *cfdata)
 {
    _cfd = NULL;
    E_FREE(cfdata);
@@ -839,7 +839,7 @@ _list_cf_fill_data(E_Config_Dialog_Data *cfdata)
 }
 
 static Evas_Object *
-_list_cf_basic_create(E_Config_Dialog *cfd, Evas *evas, E_Config_Dialog_Data *cfdata)
+_list_cf_basic_create(E_Config_Dialog *cfd __UNUSED__, Evas *evas, E_Config_Dialog_Data *cfdata)
 {
    Evas_Object *of, *ob;
    E_Radio_Group *rg;
@@ -857,7 +857,7 @@ _list_cf_basic_create(E_Config_Dialog *cfd, Evas *evas, E_Config_Dialog_Data *cf
 }
 
 static int
-_list_cf_basic_apply(E_Config_Dialog *cfd, E_Config_Dialog_Data *cfdata)
+_list_cf_basic_apply(E_Config_Dialog *cfd __UNUSED__, E_Config_Dialog_Data *cfdata)
 {
    cfdata->inst->conf->view_type = cfdata->view_type;
 
