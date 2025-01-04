@@ -69,7 +69,7 @@ _create_data(E_Config_Dialog *cfd)
 }
 
 static void
-_free_data(E_Config_Dialog *cfd, E_Config_Dialog_Data *cfdata)
+_free_data(E_Config_Dialog *cfd __UNUSED__, E_Config_Dialog_Data *cfdata)
 {
    drawer_plugins_list_free(cfdata->views);
    drawer_plugins_list_free(cfdata->sources);
@@ -122,7 +122,7 @@ _basic_create(E_Config_Dialog *cfd, Evas *evas, E_Config_Dialog_Data *cfdata)
 }
 
 static int
-_basic_apply(E_Config_Dialog *cfd, E_Config_Dialog_Data *cfdata)
+_basic_apply(E_Config_Dialog *cfd __UNUSED__, E_Config_Dialog_Data *cfdata)
 {
    eina_stringshare_del(cfdata->ci->view);
    eina_stringshare_del(cfdata->ci->source);
@@ -137,7 +137,7 @@ _basic_apply(E_Config_Dialog *cfd, E_Config_Dialog_Data *cfdata)
 }
 
 static void
-_conf_plugin_sel(void *data1, void *data2)
+_conf_plugin_sel(void *data1 __UNUSED__, void *data2)
 {
    E_Config_Dialog_Data *cfdata;
    Evas_Object *of, *ol, *packed, *otx, *oi;
@@ -219,7 +219,7 @@ _conf_plugin_sel(void *data1, void *data2)
 }
 
 static void
-_sources_list_cb_change(void *data, Evas_Object *obj)
+_sources_list_cb_change(void *data, Evas_Object *obj __UNUSED__)
 {
    E_Config_Dialog_Data *cfdata = NULL;
    Drawer_Plugin_Type *pi;
@@ -240,7 +240,7 @@ _sources_list_cb_change(void *data, Evas_Object *obj)
 }
 
 static void
-_views_list_cb_change(void *data, Evas_Object *obj)
+_views_list_cb_change(void *data, Evas_Object *obj __UNUSED__)
 {
    E_Config_Dialog_Data *cfdata;
    Drawer_Plugin_Type *pi;
@@ -261,7 +261,7 @@ _views_list_cb_change(void *data, Evas_Object *obj)
 }
 
 static void
-_conf_plugin_set(void *data1, void *data2)
+_conf_plugin_set(void *data1 __UNUSED__, void *data2)
 {
    E_Config_Dialog_Data *cfdata;
    Evas_Object *of, *ol, *packed;
