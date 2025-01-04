@@ -197,14 +197,14 @@ _conf_plugin_sel(void *data1 __UNUSED__, void *data2)
    e_widget_ilist_freeze(oi);
    for (l = cfdata->views, i = 0, selnum = -1; l; l = l->next)
      {
-	Drawer_Plugin_Type *pi = l->data;
+	Drawer_Plugin_Type *vpi = l->data;
 
 	i++;
-	if (!(strcmp(cfdata->view, pi->name)))
+	if (!(strcmp(cfdata->view, vpi->name)))
           selnum = i;
 
 	/* XXX: plugin icon if one exists */
-	e_widget_ilist_append(oi, NULL, pi->title, NULL, pi, pi->name);
+	e_widget_ilist_append(oi, NULL, vpi->title, NULL, vpi, vpi->name);
 	e_widget_on_change_hook_set(oi, _views_list_cb_change, cfdata);
      }
    e_widget_ilist_go(oi);
