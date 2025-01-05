@@ -87,27 +87,27 @@ drawer_plugin_init(Drawer_Plugin *p, const char *id)
 
    inst->handlers = eina_list_append(
       inst->handlers, ecore_event_handler_add(E_EVENT_BORDER_FOCUS_IN, _winlist_border_focus_in_cb, inst));
-   inst->handlers = eina_list_append(inst->handlers, 
-                                     ecore_event_handler_add(E_EVENT_BORDER_FOCUS_OUT, 
+   inst->handlers = eina_list_append(inst->handlers,
+                                     ecore_event_handler_add(E_EVENT_BORDER_FOCUS_OUT,
                                      _winlist_border_focus_out_cb, inst));
-   inst->handlers = eina_list_append(inst->handlers, 
+   inst->handlers = eina_list_append(inst->handlers,
                                      ecore_event_handler_add(E_EVENT_BORDER_ADD,
                                      _winlist_border_add_cb, inst));
-   inst->handlers = eina_list_append(inst->handlers, 
-                                     ecore_event_handler_add(E_EVENT_BORDER_REMOVE, 
+   inst->handlers = eina_list_append(inst->handlers,
+                                     ecore_event_handler_add(E_EVENT_BORDER_REMOVE,
                                      _winlist_border_remove_cb, inst));
-   inst->handlers = eina_list_append(inst->handlers, 
+   inst->handlers = eina_list_append(inst->handlers,
                                      ecore_event_handler_add(E_EVENT_BORDER_ICON_CHANGE,
                                      _winlist_border_icon_change_cb, inst));
-   inst->handlers = eina_list_append(inst->handlers, 
-                                     ecore_event_handler_add(E_EVENT_BORDER_DESK_SET, 
+   inst->handlers = eina_list_append(inst->handlers,
+                                     ecore_event_handler_add(E_EVENT_BORDER_DESK_SET,
                                      _winlist_border_desk_set_cb, inst));
-   inst->handlers = eina_list_append(inst->handlers, 
+   inst->handlers = eina_list_append(inst->handlers,
                                      ecore_event_handler_add(ECORE_X_EVENT_WINDOW_PROPERTY,
                                      _winlist_border_window_prop_cb, inst));
 #if 0
-inst->handlers = eina_list_append(inst->handlers, 
-                                  ecore_event_handler_add(E_EVENT_DESK_SHOW, 
+inst->handlers = eina_list_append(inst->handlers,
+                                  ecore_event_handler_add(E_EVENT_DESK_SHOW,
                                   _winlist_desk_show_cb, inst));
 #endif
 
@@ -683,7 +683,7 @@ _winlist_desk_show_cb(void *data, int type, void *event)
    inst->actions.changed = EINA_TRUE;
    if (_winlist_items_update(inst)) _winlist_event_update(inst);
 
-   return 1; 
+   return 1;
 }
 #endif
 
