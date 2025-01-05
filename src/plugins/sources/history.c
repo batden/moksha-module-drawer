@@ -13,30 +13,31 @@ typedef struct _Conf Conf;
 
 struct _Instance
 {
-   Drawer_Source* source;
+   Drawer_Source *	source;
 
-   Eina_List *items, *handlers;
-   Conf* conf;
-   E_Menu* menu;
-   struct {
-      E_Config_DD* conf;
+   Eina_List *		items, *handlers;
+   Conf *			conf;
+   E_Menu *			menu;
+   struct
+   {
+      E_Config_DD *conf;
    } edd;
-   const char* description;
+   const char *		description;
 };
 
 struct _Conf
 {
-   const char* id;
-   History_Sort_Type sort_type;
+   const char *			id;
+   History_Sort_Type	sort_type;
 };
 
 struct _E_Config_Dialog_Data
 {
-   Instance* inst;
+   Instance *			inst;
 
-   Evas_Object* ilist;
-   E_Confirm_Dialog* dialog_delete;
-   int sort_type;
+   Evas_Object *		ilist;
+   E_Confirm_Dialog *	dialog_delete;
+   int					sort_type;
 };
 
 static void _history_description_create(Instance *inst);
@@ -56,15 +57,14 @@ static void _history_cf_fill_data(E_Config_Dialog_Data *cfdata);
 static Evas_Object *_history_cf_basic_create(E_Config_Dialog *cfd, Evas *evas, E_Config_Dialog_Data *cfdata);
 static int _history_cf_basic_apply(E_Config_Dialog *cfd, E_Config_Dialog_Data *cfdata);
 
-EAPI Drawer_Plugin_Api drawer_plugin_api = { DRAWER_PLUGIN_API_VERSION,
-                                             "History" };
+EAPI Drawer_Plugin_Api drawer_plugin_api = { DRAWER_PLUGIN_API_VERSION, "History" };
 
-static E_Config_Dialog* _cfd = NULL;
+static E_Config_Dialog *_cfd = NULL;
 
-EAPI void*
-drawer_plugin_init(Drawer_Plugin* p, const char* id)
+EAPI void *
+drawer_plugin_init(Drawer_Plugin *p, const char *id)
 {
-   Instance* inst = NULL;
+   Instance *inst = NULL;
    char buf[128];
 
    inst = E_NEW(Instance, 1);
@@ -82,31 +82,32 @@ drawer_plugin_init(Drawer_Plugin* p, const char* id)
 
    snprintf(buf, sizeof(buf), "module.drawer/%s.history", id);
    inst->conf = e_config_domain_load(buf, inst->edd.conf);
-   if (!inst->conf) {
-      inst->conf = E_NEW(Conf, 1);
-      inst->conf->id = eina_stringshare_add(id);
-      inst->conf->sort_type = HISTORY_SORT_POPULARITY;
+   if (!inst->conf)
+     {
+        inst->conf = E_NEW(Conf, 1);
+        inst->conf->id = eina_stringshare_add(id);
+        inst->conf->sort_type = HISTORY_SORT_POPULARITY;
 
-      e_config_save_queue();
-   }
+        e_config_save_queue();
+     }
 
 #if 0
-   inst -> handlers = eina_list_append(inst -> handlers,
-         ecore_event_handler_add(EFREET_EVENT_DESKTOP_LIST_CHANGE,
-            _history_efreet_desktop_list_change_cb, inst));
+   inst->handlers = eina_list_append(inst->handlers,
+                                     ecore_event_handler_add(EFREET_EVENT_DESKTOP_LIST_CHANGE,
+                                                             _history_efreet_desktop_list_change_cb, inst));
 #endif
    inst->handlers = eina_list_append(inst->handlers,
-         ecore_event_handler_add(E_EVENT_EXEHIST_UPDATE,
-            _history_efreet_desktop_list_change_cb, inst));
+                                     ecore_event_handler_add(E_EVENT_EXEHIST_UPDATE,
+                                                             _history_efreet_desktop_list_change_cb, inst));
    _history_description_create(inst);
 
    return inst;
 }
 
 EAPI int
-drawer_plugin_shutdown(Drawer_Plugin* p)
+drawer_plugin_shutdown(Drawer_Plugin *p)
 {
-   Instance* inst = NULL;
+   Instance *inst = NULL;
 
    inst = p->data;
 
@@ -123,21 +124,21 @@ drawer_plugin_shutdown(Drawer_Plugin* p)
    return 1;
 }
 
-EAPI Evas_Object*
-drawer_plugin_config_get(Drawer_Plugin* p, Evas* evas)
+EAPI Evas_Object *
+drawer_plugin_config_get(Drawer_Plugin *p, Evas *evas)
 {
-   Evas_Object* button;
+   Evas_Object *button;
 
-   button = e_widget_button_add( evas, D_("History settings"), NULL,
+   button = e_widget_button_add(evas, D_("History settings"), NULL,
                                 _history_conf_activation_cb, p, NULL);
 
    return button;
 }
 
 EAPI void
-drawer_plugin_config_save(Drawer_Plugin* p)
+drawer_plugin_config_save(Drawer_Plugin *p)
 {
-   Instance* inst;
+   Instance *inst;
    char buf[128];
 
    inst = p->data;
@@ -145,44 +146,49 @@ drawer_plugin_config_save(Drawer_Plugin* p)
    e_config_domain_save(buf, inst->edd.conf, inst->conf);
 }
 
-static const char*
-_normalize_exe(const char* exe)
+static const char *
+_normalize_exe(const char *exe)
 {
    char *base, *buf, *cp, *space = NULL;
-   const char* ret;
+   const char *ret;
    Eina_Bool flag = EINA_FALSE;
 
    buf = strdup(exe);
    base = basename(buf);
-   if ((base[0] == '.') && (base[1] == '\0')) {
-      free(buf);
-      return NULL;
-   }
+   if ((base[0] == '.') && (base[1] == '\0'))
+     {
+        free(buf);
+        return NULL;
+     }
 
    cp = base;
-   while (*cp) {
-      if (isspace(*cp)) {
-         if (!space)
-            space = cp;
-         if (flag)
-            flag = EINA_FALSE;
-      } else if (!flag) {
-         /* usually a variable in the desktop exe field */
-         if (space && *cp == '%')
-            flag = EINA_TRUE;
-         else {
-            char lower = tolower(*cp);
+   while (*cp)
+     {
+        if (isspace(*cp))
+          {
+             if (!space)
+                space = cp;
+             if (flag)
+                flag = EINA_FALSE;
+          } else if (!flag)
+          {
+             /* usually a variable in the desktop exe field */
+             if (space && *cp == '%')
+               {
+                  flag = EINA_TRUE;
+               } else
+               {
+                  char lower = tolower(*cp);
 
-            space = NULL;
-            if (lower != *cp)
-               *cp = lower;
-         }
-      }
-      cp++;
-   }
+                  space = NULL;
+                  if (lower != *cp)
+                     *cp = lower;
+               }
+          }
+        cp++;
+     }
 
-   if (space)
-      *space = '\0';
+   if (space) *space = '\0';
 
    ret = eina_stringshare_add(base);
    free(buf);
@@ -190,49 +196,52 @@ _normalize_exe(const char* exe)
    return ret;
 }
 
-EAPI Eina_List*
-drawer_source_list(Drawer_Source* s)
+EAPI Eina_List *
+drawer_source_list(Drawer_Source *s)
 {
-   Instance* inst = NULL;
+   Instance *inst = NULL;
    Eina_List *hist = NULL, *l;
-   Drawer_Event_Source_Main_Icon_Update* ev;
-   const char* file;
+   Drawer_Event_Source_Main_Icon_Update *ev;
+   const char *file;
 
    if (!(inst = DRAWER_PLUGIN(s)->data)) return NULL;
 
    _history_source_items_free(inst);
 
-   switch (inst->conf->sort_type) {
-      case HISTORY_SORT_EXE:
-         hist = e_exehist_sorted_list_get(E_EXEHIST_SORT_BY_EXE, 0);
-         break;
-      case HISTORY_SORT_DATE:
-         hist = e_exehist_sorted_list_get(E_EXEHIST_SORT_BY_DATE, 0);
-         break;
-      case HISTORY_SORT_POPULARITY:
-         hist = e_exehist_sorted_list_get(E_EXEHIST_SORT_BY_POPULARITY, 0);
-         break;
-   }
+   switch (inst->conf->sort_type)
+     {
+        case HISTORY_SORT_EXE:
+           hist = e_exehist_sorted_list_get(E_EXEHIST_SORT_BY_EXE, 0);
+           break;
+        case HISTORY_SORT_DATE:
+           hist = e_exehist_sorted_list_get(E_EXEHIST_SORT_BY_DATE, 0);
+           break;
+        case HISTORY_SORT_POPULARITY:
+           hist = e_exehist_sorted_list_get(E_EXEHIST_SORT_BY_POPULARITY, 0);
+           break;
+     }
 
    if (!hist) return NULL;
 
    EINA_LIST_FOREACH(hist, l, file)
-   {
-      Drawer_Source_Item* si = NULL;
-      Efreet_Desktop* desktop = efreet_util_desktop_exec_find(file);
-      if (!desktop) {
-         const char* norm_exe = _normalize_exe(file);
-         desktop = efreet_util_desktop_exec_find(norm_exe);
-         eina_stringshare_del(norm_exe);
-      }
-      /* FIXME: SKIP files*/
-      if (desktop)
-      {
-       /* Instead of desktops, work with executables directly */
-       si = _history_source_item_fill(inst, desktop, file);
-       inst->items = eina_list_append(inst->items, si);
-      }
-   }
+     {
+        Drawer_Source_Item *si = NULL;
+        Efreet_Desktop *desktop = efreet_util_desktop_exec_find(file);
+
+        if (!desktop)
+          {
+             const char *norm_exe = _normalize_exe(file);
+             desktop = efreet_util_desktop_exec_find(norm_exe);
+             eina_stringshare_del(norm_exe);
+          }
+        /* FIXME: SKIP files*/
+        if (desktop)
+          {
+             /* Instead of desktops, work with executables directly */
+             si = _history_source_item_fill(inst, desktop, file);
+             inst->items = eina_list_append(inst->items, si);
+          }
+     }
 
    ev = E_NEW(Drawer_Event_Source_Main_Icon_Update, 1);
    ev->source = inst->source;
@@ -245,42 +254,43 @@ drawer_source_list(Drawer_Source* s)
 }
 
 EAPI void
-drawer_source_activate(Drawer_Source* s __UNUSED__, Drawer_Source_Item* si, E_Zone* zone)
+drawer_source_activate(Drawer_Source *s __UNUSED__, Drawer_Source_Item *si, E_Zone *zone)
 {
-   Efreet_Desktop* desktop;
+   Efreet_Desktop *desktop;
 
-   switch (si->data_type) {
-      case SOURCE_DATA_TYPE_DESKTOP:
-         desktop = si->data;
+   switch (si->data_type)
+     {
+        case SOURCE_DATA_TYPE_DESKTOP:
+           desktop = si->data;
 
-         if (desktop->type == EFREET_DESKTOP_TYPE_APPLICATION)
-            e_exec(zone, desktop, NULL, NULL, "drawer");
-         else if (desktop->type == EFREET_DESKTOP_TYPE_LINK) {
-            if (!strncasecmp(desktop->url, "file:", 5)) {
-               E_Action* act;
+           if (desktop->type == EFREET_DESKTOP_TYPE_APPLICATION)
+             {
+                e_exec(zone, desktop, NULL, NULL, "drawer");
+             } else if (desktop->type == EFREET_DESKTOP_TYPE_LINK)
+             {
+                if (!strncasecmp(desktop->url, "file:", 5))
+                  {
+                     E_Action *act;
 
-               act = e_action_find("fileman");
-               if (act)
-                  act->func.go(NULL, desktop->url + 5);
-            }
-         }
-         break;
-      case SOURCE_DATA_TYPE_FILE_PATH:
-         e_exec(zone, NULL, si->data, NULL, "drawer");
-         break;
-      default:
-         break;
-   }
+                     act = e_action_find("fileman");
+                     if (act)
+                        act->func.go(NULL, desktop->url + 5);
+                  }
+             }
+           break;
+        case SOURCE_DATA_TYPE_FILE_PATH:
+           e_exec(zone, NULL, si->data, NULL, "drawer");
+           break;
+        default:
+           break;
+     }
 }
 
 EAPI void
-drawer_source_context(Drawer_Source* s,
-                      Drawer_Source_Item* si,
-                      E_Zone* zone,
-                      Drawer_Event_View_Context* ev)
+drawer_source_context(Drawer_Source *s, Drawer_Source_Item *si, E_Zone *zone, Drawer_Event_View_Context *ev)
 {
-   Instance* inst = NULL;
-   E_Menu_Item* mi = NULL;
+   Instance *inst = NULL;
+   E_Menu_Item *mi = NULL;
 
    inst = DRAWER_PLUGIN(s)->data;
 
@@ -299,92 +309,97 @@ drawer_source_context(Drawer_Source* s,
    e_menu_activate(inst->menu, zone, ev->x, ev->y, 1, 1, E_MENU_POP_DIRECTION_AUTO);
 }
 
-EAPI const char*
-drawer_source_description_get(Drawer_Source* s)
+EAPI const char *
+drawer_source_description_get(Drawer_Source *s)
 {
-   Instance* inst;
+   Instance *inst;
 
    inst = DRAWER_PLUGIN(s)->data;
    return inst->description;
 }
 
 static void
-_history_description_create(Instance* inst)
+_history_description_create(Instance *inst)
 {
    eina_stringshare_del(inst->description);
-   switch (inst->conf->sort_type) {
-      case HISTORY_SORT_EXE:
-         inst->description = eina_stringshare_add("Programs in history");
-         break;
-      case HISTORY_SORT_DATE:
-         inst->description = eina_stringshare_add("Recently used programs");
-         break;
-      case HISTORY_SORT_POPULARITY:
-         inst->description = eina_stringshare_add("Most used programs");
-         break;
-      default:
-         break;
-   }
+   switch (inst->conf->sort_type)
+     {
+        case HISTORY_SORT_EXE:
+           inst->description = eina_stringshare_add("Programs in history");
+           break;
+        case HISTORY_SORT_DATE:
+           inst->description = eina_stringshare_add("Recently used programs");
+           break;
+        case HISTORY_SORT_POPULARITY:
+           inst->description = eina_stringshare_add("Most used programs");
+           break;
+        default:
+           break;
+     }
 }
 
-static Drawer_Source_Item*
-_history_source_item_fill(Instance* inst, Efreet_Desktop* desktop, const char* file)
+static Drawer_Source_Item *
+_history_source_item_fill(Instance *inst, Efreet_Desktop *desktop, const char *file)
 {
-   Drawer_Source_Item* si = NULL;
+   Drawer_Source_Item *si = NULL;
 
    si = E_NEW(Drawer_Source_Item, 1);
 
-   if (desktop) {
-      si->data = desktop;
-      si->data_type = SOURCE_DATA_TYPE_DESKTOP;
-      si->label = eina_stringshare_add(desktop->name);
-      si->description = eina_stringshare_add(desktop->comment);
-   } else {
-      si->data = (char*)eina_stringshare_add(file);
-      si->data_type = SOURCE_DATA_TYPE_FILE_PATH;
-      si->label = eina_stringshare_add(file);
-   }
+   if (desktop)
+     {
+        si->data = desktop;
+        si->data_type = SOURCE_DATA_TYPE_DESKTOP;
+        si->label = eina_stringshare_add(desktop->name);
+        si->description = eina_stringshare_add(desktop->comment);
+     } else
+     {
+        si->data = (char *) eina_stringshare_add(file);
+        si->data_type = SOURCE_DATA_TYPE_FILE_PATH;
+        si->label = eina_stringshare_add(file);
+     }
 
-   si->priv = (char*)eina_stringshare_add(file);
+   si->priv = (char *) eina_stringshare_add(file);
    si->source = inst->source;
 
    return si;
 }
 
 static void
-_history_source_items_free(Instance* inst)
+_history_source_items_free(Instance *inst)
 {
    EINA_SAFETY_ON_NULL_RETURN(inst);
    if (!inst->items) return;
 
-   while (inst->items) {
-      Drawer_Source_Item* si = NULL;
+   while (inst->items)
+     {
+        Drawer_Source_Item *si = NULL;
 
-      si = inst->items->data;
-      inst->items = eina_list_remove_list(inst->items, inst->items);
-      switch (si->data_type) {
-         case SOURCE_DATA_TYPE_DESKTOP:
-            efreet_desktop_free(si->data);
-            break;
-         case SOURCE_DATA_TYPE_FILE_PATH:
-            eina_stringshare_del(si->data);
-            break;
-         default:
-            break;
-      }
-      eina_stringshare_del(si->label);
-      eina_stringshare_del(si->description);
-      eina_stringshare_del(si->category);
-      eina_stringshare_del(si->priv);
+        si = inst->items->data;
+        inst->items = eina_list_remove_list(inst->items, inst->items);
+        switch (si->data_type)
+          {
+             case SOURCE_DATA_TYPE_DESKTOP:
+                efreet_desktop_free(si->data);
+                break;
+             case SOURCE_DATA_TYPE_FILE_PATH:
+                eina_stringshare_del(si->data);
+                break;
+             default:
+                break;
+          }
+        eina_stringshare_del(si->label);
+        eina_stringshare_del(si->description);
+        eina_stringshare_del(si->category);
+        eina_stringshare_del(si->priv);
 
-      free(si);
-   }
+        free(si);
+     }
 }
 
 static void
-_history_event_update_free(void* data __UNUSED__, void* event)
+_history_event_update_free(void *data __UNUSED__, void *event)
 {
-   Drawer_Event_Source_Update* ev;
+   Drawer_Event_Source_Update *ev;
 
    ev = event;
    eina_stringshare_del(ev->id);
@@ -392,9 +407,9 @@ _history_event_update_free(void* data __UNUSED__, void* event)
 }
 
 static void
-_history_event_update_icon_free(void* data __UNUSED__, void* event)
+_history_event_update_icon_free(void *data __UNUSED__, void *event)
 {
-   Drawer_Event_Source_Main_Icon_Update* ev;
+   Drawer_Event_Source_Main_Icon_Update *ev;
 
    ev = event;
    eina_stringshare_del(ev->id);
@@ -402,10 +417,10 @@ _history_event_update_icon_free(void* data __UNUSED__, void* event)
 }
 
 static Eina_Bool
-_history_efreet_desktop_list_change_cb(void* data, int ev_type __UNUSED__, void* event __UNUSED__)
+_history_efreet_desktop_list_change_cb(void *data, int ev_type __UNUSED__, void *event __UNUSED__)
 {
-   Instance* inst = data;
-   Drawer_Event_Source_Update* ev;
+   Instance *inst = data;
+   Drawer_Event_Source_Update *ev;
 
    ev = E_NEW(Drawer_Event_Source_Update, 1);
    ev->source = inst->source;
@@ -416,28 +431,28 @@ _history_efreet_desktop_list_change_cb(void* data, int ev_type __UNUSED__, void*
 }
 
 static void
-_history_cb_menu_item_properties(void* data, E_Menu* m __UNUSED__, E_Menu_Item* mi __UNUSED__)
+_history_cb_menu_item_properties(void *data, E_Menu *m __UNUSED__, E_Menu_Item *mi __UNUSED__)
 {
-   Drawer_Source_Item* si = data;
+   Drawer_Source_Item *si = data;
 
    if (si->data_type != SOURCE_DATA_TYPE_DESKTOP) return;
    e_desktop_edit(e_container_current_get(e_manager_current_get()), si->data);
 }
 
 static void
-_history_cb_menu_item_remove(void* data, E_Menu* m __UNUSED__, E_Menu_Item* mi __UNUSED__)
+_history_cb_menu_item_remove(void *data, E_Menu *m __UNUSED__, E_Menu_Item *mi __UNUSED__)
 {
-   Drawer_Source_Item* si = data;
+   Drawer_Source_Item *si = data;
 
-   e_exehist_del((const char*)si->priv);
+   e_exehist_del((const char *) si->priv);
 }
 
 static void
-_history_conf_activation_cb(void* data1, void* data2 __UNUSED__)
+_history_conf_activation_cb(void *data1, void *data2 __UNUSED__)
 {
-   Drawer_Plugin* p = NULL;
-   Instance* inst = NULL;
-   E_Config_Dialog_View* v = NULL;
+   Drawer_Plugin *p = NULL;
+   Instance *inst = NULL;
+   E_Config_Dialog_View *v = NULL;
    char buf[PATH_MAX];
 
    p = data1;
@@ -461,19 +476,16 @@ _history_conf_activation_cb(void* data1, void* data2 __UNUSED__)
                               D_("Drawer Plugin : History"),
                               "Drawer_History",
                               "_e_module_drawer_cfg_dlg",
-                              buf,
-                              0,
-                              v,
-                              inst);
+                              buf, 0, v, inst);
 
    e_dialog_resizable_set(_cfd->dia, 1);
 }
 
 /* Local Functions */
-static void*
-_history_cf_create_data(E_Config_Dialog* cfd)
+static void *
+_history_cf_create_data(E_Config_Dialog *cfd)
 {
-   E_Config_Dialog_Data* cfdata = NULL;
+   E_Config_Dialog_Data *cfdata = NULL;
 
    cfdata = E_NEW(E_Config_Dialog_Data, 1);
    cfdata->inst = cfd->data;
@@ -482,23 +494,23 @@ _history_cf_create_data(E_Config_Dialog* cfd)
 }
 
 static void
-_history_cf_free_data(E_Config_Dialog* cfd __UNUSED__, E_Config_Dialog_Data* cfdata)
+_history_cf_free_data(E_Config_Dialog *cfd __UNUSED__, E_Config_Dialog_Data *cfdata)
 {
    _cfd = NULL;
    E_FREE(cfdata);
 }
 
 static void
-_history_cf_fill_data(E_Config_Dialog_Data* cfdata)
+_history_cf_fill_data(E_Config_Dialog_Data *cfdata)
 {
    cfdata->sort_type = cfdata->inst->conf->sort_type;
 }
 
-static Evas_Object*
-_history_cf_basic_create(E_Config_Dialog* cfd __UNUSED__, Evas* evas, E_Config_Dialog_Data* cfdata)
+static Evas_Object *
+_history_cf_basic_create(E_Config_Dialog *cfd __UNUSED__, Evas *evas, E_Config_Dialog_Data *cfdata)
 {
    Evas_Object *o, *of, *ob;
-   E_Radio_Group* rg;
+   E_Radio_Group *rg;
 
    o = e_widget_list_add(evas, 0, 0);
 
@@ -517,10 +529,10 @@ _history_cf_basic_create(E_Config_Dialog* cfd __UNUSED__, Evas* evas, E_Config_D
 }
 
 static int
-_history_cf_basic_apply(E_Config_Dialog* cfd __UNUSED__, E_Config_Dialog_Data* cfdata)
+_history_cf_basic_apply(E_Config_Dialog *cfd __UNUSED__, E_Config_Dialog_Data *cfdata)
 {
-   Instance* inst = NULL;
-   Drawer_Event_Source_Update* ev;
+   Instance *inst = NULL;
+   Drawer_Event_Source_Update *ev;
 
    inst = cfdata->inst;
    cfdata->inst->conf->sort_type = cfdata->sort_type;
@@ -530,8 +542,7 @@ _history_cf_basic_apply(E_Config_Dialog* cfd __UNUSED__, E_Config_Dialog_Data* c
    ev = E_NEW(Drawer_Event_Source_Update, 1);
    ev->source = inst->source;
    ev->id = eina_stringshare_add(inst->conf->id);
-   ecore_event_add(
-     DRAWER_EVENT_SOURCE_UPDATE, ev, _history_event_update_free, NULL);
+   ecore_event_add(DRAWER_EVENT_SOURCE_UPDATE, ev, _history_event_update_free, NULL);
 
    e_config_save_queue();
    return 1;
