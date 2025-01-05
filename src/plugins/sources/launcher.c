@@ -13,62 +13,50 @@ typedef struct _Conf Conf;
 typedef struct _Conf_Rating Conf_Rating;
 typedef struct _Launcher_Menu_Data Launcher_Menu_Data;
 
-struct _Instance 
+struct _Instance
 {
-   Drawer_Source *source;
-
-   E_Order *apps;
-   Eina_List *items;
-
-   E_Menu *menu;
-   Launcher_Menu_Data *m_data;
-
-   Conf *conf;
-
+   Drawer_Source *		source;
+   E_Order *			apps;
+   Eina_List *			items;
+   E_Menu *				menu;
+   Launcher_Menu_Data * m_data;
+   Conf *				conf;
    struct
-     {
-	E_Config_DD *conf;
-	E_Config_DD *conf_rel;
-     } edd;
-
+   {
+      E_Config_DD * conf;
+      E_Config_DD * conf_rel;
+   } edd;
    const char *description;
 };
 
 struct _Conf
 {
-   const char *id;
-
-   const char *dir;
-
-   Launcher_Sort_Type sort_type;
-
-   Eina_List *ratings;
+   const char *			id;
+   const char *			dir;
+   Launcher_Sort_Type	sort_type;
+   Eina_List *			ratings;
 };
 
 struct _Conf_Rating
 {
-   const char *label;
-
-   int rating;
-   int popularity;
+   const char * label;
+   int			rating;
+   int			popularity;
 };
 
-struct _E_Config_Dialog_Data 
+struct _E_Config_Dialog_Data
 {
-   Instance *inst;
-
-   Evas_Object *ilist;
-   E_Confirm_Dialog *dialog_delete;
-
-   const char *dir;
-   int sort_type;
+   Instance *			inst;
+   Evas_Object *		ilist;
+   E_Confirm_Dialog *	dialog_delete;
+   const char *			dir;
+   int					sort_type;
 };
 
 struct _Launcher_Menu_Data
 {
-   Instance *inst;
-
-   Drawer_Source_Item *si;
+   Instance *			inst;
+   Drawer_Source_Item * si;
 };
 
 #define CONF_RATING(obj) ((Conf_Rating *) obj)
@@ -102,7 +90,7 @@ static void _cb_confirm_dialog_yes(void *data);
 static void _cb_confirm_dialog_destroy(void *data);
 static void _launcher_cf_load_ilist(E_Config_Dialog_Data *cfdata);
 
-EAPI Drawer_Plugin_Api drawer_plugin_api = {DRAWER_PLUGIN_API_VERSION, "Launcher"};
+EAPI Drawer_Plugin_Api drawer_plugin_api = { DRAWER_PLUGIN_API_VERSION, "Launcher" };
 
 static E_Config_Dialog *_cfd = NULL;
 
@@ -118,18 +106,18 @@ drawer_plugin_init(Drawer_Plugin *p, const char *id)
 
    /* Define EET Data Storage */
    inst->edd.conf_rel = e_config_descriptor_new("Conf_Rating", sizeof(Conf_Rating) - sizeof(int));
-   #undef T
-   #undef D
-   #define T Conf_Rating 
-   #define D inst->edd.conf_rel
+#undef T
+#undef D
+#define T Conf_Rating
+#define D inst->edd.conf_rel
    E_CONFIG_VAL(D, T, label, STR);
    E_CONFIG_VAL(D, T, rating, INT);
 
    inst->edd.conf = E_CONFIG_DD_NEW("Conf", Conf);
-   #undef T
-   #undef D
-   #define T Conf
-   #define D inst->edd.conf
+#undef T
+#undef D
+#define T Conf
+#define D inst->edd.conf
    E_CONFIG_VAL(D, T, id, STR);
    E_CONFIG_VAL(D, T, dir, STR);
    E_CONFIG_VAL(D, T, sort_type, INT);
@@ -139,11 +127,11 @@ drawer_plugin_init(Drawer_Plugin *p, const char *id)
    inst->conf = e_config_domain_load(buf, inst->edd.conf);
    if (!inst->conf)
      {
-	inst->conf = E_NEW(Conf, 1);
-	inst->conf->dir = eina_stringshare_add("default");
-	inst->conf->id = eina_stringshare_add(id);
+        inst->conf = E_NEW(Conf, 1);
+        inst->conf->dir = eina_stringshare_add("default");
+        inst->conf->id = eina_stringshare_add(id);
 
-	e_config_save_queue();
+        e_config_save_queue();
      }
 
    _launcher_description_create(inst);
@@ -155,7 +143,7 @@ EAPI int
 drawer_plugin_shutdown(Drawer_Plugin *p)
 {
    Instance *inst = NULL;
-   
+
    inst = p->data;
 
    _launcher_source_items_free(inst);
@@ -166,20 +154,20 @@ drawer_plugin_shutdown(Drawer_Plugin *p)
 
    while (inst->conf->ratings)
      {
-	Conf_Rating *r = NULL;
+        Conf_Rating *r = NULL;
 
-	r = inst->conf->ratings->data;
+        r = inst->conf->ratings->data;
 
-	inst->conf->ratings = eina_list_remove_list(
-	      inst->conf->ratings, inst->conf->ratings);
+        inst->conf->ratings = eina_list_remove_list(
+           inst->conf->ratings, inst->conf->ratings);
 
-	eina_stringshare_del(r->label);
+        eina_stringshare_del(r->label);
 
-	E_FREE(r);
+        E_FREE(r);
      }
 
    if (inst->m_data)
-     E_FREE(inst->m_data);
+      E_FREE(inst->m_data);
 
    E_CONFIG_DD_FREE(inst->edd.conf);
    E_CONFIG_DD_FREE(inst->edd.conf_rel);
@@ -231,35 +219,35 @@ drawer_source_list(Drawer_Source *s)
 
    if (inst->apps)
      {
-	Efreet_Desktop *desktop = NULL;
-	Eina_List *l = NULL;
+        Efreet_Desktop *desktop = NULL;
+        Eina_List *l = NULL;
 
-	for (l = inst->apps->desktops; l; l = l->next)
-	  {
-	     Drawer_Source_Item *si;
+        for (l = inst->apps->desktops; l; l = l->next)
+          {
+             Drawer_Source_Item *si;
 
-	     desktop = l->data;
-	     si = _launcher_source_item_fill(inst, desktop);
-	     inst->items = eina_list_append(inst->items, si);
+             desktop = l->data;
+             si = _launcher_source_item_fill(inst, desktop);
+             inst->items = eina_list_append(inst->items, si);
 
-	     min = MIN(CONF_RATING(si->priv)->rating, min);
-	  }
+             min = MIN(CONF_RATING(si->priv)->rating, min);
+          }
      }
 
-   if (min > 20000)
-     _launcher_sources_rating_discount(inst, min);
-   switch(inst->conf->sort_type)
+   if (min > 20000) _launcher_sources_rating_discount(inst, min);
+
+   switch (inst->conf->sort_type)
      {
-      case LAUNCHER_SORT_RATING:
-	 inst->items = eina_list_sort(inst->items,
-				      eina_list_count(inst->items), _launcher_cb_sort_rating);
-	 break;
-      case LAUNCHER_SORT_POPULARITY:
-	 inst->items = eina_list_sort(inst->items,
-				      eina_list_count(inst->items), _launcher_cb_sort_popularity);
-	 break;
-      default:
-	 break;
+        case LAUNCHER_SORT_RATING:
+           inst->items = eina_list_sort(inst->items,
+                                        eina_list_count(inst->items), _launcher_cb_sort_rating);
+           break;
+        case LAUNCHER_SORT_POPULARITY:
+           inst->items = eina_list_sort(inst->items,
+                                        eina_list_count(inst->items), _launcher_cb_sort_popularity);
+           break;
+        default:
+           break;
      }
    if (inst->items)
      {
@@ -268,8 +256,8 @@ drawer_source_list(Drawer_Source *s)
         ev->id = eina_stringshare_add(inst->conf->id);
         ev->si = inst->items->data;
         ecore_event_add(
-            DRAWER_EVENT_SOURCE_MAIN_ICON_UPDATE, ev,
-            _launcher_event_update_icon_free, NULL);
+           DRAWER_EVENT_SOURCE_MAIN_ICON_UPDATE, ev,
+           _launcher_event_update_icon_free, NULL);
      }
 
    return inst->items;
@@ -285,19 +273,19 @@ drawer_source_activate(Drawer_Source *s, Drawer_Source_Item *si, E_Zone *zone)
      e_exec(zone, desktop, NULL, NULL, "drawer");
    else if (desktop->type == EFREET_DESKTOP_TYPE_LINK)
      {
-	if (!strncasecmp(desktop->url, "file:", 5))
-	  {
-	     E_Action *act;
+        if (!strncasecmp(desktop->url, "file:", 5))
+          {
+             E_Action *act;
 
-	     act = e_action_find("fileman");
-	     if (act) act->func.go(NULL, desktop->url + 5);
-	  }
+             act = e_action_find("fileman");
+             if (act) act->func.go(NULL, desktop->url + 5);
+          }
      }
 
    inst = DRAWER_PLUGIN(s)->data;
    CONF_RATING(si->priv)->rating++;
    if (inst->conf->sort_type)
-     _launcher_cb_app_change(inst, NULL);
+      _launcher_cb_app_change(inst, NULL);
 }
 
 EAPI void
@@ -354,7 +342,7 @@ _launcher_sources_rating_discount(Instance *inst, int min)
    Eina_List *l;
 
    EINA_LIST_FOREACH(inst->items, l, si)
-      CONF_RATING(si->priv)->rating -= min;
+   CONF_RATING(si->priv)->rating -= min;
 }
 
 static int
@@ -364,12 +352,12 @@ _launcher_cb_sort_rating(const void *data1, const void *data2)
 
    si1 = data1;
    si2 = data2;
-   if(!si1) return(1);
-   if(!si2) return(-1);
+   if (!si1) return 1;
+   if (!si2) return -1;
 
    /* reverse the list if equal */
    if (CONF_RATING(si2->priv)->rating == CONF_RATING(si1->priv)->rating)
-     return -1;
+      return -1;
    return CONF_RATING(si2->priv)->rating - CONF_RATING(si1->priv)->rating;
 }
 
@@ -380,12 +368,12 @@ _launcher_cb_sort_popularity(const void *data1, const void *data2)
 
    si1 = data1;
    si2 = data2;
-   if(!si1) return(1);
-   if(!si2) return(-1);
+   if (!si1) return 1;
+   if (!si2) return -1;
 
    /* reverse the list if equal */
    if (CONF_RATING(si2->priv)->popularity == CONF_RATING(si1->priv)->popularity)
-     return -1;
+      return -1;
    return CONF_RATING(si2->priv)->popularity - CONF_RATING(si1->priv)->popularity;
 }
 
@@ -421,25 +409,25 @@ _launcher_source_item_fill(Instance *inst, Efreet_Desktop *desktop)
 
    EINA_LIST_FOREACH(inst->conf->ratings, l, r)
      {
-	if (!(strcmp(si->label, r->label)))
-	  {
-	     si->priv = r;
-	     found = 1;
-	     break;
-	  }
+        if (!(strcmp(si->label, r->label)))
+          {
+             si->priv = r;
+             found = 1;
+             break;
+          }
      }
 
    if (!found)
      {
-	r = E_NEW(Conf_Rating, 1);
-	r->label = eina_stringshare_add(si->label);
-	r->rating = 0;
-	si->priv = r;
+        r = E_NEW(Conf_Rating, 1);
+        r->label = eina_stringshare_add(si->label);
+        r->rating = 0;
+        si->priv = r;
 
-	inst->conf->ratings = eina_list_append(inst->conf->ratings, r);
+        inst->conf->ratings = eina_list_append(inst->conf->ratings, r);
      }
    if (inst->conf->sort_type == LAUNCHER_SORT_POPULARITY)
-     CONF_RATING(si->priv)->popularity = e_exehist_popularity_get(desktop->exec);
+      CONF_RATING(si->priv)->popularity = e_exehist_popularity_get(desktop->exec);
 
    return si;
 }
@@ -461,21 +449,21 @@ _launcher_source_items_free(Instance *inst)
 {
    while (inst->items)
      {
-	Drawer_Source_Item *si = NULL;
-	
-	si = inst->items->data;
-	inst->items = eina_list_remove_list(inst->items, inst->items);
-	eina_stringshare_del(si->label);
-	eina_stringshare_del(si->description);
-	eina_stringshare_del(si->category);
+        Drawer_Source_Item *si = NULL;
 
-	free(si);
+        si = inst->items->data;
+        inst->items = eina_list_remove_list(inst->items, inst->items);
+        eina_stringshare_del(si->label);
+        eina_stringshare_del(si->description);
+        eina_stringshare_del(si->category);
+
+        free(si);
      }
 
    if (inst->apps)
      {
-	e_order_update_callback_set(inst->apps, NULL, NULL);
-       	e_object_del(E_OBJECT(inst->apps));
+        e_order_update_callback_set(inst->apps, NULL, NULL);
+        e_object_del(E_OBJECT(inst->apps));
      }
 }
 
@@ -511,7 +499,7 @@ _launcher_conf_activation_cb(void *data1, void *data2 __UNUSED__)
    inst = p->data;
    /* is this config dialog already visible ? */
    if (e_config_dialog_find("Drawer_Launcher", "_e_module_drawer_cfg_dlg"))
-     return;
+      return;
 
    v = E_NEW(E_Config_Dialog_View, 1);
    if (!v) return;
@@ -526,8 +514,8 @@ _launcher_conf_activation_cb(void *data1, void *data2 __UNUSED__)
 
    /* create new config dialog */
    _cfd = e_config_dialog_new(e_container_current_get(e_manager_current_get()),
-	 D_("Drawer Plugin : Launcher"), "Drawer_Launcher", 
-	 "_e_module_drawer_cfg_dlg", buf, 0, v, inst);
+                              D_("Drawer Plugin : Launcher"), "Drawer_Launcher",
+                              "_e_module_drawer_cfg_dlg", buf, 0, v, inst);
 
    e_dialog_resizable_set(_cfd->dia, 1);
 }
@@ -544,7 +532,7 @@ static void
 _launcher_cb_menu_item_remove(void *data, E_Menu *m __UNUSED__, E_Menu_Item *mi __UNUSED__)
 {
    Launcher_Menu_Data *m_data = data;
-   
+
    _launcher_source_item_free(m_data->inst, m_data->si);
 }
 
@@ -560,7 +548,7 @@ _launcher_cf_create_data(E_Config_Dialog *cfd)
    return cfdata;
 }
 
-static void 
+static void
 _launcher_cf_free_data(E_Config_Dialog *cfd __UNUSED__, E_Config_Dialog_Data *cfdata)
 {
    eina_stringshare_del(cfdata->dir);
@@ -569,7 +557,7 @@ _launcher_cf_free_data(E_Config_Dialog *cfd __UNUSED__, E_Config_Dialog_Data *cf
    E_FREE(cfdata);
 }
 
-static void 
+static void
 _launcher_cf_fill_data(E_Config_Dialog_Data *cfdata)
 {
    cfdata->dir = eina_stringshare_ref(cfdata->inst->conf->dir);
@@ -590,18 +578,18 @@ _launcher_cf_basic_create(E_Config_Dialog *cfd __UNUSED__, Evas *evas, E_Config_
    _launcher_cf_load_ilist(cfdata);
    e_widget_size_min_set(ol, 140, 140);
    e_widget_frametable_object_append(of, ol, 0, 0, 1, 2, 1, 1, 1, 0);
-   
+
    ot = e_widget_table_add(evas, 0);
    ob = e_widget_button_add(evas, D_("Add"), "list-add", _cb_add, cfdata, NULL);
    e_widget_table_object_append(ot, ob, 0, 0, 1, 1, 1, 1, 1, 0);
    ob = e_widget_button_add(evas, D_("Delete"), "list-remove", _cb_del, cfdata, NULL);
    e_widget_table_object_append(ot, ob, 0, 1, 1, 1, 1, 1, 1, 0);
    ob = e_widget_button_add(evas, D_("Configure"), "configure", _cb_config, cfdata, NULL);
-   e_widget_table_object_append(ot, ob, 0, 2, 1, 1, 1, 1, 1, 0);   
+   e_widget_table_object_append(ot, ob, 0, 2, 1, 1, 1, 1, 1, 0);
 
-   if (!e_configure_registry_exists("applications/ibar_applications")) 
-     e_widget_disabled_set(ob, 1);
-   
+   if (!e_configure_registry_exists("applications/ibar_applications"))
+      e_widget_disabled_set(ob, 1);
+
    e_widget_frametable_object_append(of, ot, 1, 0, 1, 1, 1, 1, 1, 0);
    e_widget_list_object_append(o, of, 1, 1, 0.5);
 
@@ -619,7 +607,7 @@ _launcher_cf_basic_create(E_Config_Dialog *cfd __UNUSED__, Evas *evas, E_Config_
    return o;
 }
 
-static int 
+static int
 _launcher_cf_basic_apply(E_Config_Dialog *cfd __UNUSED__, E_Config_Dialog_Data *cfdata)
 {
    Instance *inst = NULL;
@@ -646,11 +634,11 @@ static void
 _cb_add(void *data, void *data2 __UNUSED__)
 {
    E_Config_Dialog_Data *cfdata;
-   
+
    cfdata = data;
    e_entry_dialog_show(D_("Create new Launcher source"), "enlightenment",
-		       D_("Enter a name for this new source:"), "", NULL, NULL,
-		       _cb_entry_ok, NULL, cfdata);
+                       D_("Enter a name for this new source:"), "", NULL, NULL,
+                       _cb_entry_ok, NULL, cfdata);
 }
 
 static void
@@ -660,16 +648,15 @@ _cb_del(void *data, void *data2 __UNUSED__)
    E_Config_Dialog_Data *cfdata;
    E_Confirm_Dialog *dialog;
 
-   cfdata = data;   
-   if (cfdata->dialog_delete)
-     return;
+   cfdata = data;
+   if (cfdata->dialog_delete) return;
 
    snprintf(buf, sizeof(buf), D_("You requested to delete \"%s\".<br><br>"
-				"Are you sure you want to delete this bar source?"),
-	    cfdata->dir);
-   
+                                 "Are you sure you want to delete this bar source?"),
+            cfdata->dir);
+
    dialog = e_confirm_dialog_show(D_("Are you sure you want to delete this bar source?"),
-                                  "application-exit", buf, NULL, NULL, 
+                                  "application-exit", buf, NULL, NULL,
                                   _cb_confirm_dialog_yes, NULL, cfdata, NULL, _cb_confirm_dialog_destroy, cfdata);
    cfdata->dialog_delete = dialog;
 }
@@ -679,13 +666,13 @@ _cb_config(void *data, void *data2 __UNUSED__)
 {
    char path[PATH_MAX];
    E_Config_Dialog_Data *cfdata;
-   
+
    cfdata = data;
-   snprintf(path, sizeof(path), "%s/.e/e/applications/bar/%s/.order", 
-	    e_user_homedir_get(), cfdata->dir);
+   snprintf(path, sizeof(path), "%s/.e/e/applications/bar/%s/.order",
+            e_user_homedir_get(), cfdata->dir);
    e_configure_registry_call("internal/ibar_other",
-			     e_container_current_get(e_manager_current_get()),
-			     path);
+                             e_container_current_get(e_manager_current_get()),
+                             path);
 }
 
 static void
@@ -694,27 +681,27 @@ _cb_entry_ok(void *data, char *text)
    char buf[PATH_MAX];
    char tmp[PATH_MAX];
    FILE *f;
-   
-   snprintf(buf, sizeof(buf), "%s/.e/e/applications/bar/%s", 
-	    e_user_homedir_get(), text);
 
-   if (!ecore_file_exists(buf)) 
+   snprintf(buf, sizeof(buf), "%s/.e/e/applications/bar/%s",
+            e_user_homedir_get(), text);
+
+   if (!ecore_file_exists(buf))
      {
-	ecore_file_mkdir(buf);
-	snprintf(buf, sizeof(buf), "%s/.e/e/applications/bar/%s/.order", 
-		 e_user_homedir_get(), text);
-	f = fopen(buf, "w");
-	if (f) 
-	  {
-	     /* Populate this .order file with some defaults */
-	     snprintf(tmp, sizeof(tmp), "xterm.desktop\n" "sylpheed.desktop\n" 
-		      "firefox.desktop\n" "openoffice.desktop\n" "xchat.desktop\n"
-		      "gimp.desktop\n" "xmms.desktop\n");
-	     fwrite(tmp, sizeof(char), strlen(tmp), f);
-	     fclose(f);
-	  }
+        ecore_file_mkdir(buf);
+        snprintf(buf, sizeof(buf), "%s/.e/e/applications/bar/%s/.order",
+                 e_user_homedir_get(), text);
+        f = fopen(buf, "w");
+        if (f)
+          {
+             /* Populate this .order file with some defaults */
+             snprintf(tmp, sizeof(tmp), "xterm.desktop\n" "sylpheed.desktop\n"
+                      "firefox.desktop\n" "openoffice.desktop\n" "xchat.desktop\n"
+                      "gimp.desktop\n" "xmms.desktop\n");
+             fwrite(tmp, sizeof(char), strlen(tmp), f);
+             fclose(f);
+          }
      }
-   
+
    _launcher_cf_load_ilist(data);
 }
 
@@ -723,25 +710,24 @@ _cb_confirm_dialog_yes(void *data)
 {
    E_Config_Dialog_Data *cfdata;
    char buf[PATH_MAX];
-   
+
    cfdata = data;
    snprintf(buf, sizeof(buf), "%s/.e/e/applications/bar/%s", e_user_homedir_get(), cfdata->dir);
-   if (ecore_file_is_dir(buf))
-     ecore_file_recursive_rm(buf);
-   
+   if (ecore_file_is_dir(buf)) ecore_file_recursive_rm(buf);
+
    _launcher_cf_load_ilist(cfdata);
 }
 
 static void
-_cb_confirm_dialog_destroy(void *data) 
+_cb_confirm_dialog_destroy(void *data)
 {
    E_Config_Dialog_Data *cfdata;
-   
+
    cfdata = data;
    cfdata->dialog_delete = NULL;
 }
 
-static void 
+static void
 _launcher_cf_load_ilist(E_Config_Dialog_Data *cfdata)
 {
    Eina_List *dirs;
@@ -751,26 +737,25 @@ _launcher_cf_load_ilist(E_Config_Dialog_Data *cfdata)
    int i = 0;
 
    e_widget_ilist_clear(cfdata->ilist);
-   
+
    home = e_user_homedir_get();
    snprintf(buf, sizeof(buf), "%s/.e/e/applications/bar", home);
    dirs = ecore_file_ls(buf);
    EINA_LIST_FREE(dirs, file)
      {
-      if (file[0] == '.') goto end;
-	     snprintf(buf, sizeof(buf), "%s/.e/e/applications/bar/%s", home, file);
-	     if (ecore_file_is_dir(buf))
-	       {
-		  e_widget_ilist_append(cfdata->ilist, NULL, file, NULL, NULL, file);
-		  if ((cfdata->dir) && (!strcmp(cfdata->dir, file)))
-		    selnum = i;
-		  i++;
-	       }
+        if (file[0] == '.') goto end;
+        snprintf(buf, sizeof(buf), "%s/.e/e/applications/bar/%s", home, file);
+        if (ecore_file_is_dir(buf))
+          {
+             e_widget_ilist_append(cfdata->ilist, NULL, file, NULL, NULL, file);
+             if ((cfdata->dir) && (!strcmp(cfdata->dir, file))) selnum = i;
+             i++;
+          }
 
-   end:
-      free(file);
+end:
+        free(file);
      }
    e_widget_ilist_go(cfdata->ilist);
    if (selnum >= 0)
-     e_widget_ilist_selected_set(cfdata->ilist, selnum);   
+      e_widget_ilist_selected_set(cfdata->ilist, selnum);
 }

@@ -16,59 +16,46 @@ typedef enum
 
 struct _Instance
 {
-   Drawer_Source *source;
-
-   Conf *conf;
-
-   Eina_List *items;
-
-   E_Menu *menu;
-
+   Drawer_Source *	source;
+   Conf *			conf;
+   Eina_List *		items;
+   E_Menu *			menu;
    struct
-     {
-	E_Config_DD *conf;
-     } edd;
-
-   Ecore_File_Monitor *monitor;
-
-   const char *description;
+   {
+      E_Config_DD *conf;
+   } edd;
+   Ecore_File_Monitor * monitor;
+   const char *			description;
 };
 
 struct _Conf
 {
-   const char *id;
-
-   const char *dir;
-   const char *fm;
-
-   Sort_Type sort_type;
-
-   Eina_Bool sort_dir;
+   const char * id;
+   const char * dir;
+   const char * fm;
+   Sort_Type	sort_type;
+   Eina_Bool	sort_dir;
 };
 
 struct _Dirwatcher_Priv
 {
-   Eina_Bool dir : 1;
-   Eina_Bool link : 1;
-   Eina_Bool mount : 1;
-
-   const char *mime;
-
-   Instance *inst;
+   Eina_Bool	dir : 1;
+   Eina_Bool	link : 1;
+   Eina_Bool	mount : 1;
+   const char * mime;
+   Instance *	inst;
 };
 
 struct _E_Config_Dialog_Data
 {
-   Instance *inst;
-
-   char *dir;
-   char *fm;
-
-   int sort_dir;
-   int sort_type;
+   Instance *	inst;
+   char *		dir;
+   char *		fm;
+   int			sort_dir;
+   int			sort_type;
 };
 
-EAPI Drawer_Plugin_Api drawer_plugin_api = {DRAWER_PLUGIN_API_VERSION, "Directory Watcher"};
+EAPI Drawer_Plugin_Api drawer_plugin_api = { DRAWER_PLUGIN_API_VERSION, "Directory Watcher" };
 
 static void _dirwatcher_directory_activate(Instance *inst, E_Zone *zone, const char *path);
 static void _dirwatcher_description_create(Instance *inst);
@@ -77,7 +64,8 @@ static Drawer_Source_Item * _dirwatcher_source_item_fill(Instance *inst, const c
 static void _dirwatcher_event_update_free(void *data __UNUSED__, void *event);
 static void _dirwatcher_event_update_icon_free(void *data __UNUSED__, void *event);
 
-static void _dirwatcher_monitor_cb(void *data, Ecore_File_Monitor *em __UNUSED__, Ecore_File_Event event __UNUSED__, const char *path);
+static void _dirwatcher_monitor_cb(void *data, Ecore_File_Monitor *em __UNUSED__, Ecore_File_Event event __UNUSED__,
+                                   const char *path);
 static void _dirwatcher_cb_menu_open_dir(void *data, E_Menu *m, E_Menu_Item *mi);
 static void _dirwatcher_conf_activation_cb(void *data1, void *data2 __UNUSED__);
 
@@ -103,10 +91,10 @@ drawer_plugin_init(Drawer_Plugin *p, const char *id)
 
    /* Define EET Data Storage */
    inst->edd.conf = E_CONFIG_DD_NEW("Conf", Conf);
-   #undef T
-   #undef D
-   #define T Conf
-   #define D inst->edd.conf
+#undef T
+#undef D
+#define T Conf
+#define D inst->edd.conf
    E_CONFIG_VAL(D, T, id, STR);
    E_CONFIG_VAL(D, T, dir, STR);
    E_CONFIG_VAL(D, T, fm, STR);
@@ -117,21 +105,21 @@ drawer_plugin_init(Drawer_Plugin *p, const char *id)
    inst->conf = e_config_domain_load(buf, inst->edd.conf);
    if (!inst->conf)
      {
-	char buf2[PATH_MAX];
+        char buf2[PATH_MAX];
 
-	snprintf(buf2, sizeof(buf2), "%s/Desktop", e_user_homedir_get());
+        snprintf(buf2, sizeof(buf2), "%s/Desktop", e_user_homedir_get());
 
-	inst->conf = E_NEW(Conf, 1);
-	inst->conf->sort_dir = EINA_TRUE;
-	inst->conf->dir = eina_stringshare_add(buf2);
-	inst->conf->fm = eina_stringshare_add("");
-	inst->conf->id = eina_stringshare_add(id);
+        inst->conf = E_NEW(Conf, 1);
+        inst->conf->sort_dir = EINA_TRUE;
+        inst->conf->dir = eina_stringshare_add(buf2);
+        inst->conf->fm = eina_stringshare_add("");
+        inst->conf->id = eina_stringshare_add(id);
 
-	e_config_save_queue();
+        e_config_save_queue();
      }
 
    inst->monitor = ecore_file_monitor_add(inst->conf->dir,
-					  _dirwatcher_monitor_cb, inst);
+                                          _dirwatcher_monitor_cb, inst);
    _dirwatcher_description_create(inst);
 
    return inst;
@@ -145,7 +133,7 @@ drawer_plugin_shutdown(Drawer_Plugin *p)
    inst = p->data;
 
    if (inst->monitor)
-     ecore_file_monitor_del(inst->monitor);
+      ecore_file_monitor_del(inst->monitor);
 
    eina_stringshare_del(inst->description);
    eina_stringshare_del(inst->conf->id);
@@ -174,28 +162,27 @@ drawer_source_list(Drawer_Source *s)
 
    files = ecore_file_ls(inst->conf->dir);
    EINA_LIST_FREE(files, file)
-     {
-	Drawer_Source_Item *si;
+   {
+      Drawer_Source_Item *si;
 
-	if (file[0] == '.') goto end;
-	si = _dirwatcher_source_item_fill(inst, file);
-	if (si)
-	  inst->items = eina_list_append(inst->items, si);
+      if (file[0] == '.') goto end;
+      si = _dirwatcher_source_item_fill(inst, file);
+      if (si)
+         inst->items = eina_list_append(inst->items, si);
 
 end:
-	free(file);
-     }
+      free(file);
+   }
 
    inst->items = eina_list_sort(inst->items,
-	      eina_list_count(inst->items), _dirwatcher_cb_sort);
+                                eina_list_count(inst->items), _dirwatcher_cb_sort);
 
    ev = E_NEW(Drawer_Event_Source_Main_Icon_Update, 1);
    ev->source = inst->source;
    ev->id = eina_stringshare_add(inst->conf->id);
    ev->si = inst->items->data;
-   ecore_event_add(
-       DRAWER_EVENT_SOURCE_MAIN_ICON_UPDATE, ev,
-       _dirwatcher_event_update_icon_free, NULL);
+   ecore_event_add(DRAWER_EVENT_SOURCE_MAIN_ICON_UPDATE, ev,
+                   _dirwatcher_event_update_icon_free, NULL);
 
    return inst->items;
 }
@@ -206,31 +193,29 @@ drawer_source_activate(Drawer_Source *s, Drawer_Source_Item *si, E_Zone *zone)
    Dirwatcher_Priv *p = NULL;
    Instance *inst = DRAWER_PLUGIN(s)->data;
 
-   if (si->data_type != SOURCE_DATA_TYPE_FILE_PATH)
-     return;
+   if (si->data_type != SOURCE_DATA_TYPE_FILE_PATH) return;
 
    p = si->priv;
    if (p->dir)
-     return _dirwatcher_directory_activate(p->inst, zone, si->data);
+      return _dirwatcher_directory_activate(p->inst, zone, si->data);
    if (si->data)
      {
         Efreet_Desktop *desktop;
 
-	if ((e_util_glob_case_match(si->data, "*.desktop")) ||
-	    (e_util_glob_case_match(si->data, "*.directory")))
-	  {
-	     desktop = efreet_desktop_new(si->data);
-	     if (!desktop) return;
+        if ((e_util_glob_case_match(si->data, "*.desktop")) ||
+            (e_util_glob_case_match(si->data, "*.directory")))
+          {
+             desktop = efreet_desktop_new(si->data);
+             if (!desktop) return;
 
-	     e_exec(e_util_zone_current_get(e_manager_current_get()),
-		    desktop, NULL, NULL, NULL);
-	     if (p->mime)
-	       e_exehist_mime_desktop_add(p->mime, desktop);
+             e_exec(e_util_zone_current_get(e_manager_current_get()),
+                    desktop, NULL, NULL, NULL);
+             if (p->mime)
+                e_exehist_mime_desktop_add(p->mime, desktop);
 
-	     efreet_desktop_free(desktop);
+             efreet_desktop_free(desktop);
              return;
-	  }
-        else if (p->mime)
+          } else if (p->mime)
           {
              desktop = e_exehist_mime_desktop_get(p->mime);
              if (desktop)
@@ -245,11 +230,11 @@ drawer_source_activate(Drawer_Source *s, Drawer_Source_Item *si, E_Zone *zone)
                   e_exec(zone, desktop, NULL, files, "drawer");
                   eina_list_free(files);
 
-                  if (!chdir(pcwd))return;
+                  if (!chdir(pcwd)) return;
                   return;
                }
           }
-	return;
+        return;
      }
 }
 
@@ -317,19 +302,16 @@ _dirwatcher_directory_activate(Instance *inst, E_Zone *zone, const char *path)
 
    if (inst->conf->fm && (inst->conf->fm[0] != '\0'))
      {
-	snprintf(exec, PATH_MAX, "%s \"%s\"", inst->conf->fm, path);
-	e_exec(zone, NULL, exec, NULL, NULL);
-     }
-   else
+        snprintf(exec, PATH_MAX, "%s \"%s\"", inst->conf->fm, path);
+        e_exec(zone, NULL, exec, NULL, NULL);
+     } else
      {
-	E_Action *act = NULL;
+        E_Action *act = NULL;
 
-	act = e_action_find("fileman");
-	if (act)
-	  {
-	     if (act && act->func.go)
-	       act->func.go(E_OBJECT(e_manager_current_get()), path);
-	  }
+        act = e_action_find("fileman");
+        if (act)
+           if (act && act->func.go)
+              act->func.go(E_OBJECT(e_manager_current_get()), path);
      }
 }
 
@@ -343,14 +325,16 @@ _dirwatcher_description_create(Instance *inst)
    eina_stringshare_del(inst->description);
    homedir = e_user_homedir_get();
    if (!(strncmp(inst->conf->dir, homedir, PATH_MAX)))
-     snprintf(buf, sizeof(buf), D_("Home"));
-   else if (!(strncmp(inst->conf->dir, homedir, strlen(homedir))))
      {
-	snprintf(path, sizeof(path), "%s", inst->conf->dir);
-	snprintf(buf, sizeof(buf), "%s", path + strlen(homedir) + 1);
+        snprintf(buf, sizeof(buf), D_("Home"));
+     } else if (!(strncmp(inst->conf->dir, homedir, strlen(homedir))))
+     {
+        snprintf(path, sizeof(path), "%s", inst->conf->dir);
+        snprintf(buf, sizeof(buf), "%s", path + strlen(homedir) + 1);
+     } else
+     {
+        snprintf(buf, sizeof(buf), "%s", inst->conf->dir);
      }
-   else
-     snprintf(buf, sizeof(buf), "%s", inst->conf->dir);
    inst->description = eina_stringshare_add(buf);
 }
 
@@ -359,16 +343,16 @@ _dirwatcher_source_items_free(Instance *inst)
 {
    while (inst->items)
      {
-	Drawer_Source_Item *si = NULL;
+        Drawer_Source_Item *si = NULL;
 
-	si = inst->items->data;
-	inst->items = eina_list_remove_list(inst->items, inst->items);
-	eina_stringshare_del(si->label);
-	eina_stringshare_del(si->description);
-	eina_stringshare_del(si->category);
+        si = inst->items->data;
+        inst->items = eina_list_remove_list(inst->items, inst->items);
+        eina_stringshare_del(si->label);
+        eina_stringshare_del(si->description);
+        eina_stringshare_del(si->category);
 
-	E_FREE(si->priv);
-	E_FREE(si);
+        E_FREE(si->priv);
+        E_FREE(si);
      }
 }
 
@@ -389,34 +373,35 @@ _dirwatcher_source_item_fill(Instance *inst, const char *file)
    if ((e_util_glob_case_match(buf, "*.desktop")) ||
        (e_util_glob_case_match(buf, "*.directory")))
      {
-	Efreet_Desktop *desktop;
+        Efreet_Desktop *desktop;
 
-	desktop = efreet_desktop_new(buf);
-	if (!desktop) return NULL;
-	si->label = eina_stringshare_add(desktop->name);
-	efreet_desktop_free(desktop);
+        desktop = efreet_desktop_new(buf);
+        if (!desktop) return NULL;
+        si->label = eina_stringshare_add(desktop->name);
+        efreet_desktop_free(desktop);
+     } else
+     {
+        si->label = eina_stringshare_add(file);
      }
-   else
-     si->label = eina_stringshare_add(file);
 
    file_path = eina_stringshare_add(buf);
 
    mime = e_fm_mime_filename_get(file_path);
    if (mime)
      {
-	snprintf(buf, sizeof(buf), "%s (%s)", mime,
-		 e_util_size_string_get(ecore_file_size(file_path)));
-	p->mime = mime;
-     }
-   else if (ecore_file_is_dir(file_path))
+        snprintf(buf, sizeof(buf), "%s (%s)", mime,
+                 e_util_size_string_get(ecore_file_size(file_path)));
+        p->mime = mime;
+     } else if (ecore_file_is_dir(file_path))
      {
-	snprintf(buf, sizeof(buf), D_("Directory (%s)"),
-		 e_util_size_string_get(ecore_file_size(file_path)));
-	p->dir = EINA_TRUE;
+        snprintf(buf, sizeof(buf), D_("Directory (%s)"),
+                 e_util_size_string_get(ecore_file_size(file_path)));
+        p->dir = EINA_TRUE;
+     } else
+     {
+        snprintf(buf, sizeof(buf), "%s (%s)", basename((char *) file_path),
+                 e_util_size_string_get(ecore_file_size(file_path)));
      }
-   else
-     snprintf(buf, sizeof(buf), "%s (%s)", basename((char *) file_path),
-	      e_util_size_string_get(ecore_file_size(file_path)));
    si->description = eina_stringshare_add(buf);
 
    p->inst = inst;
@@ -448,7 +433,8 @@ _dirwatcher_event_update_icon_free(void *data __UNUSED__, void *event)
 }
 
 static void
-_dirwatcher_monitor_cb(void *data, Ecore_File_Monitor *em __UNUSED__, Ecore_File_Event event __UNUSED__, const char *path)
+_dirwatcher_monitor_cb(void *data, Ecore_File_Monitor *em __UNUSED__, Ecore_File_Event event __UNUSED__,
+                       const char *path)
 {
    Instance *inst = NULL;
    Drawer_Event_Source_Update *ev;
@@ -471,7 +457,7 @@ _dirwatcher_cb_menu_open_dir(void *data, E_Menu *m __UNUSED__, E_Menu_Item *mi _
 
    if (!(inst = data)) return;
    _dirwatcher_directory_activate(inst, e_util_zone_current_get(e_manager_current_get()),
-				  inst->conf->dir);
+                                  inst->conf->dir);
 }
 
 static void
@@ -486,7 +472,7 @@ _dirwatcher_conf_activation_cb(void *data1, void *data2 __UNUSED__)
    inst = p->data;
    /* is this config dialog already visible ? */
    if (e_config_dialog_find("Drawer_Dirwatcher", "_e_module_drawer_cfg_dlg"))
-     return;
+      return;
 
    v = E_NEW(E_Config_Dialog_View, 1);
    if (!v) return;
@@ -501,8 +487,8 @@ _dirwatcher_conf_activation_cb(void *data1, void *data2 __UNUSED__)
 
    /* create new config dialog */
    _cfd = e_config_dialog_new(e_container_current_get(e_manager_current_get()),
-	 D_("Drawer Plugin : Directory Watcher"), "Drawer_Dirwatcher",
-	 "_e_module_drawer_cfg_dlg", buf, 0, v, inst);
+                              D_("Drawer Plugin : Directory Watcher"), "Drawer_Dirwatcher",
+                              "_e_module_drawer_cfg_dlg", buf, 0, v, inst);
 
    e_dialog_resizable_set(_cfd->dia, 1);
 }
@@ -596,9 +582,9 @@ _dirwatcher_cf_basic_apply(E_Config_Dialog *cfd __UNUSED__, E_Config_Dialog_Data
    E_FREE(path);
 
    if (inst->monitor)
-     ecore_file_monitor_del(inst->monitor);
+      ecore_file_monitor_del(inst->monitor);
    inst->monitor = ecore_file_monitor_add(inst->conf->dir,
-					  _dirwatcher_monitor_cb, inst);
+                                          _dirwatcher_monitor_cb, inst);
 
    _dirwatcher_description_create(inst);
 
@@ -620,12 +606,12 @@ _dirwatcher_cb_sort_dir(const Drawer_Source_Item *si1, const Drawer_Source_Item 
    d2 = ecore_file_is_dir(si2->data);
 
    if (d1 && d2)
-     return strcmp(si1->data, si2->data);
+      return strcmp(si1->data, si2->data);
 
    if (d1)
-     return -1;
+      return -1;
    if (d2)
-     return 1;
+      return 1;
    return 0;
 }
 
@@ -644,58 +630,57 @@ _dirwatcher_cb_sort(const void *data1, const void *data2)
    inst = ((Dirwatcher_Priv *) si1->priv)->inst;
    switch (inst->conf->sort_type)
      {
-      case SORT_NAME:
-	 if (inst->conf->sort_dir)
-	   {
-	      int ret = _dirwatcher_cb_sort_dir(si1, si2);
-	      if (ret) return ret;
-	   }
+        case SORT_NAME:
+           if (inst->conf->sort_dir)
+             {
+                int ret = _dirwatcher_cb_sort_dir(si1, si2);
+                if (ret) return ret;
+             }
 
-	 name1 = ecore_file_file_get(si1->data);
-	 name2 = ecore_file_file_get(si2->data);
-	 return strcmp(name1, name2);
-      case SORT_MTIME:
-	 if (inst->conf->sort_dir)
-	   {
-	      int ret = _dirwatcher_cb_sort_dir(si1, si2);
-	      if (ret) return ret;
-	   }
+           name1 = ecore_file_file_get(si1->data);
+           name2 = ecore_file_file_get(si2->data);
+           return strcmp(name1, name2);
+        case SORT_MTIME:
+           if (inst->conf->sort_dir)
+             {
+                int ret = _dirwatcher_cb_sort_dir(si1, si2);
+                if (ret) return ret;
+             }
 
-	 if (stat(si1->data, &st1) < 0) return 0;
-	 if (stat(si2->data, &st2) < 0) return 0;
-	 return st1.st_mtime - st2.st_mtime;
-      case SORT_CTIME:
-	 if (inst->conf->sort_dir)
-	   {
-	      int ret = _dirwatcher_cb_sort_dir(si1, si2);
-	      if (ret) return ret;
-	   }
+           if (stat(si1->data, &st1) < 0) return 0;
+           if (stat(si2->data, &st2) < 0) return 0;
+           return st1.st_mtime - st2.st_mtime;
+        case SORT_CTIME:
+           if (inst->conf->sort_dir)
+             {
+                int ret = _dirwatcher_cb_sort_dir(si1, si2);
+                if (ret) return ret;
+             }
 
-	 if (stat(si1->data, &st1) < 0) return 0;
-	 if (stat(si2->data, &st2) < 0) return 0;
-	 return st1.st_ctime - st2.st_ctime;
-      case SORT_ATIME:
-	 if (inst->conf->sort_dir)
-	   {
-	      int ret = _dirwatcher_cb_sort_dir(si1, si2);
-	      if (ret) return ret;
-	   }
+           if (stat(si1->data, &st1) < 0) return 0;
+           if (stat(si2->data, &st2) < 0) return 0;
+           return st1.st_ctime - st2.st_ctime;
+        case SORT_ATIME:
+           if (inst->conf->sort_dir)
+             {
+                int ret = _dirwatcher_cb_sort_dir(si1, si2);
+                if (ret) return ret;
+             }
 
-	 if (stat(si1->data, &st1) < 0) return 0;
-	 if (stat(si2->data, &st2) < 0) return 0;
-	 return st1.st_atime - st2.st_atime;
-      case SORT_SIZE:
-	 if (inst->conf->sort_dir)
-	   {
-	      int ret = _dirwatcher_cb_sort_dir(si1, si2);
-	      if (ret) return ret;
-	   }
+           if (stat(si1->data, &st1) < 0) return 0;
+           if (stat(si2->data, &st2) < 0) return 0;
+           return st1.st_atime - st2.st_atime;
+        case SORT_SIZE:
+           if (inst->conf->sort_dir)
+             {
+                int ret = _dirwatcher_cb_sort_dir(si1, si2);
+                if (ret) return ret;
+             }
 
-	 size1 = ecore_file_size(si1->data);
-	 size2 = ecore_file_size(si2->data);
-	 return size1 - size2;
+           size1 = ecore_file_size(si1->data);
+           size2 = ecore_file_size(si2->data);
+           return size1 - size2;
      }
 
    return 0;
 }
-

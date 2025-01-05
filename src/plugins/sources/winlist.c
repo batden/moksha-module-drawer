@@ -8,27 +8,21 @@
 typedef struct _Instance Instance;
 typedef struct _Conf Conf;
 
-struct _Instance 
+struct _Instance
 {
-   Drawer_Source *source;
-
-   Eina_List *items, *handlers;
-
-   Conf *conf;
-
-   E_Menu *menu;
-
+   Drawer_Source *	source;
+   Eina_List *		items, *handlers;
+   Conf *			conf;
+   E_Menu *			menu;
    struct
-     {
-	E_Config_DD *conf;
-     } edd;
-
+   {
+      E_Config_DD *conf;
+   } edd;
    struct
-     {
-	Eina_Bool changed;
-	E_Border *removed, *added;
-     } actions;
-
+   {
+      Eina_Bool changed;
+      E_Border *removed, *added;
+   } actions;
    const char *description;
 };
 
@@ -56,13 +50,11 @@ static Eina_Bool  _winlist_border_remove_cb(void *data, int type, void *event);
 static Eina_Bool  _winlist_border_icon_change_cb(void *data, int type, void *event);
 static Eina_Bool  _winlist_border_desk_set_cb(void *data, int type, void *event);
 static Eina_Bool  _winlist_border_window_prop_cb(void *data, int type, void *event);
-/*
-static int  _winlist_desk_show_cb(void *data, int type, void *event);
-*/
+// static int  _winlist_desk_show_cb(void *data, int type, void *event);
 static void _winlist_event_update_free(void *data __UNUSED__, void *event);
 static void _winlist_event_update_icon_free(void *data __UNUSED__, void *event);
 
-EAPI Drawer_Plugin_Api drawer_plugin_api = {DRAWER_PLUGIN_API_VERSION, "Winlist"};
+EAPI Drawer_Plugin_Api drawer_plugin_api = { DRAWER_PLUGIN_API_VERSION, "Winlist" };
 
 EAPI void *
 drawer_plugin_init(Drawer_Plugin *p, const char *id)
@@ -77,55 +69,53 @@ drawer_plugin_init(Drawer_Plugin *p, const char *id)
 
    /* Define EET Data Storage */
    inst->edd.conf = E_CONFIG_DD_NEW("Conf", Conf);
-   #undef T
-   #undef D
-   #define T Conf
-   #define D inst->edd.conf
+#undef T
+#undef D
+#define T Conf
+#define D inst->edd.conf
    E_CONFIG_VAL(D, T, id, STR);
 
    snprintf(buf, sizeof(buf), "module.drawer/%s.winlist", id);
    inst->conf = e_config_domain_load(buf, inst->edd.conf);
    if (!inst->conf)
      {
-	inst->conf = E_NEW(Conf, 1);
-	inst->conf->id = eina_stringshare_add(id);
+        inst->conf = E_NEW(Conf, 1);
+        inst->conf->id = eina_stringshare_add(id);
 
-	e_config_save_queue();
+        e_config_save_queue();
      }
 
    inst->handlers = eina_list_append(
-       inst->handlers, ecore_event_handler_add(
-	   E_EVENT_BORDER_FOCUS_IN, _winlist_border_focus_in_cb, inst));
-   inst->handlers = eina_list_append(
-       inst->handlers, ecore_event_handler_add(
-	   E_EVENT_BORDER_FOCUS_OUT, _winlist_border_focus_out_cb, inst));
-   inst->handlers = eina_list_append(
-       inst->handlers, ecore_event_handler_add(
-	   E_EVENT_BORDER_ADD, _winlist_border_add_cb, inst));
-   inst->handlers = eina_list_append(
-       inst->handlers, ecore_event_handler_add(
-	   E_EVENT_BORDER_REMOVE, _winlist_border_remove_cb, inst));
-   inst->handlers = eina_list_append(
-       inst->handlers, ecore_event_handler_add(
-	   E_EVENT_BORDER_ICON_CHANGE, _winlist_border_icon_change_cb, inst));
-   inst->handlers = eina_list_append(
-       inst->handlers, ecore_event_handler_add(
-	   E_EVENT_BORDER_DESK_SET, _winlist_border_desk_set_cb, inst));
-   inst->handlers = eina_list_append(
-       inst->handlers, ecore_event_handler_add(
-	   ECORE_X_EVENT_WINDOW_PROPERTY, _winlist_border_window_prop_cb, inst));
-   /*
-   inst->handlers = eina_list_append(
-       inst->handlers, ecore_event_handler_add(
-	   E_EVENT_DESK_SHOW, _winlist_desk_show_cb, inst));
-   */
+      inst->handlers, ecore_event_handler_add(E_EVENT_BORDER_FOCUS_IN, _winlist_border_focus_in_cb, inst));
+   inst->handlers = eina_list_append(inst->handlers, 
+                                     ecore_event_handler_add(E_EVENT_BORDER_FOCUS_OUT, 
+                                     _winlist_border_focus_out_cb, inst));
+   inst->handlers = eina_list_append(inst->handlers, 
+                                     ecore_event_handler_add(E_EVENT_BORDER_ADD,
+                                     _winlist_border_add_cb, inst));
+   inst->handlers = eina_list_append(inst->handlers, 
+                                     ecore_event_handler_add(E_EVENT_BORDER_REMOVE, 
+                                     _winlist_border_remove_cb, inst));
+   inst->handlers = eina_list_append(inst->handlers, 
+                                     ecore_event_handler_add(E_EVENT_BORDER_ICON_CHANGE,
+                                     _winlist_border_icon_change_cb, inst));
+   inst->handlers = eina_list_append(inst->handlers, 
+                                     ecore_event_handler_add(E_EVENT_BORDER_DESK_SET, 
+                                     _winlist_border_desk_set_cb, inst));
+   inst->handlers = eina_list_append(inst->handlers, 
+                                     ecore_event_handler_add(ECORE_X_EVENT_WINDOW_PROPERTY,
+                                     _winlist_border_window_prop_cb, inst));
+#if 0
+inst->handlers = eina_list_append(inst->handlers, 
+                                  ecore_event_handler_add(E_EVENT_DESK_SHOW, 
+                                  _winlist_desk_show_cb, inst));
+#endif
 
    _winlist_description_create(inst);
    _winlist_items_update(inst);
 
    bd = e_border_focused_get();
-   if (bd)
-     _winlist_border_focus_in(inst, bd);
+   if (bd) _winlist_border_focus_in(inst, bd);
 
    return inst;
 }
@@ -134,7 +124,7 @@ EAPI int
 drawer_plugin_shutdown(Drawer_Plugin *p)
 {
    Instance *inst = NULL;
-   
+
    inst = p->data;
 
    _winlist_source_items_free(inst);
@@ -178,18 +168,16 @@ drawer_source_activate(Drawer_Source *s __UNUSED__, Drawer_Source_Item *si, E_Zo
 
    E_OBJECT_CHECK(bd);
    if (bd->iconic)
-     {
-	if (!bd->lock_user_iconify)
-	  e_border_uniconify(bd);
-     }
+      if (!bd->lock_user_iconify)
+         e_border_uniconify(bd);
    e_desk_show(bd->desk);
    if (!bd->lock_user_stacking)
-     e_border_raise(bd);
+      e_border_raise(bd);
    if (!bd->lock_focus_out)
      {
-	if (e_config->focus_policy != E_FOCUS_CLICK)
-	  e_border_pointer_warp_to_center(bd);
-	e_border_focus_set(bd, 1, 1);
+        if (e_config->focus_policy != E_FOCUS_CLICK)
+           e_border_pointer_warp_to_center(bd);
+        e_border_focus_set(bd, 1, 1);
      }
 }
 
@@ -211,9 +199,9 @@ drawer_source_trigger(Drawer_Source *s __UNUSED__, E_Zone *zone)
 
    if (bd)
      {
-	si = _winlist_item_from_border(DRAWER_PLUGIN(s)->data, bd);
-	if (si)
-	  s->func.activate(s, si, zone);
+        si = _winlist_item_from_border(DRAWER_PLUGIN(s)->data, bd);
+        if (si)
+           s->func.activate(s, si, zone);
      }
 }
 
@@ -221,11 +209,12 @@ EAPI Evas_Object *
 drawer_source_render_item(Drawer_Source *s __UNUSED__, Drawer_Source_Item *si, Evas *evas)
 {
    Evas_Object *o = NULL;
+
 #ifdef HAVE_XPIXMAP
    Evas_Coord w, h;
 
    o = esmart_xpixmap_new(evas, 0, ((E_Border *) si->data)->win);
-   //Evas_Object *ic = e_icon_add(evas);
+   // Evas_Object *ic = e_icon_add(evas);
 
    evas_object_size_hint_request_get(o, &w, &h);
    evas_object_resize(o, w, h);
@@ -235,7 +224,7 @@ drawer_source_render_item(Drawer_Source *s __UNUSED__, Drawer_Source_Item *si, E
    return e_border_icon_add(si->data, evas);
 #endif
 
-   //e_icon_object_set(ic, o);
+   // e_icon_object_set(ic, o);
    return o;
 }
 
@@ -259,16 +248,16 @@ _winlist_source_item_fill(Instance *inst, E_Border *bd)
    si->label = eina_stringshare_add(e_border_name_get(bd));
    switch (e_config->clientlist_group_by)
      {
-      case E_CLIENTLIST_GROUP_CLASS:
-	 si->category = eina_stringshare_add(bd->client.icccm.class);
-	 snprintf(buf, sizeof(buf), "%s - %s", bd->desk->name, bd->client.icccm.class);
-	 si->description = eina_stringshare_add(buf);
-	 break;
-      case E_CLIENTLIST_GROUP_DESK:
-	 si->category = eina_stringshare_add(bd->desk->name);
-	 snprintf(buf, sizeof(buf), "%s - %s", bd->client.icccm.class, bd->desk->name);
-	 si->description = eina_stringshare_add(buf);
-	 break;
+        case E_CLIENTLIST_GROUP_CLASS:
+           si->category = eina_stringshare_add(bd->client.icccm.class);
+           snprintf(buf, sizeof(buf), "%s - %s", bd->desk->name, bd->client.icccm.class);
+           si->description = eina_stringshare_add(buf);
+           break;
+        case E_CLIENTLIST_GROUP_DESK:
+           si->category = eina_stringshare_add(bd->desk->name);
+           snprintf(buf, sizeof(buf), "%s - %s", bd->client.icccm.class, bd->desk->name);
+           si->description = eina_stringshare_add(buf);
+           break;
      }
 
    si->source = inst->source;
@@ -282,7 +271,7 @@ _winlist_source_items_free(Instance *inst)
    Drawer_Source_Item *si;
 
    EINA_LIST_FREE(inst->items, si)
-      _winlist_source_item_free(si);
+   _winlist_source_item_free(si);
 }
 
 static void
@@ -304,7 +293,7 @@ _winlist_item_from_border(Instance *inst, E_Border *bd)
 
    if (!inst->items) return NULL;
    EINA_LIST_FOREACH(inst->items, l, si)
-      if (si->data == bd) return si;
+   if (si->data == bd) return si;
 
    return NULL;
 }
@@ -329,55 +318,53 @@ _winlist_items_update(Instance *inst)
 
    if (inst->actions.removed)
      {
-	Drawer_Source_Item *si;
+        Drawer_Source_Item *si;
 
-	ret = EINA_FALSE;
-	si = _winlist_item_from_border(inst, inst->actions.removed);
-	if (si)
-	  {
-	     inst->items = eina_list_remove(inst->items, si);
-	     _winlist_source_item_free(si);
+        ret = EINA_FALSE;
+        si = _winlist_item_from_border(inst, inst->actions.removed);
+        if (si)
+          {
+             inst->items = eina_list_remove(inst->items, si);
+             _winlist_source_item_free(si);
 
-	     ret = EINA_TRUE;
-	  }
-	inst->actions.removed = NULL;
-     }
-   else if (inst->actions.added)
+             ret = EINA_TRUE;
+          }
+        inst->actions.removed = NULL;
+     } else if (inst->actions.added)
      {
-	Drawer_Source_Item *si = NULL;
+        Drawer_Source_Item *si = NULL;
 
-	bd = inst->actions.added;
-	inst->actions.added = NULL;
-	si = _winlist_source_item_fill(inst, bd);
-	inst->items = eina_list_append(inst->items, si);
-     }
-   else if (!inst->actions.changed)
+        bd = inst->actions.added;
+        inst->actions.added = NULL;
+        si = _winlist_source_item_fill(inst, bd);
+        inst->items = eina_list_append(inst->items, si);
+     } else if (!inst->actions.changed)
      {
-	_winlist_source_items_free(inst);
+        _winlist_source_items_free(inst);
 
-	EINA_LIST_FOREACH(e_border_client_list(), l, bd)
-	  {
-	     Drawer_Source_Item *si = NULL;
+        EINA_LIST_FOREACH(e_border_client_list(), l, bd)
+          {
+             Drawer_Source_Item *si = NULL;
 
-	     if (_winlist_border_filter(bd, zone)) continue;
-	     si = _winlist_source_item_fill(inst, bd);
-	     inst->items = eina_list_append(inst->items, si);
-	  }
+             if (_winlist_border_filter(bd, zone)) continue;
+             si = _winlist_source_item_fill(inst, bd);
+             inst->items = eina_list_append(inst->items, si);
+          }
      }
 
    if (inst->items)
      {
-	switch (e_config->clientlist_sort_by)
-	  {
-	   case E_CLIENTLIST_SORT_ALPHA:
-	      inst->items = eina_list_sort(inst->items, eina_list_count(inst->items),
-					   _winlist_sort_alpha_cb);
-	      break;
-	   case E_CLIENTLIST_SORT_ZORDER:
-	      inst->items = eina_list_sort(inst->items, eina_list_count(inst->items),
-					   _winlist_sort_z_order_cb);
-	      break;
-	  }
+        switch (e_config->clientlist_sort_by)
+          {
+             case E_CLIENTLIST_SORT_ALPHA:
+                inst->items = eina_list_sort(inst->items, eina_list_count(inst->items),
+                                             _winlist_sort_alpha_cb);
+                break;
+             case E_CLIENTLIST_SORT_ZORDER:
+                inst->items = eina_list_sort(inst->items, eina_list_count(inst->items),
+                                             _winlist_sort_z_order_cb);
+                break;
+          }
      }
 
    return ret;
@@ -390,24 +377,25 @@ _winlist_border_focus_in(Instance *inst, E_Border *bd)
    Drawer_Source_Item *si;
 
    if (inst->items)
-     EINA_LIST_FOREACH(inst->items, l, si)
-       {
-	  if (si->data == bd)
-	    {
-	       Drawer_Event_Source_Main_Icon_Update *ev;
+     {
+        EINA_LIST_FOREACH(inst->items, l, si)
+        {
+           if (si->data == bd)
+             {
+                Drawer_Event_Source_Main_Icon_Update *ev;
 
-	       ev = E_NEW(Drawer_Event_Source_Main_Icon_Update, 1);
-	       ev->source = inst->source;
-	       ev->id = eina_stringshare_add(inst->conf->id);
-	       ev->si = si;
-	       ecore_event_add(
-		   DRAWER_EVENT_SOURCE_MAIN_ICON_UPDATE, ev,
-		   _winlist_event_update_icon_free, NULL);
-	       return;
-	    }
-       }
+                ev = E_NEW(Drawer_Event_Source_Main_Icon_Update, 1);
+                ev->source = inst->source;
+                ev->id = eina_stringshare_add(inst->conf->id);
+                ev->si = si;
+                ecore_event_add(
+                   DRAWER_EVENT_SOURCE_MAIN_ICON_UPDATE, ev,
+                   _winlist_event_update_icon_free, NULL);
+                return;
+             }
+        }
 
-   if (_winlist_border_filter(bd, e_util_zone_current_get(e_manager_current_get()))) return;
+        if (_winlist_border_filter(bd, e_util_zone_current_get(e_manager_current_get()))) return; }
    inst->actions.added = bd;
    _winlist_items_update(inst);
 }
@@ -428,7 +416,7 @@ _winlist_sort_alpha_cb(const void *d1, const void *d2)
 {
    const Drawer_Source_Item *si1, *si2;
    const char *name1, *name2;
-   
+
    if (!d1) return 1;
    if (!d2) return -1;
 
@@ -436,7 +424,7 @@ _winlist_sort_alpha_cb(const void *d1, const void *d2)
    si2 = d2;
    name1 = e_border_name_get(si1->data);
    name2 = e_border_name_get(si2->data);
-   
+
    if (strcasecmp(name1, name2) > 0) return 1;
    if (strcasecmp(name1, name2) < 0) return -1;
    return 0;
@@ -458,7 +446,7 @@ _winlist_sort_z_order_cb(const void *d1, const void *d2)
 
    if (bd1->layer < bd2->layer) return 1;
    if (bd1->layer > bd2->layer) return -1;
-   return 0;   
+   return 0;
 }
 
 static Eina_Bool
@@ -470,8 +458,7 @@ _winlist_border_focus_in_cb(void *data, int type __UNUSED__, void *event)
 
    ev = event;
    inst = data;
-   if (!(bd = ev->border))
-     return EINA_TRUE;
+   if (!(bd = ev->border)) return EINA_TRUE;
 
    _winlist_border_focus_in(inst, bd);
 
@@ -494,8 +481,8 @@ _winlist_border_focus_out_cb(void *data, int type __UNUSED__, void *event)
    ev2->id = eina_stringshare_add(inst->conf->id);
    ev2->si = NULL;
    ecore_event_add(
-       DRAWER_EVENT_SOURCE_MAIN_ICON_UPDATE, ev2,
-       _winlist_event_update_icon_free, NULL);
+      DRAWER_EVENT_SOURCE_MAIN_ICON_UPDATE, ev2,
+      _winlist_event_update_icon_free, NULL);
 
    return EINA_TRUE;
 }
@@ -514,8 +501,7 @@ _winlist_border_add_cb(void *data, int type __UNUSED__, void *event)
    if (_winlist_border_filter(bd, zone)) return EINA_TRUE;
 
    inst->actions.added = bd;
-   if (_winlist_items_update(inst))
-     _winlist_event_update(inst);
+   if (_winlist_items_update(inst)) _winlist_event_update(inst);
 
    return EINA_TRUE;
 }
@@ -534,8 +520,7 @@ _winlist_border_remove_cb(void *data, int type __UNUSED__, void *event)
    if (_winlist_border_filter(bd, zone)) return EINA_TRUE;
 
    inst->actions.removed = bd;
-   if (_winlist_items_update(inst))
-     _winlist_event_update(inst);
+   if (_winlist_items_update(inst)) _winlist_event_update(inst);
 
    return EINA_TRUE;
 }
@@ -572,29 +557,28 @@ _winlist_border_desk_set_cb(void *data, int type __UNUSED__, void *event)
    si = _winlist_item_from_border(inst, bd);
    if (si)
      {
-	switch (e_config->clientlist_group_by)
-	  {
-	   case E_CLIENTLIST_GROUP_CLASS:
-	      snprintf(buf, sizeof(buf), "%s - %s", bd->desk->name, bd->client.icccm.class);
-	      if (strcmp(si->description, buf))
-		{
-		   eina_stringshare_replace(&(si->description), buf);
-		   changed = EINA_TRUE;
-		}
-	      break;
-	   case E_CLIENTLIST_GROUP_DESK:
-	      snprintf(buf, sizeof(buf), "%s - %s", bd->client.icccm.class, bd->desk->name);
-	      if (strcmp(si->description, buf))
-		{
-		   eina_stringshare_replace(&(si->description), buf);
-		   changed = EINA_TRUE;
-		}
-	      break;
-	  }
+        switch (e_config->clientlist_group_by)
+          {
+             case E_CLIENTLIST_GROUP_CLASS:
+                snprintf(buf, sizeof(buf), "%s - %s", bd->desk->name, bd->client.icccm.class);
+                if (strcmp(si->description, buf))
+                  {
+                     eina_stringshare_replace(&(si->description), buf);
+                     changed = EINA_TRUE;
+                  }
+                break;
+             case E_CLIENTLIST_GROUP_DESK:
+                snprintf(buf, sizeof(buf), "%s - %s", bd->client.icccm.class, bd->desk->name);
+                if (strcmp(si->description, buf))
+                  {
+                     eina_stringshare_replace(&(si->description), buf);
+                     changed = EINA_TRUE;
+                  }
+                break;
+          }
      }
 
-   if (changed)
-     _winlist_event_update(inst);
+   if (changed) _winlist_event_update(inst);
 
    return EINA_TRUE;
 }
@@ -617,13 +601,13 @@ _winlist_border_window_prop_cb(void *data, int type __UNUSED__, void *event)
    if (_winlist_border_filter(bd, zone)) return EINA_TRUE;
    if (ev->atom == ECORE_X_ATOM_WM_NAME)
      {
-	if ((!bd->client.netwm.name) &&
-	    (!bd->client.netwm.fetch.name))
-	  {
-	     si = _winlist_item_from_border(inst, bd);
-	     if (si)
-	       {
-		  tmp = ecore_x_icccm_title_get(bd->client.win);
+        if ((!bd->client.netwm.name) &&
+            (!bd->client.netwm.fetch.name))
+          {
+             si = _winlist_item_from_border(inst, bd);
+             if (si)
+               {
+                  tmp = ecore_x_icccm_title_get(bd->client.win);
 
                   if (tmp)
                     {
@@ -634,15 +618,14 @@ _winlist_border_window_prop_cb(void *data, int type __UNUSED__, void *event)
                          }
                        free(tmp);
                     }
-	       }
-	  }
-     }
-   else if (ev->atom == ECORE_X_ATOM_NET_WM_NAME)
+               }
+          }
+     } else if (ev->atom == ECORE_X_ATOM_NET_WM_NAME)
      {
-	si = _winlist_item_from_border(inst, bd);
-	if (si)
-	  {
-	     ecore_x_netwm_name_get(bd->client.win, &tmp);
+        si = _winlist_item_from_border(inst, bd);
+        if (si)
+          {
+             ecore_x_netwm_name_get(bd->client.win, &tmp);
              if (tmp)
                {
                   if (strcmp(si->label, tmp))
@@ -652,44 +635,42 @@ _winlist_border_window_prop_cb(void *data, int type __UNUSED__, void *event)
                     }
                   free(tmp);
                }
-	  }
-     }
-   else if (ev->atom == ECORE_X_ATOM_WM_CLASS)
+          }
+     } else if (ev->atom == ECORE_X_ATOM_WM_CLASS)
      {
-	char buf[512];
-	si = _winlist_item_from_border(inst, bd);
-	if (si)
-	  {
-	     ecore_x_icccm_name_class_get(bd->client.win, NULL, &tmp);
-	     switch (e_config->clientlist_group_by)
-	       {
-		case E_CLIENTLIST_GROUP_CLASS:
-		   snprintf(buf, sizeof(buf), "%s - %s", bd->desk->name, tmp);
-		   if (strcmp(si->description, buf))
-		     {
-			eina_stringshare_replace(&(si->description), buf);
-			changed = EINA_TRUE;
-		     }
-		   break;
-		case E_CLIENTLIST_GROUP_DESK:
-		   snprintf(buf, sizeof(buf), "%s - %s", tmp, bd->desk->name);
-		   if (strcmp(si->description, buf))
-		     {
-			eina_stringshare_replace(&(si->description), buf);
-			changed = EINA_TRUE;
-		     }
-		   break;
-	       }
-	  }
+        char buf[512];
+        si = _winlist_item_from_border(inst, bd);
+        if (si)
+          {
+             ecore_x_icccm_name_class_get(bd->client.win, NULL, &tmp);
+             switch (e_config->clientlist_group_by)
+               {
+                  case E_CLIENTLIST_GROUP_CLASS:
+                     snprintf(buf, sizeof(buf), "%s - %s", bd->desk->name, tmp);
+                     if (strcmp(si->description, buf))
+                       {
+                          eina_stringshare_replace(&(si->description), buf);
+                          changed = EINA_TRUE;
+                       }
+                     break;
+                  case E_CLIENTLIST_GROUP_DESK:
+                     snprintf(buf, sizeof(buf), "%s - %s", tmp, bd->desk->name);
+                     if (strcmp(si->description, buf))
+                       {
+                          eina_stringshare_replace(&(si->description), buf);
+                          changed = EINA_TRUE;
+                       }
+                     break;
+               }
+          }
      }
 
-   if (changed)
-     _winlist_event_update(inst);
+   if (changed) _winlist_event_update(inst);
 
    return EINA_TRUE;
 }
 
-/*
+#if 0
 static int
 _winlist_desk_show_cb(void *data, int type, void *event)
 {
@@ -700,12 +681,11 @@ _winlist_desk_show_cb(void *data, int type, void *event)
    inst = data;
 
    inst->actions.changed = EINA_TRUE;
-   if (_winlist_items_update(inst))
-     _winlist_event_update(inst);
+   if (_winlist_items_update(inst)) _winlist_event_update(inst);
 
-   return 1;
+   return 1; 
 }
-*/
+#endif
 
 static void
 _winlist_event_update_free(void *data __UNUSED__, void *event)
