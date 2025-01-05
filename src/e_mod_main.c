@@ -176,7 +176,7 @@ e_modapi_init(E_Module *m)
 
    homedir = e_user_homedir_get();
    snprintf(buf, sizeof(buf), "%s/.e/e/config/%s/module.drawer",
-	    homedir, e_config_profile_get());
+            homedir, e_config_profile_get());
    ecore_file_mkdir(buf);
 
    /* Location of theme to load for this module */
@@ -210,19 +210,19 @@ e_modapi_init(E_Module *m)
           {
              /* config too old */
              _drawer_conf_free();
-	     ecore_timer_add(1.0, _drawer_conf_timer,
-			     D_("Drawer Module Configuration data needed "
-			     "upgrading. Your old configuration<br> has been"
-			     " wiped and a new set of defaults initialized. "
-			     "This<br>will happen regularly during "
-			     "development, so don't report a<br>bug. "
-			     "This simply means the module needs "
-			     "new configuration<br>data by default for "
-			     "usable functionality that your old<br>"
-			     "configuration simply lacks. This new set of "
-			     "defaults will fix<br>that by adding it in. "
-			     "You can re-configure things now to your<br>"
-			     "liking. Sorry for the inconvenience.<br>"));
+             ecore_timer_add(1.0, _drawer_conf_timer,
+                             D_("Drawer Module Configuration data needed "
+                             "upgrading. Your old configuration<br> has been"
+                             " wiped and a new set of defaults initialized. "
+                             "This<br>will happen regularly during "
+                             "development, so don't report a<br>bug. "
+                             "This simply means the module needs "
+                             "new configuration<br>data by default for "
+                             "usable functionality that your old<br>"
+                             "configuration simply lacks. This new set of "
+                             "defaults will fix<br>that by adding it in. "
+                             "You can re-configure things now to your<br>"
+                             "liking. Sorry for the inconvenience.<br>"));
           }
 
         /* Ardvarks */
@@ -230,40 +230,40 @@ e_modapi_init(E_Module *m)
           {
              /* config too new...wtf ? */
              _drawer_conf_free();
-	     ecore_timer_add(1.0, _drawer_conf_timer,
-			     D_("Your Drawer Module configuration is NEWER "
-			     "than the module version. This is "
-			     "very<br>strange. This should not happen unless"
-			     " you downgraded<br>the module or "
-			     "copied the configuration from a place where"
-			     "<br>a newer version of the module "
-			     "was running. This is bad and<br>as a "
-			     "precaution your configuration has been now "
-			     "restored to<br>defaults. Sorry for the "
-			     "inconvenience.<br>"));
+             ecore_timer_add(1.0, _drawer_conf_timer,
+                             D_("Your Drawer Module configuration is NEWER "
+                             "than the module version. This is "
+                             "very<br>strange. This should not happen unless"
+                             " you downgraded<br>the module or "
+                             "copied the configuration from a place where"
+                             "<br>a newer version of the module "
+                             "was running. This is bad and<br>as a "
+                             "precaution your configuration has been now "
+                             "restored to<br>defaults. Sorry for the "
+                             "inconvenience.<br>"));
           }
-	/* Millepedes */
-	else
-	  {
-	     Config_Item *ci = NULL;
-	     Eina_List *l, *l_next;
-	     const char *dup = NULL;
+        /* Millepedes */
+        else
+          {
+             Config_Item *ci = NULL;
+             Eina_List *l, *l_next;
+             const char *dup = NULL;
 
-	     EINA_LIST_FOREACH_SAFE(drawer_conf->conf_items, l, l_next, ci)
-	       {
-		  if ((!dup) || (strcmp(dup, ci->id)))
-		    {
-		       dup = ci->id;
-		       continue;
-		    }
-		  else
-		    {
-		       _drawer_conf_item_free(ci);
-		       drawer_conf->conf_items =
-			  eina_list_remove_list(drawer_conf->conf_items, l);
-		    }
-	       }
-	  }
+             EINA_LIST_FOREACH_SAFE(drawer_conf->conf_items, l, l_next, ci)
+               {
+                  if ((!dup) || (strcmp(dup, ci->id)))
+                    {
+                       dup = ci->id;
+                       continue;
+                    }
+                  else
+                    {
+                       _drawer_conf_item_free(ci);
+                       drawer_conf->conf_items =
+                          eina_list_remove_list(drawer_conf->conf_items, l);
+                    }
+               }
+          }
      }
 
    /* if we don't have a config yet, or it got erased above,
@@ -325,7 +325,7 @@ e_modapi_shutdown(E_Module *m __UNUSED__)
           eina_list_remove_list(drawer_conf->conf_items,
                                 drawer_conf->conf_items);
 
-	_drawer_conf_item_free(ci);
+        _drawer_conf_item_free(ci);
      }
 
    /* Cleanup the main config structure */
@@ -357,12 +357,12 @@ e_modapi_save(E_Module *m __UNUSED__)
 
    EINA_LIST_FOREACH(instances, l, inst)
      {
-	if (inst->view && inst->view->func.config_save)
-	  inst->view->func.config_save(inst->view);
-	if (inst->source && inst->source->func.config_save)
-	  inst->source->func.config_save(inst->source);
-	if (inst->composite && inst->composite->func.config_save)
-	  inst->composite->func.config_save(inst->composite);
+        if (inst->view && inst->view->func.config_save)
+          inst->view->func.config_save(inst->view);
+        if (inst->source && inst->source->func.config_save)
+          inst->source->func.config_save(inst->source);
+        if (inst->composite && inst->composite->func.config_save)
+          inst->composite->func.config_save(inst->composite);
      }
 
    e_config_domain_save("module.drawer", conf_edd, drawer_conf);
@@ -391,31 +391,31 @@ drawer_plugins_list(Drawer_Plugin_Category cat)
 
    EINA_LIST_FREE(files, mod)
      {
-	Efreet_Desktop *desk = NULL;
-	Drawer_Plugin_Type *pi = NULL;
-	char buf2[PATH_MAX];
-	char *ri;
+        Efreet_Desktop *desk = NULL;
+        Drawer_Plugin_Type *pi = NULL;
+        char buf2[PATH_MAX];
+        char *ri;
 
-	ri = rindex(mod, '.');
-	if (strncmp(ri, ".desktop", 8))
-	  goto end;
+        ri = rindex(mod, '.');
+        if (strncmp(ri, ".desktop", 8))
+          goto end;
 
-	pi = E_NEW(Drawer_Plugin_Type, 1);
+        pi = E_NEW(Drawer_Plugin_Type, 1);
 
-	snprintf(buf2, sizeof(buf2), "%s%s", moddir, mod);
-	if (!(desk = efreet_desktop_new(buf2))) goto end;
-	if (desk->x)
-	  pi->title = eina_stringshare_add(eina_hash_find(desk->x, "X-Drawer-Title"));
-	if (!pi->title) pi->title = eina_stringshare_add(desk->name);
+        snprintf(buf2, sizeof(buf2), "%s%s", moddir, mod);
+        if (!(desk = efreet_desktop_new(buf2))) goto end;
+        if (desk->x)
+          pi->title = eina_stringshare_add(eina_hash_find(desk->x, "X-Drawer-Title"));
+        if (!pi->title) pi->title = eina_stringshare_add(desk->name);
 
-	pi->name = eina_stringshare_add(desk->name);
-	pi->comment = eina_stringshare_add(desk->comment);
+        pi->name = eina_stringshare_add(desk->name);
+        pi->comment = eina_stringshare_add(desk->comment);
 
-	ret = eina_list_append(ret, pi);
-	efreet_desktop_free(desk);
+        ret = eina_list_append(ret, pi);
+        efreet_desktop_free(desk);
 
      end:
-	free(mod);
+        free(mod);
      }
    free(mod);
 
@@ -430,9 +430,9 @@ drawer_plugins_list_free(Eina_List *list)
 
    EINA_LIST_FOREACH(list, l, pi)
      {
-	eina_stringshare_del(pi->title);
-	eina_stringshare_del(pi->name);
-	eina_stringshare_del(pi->comment);
+        eina_stringshare_del(pi->title);
+        eina_stringshare_del(pi->name);
+        eina_stringshare_del(pi->comment);
      }
    eina_list_free(list);
 }
@@ -497,68 +497,68 @@ drawer_util_icon_create(Drawer_Source_Item *si, Evas *evas, int w, int h)
    switch(si->data_type)
      {
       case SOURCE_DATA_TYPE_DESKTOP:
-	 o = e_util_desktop_icon_add(si->data, MAX(w, h), evas);
-	 break;
+         o = e_util_desktop_icon_add(si->data, MAX(w, h), evas);
+         break;
       case SOURCE_DATA_TYPE_FILE_PATH:
-	 if ((e_util_glob_case_match(si->data, "*.desktop")) ||
-	     (e_util_glob_case_match(si->data, "*.directory")))
-	   {
-	      Efreet_Desktop *desktop;
+         if ((e_util_glob_case_match(si->data, "*.desktop")) ||
+             (e_util_glob_case_match(si->data, "*.directory")))
+           {
+              Efreet_Desktop *desktop;
 
-	      desktop = efreet_desktop_new(si->data);
-	      if (!desktop) return NULL;
-	      o = e_util_desktop_icon_add(desktop, MAX(w, h), evas);
-	      if (!o)
-		{
-		   o = edje_object_add(evas);
-		   if (!e_util_edje_icon_set(o, desktop->icon))
-		     {
-			evas_object_del(o);
-			o = NULL;
-		     }
-		}
+              desktop = efreet_desktop_new(si->data);
+              if (!desktop) return NULL;
+              o = e_util_desktop_icon_add(desktop, MAX(w, h), evas);
+              if (!o)
+                {
+                   o = edje_object_add(evas);
+                   if (!e_util_edje_icon_set(o, desktop->icon))
+                     {
+                        evas_object_del(o);
+                        o = NULL;
+                     }
+                }
 
-	      efreet_desktop_free(desktop);
-	   }
-	 else if (ecore_file_is_dir(si->data))
-	   {
-	      o = e_icon_add(evas);
-	      e_util_icon_theme_set(o, "folder");
-	   }
+              efreet_desktop_free(desktop);
+           }
+         else if (ecore_file_is_dir(si->data))
+           {
+              o = e_icon_add(evas);
+              e_util_icon_theme_set(o, "folder");
+           }
 
 #if 0
-	 o = e_thumb_icon_add(evas);
-	 if ((e_util_glob_case_match(si->data, "*.edj")))
-	   {
-	      /* FIXME: There is probably a quicker way of doing this. */
-	      if (edje_file_group_exists(si->data, "icon"))
-		e_thumb_icon_file_set(o, si->data, "icon");
-	      else if (edje_file_group_exists(si->data, "e/desktop/background"))
-		e_thumb_icon_file_set(o, si->data, "e/desktop/background");
-	      else if (edje_file_group_exists(si->data, "e/init/splash"))
-		e_thumb_icon_file_set(o, si->data, "e/init/splash");
-	      e_thumb_icon_size_set(o, w, w/4*3);
-	   }
-	 else
-	   {
-	      e_thumb_icon_file_set(o, si->data, NULL);
-	      e_thumb_icon_size_set(o, w, h);
-	   }
+         o = e_thumb_icon_add(evas);
+         if ((e_util_glob_case_match(si->data, "*.edj")))
+           {
+              /* FIXME: There is probably a quicker way of doing this. */
+              if (edje_file_group_exists(si->data, "icon"))
+                e_thumb_icon_file_set(o, si->data, "icon");
+              else if (edje_file_group_exists(si->data, "e/desktop/background"))
+                e_thumb_icon_file_set(o, si->data, "e/desktop/background");
+              else if (edje_file_group_exists(si->data, "e/init/splash"))
+                e_thumb_icon_file_set(o, si->data, "e/init/splash");
+              e_thumb_icon_size_set(o, w, w/4*3);
+           }
+         else
+           {
+              e_thumb_icon_file_set(o, si->data, NULL);
+              e_thumb_icon_size_set(o, w, h);
+           }
 
-	 e_thumb_icon_begin(o);
+         e_thumb_icon_begin(o);
 #endif
-	 if (!o)
-	   {
+         if (!o)
+           {
 #ifdef HAVE_ETHUMB
-	      o = edje_object_add(evas);
+              o = edje_object_add(evas);
 
-	      td = calloc(1, sizeof(Drawer_Thumb_Data));
-	      td->o_icon = o;
+              td = calloc(1, sizeof(Drawer_Thumb_Data));
+              td->o_icon = o;
               td->file = eina_stringshare_add(si->data);
-	      td->w = w;
-	      td->h = h;
+              td->w = w;
+              td->h = h;
 
-	      _drawer_thumbnail_theme(o, si);
+              _drawer_thumbnail_theme(o, si);
               evas_object_event_callback_add(o, EVAS_CALLBACK_DEL,
                                              _drawer_thumb_object_del_cb, td);
               if (ethumb_client)
@@ -587,9 +587,9 @@ drawer_util_icon_create(Drawer_Source_Item *si, Evas *evas, int w, int h)
               e_thumb_icon_begin(o);
 #endif
 
-	      return o;
-	   }
-	 break;
+              return o;
+           }
+         break;
       case SOURCE_DATA_TYPE_OTHER:
          if (si->source->func.render_item)
            {
@@ -597,16 +597,16 @@ drawer_util_icon_create(Drawer_Source_Item *si, Evas *evas, int w, int h)
               evas_object_show(o);
               evas_object_resize(o, w, h);
            }
-	 break;
+         break;
      }
 
    if (o)
      {
-	Evas_Object *thumbnail = edje_object_add(evas);
+        Evas_Object *thumbnail = edje_object_add(evas);
 
-	_drawer_thumbnail_theme(thumbnail, si);
-	_drawer_thumbnail_swallow(thumbnail, o);
-	return thumbnail;
+        _drawer_thumbnail_theme(thumbnail, si);
+        _drawer_thumbnail_swallow(thumbnail, o);
+        return thumbnail;
      }
    return NULL;
 }
@@ -621,40 +621,40 @@ _drawer_shelf_update(Instance *inst, Drawer_Source_Item *si)
 
    if (inst->o_content)
      {
-	edje_object_part_unswallow(inst->o_drawer, inst->o_content);
-	evas_object_del(inst->o_content);
+        edje_object_part_unswallow(inst->o_drawer, inst->o_content);
+        evas_object_del(inst->o_content);
      }
 
    evas = evas_object_evas_get(inst->o_drawer);
 
    if (si)
      {
-	inst->o_content = drawer_util_icon_create(si, evas, 120, 120);
-	edje_object_signal_emit(inst->o_content, "e,state,hide_info", "e");
+        inst->o_content = drawer_util_icon_create(si, evas, 120, 120);
+        edje_object_signal_emit(inst->o_content, "e,state,hide_info", "e");
      }
    else if (inst->composite && inst->composite->enabled &&
-	    DRAWER_COMPOSITE(inst->composite)->func.get_main_icon)
+            DRAWER_COMPOSITE(inst->composite)->func.get_main_icon)
      {
-	inst->o_content = DRAWER_COMPOSITE(inst->composite)->func.get_main_icon(
-	    DRAWER_COMPOSITE(inst->composite), evas, 120, 120);
-	edje_object_signal_emit(inst->o_content, "e,state,hide_info", "e");
+        inst->o_content = DRAWER_COMPOSITE(inst->composite)->func.get_main_icon(
+            DRAWER_COMPOSITE(inst->composite), evas, 120, 120);
+        edje_object_signal_emit(inst->o_content, "e,state,hide_info", "e");
      }
    else
      {
-	char buf[PATH_MAX];
+        char buf[PATH_MAX];
 
-	snprintf(buf, sizeof(buf), "%s/e-module-drawer.edj",
-	      drawer_conf->module->dir);
-	inst->o_content = edje_object_add(evas);
-	if (!e_theme_edje_object_set(inst->o_content, "base/theme/modules/drawer",
-				     "modules/drawer/main/icon"))
-	  edje_object_file_set(inst->o_content, buf, "modules/drawer/main/icon");
+        snprintf(buf, sizeof(buf), "%s/e-module-drawer.edj",
+              drawer_conf->module->dir);
+        inst->o_content = edje_object_add(evas);
+        if (!e_theme_edje_object_set(inst->o_content, "base/theme/modules/drawer",
+                                     "modules/drawer/main/icon"))
+          edje_object_file_set(inst->o_content, buf, "modules/drawer/main/icon");
      }
 
    if (inst->o_content)
      {
-	edje_object_part_swallow(inst->o_drawer, "e.swallow.content", inst->o_content);
-	evas_object_show(inst->o_content);
+        edje_object_part_swallow(inst->o_drawer, "e.swallow.content", inst->o_content);
+        evas_object_show(inst->o_content);
      }
 }
 
@@ -669,15 +669,15 @@ _drawer_popup_theme_set(Instance *inst)
      snprintf(theme, sizeof(theme), "modules/drawer/container_noncomposite");
    inst->flags.use_composite = e_config->use_composite;
    if (!(e_theme_edje_object_set(inst->popup->o_bg,
-	       "base/theme/modules/drawer", theme)))
+               "base/theme/modules/drawer", theme)))
      {
-	char buf[PATH_MAX];
+        char buf[PATH_MAX];
 
-	snprintf(buf, sizeof(buf), "%s/e-module-drawer.edj", drawer_conf->module->dir);
-	if (edje_file_group_exists(buf, theme))
-	  edje_object_file_set(inst->popup->o_bg, buf, theme);
-	else
-	  e_theme_edje_object_set(inst->popup->o_bg, "base/theme/gadman", "e/gadman/popup");
+        snprintf(buf, sizeof(buf), "%s/e-module-drawer.edj", drawer_conf->module->dir);
+        if (edje_file_group_exists(buf, theme))
+          edje_object_file_set(inst->popup->o_bg, buf, theme);
+        else
+          e_theme_edje_object_set(inst->popup->o_bg, "base/theme/gadman", "e/gadman/popup");
      }
 }
 
@@ -689,9 +689,9 @@ _drawer_popup_create(Instance *inst)
    _drawer_popup_theme_set(inst);
    e_popup_edje_bg_object_set(inst->popup->win, inst->popup->o_bg);
    edje_object_signal_callback_add(inst->popup->o_bg, "e,action,popup,hidden", "drawer",
-				   _drawer_popup_hidden_cb, inst);
+                                   _drawer_popup_hidden_cb, inst);
    edje_object_signal_callback_add(inst->popup->o_bg, "e,action,popup,shown", "drawer",
-				   _drawer_popup_shown_cb, inst);
+                                   _drawer_popup_shown_cb, inst);
 
    _drawer_popup_update(inst);
 }
@@ -702,32 +702,32 @@ _drawer_popup_show(Instance *inst)
    if (inst->flags.pop_empty) return;
    switch(inst->gcc->gadcon->orient)
      {
-      case E_GADCON_ORIENT_CORNER_RT:
-      case E_GADCON_ORIENT_CORNER_RB:
-      case E_GADCON_ORIENT_RIGHT:
-	 edje_object_signal_emit(inst->o_drawer, "e,action,popup,show,right", "drawer");
-	 edje_object_signal_emit(inst->popup->o_bg, "e,action,popup,show,right", "drawer");
-	break;
-      case E_GADCON_ORIENT_LEFT:
-      case E_GADCON_ORIENT_CORNER_LT:
-      case E_GADCON_ORIENT_CORNER_LB:
-	 edje_object_signal_emit(inst->o_drawer, "e,action,popup,show,left", "drawer");
-	 edje_object_signal_emit(inst->popup->o_bg, "e,action,popup,show,left", "drawer");
-	 break;
-      case E_GADCON_ORIENT_TOP:
-      case E_GADCON_ORIENT_CORNER_TL:
-      case E_GADCON_ORIENT_CORNER_TR:
-	 edje_object_signal_emit(inst->o_drawer, "e,action,popup,show,top", "drawer");
-	 edje_object_signal_emit(inst->popup->o_bg, "e,action,popup,show,top", "drawer");
-	break;
-      case E_GADCON_ORIENT_BOTTOM:
-      case E_GADCON_ORIENT_CORNER_BL:
-      case E_GADCON_ORIENT_CORNER_BR:
-	 edje_object_signal_emit(inst->o_drawer, "e,action,popup,show,bottom", "drawer");
-	 edje_object_signal_emit(inst->popup->o_bg, "e,action,popup,show,bottom", "drawer");
-	break;
-      default:
-        break;
+       case E_GADCON_ORIENT_CORNER_RT:
+       case E_GADCON_ORIENT_CORNER_RB:
+       case E_GADCON_ORIENT_RIGHT:
+          edje_object_signal_emit(inst->o_drawer, "e,action,popup,show,right", "drawer");
+          edje_object_signal_emit(inst->popup->o_bg, "e,action,popup,show,right", "drawer");
+         break;
+       case E_GADCON_ORIENT_LEFT:
+       case E_GADCON_ORIENT_CORNER_LT:
+       case E_GADCON_ORIENT_CORNER_LB:
+          edje_object_signal_emit(inst->o_drawer, "e,action,popup,show,left", "drawer");
+          edje_object_signal_emit(inst->popup->o_bg, "e,action,popup,show,left", "drawer");
+         break;
+       case E_GADCON_ORIENT_TOP:
+       case E_GADCON_ORIENT_CORNER_TL:
+       case E_GADCON_ORIENT_CORNER_TR:
+          edje_object_signal_emit(inst->o_drawer, "e,action,popup,show,top", "drawer");
+          edje_object_signal_emit(inst->popup->o_bg, "e,action,popup,show,top", "drawer");
+         break;
+       case E_GADCON_ORIENT_BOTTOM:
+       case E_GADCON_ORIENT_CORNER_BL:
+       case E_GADCON_ORIENT_CORNER_BR:
+          edje_object_signal_emit(inst->o_drawer, "e,action,popup,show,bottom", "drawer");
+          edje_object_signal_emit(inst->popup->o_bg, "e,action,popup,show,bottom", "drawer");
+         break;
+       default:
+         break;
      }
    if (inst->flags.pop_update)
      _drawer_popup_update(inst);
@@ -754,32 +754,32 @@ _drawer_popup_hide(Instance *inst)
    if (inst->flags.pop_hiding) return;
    switch(inst->gcc->gadcon->orient)
      {
-      case E_GADCON_ORIENT_CORNER_RT:
-      case E_GADCON_ORIENT_CORNER_RB:
-      case E_GADCON_ORIENT_RIGHT:
-	 edje_object_signal_emit(inst->o_drawer, "e,action,popup,hide,right", "drawer");
-	 edje_object_signal_emit(inst->popup->o_bg, "e,action,popup,hide,right", "drawer");
-	break;
-      case E_GADCON_ORIENT_LEFT:
-      case E_GADCON_ORIENT_CORNER_LT:
-      case E_GADCON_ORIENT_CORNER_LB:
-	 edje_object_signal_emit(inst->o_drawer, "e,action,popup,hide,left", "drawer");
-	 edje_object_signal_emit(inst->popup->o_bg, "e,action,popup,hide,left", "drawer");
-	 break;
-      case E_GADCON_ORIENT_TOP:
-      case E_GADCON_ORIENT_CORNER_TL:
-      case E_GADCON_ORIENT_CORNER_TR:
-	 edje_object_signal_emit(inst->o_drawer, "e,action,popup,hide,top", "drawer");
-	 edje_object_signal_emit(inst->popup->o_bg, "e,action,popup,hide,top", "drawer");
-	break;
-      case E_GADCON_ORIENT_BOTTOM:
-      case E_GADCON_ORIENT_CORNER_BL:
-      case E_GADCON_ORIENT_CORNER_BR:
-	 edje_object_signal_emit(inst->o_drawer, "e,action,popup,hide,bottom", "drawer");
-	 edje_object_signal_emit(inst->popup->o_bg, "e,action,popup,hide,bottom", "drawer");
-	break;
-      default:
-        break;
+       case E_GADCON_ORIENT_CORNER_RT:
+       case E_GADCON_ORIENT_CORNER_RB:
+       case E_GADCON_ORIENT_RIGHT:
+          edje_object_signal_emit(inst->o_drawer, "e,action,popup,hide,right", "drawer");
+          edje_object_signal_emit(inst->popup->o_bg, "e,action,popup,hide,right", "drawer");
+         break;
+       case E_GADCON_ORIENT_LEFT:
+       case E_GADCON_ORIENT_CORNER_LT:
+       case E_GADCON_ORIENT_CORNER_LB:
+          edje_object_signal_emit(inst->o_drawer, "e,action,popup,hide,left", "drawer");
+          edje_object_signal_emit(inst->popup->o_bg, "e,action,popup,hide,left", "drawer");
+          break;
+       case E_GADCON_ORIENT_TOP:
+       case E_GADCON_ORIENT_CORNER_TL:
+       case E_GADCON_ORIENT_CORNER_TR:
+          edje_object_signal_emit(inst->o_drawer, "e,action,popup,hide,top", "drawer");
+          edje_object_signal_emit(inst->popup->o_bg, "e,action,popup,hide,top", "drawer");
+         break;
+       case E_GADCON_ORIENT_BOTTOM:
+       case E_GADCON_ORIENT_CORNER_BL:
+       case E_GADCON_ORIENT_CORNER_BR:
+          edje_object_signal_emit(inst->o_drawer, "e,action,popup,hide,bottom", "drawer");
+          edje_object_signal_emit(inst->popup->o_bg, "e,action,popup,hide,bottom", "drawer");
+         break;
+       default:
+         break;
      }
    inst->flags.pop_hiding = EINA_TRUE;
    if (inst->view && DRAWER_VIEW(inst->view)->func.toggle_visibility)
@@ -797,8 +797,8 @@ _drawer_popup_update(Instance *inst)
 
    if (inst->flags.pop_hiding)
      {
-	inst->flags.pop_update = EINA_TRUE;
-	return;
+        inst->flags.pop_update = EINA_TRUE;
+        return;
      }
 
    o = _drawer_content_generate(inst, inst->popup->win->evas);
@@ -820,10 +820,10 @@ _drawer_container_update(Instance *inst)
 {
    if (inst->o_content)
      {
-	edje_object_part_unswallow(inst->o_drawer, inst->o_content);
-	evas_object_del(inst->o_content);
-	evas_object_event_callback_del(inst->o_content, EVAS_CALLBACK_RESIZE,
-				       _drawer_container_resize_cb);
+        edje_object_part_unswallow(inst->o_drawer, inst->o_content);
+        evas_object_del(inst->o_content);
+        evas_object_event_callback_del(inst->o_content, EVAS_CALLBACK_RESIZE,
+                                       _drawer_container_resize_cb);
      }
    inst->o_content = _drawer_content_generate
       (inst, evas_object_evas_get(inst->o_drawer));
@@ -831,7 +831,7 @@ _drawer_container_update(Instance *inst)
    evas_object_show(inst->o_content);
 
    evas_object_event_callback_add(inst->o_content, EVAS_CALLBACK_RESIZE,
-				  _drawer_container_resize_cb, inst);
+                                  _drawer_container_resize_cb, inst);
 }
 
 static Evas_Object *
@@ -899,40 +899,40 @@ _drawer_container_setup(Instance *inst, E_Gadcon_Orient orient)
      edje_object_part_unswallow(inst->o_drawer, inst->o_content);
    if (inst->flags.is_floating)
      {
-	if (!e_theme_edje_object_set(inst->o_drawer, "base/theme/modules/drawer",
-		 "modules/drawer/main_float"))
-	  edje_object_file_set(inst->o_drawer, buf, "modules/drawer/main_float");
+        if (!e_theme_edje_object_set(inst->o_drawer, "base/theme/modules/drawer",
+                 "modules/drawer/main_float"))
+          edje_object_file_set(inst->o_drawer, buf, "modules/drawer/main_float");
      }
    else
      {
-	if (!e_theme_edje_object_set(inst->o_drawer, "base/theme/modules/drawer",
-		 "modules/drawer/main"))
-	  edje_object_file_set(inst->o_drawer, buf, "modules/drawer/main");
-	switch(orient)
-	  {
-	   case E_GADCON_ORIENT_CORNER_RT:
-	   case E_GADCON_ORIENT_CORNER_RB:
-	   case E_GADCON_ORIENT_RIGHT:
-	      edje_object_signal_emit(inst->o_drawer, "e,state,orient,right", "drawer");
-	      break;
-	   case E_GADCON_ORIENT_LEFT:
-	   case E_GADCON_ORIENT_CORNER_LT:
-	   case E_GADCON_ORIENT_CORNER_LB:
-	      edje_object_signal_emit(inst->o_drawer, "e,state,orient,left", "drawer");
-	      break;
-	   case E_GADCON_ORIENT_TOP:
-	   case E_GADCON_ORIENT_CORNER_TL:
-	   case E_GADCON_ORIENT_CORNER_TR:
-	      edje_object_signal_emit(inst->o_drawer, "e,state,orient,top", "drawer");
-	      break;
-	   case E_GADCON_ORIENT_BOTTOM:
-	   case E_GADCON_ORIENT_CORNER_BL:
-	   case E_GADCON_ORIENT_CORNER_BR:
-	      edje_object_signal_emit(inst->o_drawer, "e,state,orient,bottom", "drawer");
-	      break;
+        if (!e_theme_edje_object_set(inst->o_drawer, "base/theme/modules/drawer",
+                 "modules/drawer/main"))
+          edje_object_file_set(inst->o_drawer, buf, "modules/drawer/main");
+        switch(orient)
+          {
+           case E_GADCON_ORIENT_CORNER_RT:
+           case E_GADCON_ORIENT_CORNER_RB:
+           case E_GADCON_ORIENT_RIGHT:
+              edje_object_signal_emit(inst->o_drawer, "e,state,orient,right", "drawer");
+              break;
+           case E_GADCON_ORIENT_LEFT:
+           case E_GADCON_ORIENT_CORNER_LT:
+           case E_GADCON_ORIENT_CORNER_LB:
+              edje_object_signal_emit(inst->o_drawer, "e,state,orient,left", "drawer");
+              break;
+           case E_GADCON_ORIENT_TOP:
+           case E_GADCON_ORIENT_CORNER_TL:
+           case E_GADCON_ORIENT_CORNER_TR:
+              edje_object_signal_emit(inst->o_drawer, "e,state,orient,top", "drawer");
+              break;
+           case E_GADCON_ORIENT_BOTTOM:
+           case E_GADCON_ORIENT_CORNER_BL:
+           case E_GADCON_ORIENT_CORNER_BR:
+              edje_object_signal_emit(inst->o_drawer, "e,state,orient,bottom", "drawer");
+              break;
            default:
               break;
-	  }
+          }
      }
    if (inst->o_content)
      edje_object_part_swallow(inst->o_drawer, "e.swallow.content", inst->o_content);
@@ -969,18 +969,18 @@ _drawer_plugin_new(Instance *inst __UNUSED__, const char *name, const char *cate
    modpath = e_path_find(path_modules, buf);
    if (!modpath)
      {
-	e_util_dialog_show( D_("Drawer Plugins"),
-	      D_("The plugin '%s' was not found."), name);
-	p->error = EINA_TRUE;
-	goto init_done;
+        e_util_dialog_show( D_("Drawer Plugins"),
+              D_("The plugin '%s' was not found."), name);
+        p->error = EINA_TRUE;
+        goto init_done;
      }
    p->handle = dlopen(modpath, RTLD_NOW | RTLD_GLOBAL);
    if (!p->handle)
      {
-	e_util_dialog_show( D_("Drawer Plugins"),
-	      D_("The plugin '%s' could not be opened."), name);
-	p->error = EINA_TRUE;
-	goto init_done;
+        e_util_dialog_show( D_("Drawer Plugins"),
+              D_("The plugin '%s' could not be opened."), name);
+        p->error = EINA_TRUE;
+        goto init_done;
      }
 
    p->func.init = dlsym(p->handle, "drawer_plugin_init");
@@ -991,25 +991,25 @@ _drawer_plugin_new(Instance *inst __UNUSED__, const char *name, const char *cate
        (!p->api)
       )
      {
-	e_util_dialog_show( D_("Drawer Plugins"),
-	      D_("The plugin '%s' does not contain all required functions."), name);
-	p->api = NULL;
-	p->func.init = NULL;
-	p->func.shutdown = NULL;
-	dlclose(p->handle);
-	p->error = EINA_TRUE;
-	goto init_done;
+        e_util_dialog_show( D_("Drawer Plugins"),
+              D_("The plugin '%s' does not contain all required functions."), name);
+        p->api = NULL;
+        p->func.init = NULL;
+        p->func.shutdown = NULL;
+        dlclose(p->handle);
+        p->error = EINA_TRUE;
+        goto init_done;
      }
 
    if (p->api->version < DRAWER_PLUGIN_API_VERSION)
      {
-	e_util_dialog_show( D_("Drawer Plugins"),
-	      D_("The plugin '%s' does not have the required API version."), name);
-	p->api = NULL;
-	dlclose(p->handle);
-	p->handle = NULL;
-	p->error = EINA_TRUE;
-	goto init_done;
+        e_util_dialog_show( D_("Drawer Plugins"),
+              D_("The plugin '%s' does not have the required API version."), name);
+        p->api = NULL;
+        dlclose(p->handle);
+        p->handle = NULL;
+        p->error = EINA_TRUE;
+        goto init_done;
      }
 
    p->func.config_get = dlsym(p->handle, "drawer_plugin_config_get");
@@ -1020,12 +1020,12 @@ init_done:
    p->name = eina_stringshare_add(name);
    if (modpath)
      {
-	char *d;
+        char *d;
 
-	d = ecore_file_dir_get(modpath);
-	p->dir = eina_stringshare_add(d);
-	free(d);
-	eina_stringshare_del(modpath);
+        d = ecore_file_dir_get(modpath);
+        p->dir = eina_stringshare_add(d);
+        free(d);
+        eina_stringshare_del(modpath);
      }
 
    return p;
@@ -1071,12 +1071,12 @@ _drawer_source_new(Instance *inst, const char *name)
 
    if (!s->func.list)
      {
-	e_util_dialog_show( D_("Drawer Plugins"),
-	      D_("The plugin '%s' does not contain all required functions."), name);
-	s->func.list = NULL;
-	dlclose(p->handle);
-	p->error = EINA_TRUE;
-	goto init_done;
+        e_util_dialog_show( D_("Drawer Plugins"),
+              D_("The plugin '%s' does not contain all required functions."), name);
+        s->func.list = NULL;
+        dlclose(p->handle);
+        p->error = EINA_TRUE;
+        goto init_done;
      }
 
    s->func.activate = dlsym(p->handle, "drawer_source_activate");
@@ -1122,12 +1122,12 @@ _drawer_view_new(Instance *inst, const char *name)
 
    if (!v->func.render)
      {
-	e_util_dialog_show( D_("Drawer Plugins"),
-	      D_("The plugin '%s' does not contain all required functions."), name);
-	v->func.render = NULL;
-	dlclose(p->handle);
-	p->error = EINA_TRUE;
-	goto init_done;
+        e_util_dialog_show( D_("Drawer Plugins"),
+              D_("The plugin '%s' does not contain all required functions."), name);
+        v->func.render = NULL;
+        dlclose(p->handle);
+        p->error = EINA_TRUE;
+        goto init_done;
      }
 
    v->func.container_resized = dlsym(p->handle, "drawer_view_container_resized");
@@ -1168,12 +1168,12 @@ _drawer_composite_new(Instance *inst, const char *name)
 
    if (!c->func.render)
      {
-	e_util_dialog_show( D_("Drawer Plugins"),
-	      D_("The plugin '%s' does not contain all required functions."), name);
-	c->func.render = NULL;
-	dlclose(p->handle);
-	p->error = EINA_TRUE;
-	goto init_done;
+        e_util_dialog_show( D_("Drawer Plugins"),
+              D_("The plugin '%s' does not contain all required functions."), name);
+        c->func.render = NULL;
+        dlclose(p->handle);
+        p->error = EINA_TRUE;
+        goto init_done;
      }
 
    c->func.trigger = dlsym(p->handle, "drawer_composite_trigger");
@@ -1227,20 +1227,20 @@ _drawer_gc_init(E_Gadcon *gc, const char *name, const char *id, const char *styl
    instances = eina_list_append(instances, inst);
 
    inst->handlers = eina_list_append(inst->handlers,
-	 ecore_event_handler_add(DRAWER_EVENT_SOURCE_UPDATE,
-				 _drawer_source_update_cb, NULL));
+         ecore_event_handler_add(DRAWER_EVENT_SOURCE_UPDATE,
+                                 _drawer_source_update_cb, NULL));
    inst->handlers = eina_list_append(inst->handlers,
-	 ecore_event_handler_add(DRAWER_EVENT_SOURCE_MAIN_ICON_UPDATE,
-				 _drawer_source_main_icon_update_cb, NULL));
+         ecore_event_handler_add(DRAWER_EVENT_SOURCE_MAIN_ICON_UPDATE,
+                                 _drawer_source_main_icon_update_cb, NULL));
    inst->handlers = eina_list_append(inst->handlers,
-	 ecore_event_handler_add(DRAWER_EVENT_VIEW_ITEM_ACTIVATE,
-				 _drawer_view_activate_cb, NULL));
+         ecore_event_handler_add(DRAWER_EVENT_VIEW_ITEM_ACTIVATE,
+                                 _drawer_view_activate_cb, NULL));
    inst->handlers = eina_list_append(inst->handlers,
-	 ecore_event_handler_add(DRAWER_EVENT_VIEW_ITEM_CONTEXT,
-				 _drawer_view_context_cb, NULL));
+         ecore_event_handler_add(DRAWER_EVENT_VIEW_ITEM_CONTEXT,
+                                 _drawer_view_context_cb, NULL));
    inst->handlers = eina_list_append(inst->handlers,
-	 ecore_event_handler_add(ECORE_EVENT_MOUSE_BUTTON_DOWN,
-				 _drawer_global_mouse_down_cb, inst));
+         ecore_event_handler_add(ECORE_EVENT_MOUSE_BUTTON_DOWN,
+                                 _drawer_global_mouse_down_cb, inst));
 
    if (inst->conf_item->composite)
      _drawer_composite_new(inst, inst->conf_item->composite);
@@ -1280,8 +1280,8 @@ _drawer_gc_shutdown(E_Gadcon_Client *gcc)
 
    if (inst->o_content)
      {
-	edje_object_part_unswallow(inst->o_drawer, inst->o_content);
-	evas_object_del(inst->o_content);
+        edje_object_part_unswallow(inst->o_drawer, inst->o_content);
+        evas_object_del(inst->o_content);
      }
 
    /* delete the visual */
@@ -1294,13 +1294,13 @@ _drawer_gc_shutdown(E_Gadcon_Client *gcc)
      }
    if (inst->popup)
      {
-	_drawer_popup_hide(inst);
-	_drawer_popup_hidden_cb(inst, NULL, NULL, NULL);
-	edje_object_signal_callback_del(inst->popup->o_bg, "e,action,popup,hidden",
-					"drawer", _drawer_popup_hidden_cb);
-	edje_object_signal_callback_del(inst->popup->o_bg, "e,action,popup,shown",
-					"drawer", _drawer_popup_shown_cb);
-	e_object_del(E_OBJECT(inst->popup));
+        _drawer_popup_hide(inst);
+        _drawer_popup_hidden_cb(inst, NULL, NULL, NULL);
+        edje_object_signal_callback_del(inst->popup->o_bg, "e,action,popup,hidden",
+                                        "drawer", _drawer_popup_hidden_cb);
+        edje_object_signal_callback_del(inst->popup->o_bg, "e,action,popup,shown",
+                                        "drawer", _drawer_popup_shown_cb);
+        e_object_del(E_OBJECT(inst->popup));
      }
 
    E_FREE_LIST(inst->handlers, ecore_event_handler_del);
@@ -1400,7 +1400,7 @@ _drawer_conf_free(void)
         drawer_conf->conf_items =
           eina_list_remove_list(drawer_conf->conf_items,
                                 drawer_conf->conf_items);
-	_drawer_conf_item_free(ci);
+        _drawer_conf_item_free(ci);
      }
 
    E_FREE(drawer_conf);
@@ -1457,8 +1457,8 @@ _drawer_instance_get(Config_Item *ci)
    Instance *inst = NULL;
 
    EINA_LIST_FOREACH(instances, l, inst)
-	if (inst->conf_item == ci)
-	  return inst;
+        if (inst->conf_item == ci)
+          return inst;
 
    return NULL;
 }
@@ -1467,13 +1467,13 @@ static void
 _drawer_thumbnail_theme(Evas_Object *thumbnail, Drawer_Source_Item *si __UNUSED__)
 {
    if (!e_theme_edje_object_set(thumbnail, "base/theme/modules/drawer",
-				"modules/drawer/icon/thumbnail"))
+                                "modules/drawer/icon/thumbnail"))
      {
-	char buf[PATH_MAX];
+        char buf[PATH_MAX];
 
-	snprintf(buf, sizeof(buf), "%s/e-module-drawer.edj",
-		 drawer_conf->module->dir);
-	edje_object_file_set(thumbnail, buf, "modules/drawer/icon/thumbnail");
+        snprintf(buf, sizeof(buf), "%s/e-module-drawer.edj",
+                 drawer_conf->module->dir);
+        edje_object_file_set(thumbnail, buf, "modules/drawer/icon/thumbnail");
      }
 }
 
@@ -1490,11 +1490,11 @@ _drawer_thumbnail_swallow(Evas_Object *thumbnail, Evas_Object *swallow)
 
    if (!(strcmp(type, "edje")))
      {
-	edje_object_size_min_get(swallow, &w, &h);
-	if (!w || !h)
-	  edje_object_size_min_calc(swallow, &w, &h);
+        edje_object_size_min_get(swallow, &w, &h);
+        if (!w || !h)
+          edje_object_size_min_calc(swallow, &w, &h);
 
-	evas_object_size_hint_min_set(swallow, w, h);
+        evas_object_size_hint_min_set(swallow, w, h);
      }
    else if (!(strcmp(type, "e_icon")))
      e_icon_scale_up_set(swallow, 0);
@@ -1511,7 +1511,7 @@ _drawer_thumb_exist_cb(void *data, Ethumb_Client *client __UNUSED__, Ethumb_Exis
 
         ethumb_client_thumb_path_get(ethumb_client, &thumb_path, NULL);
         _drawer_thumb_generate_cb(td, ethumb_client, 0, td->file, NULL,
-				  thumb_path, NULL, EINA_TRUE);
+                                  thumb_path, NULL, EINA_TRUE);
      }
    else if (ethumb_client_generate(ethumb_client, _drawer_thumb_generate_cb, td, _drawer_thumb_data_free) == -1)
      _drawer_thumb_data_free(td);
@@ -1606,9 +1606,9 @@ _drawer_source_update_cb(void *data __UNUSED__, int ev_type, void *event)
 
    if (inst->flags.is_floating)
      {
-	if ((inst->composite && inst->composite->enabled) ||
+        if ((inst->composite && inst->composite->enabled) ||
             (inst->view && inst->view->enabled))
-	  _drawer_container_update(inst);
+          _drawer_container_update(inst);
      }
    else if (inst->popup)
      _drawer_popup_update(inst);
@@ -1669,8 +1669,8 @@ _drawer_view_context_cb(void *data __UNUSED__, int ev_type, void *event)
 
    if (inst->popup)
      {
-	ev->x += inst->popup->win->x;
-	ev->y += inst->popup->win->y;
+        ev->x += inst->popup->win->x;
+        ev->y += inst->popup->win->y;
      }
 
    if (s->func.context)
@@ -1730,15 +1730,15 @@ _drawer_mouse_down_cb(void *data, Evas *evas __UNUSED__, Evas_Object *obj __UNUS
        ((inst->composite && inst->composite->enabled) ||
         (inst->source && inst->view && inst->source->enabled && inst->view->enabled)))
      {
-	if (inst->flags.pop_hiding) return;
-	if (!inst->popup) _drawer_popup_create(inst);
+        if (inst->flags.pop_hiding) return;
+        if (!inst->popup) _drawer_popup_create(inst);
         if (e_config->use_composite == inst->flags.use_composite)
           _drawer_popup_theme_set(inst);
-	if (inst->popup->win->visible)
-	  _drawer_popup_hide(inst);
-	else
-	  _drawer_popup_show(inst);
-	return;
+        if (inst->popup->win->visible)
+          _drawer_popup_hide(inst);
+        else
+          _drawer_popup_show(inst);
+        return;
      }
    else if (ev->button == 2 && !inst->flags.is_floating)
      {
@@ -1765,16 +1765,16 @@ _drawer_mouse_down_cb(void *data, Evas *evas __UNUSED__, Evas_Object *obj __UNUS
                }
           }
 
-	if (inst->popup)
-	  _drawer_popup_hide(inst);
+        if (inst->popup)
+          _drawer_popup_hide(inst);
 
      }
    else if (ev->button == 3)
      {
-	E_Zone *zone = NULL;
-	E_Menu *m;
-	E_Menu_Item *mi = NULL;
-	int x, y;
+        E_Zone *zone = NULL;
+        E_Menu *m;
+        E_Menu_Item *mi = NULL;
+        int x, y;
 
         /* grab current zone */
         zone = e_util_zone_current_get(e_manager_current_get());
@@ -1872,46 +1872,46 @@ _drawer_thumb_generate_cb(void *data, Ethumb_Client *client __UNUSED__, int id _
      }
    else if (file)
      {
-	const char *mime = NULL;
+        const char *mime = NULL;
 
-	mime = efreet_mime_globs_type_get(file);
-	if (mime)
-	  {
-	     const char *icon;
+        mime = efreet_mime_globs_type_get(file);
+        if (mime)
+          {
+             const char *icon;
 
-	     icon = e_fm_mime_icon_get(mime);
-	     if (!icon);
-	     else if (!strncmp(icon, "e/icons/fileman/mime/", 21))
-	       {
-		  o = edje_object_add(evas);
-		  if (!e_theme_edje_object_set(o, "base/theme/fileman", icon))
-		    {
-		       evas_object_del(o);
-		       o = NULL;
-		    }
-	       }
-	     else
-	       {
-		  char *p;
+             icon = e_fm_mime_icon_get(mime);
+             if (!icon);
+             else if (!strncmp(icon, "e/icons/fileman/mime/", 21))
+               {
+                  o = edje_object_add(evas);
+                  if (!e_theme_edje_object_set(o, "base/theme/fileman", icon))
+                    {
+                       evas_object_del(o);
+                       o = NULL;
+                    }
+               }
+             else
+               {
+                  char *p;
 
-		  p = strrchr(icon, '.');
-		  if ((p) && (!strcmp(p, ".edj")))
-		    {
-		       o = edje_object_add(evas);
-		       if (!edje_object_file_set(o, icon, "icon"))
-			 {
-			    evas_object_del(o);
-			    o = NULL;
-			 }
-		    }
-	       }
-	  }
+                  p = strrchr(icon, '.');
+                  if ((p) && (!strcmp(p, ".edj")))
+                    {
+                       o = edje_object_add(evas);
+                       if (!edje_object_file_set(o, icon, "icon"))
+                         {
+                            evas_object_del(o);
+                            o = NULL;
+                         }
+                    }
+               }
+          }
 
-	if (!o)
-	  {
-	     o = edje_object_add(evas);
-	     e_theme_edje_object_set(o, "base/theme/fileman", "e/icons/fileman/file");
-	  }
+        if (!o)
+          {
+             o = edje_object_add(evas);
+             e_theme_edje_object_set(o, "base/theme/fileman", "e/icons/fileman/file");
+          }
      }
 
    if (o)
@@ -1944,27 +1944,27 @@ _smart_init(void)
 {
    if (smart) return;
      {
-	static const Evas_Smart_Class sc =
-	  {
-	       "drawer_content_container",
-	       EVAS_SMART_CLASS_VERSION,
-	       NULL,
-	       _smart_del,
-	       _smart_move,
-	       _smart_resize,
-	       _smart_show,
-	       _smart_hide,
-	       NULL,
-	       NULL,
-	       NULL,
-	       NULL,            /* Calculate */
-	       NULL,            /* Member add */
-	       NULL,            /* Member del */
-	       NULL,
+        static const Evas_Smart_Class sc =
+          {
+               "drawer_content_container",
+               EVAS_SMART_CLASS_VERSION,
+               NULL,
+               _smart_del,
+               _smart_move,
+               _smart_resize,
+               _smart_show,
+               _smart_hide,
+               NULL,
+               NULL,
+               NULL,
+               NULL,            /* Calculate */
+               NULL,            /* Member add */
+               NULL,            /* Member del */
+               NULL,
                NULL,
                NULL,
                NULL             /* Data */
-	  };
+          };
         smart = evas_smart_class_new(&sc);
      }
 }
