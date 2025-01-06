@@ -60,6 +60,7 @@ struct _Launcher_Menu_Data
 };
 
 #define CONF_RATING(obj) ((Conf_Rating *) obj)
+#define MAGIC_RATING 20000
 
 static void _launcher_description_create(Instance *inst);
 static void _launcher_sources_rating_discount(Instance *inst, int min);
@@ -142,9 +143,7 @@ drawer_plugin_init(Drawer_Plugin *p, const char *id)
 EAPI int
 drawer_plugin_shutdown(Drawer_Plugin *p)
 {
-   Instance *inst = NULL;
-
-   inst = p->data;
+   Instance *inst = p->data;
 
    _launcher_source_items_free(inst);
 
@@ -180,9 +179,7 @@ drawer_plugin_shutdown(Drawer_Plugin *p)
 EAPI Evas_Object *
 drawer_plugin_config_get(Drawer_Plugin *p, Evas *evas)
 {
-   Evas_Object *button;
-
-   button = e_widget_button_add(evas, D_("Launcher settings"), NULL, _launcher_conf_activation_cb, p, NULL);
+   Evas_Object *button = e_widget_button_add(evas, D_("Launcher settings"), NULL, _launcher_conf_activation_cb, p, NULL);
 
    return button;
 }
@@ -190,10 +187,9 @@ drawer_plugin_config_get(Drawer_Plugin *p, Evas *evas)
 EAPI void
 drawer_plugin_config_save(Drawer_Plugin *p)
 {
-   Instance *inst;
+   Instance *inst = p->data;
    char buf[128];
 
-   inst = p->data;
    snprintf(buf, sizeof(buf), "module.drawer/%s.launcher", inst->conf->id);
    e_config_domain_save(buf, inst->edd.conf, inst->conf);
 }
@@ -234,7 +230,7 @@ drawer_source_list(Drawer_Source *s)
           }
      }
 
-   if (min > 20000) _launcher_sources_rating_discount(inst, min);
+   if (min > MAGIC_RATING) _launcher_sources_rating_discount(inst, min);
 
    switch (inst->conf->sort_type)
      {
@@ -317,9 +313,7 @@ drawer_source_context(Drawer_Source *s, Drawer_Source_Item *si, E_Zone *zone, Dr
 EAPI const char *
 drawer_source_description_get(Drawer_Source *s)
 {
-   Instance *inst;
-
-   inst = DRAWER_PLUGIN(s)->data;
+   Instance *inst = DRAWER_PLUGIN(s)->data;
 
    return inst->description;
 }
@@ -341,7 +335,7 @@ _launcher_sources_rating_discount(Instance *inst, int min)
    Eina_List *l;
 
    EINA_LIST_FOREACH(inst->items, l, si)
-   CONF_RATING(si->priv)->rating -= min;
+      CONF_RATING(si->priv)->rating -= min;
 }
 
 static int
@@ -387,7 +381,8 @@ _launcher_cb_app_change(void *data, E_Order *eo __UNUSED__)
    ev = E_NEW(Drawer_Event_Source_Update, 1);
    ev->source = inst->source;
    ev->id = eina_stringshare_add(inst->conf->id);
-   ecore_event_add(DRAWER_EVENT_SOURCE_UPDATE, ev, _launcher_event_update_free, NULL);
+   ecore_event_add(DRAWER_EVENT_SOURCE_UPDATE,
+                   ev, _launcher_event_update_free, NULL);
 }
 
 static Drawer_Source_Item *
@@ -469,9 +464,7 @@ _launcher_source_items_free(Instance *inst)
 static void
 _launcher_event_update_free(void *data __UNUSED__, void *event)
 {
-   Drawer_Event_Source_Update *ev;
-
-   ev = event;
+   Drawer_Event_Source_Update *ev = event;
    eina_stringshare_del(ev->id);
    free(ev);
 }
@@ -479,9 +472,7 @@ _launcher_event_update_free(void *data __UNUSED__, void *event)
 static void
 _launcher_event_update_icon_free(void *data __UNUSED__, void *event)
 {
-   Drawer_Event_Source_Main_Icon_Update *ev;
-
-   ev = event;
+   Drawer_Event_Source_Main_Icon_Update *ev = event;
    eina_stringshare_del(ev->id);
    free(ev);
 }
@@ -539,9 +530,7 @@ _launcher_cb_menu_item_remove(void *data, E_Menu *m __UNUSED__, E_Menu_Item *mi 
 static void *
 _launcher_cf_create_data(E_Config_Dialog *cfd)
 {
-   E_Config_Dialog_Data *cfdata = NULL;
-
-   cfdata = E_NEW(E_Config_Dialog_Data, 1);
+   E_Config_Dialog_Data *cfdata = E_NEW(E_Config_Dialog_Data, 1);
    cfdata->inst = cfd->data;
    _launcher_cf_fill_data(cfdata);
    return cfdata;
@@ -609,10 +598,9 @@ _launcher_cf_basic_create(E_Config_Dialog *cfd __UNUSED__, Evas *evas, E_Config_
 static int
 _launcher_cf_basic_apply(E_Config_Dialog *cfd __UNUSED__, E_Config_Dialog_Data *cfdata)
 {
-   Instance *inst = NULL;
+   Instance *inst = cfdata->inst;;
    Drawer_Event_Source_Update *ev;
 
-   inst = cfdata->inst;
    eina_stringshare_del(inst->conf->dir);
 
    inst->conf->dir = eina_stringshare_add(cfdata->dir);
@@ -623,7 +611,8 @@ _launcher_cf_basic_apply(E_Config_Dialog *cfd __UNUSED__, E_Config_Dialog_Data *
    ev = E_NEW(Drawer_Event_Source_Update, 1);
    ev->source = inst->source;
    ev->id = eina_stringshare_add(inst->conf->id);
-   ecore_event_add(DRAWER_EVENT_SOURCE_UPDATE, ev, _launcher_event_update_free, NULL);
+   ecore_event_add(DRAWER_EVENT_SOURCE_UPDATE,
+                   ev, _launcher_event_update_free, NULL);
 
    e_config_save_queue();
    return 1;
@@ -632,9 +621,7 @@ _launcher_cf_basic_apply(E_Config_Dialog *cfd __UNUSED__, E_Config_Dialog_Data *
 static void
 _cb_add(void *data, void *data2 __UNUSED__)
 {
-   E_Config_Dialog_Data *cfdata;
-
-   cfdata = data;
+   E_Config_Dialog_Data *cfdata = data;
    e_entry_dialog_show(D_("Create new Launcher source"), "enlightenment",
                        D_("Enter a name for this new source:"), "", NULL, NULL,
                        _cb_entry_ok, NULL, cfdata);
@@ -644,10 +631,9 @@ static void
 _cb_del(void *data, void *data2 __UNUSED__)
 {
    char buf[PATH_MAX];
-   E_Config_Dialog_Data *cfdata;
+   E_Config_Dialog_Data *cfdata = data;
    E_Confirm_Dialog *dialog;
 
-   cfdata = data;
    if (cfdata->dialog_delete) return;
 
    snprintf(buf, sizeof(buf), D_("You requested to delete \"%s\".<br><br>"
@@ -664,9 +650,8 @@ static void
 _cb_config(void *data, void *data2 __UNUSED__)
 {
    char path[PATH_MAX];
-   E_Config_Dialog_Data *cfdata;
-
-   cfdata = data;
+   E_Config_Dialog_Data *cfdata = data;
+   
    snprintf(path, sizeof(path), "%s/.e/e/applications/bar/%s/.order",
             e_user_homedir_get(), cfdata->dir);
    e_configure_registry_call("internal/ibar_other",
@@ -707,10 +692,9 @@ _cb_entry_ok(void *data, char *text)
 static void
 _cb_confirm_dialog_yes(void *data)
 {
-   E_Config_Dialog_Data *cfdata;
+   E_Config_Dialog_Data *cfdata = data;
    char buf[PATH_MAX];
 
-   cfdata = data;
    snprintf(buf, sizeof(buf), "%s/.e/e/applications/bar/%s", e_user_homedir_get(), cfdata->dir);
    if (ecore_file_is_dir(buf)) ecore_file_recursive_rm(buf);
 
@@ -720,9 +704,7 @@ _cb_confirm_dialog_yes(void *data)
 static void
 _cb_confirm_dialog_destroy(void *data)
 {
-   E_Config_Dialog_Data *cfdata;
-
-   cfdata = data;
+   E_Config_Dialog_Data *cfdata = data;
    cfdata->dialog_delete = NULL;
 }
 
