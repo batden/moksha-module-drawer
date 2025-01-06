@@ -138,10 +138,8 @@ drawer_plugin_init(Drawer_Plugin *p, const char *id)
 EAPI int
 drawer_plugin_shutdown(Drawer_Plugin *p)
 {
-   Instance *inst = NULL;
+   Instance *inst = p->data;
    Entry *e;
-
-   inst = p->data;
 
    EINA_LIST_FREE(inst->entries, e)
    {
@@ -167,9 +165,7 @@ drawer_plugin_shutdown(Drawer_Plugin *p)
 EAPI Evas_Object *
 drawer_plugin_config_get(Drawer_Plugin *p, Evas *evas)
 {
-   Evas_Object *button;
-
-   button = e_widget_button_add(evas, D_("List settings"), NULL, _list_conf_activation_cb, p, NULL);
+   Evas_Object *button = e_widget_button_add(evas, D_("List settings"), NULL, _list_conf_activation_cb, p, NULL);
 
    return button;
 }
@@ -177,10 +173,9 @@ drawer_plugin_config_get(Drawer_Plugin *p, Evas *evas)
 EAPI void
 drawer_plugin_config_save(Drawer_Plugin *p)
 {
-   Instance *inst;
+   Instance *inst = p->data;
    char buf[128];
 
-   inst = p->data;
    snprintf(buf, sizeof(buf), "module.drawer/%s.list", inst->conf->id);
    e_config_domain_save(buf, inst->edd_conf, inst->conf);
 }
@@ -188,14 +183,12 @@ drawer_plugin_config_save(Drawer_Plugin *p)
 EAPI Evas_Object *
 drawer_view_render(Drawer_View *v, Evas *evas, Eina_List *items)
 {
-   Instance *inst = NULL;
+   Instance *inst = DRAWER_PLUGIN(v)->data;
    Eina_List *l = NULL, *ll = NULL;
    Drawer_Source_Item *si;
    const char *cat = NULL;
    Eina_Bool change = EINA_FALSE;
    Entry *e;
-
-   inst = DRAWER_PLUGIN(v)->data;
 
    inst->evas = evas;
 
@@ -217,7 +210,7 @@ drawer_view_render(Drawer_View *v, Evas *evas, Eina_List *items)
    e_box_freeze(inst->o_box);
 
    EINA_LIST_FOREACH(items, l, si)
-        ll = eina_list_append(ll, si);
+      ll = eina_list_append(ll, si);
    ll = eina_list_sort(ll, eina_list_count(ll), _list_sort_by_category_cb);
    switch (inst->orient)
      {
@@ -256,7 +249,7 @@ drawer_view_render(Drawer_View *v, Evas *evas, Eina_List *items)
                 if (change)
                   {
                      Entry *c;
-  
+
                      c = _list_vertical_cat_create(inst, si);
                      inst->entries = eina_list_append(inst->entries, c);
                      e_box_pack_end(inst->o_box, c->o_holder);
@@ -297,9 +290,7 @@ drawer_view_render(Drawer_View *v, Evas *evas, Eina_List *items)
 EAPI void
 drawer_view_orient_set(Drawer_View *v, E_Gadcon_Orient orient)
 {
-   Instance *inst = NULL;
-
-   inst = DRAWER_PLUGIN(v)->data;
+   Instance *inst = DRAWER_PLUGIN(v)->data;
 
    switch (orient)
      {
@@ -429,10 +420,9 @@ _list_reconfigure(Instance *inst)
 static void
 _list_containers_create(Instance *inst)
 {
-   Evas *evas;
+   Evas *evas = inst->evas;
    const char *group;
 
-   evas = inst->evas;
    inst->o_con = edje_object_add(evas);
 
    inst->o_box = e_box_add(evas);
@@ -483,9 +473,7 @@ _list_containers_create(Instance *inst)
 static Entry *
 _list_horizontal_entry_create(Instance *inst, Drawer_Source_Item *si)
 {
-   Entry *e;
-
-   e = E_NEW(Entry, 1);
+   Entry *e = E_NEW(Entry, 1);
 
    e->o_holder = edje_object_add(inst->evas);
 
@@ -507,9 +495,7 @@ _list_horizontal_entry_create(Instance *inst, Drawer_Source_Item *si)
 static Entry *
 _list_vertical_entry_create(Instance *inst, Drawer_Source_Item *si)
 {
-   Entry *e;
-
-   e = E_NEW(Entry, 1);
+   Entry *e = E_NEW(Entry, 1);
 
    e->o_holder = edje_object_add(inst->evas);
 
@@ -531,10 +517,8 @@ _list_vertical_entry_create(Instance *inst, Drawer_Source_Item *si)
 static Entry *
 _list_horizontal_cat_create(Instance *inst, Drawer_Source_Item *si)
 {
-   Entry *e;
+   Entry *e = E_NEW(Entry, 1);
    char buf[1024];
-
-   e = E_NEW(Entry, 1);
 
    e->o_holder = edje_object_add(inst->evas);
    if (!e_theme_edje_object_set(e->o_holder, "base/theme/modules/drawer",
@@ -559,10 +543,8 @@ _list_horizontal_cat_create(Instance *inst, Drawer_Source_Item *si)
 static Entry *
 _list_vertical_cat_create(Instance *inst, Drawer_Source_Item *si)
 {
-   Entry *e;
+   Entry *e = E_NEW(Entry, 1);
    char buf[1024];
-
-   e = E_NEW(Entry, 1);
 
    e->o_holder = edje_object_add(inst->evas);
    if (!e_theme_edje_object_set(e->o_holder, "base/theme/modules/drawer",
@@ -628,10 +610,9 @@ _list_autoscroll_update(Instance *inst, Evas_Coord x, Evas_Coord y, Evas_Coord w
 static Eina_Bool
 _list_scroll_timer(void *data)
 {
-   Instance *inst = NULL;
+   Instance *inst = data;
    double d;
 
-   inst = data;
    d = inst->scroll_wanted - inst->scroll_pos;
    if (d < 0) d = -d;
    if (d < 0.001)
@@ -647,9 +628,8 @@ _list_scroll_timer(void *data)
 static Eina_Bool
 _list_scroll_animator(void *data)
 {
-   Instance *inst = NULL;
+   Instance *inst = data;
 
-   inst = data;
    if (e_box_orientation_get(inst->o_box))
       e_box_align_set(inst->o_box, 1.0 - inst->scroll_pos, 0.5);
    else
@@ -668,12 +648,10 @@ _list_scroll_animator(void *data)
 static void
 _list_cb_list_mouse_move(void *data, Evas *e __UNUSED__, Evas_Object *obj __UNUSED__, void *event_info)
 {
-   Instance *inst = NULL;
-   Evas_Event_Mouse_Move *ev;
+   Instance *inst = data;
+   Evas_Event_Mouse_Move *ev = event_info;
    Evas_Coord x, y, w, h;
 
-   ev = event_info;
-   inst = data;
    evas_object_geometry_get(inst->o_box, &x, &y, &w, &h);
    _list_autoscroll_update(inst, ev->cur.output.x - x,
                            ev->cur.output.y - y, w, h);
@@ -701,12 +679,10 @@ static void
 _list_entry_select_cb(void *data, Evas_Object *obj __UNUSED__, const char *emission __UNUSED__,
                       const char *source __UNUSED__)
 {
-   Entry *e = NULL;
-   Instance *inst = NULL;
+   Entry *e = data;
+   Instance *inst = e->inst;
    Drawer_Source_Item *si = NULL;
 
-   e = data;
-   inst = e->inst;
    si = e->si;
    edje_object_part_text_set(inst->o_con, "e.text.label", si->label);
    edje_object_part_text_set(inst->o_con, "e.text.description", si->description);
@@ -716,11 +692,9 @@ static void
 _list_entry_deselect_cb(void *data, Evas_Object *obj __UNUSED__, const char *emission __UNUSED__,
                         const char *source __UNUSED__)
 {
-   Entry *e = NULL;
-   Instance *inst = NULL;
+   Entry *e = data;
+   Instance *inst = e->inst;
 
-   e = data;
-   inst = e->inst;
    edje_object_part_text_set(inst->o_con, "e.text.label", NULL);
    edje_object_part_text_set(inst->o_con, "e.text.description", NULL);
 }
@@ -729,15 +703,14 @@ static void
 _list_entry_activate_cb(void *data, Evas_Object *obj __UNUSED__, const char *emission __UNUSED__,
                         const char *source __UNUSED__)
 {
-   Entry *e = NULL;
-   Drawer_Event_View_Activate *ev;
+   Entry *e = data;
+   Drawer_Event_View_Activate *ev = E_NEW(Drawer_Event_View_Activate, 1);
 
-   e = data;
-   ev = E_NEW(Drawer_Event_View_Activate, 1);
    ev->data = e->si;
    ev->view = e->inst->view;
    ev->id = eina_stringshare_add(e->inst->parent_id);
-   ecore_event_add(DRAWER_EVENT_VIEW_ITEM_ACTIVATE, ev, _list_event_activate_free, NULL);
+   ecore_event_add(DRAWER_EVENT_VIEW_ITEM_ACTIVATE,
+                   ev, _list_event_activate_free, NULL);
 
    /* XXX: this doesn't seem to work */
    edje_object_signal_emit(e->inst->o_con, "e,action,activate", "drawer");
@@ -746,28 +719,25 @@ _list_entry_activate_cb(void *data, Evas_Object *obj __UNUSED__, const char *emi
 static void
 _list_entry_context_cb(void *data, Evas_Object *obj, const char *emission __UNUSED__, const char *source __UNUSED__)
 {
-   Entry *e = NULL;
-   Drawer_Event_View_Context *ev;
+   Entry *e = data;
+   Drawer_Event_View_Context *ev = E_NEW(Drawer_Event_View_Context, 1);;
    Evas_Coord ox, oy;
 
    evas_object_geometry_get(obj, &ox, &oy, NULL, NULL);
 
-   e = data;
-   ev = E_NEW(Drawer_Event_View_Context, 1);
    ev->data = e->si;
    ev->view = e->inst->view;
    ev->x = ox;
    ev->y = oy;
    ev->id = eina_stringshare_add(e->inst->parent_id);
-   ecore_event_add(DRAWER_EVENT_VIEW_ITEM_CONTEXT, ev, _list_event_context_free, NULL);
+   ecore_event_add(DRAWER_EVENT_VIEW_ITEM_CONTEXT,
+                   ev, _list_event_context_free, NULL);
 }
 
 static void
 _list_event_activate_free(void *data __UNUSED__, void *event)
 {
-   Drawer_Event_View_Activate *ev;
-
-   ev = event;
+   Drawer_Event_View_Activate *ev = event;
    eina_stringshare_del(ev->id);
    free(ev);
 }
@@ -775,9 +745,7 @@ _list_event_activate_free(void *data __UNUSED__, void *event)
 static void
 _list_event_context_free(void *data __UNUSED__, void *event)
 {
-   Drawer_Event_View_Context *ev;
-
-   ev = event;
+   Drawer_Event_View_Context *ev = event;
    eina_stringshare_del(ev->id);
    free(ev);
 }
@@ -785,15 +753,13 @@ _list_event_context_free(void *data __UNUSED__, void *event)
 static void
 _list_conf_activation_cb(void *data1, void *data2 __UNUSED__)
 {
-   Drawer_Plugin *p = NULL;
-   Instance *inst = NULL;
+   Drawer_Plugin *p = data1;
+   Instance *inst = p->data;
    E_Config_Dialog_View *v = NULL;
    char buf[PATH_MAX];
 
-   p = data1;
-   inst = p->data;
    /* is this config dialog already visible ? */
-   if (e_config_dialog_find("Drawer_List", "_e_module_drawer_cfg_dlg")) 
+   if (e_config_dialog_find("Drawer_List", "_e_module_drawer_cfg_dlg"))
       return;
 
    v = E_NEW(E_Config_Dialog_View, 1);
@@ -818,9 +784,8 @@ _list_conf_activation_cb(void *data1, void *data2 __UNUSED__)
 static void *
 _list_cf_create_data(E_Config_Dialog *cfd)
 {
-   E_Config_Dialog_Data *cfdata = NULL;
+   E_Config_Dialog_Data *cfdata = E_NEW(E_Config_Dialog_Data, 1);
 
-   cfdata = E_NEW(E_Config_Dialog_Data, 1);
    cfdata->inst = cfd->data;
    _list_cf_fill_data(cfdata);
    return cfdata;
