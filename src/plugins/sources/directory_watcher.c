@@ -82,10 +82,8 @@ static E_Config_Dialog *_cfd = NULL;
 EAPI void *
 drawer_plugin_init(Drawer_Plugin *p, const char *id)
 {
-   Instance *inst = NULL;
+   Instance *inst = E_NEW(Instance, 1);
    char buf[128];
-
-   inst = E_NEW(Instance, 1);
 
    inst->source = DRAWER_SOURCE(p);
 
@@ -128,9 +126,7 @@ drawer_plugin_init(Drawer_Plugin *p, const char *id)
 EAPI int
 drawer_plugin_shutdown(Drawer_Plugin *p)
 {
-   Instance *inst = NULL;
-
-   inst = p->data;
+   Instance *inst = p->data;
 
    if (inst->monitor)
       ecore_file_monitor_del(inst->monitor);
@@ -163,13 +159,10 @@ drawer_source_list(Drawer_Source *s)
    files = ecore_file_ls(inst->conf->dir);
    EINA_LIST_FREE(files, file)
    {
-      Drawer_Source_Item *si;
-
       if (file[0] == '.') goto end;
-      si = _dirwatcher_source_item_fill(inst, file);
+      Drawer_Source_Item *si = _dirwatcher_source_item_fill(inst, file);
       if (si)
          inst->items = eina_list_append(inst->items, si);
-
 end:
       free(file);
    }
@@ -181,8 +174,8 @@ end:
    ev->source = inst->source;
    ev->id = eina_stringshare_add(inst->conf->id);
    ev->si = inst->items->data;
-   ecore_event_add(DRAWER_EVENT_SOURCE_MAIN_ICON_UPDATE, ev,
-                   _dirwatcher_event_update_icon_free, NULL);
+   ecore_event_add(DRAWER_EVENT_SOURCE_MAIN_ICON_UPDATE,
+                   ev, _dirwatcher_event_update_icon_free, NULL);
 
    return inst->items;
 }
@@ -249,10 +242,8 @@ drawer_source_trigger(Drawer_Source *s, E_Zone *zone)
 EAPI void
 drawer_source_context(Drawer_Source *s, Drawer_Source_Item *si __UNUSED__, E_Zone *zone, Drawer_Event_View_Context *ev)
 {
-   Instance *inst = NULL;
+   Instance *inst  = DRAWER_PLUGIN(s)->data;
    E_Menu_Item *mi = NULL;
-
-   inst = DRAWER_PLUGIN(s)->data;
 
    inst->menu = e_menu_new();
 
@@ -267,9 +258,7 @@ drawer_source_context(Drawer_Source *s, Drawer_Source_Item *si __UNUSED__, E_Zon
 EAPI Evas_Object *
 drawer_plugin_config_get(Drawer_Plugin *p, Evas *evas)
 {
-   Evas_Object *button;
-
-   button = e_widget_button_add(evas, D_("Directory Watcher settings"), NULL, _dirwatcher_conf_activation_cb, p, NULL);
+   Evas_Object *button = e_widget_button_add(evas, D_("Directory Watcher settings"), NULL, _dirwatcher_conf_activation_cb, p, NULL);
 
    return button;
 }
@@ -277,10 +266,9 @@ drawer_plugin_config_get(Drawer_Plugin *p, Evas *evas)
 EAPI void
 drawer_plugin_config_save(Drawer_Plugin *p)
 {
-   Instance *inst;
+   Instance *inst = p->data;
    char buf[128];
 
-   inst = p->data;
    snprintf(buf, sizeof(buf), "module.drawer/%s.dirwatcher", inst->conf->id);
    e_config_domain_save(buf, inst->edd.conf, inst->conf);
 }
@@ -288,9 +276,7 @@ drawer_plugin_config_save(Drawer_Plugin *p)
 EAPI const char *
 drawer_source_description_get(Drawer_Source *s)
 {
-   Instance *inst;
-
-   inst = DRAWER_PLUGIN(s)->data;
+   Instance *inst = DRAWER_PLUGIN(s)->data;
 
    return inst->description;
 }
@@ -359,13 +345,10 @@ _dirwatcher_source_items_free(Instance *inst)
 static Drawer_Source_Item *
 _dirwatcher_source_item_fill(Instance *inst, const char *file)
 {
-   Drawer_Source_Item *si = NULL;
-   Dirwatcher_Priv *p = NULL;
+   Drawer_Source_Item *si = E_NEW(Drawer_Source_Item, 1);
+   Dirwatcher_Priv *p = E_NEW(Dirwatcher_Priv, 1);
    char buf[PATH_MAX];
    const char *mime, *file_path;
-
-   si = E_NEW(Drawer_Source_Item, 1);
-   p = E_NEW(Dirwatcher_Priv, 1);
 
    si->priv = p;
 
@@ -373,9 +356,7 @@ _dirwatcher_source_item_fill(Instance *inst, const char *file)
    if ((e_util_glob_case_match(buf, "*.desktop")) ||
        (e_util_glob_case_match(buf, "*.directory")))
      {
-        Efreet_Desktop *desktop;
-
-        desktop = efreet_desktop_new(buf);
+        Efreet_Desktop *desktop = efreet_desktop_new(buf);
         if (!desktop) return NULL;
         si->label = eina_stringshare_add(desktop->name);
         efreet_desktop_free(desktop);
@@ -415,9 +396,7 @@ _dirwatcher_source_item_fill(Instance *inst, const char *file)
 static void
 _dirwatcher_event_update_free(void *data __UNUSED__, void *event)
 {
-   Drawer_Event_Source_Update *ev;
-
-   ev = event;
+   Drawer_Event_Source_Update *ev = event;
    eina_stringshare_del(ev->id);
    free(ev);
 }
@@ -425,9 +404,7 @@ _dirwatcher_event_update_free(void *data __UNUSED__, void *event)
 static void
 _dirwatcher_event_update_icon_free(void *data __UNUSED__, void *event)
 {
-   Drawer_Event_Source_Main_Icon_Update *ev;
-
-   ev = event;
+   Drawer_Event_Source_Main_Icon_Update *ev = event;
    eina_stringshare_del(ev->id);
    free(ev);
 }
@@ -436,18 +413,15 @@ static void
 _dirwatcher_monitor_cb(void *data, Ecore_File_Monitor *em __UNUSED__, Ecore_File_Event event __UNUSED__,
                        const char *path)
 {
-   Instance *inst = NULL;
-   Drawer_Event_Source_Update *ev;
-   char *base;
-
-   inst = data;
-   base = basename((char *) path);
+   Instance *inst = data;
+   Drawer_Event_Source_Update *ev = E_NEW(Drawer_Event_Source_Update, 1);
+   char *base = basename((char *) path);
    if (base[0] == '.') return;
 
-   ev = E_NEW(Drawer_Event_Source_Update, 1);
    ev->source = inst->source;
    ev->id = eina_stringshare_add(inst->conf->id);
-   ecore_event_add(DRAWER_EVENT_SOURCE_UPDATE, ev, _dirwatcher_event_update_free, NULL);
+   ecore_event_add(DRAWER_EVENT_SOURCE_UPDATE,
+                   ev, _dirwatcher_event_update_free, NULL);
 }
 
 static void
@@ -496,9 +470,7 @@ _dirwatcher_conf_activation_cb(void *data1, void *data2 __UNUSED__)
 static void *
 _dirwatcher_cf_create_data(E_Config_Dialog *cfd)
 {
-   E_Config_Dialog_Data *cfdata = NULL;
-
-   cfdata = E_NEW(E_Config_Dialog_Data, 1);
+   E_Config_Dialog_Data *cfdata = E_NEW(E_Config_Dialog_Data, 1);
    cfdata->inst = cfd->data;
    _dirwatcher_cf_fill_data(cfdata);
    return cfdata;
@@ -566,11 +538,10 @@ _dirwatcher_cf_basic_create(E_Config_Dialog *cfd __UNUSED__, Evas *evas, E_Confi
 static int
 _dirwatcher_cf_basic_apply(E_Config_Dialog *cfd __UNUSED__, E_Config_Dialog_Data *cfdata)
 {
-   Instance *inst = NULL;
+   Instance *inst  = cfdata->inst;
    Drawer_Event_Source_Update *ev;
    char *path;
 
-   inst = cfdata->inst;
    eina_stringshare_del(cfdata->inst->conf->dir);
    eina_stringshare_del(cfdata->inst->conf->fm);
    cfdata->inst->conf->sort_dir = cfdata->sort_dir;
@@ -591,7 +562,8 @@ _dirwatcher_cf_basic_apply(E_Config_Dialog *cfd __UNUSED__, E_Config_Dialog_Data
    ev = E_NEW(Drawer_Event_Source_Update, 1);
    ev->source = inst->source;
    ev->id = eina_stringshare_add(inst->conf->id);
-   ecore_event_add(DRAWER_EVENT_SOURCE_UPDATE, ev, _dirwatcher_event_update_free, NULL);
+   ecore_event_add(DRAWER_EVENT_SOURCE_UPDATE,
+                   ev, _dirwatcher_event_update_free, NULL);
 
    e_config_save_queue();
    return 1;
