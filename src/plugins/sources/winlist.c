@@ -386,13 +386,13 @@ _winlist_border_focus_in(Instance *inst, E_Border *bd)
                 ev->source = inst->source;
                 ev->id = eina_stringshare_add(inst->conf->id);
                 ev->si = si;
-                ecore_event_add(DRAWER_EVENT_SOURCE_MAIN_ICON_UPDATE, 
+                ecore_event_add(DRAWER_EVENT_SOURCE_MAIN_ICON_UPDATE,
                                 ev, _winlist_event_update_icon_free, NULL);
                 return;
              }
         }
 
-        if (_winlist_border_filter(bd, e_util_zone_current_get(e_manager_current_get()))) return; 
+        if (_winlist_border_filter(bd, e_util_zone_current_get(e_manager_current_get()))) return;
      }
    inst->actions.added = bd;
    _winlist_items_update(inst);
@@ -518,7 +518,7 @@ _winlist_border_icon_change_cb(void *data, int type __UNUSED__, void *event)
 {
    E_Event_Border_Icon_Change *ev = event;
    Instance *inst = data;
-   
+
    if (!ev->border) return EINA_TRUE;
    _winlist_event_update(inst);
 
