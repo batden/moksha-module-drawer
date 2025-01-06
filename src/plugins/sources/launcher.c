@@ -255,9 +255,8 @@ drawer_source_list(Drawer_Source *s)
         ev->source = inst->source;
         ev->id = eina_stringshare_add(inst->conf->id);
         ev->si = inst->items->data;
-        ecore_event_add(
-           DRAWER_EVENT_SOURCE_MAIN_ICON_UPDATE, ev,
-           _launcher_event_update_icon_free, NULL);
+        ecore_event_add(DRAWER_EVENT_SOURCE_MAIN_ICON_UPDATE,
+                        ev, _launcher_event_update_icon_free, NULL);
      }
 
    return inst->items;

@@ -184,9 +184,7 @@ drawer_source_activate(Drawer_Source *s __UNUSED__, Drawer_Source_Item *si, E_Zo
 EAPI const char *
 drawer_source_description_get(Drawer_Source *s)
 {
-   Instance *inst;
-
-   inst = DRAWER_PLUGIN(s)->data;
+   Instance *inst = DRAWER_PLUGIN(s)->data;
 
    return inst->description;
 }
@@ -271,7 +269,7 @@ _winlist_source_items_free(Instance *inst)
    Drawer_Source_Item *si;
 
    EINA_LIST_FREE(inst->items, si)
-   _winlist_source_item_free(si);
+      _winlist_source_item_free(si);
 }
 
 static void
@@ -293,7 +291,7 @@ _winlist_item_from_border(Instance *inst, E_Border *bd)
 
    if (!inst->items) return NULL;
    EINA_LIST_FOREACH(inst->items, l, si)
-   if (si->data == bd) return si;
+      if (si->data == bd) return si;
 
    return NULL;
 }
@@ -388,14 +386,14 @@ _winlist_border_focus_in(Instance *inst, E_Border *bd)
                 ev->source = inst->source;
                 ev->id = eina_stringshare_add(inst->conf->id);
                 ev->si = si;
-                ecore_event_add(
-                   DRAWER_EVENT_SOURCE_MAIN_ICON_UPDATE, ev,
-                   _winlist_event_update_icon_free, NULL);
+                ecore_event_add(DRAWER_EVENT_SOURCE_MAIN_ICON_UPDATE, 
+                                ev, _winlist_event_update_icon_free, NULL);
                 return;
              }
         }
 
-        if (_winlist_border_filter(bd, e_util_zone_current_get(e_manager_current_get()))) return; }
+        if (_winlist_border_filter(bd, e_util_zone_current_get(e_manager_current_get()))) return; 
+     }
    inst->actions.added = bd;
    _winlist_items_update(inst);
 }
@@ -452,37 +450,31 @@ _winlist_sort_z_order_cb(const void *d1, const void *d2)
 static Eina_Bool
 _winlist_border_focus_in_cb(void *data, int type __UNUSED__, void *event)
 {
-   E_Event_Border_Focus_In *ev;
+   E_Event_Border_Focus_In *ev = event;
    E_Border *bd;
-   Instance *inst;
+   Instance *inst = data;
 
-   ev = event;
-   inst = data;
    if (!(bd = ev->border)) return EINA_TRUE;
 
    _winlist_border_focus_in(inst, bd);
-
    return EINA_TRUE;
 }
 
 static Eina_Bool
 _winlist_border_focus_out_cb(void *data, int type __UNUSED__, void *event)
 {
-   E_Event_Border_Focus_Out *ev;
-   Instance *inst;
+   E_Event_Border_Focus_Out *ev = event;
+   Instance *inst = data;
    Drawer_Event_Source_Main_Icon_Update *ev2;
 
-   ev = event;
-   inst = data;
    if (!ev->border) return EINA_TRUE;
 
    ev2 = E_NEW(Drawer_Event_Source_Main_Icon_Update, 1);
    ev2->source = inst->source;
    ev2->id = eina_stringshare_add(inst->conf->id);
    ev2->si = NULL;
-   ecore_event_add(
-      DRAWER_EVENT_SOURCE_MAIN_ICON_UPDATE, ev2,
-      _winlist_event_update_icon_free, NULL);
+   ecore_event_add(DRAWER_EVENT_SOURCE_MAIN_ICON_UPDATE,
+                   ev2, _winlist_event_update_icon_free, NULL);
 
    return EINA_TRUE;
 }
@@ -490,13 +482,11 @@ _winlist_border_focus_out_cb(void *data, int type __UNUSED__, void *event)
 static Eina_Bool
 _winlist_border_add_cb(void *data, int type __UNUSED__, void *event)
 {
-   E_Event_Border_Add *evt;
+   E_Event_Border_Add *evt = event;
    E_Border *bd;
-   Instance *inst;
+   Instance *inst = data;
    E_Zone *zone = e_util_zone_current_get(e_manager_current_get());
 
-   evt = event;
-   inst = data;
    if (!(bd = evt->border)) return EINA_TRUE;
    if (_winlist_border_filter(bd, zone)) return EINA_TRUE;
 
@@ -509,13 +499,11 @@ _winlist_border_add_cb(void *data, int type __UNUSED__, void *event)
 static Eina_Bool
 _winlist_border_remove_cb(void *data, int type __UNUSED__, void *event)
 {
-   E_Event_Border_Remove *evt;
+   E_Event_Border_Remove *evt = event;
    E_Border *bd;
-   Instance *inst;
+   Instance *inst = data;
    E_Zone *zone = e_util_zone_current_get(e_manager_current_get());
 
-   evt = event;
-   inst = data;
    if (!(bd = evt->border)) return EINA_TRUE;
    if (_winlist_border_filter(bd, zone)) return EINA_TRUE;
 
@@ -528,13 +516,10 @@ _winlist_border_remove_cb(void *data, int type __UNUSED__, void *event)
 static Eina_Bool
 _winlist_border_icon_change_cb(void *data, int type __UNUSED__, void *event)
 {
-   E_Event_Border_Icon_Change *ev;
-   Instance *inst;
-
-   ev = event;
-   inst = data;
+   E_Event_Border_Icon_Change *ev = event;
+   Instance *inst = data;
+   
    if (!ev->border) return EINA_TRUE;
-
    _winlist_event_update(inst);
 
    return EINA_TRUE;
@@ -543,15 +528,13 @@ _winlist_border_icon_change_cb(void *data, int type __UNUSED__, void *event)
 static Eina_Bool
 _winlist_border_desk_set_cb(void *data, int type __UNUSED__, void *event)
 {
-   E_Event_Border_Icon_Change *ev;
+   E_Event_Border_Icon_Change *ev = event;
    E_Border *bd;
-   Instance *inst;
+   Instance *inst = data;
    Drawer_Source_Item *si;
    Eina_Bool changed = EINA_FALSE;
    char buf[512];
 
-   ev = event;
-   inst = data;
    if (!(bd = ev->border)) return EINA_TRUE;
 
    si = _winlist_item_from_border(inst, bd);
@@ -587,15 +570,13 @@ static Eina_Bool
 _winlist_border_window_prop_cb(void *data, int type __UNUSED__, void *event)
 {
    E_Border *bd;
-   Ecore_X_Event_Window_Property *ev;
-   Instance *inst;
+   Ecore_X_Event_Window_Property *ev = event;
+   Instance *inst = data;
    Eina_Bool changed = EINA_FALSE;
    E_Zone *zone = e_util_zone_current_get(e_manager_current_get());
    Drawer_Source_Item *si;
    char *tmp;
 
-   ev = event;
-   inst = data;
    bd = e_border_find_by_client_window(ev->win);
    if (!bd) return EINA_TRUE;
    if (_winlist_border_filter(bd, zone)) return EINA_TRUE;
@@ -674,11 +655,8 @@ _winlist_border_window_prop_cb(void *data, int type __UNUSED__, void *event)
 static int
 _winlist_desk_show_cb(void *data, int type, void *event)
 {
-   E_Event_Desk_Show *ev;
-   Instance *inst;
-
-   ev = event;
-   inst = data;
+   E_Event_Desk_Show *ev = event;
+   Instance *inst = data;
 
    inst->actions.changed = EINA_TRUE;
    if (_winlist_items_update(inst)) _winlist_event_update(inst);
@@ -690,9 +668,7 @@ _winlist_desk_show_cb(void *data, int type, void *event)
 static void
 _winlist_event_update_free(void *data __UNUSED__, void *event)
 {
-   Drawer_Event_Source_Update *ev;
-
-   ev = event;
+   Drawer_Event_Source_Update *ev = event;
    eina_stringshare_del(ev->id);
    free(ev);
 }
@@ -700,9 +676,7 @@ _winlist_event_update_free(void *data __UNUSED__, void *event)
 static void
 _winlist_event_update_icon_free(void *data __UNUSED__, void *event)
 {
-   Drawer_Event_Source_Main_Icon_Update *ev;
-
-   ev = event;
+   Drawer_Event_Source_Main_Icon_Update *ev = event;
    eina_stringshare_del(ev->id);
    free(ev);
 }
