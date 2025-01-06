@@ -12,7 +12,6 @@ images {
    image: "env_bg_left.png" COMP;
    image: "env_fg_left.png" COMP;
    image: "logo_white_128.png" COMP;
-   image: "base_bg.png" COMP;
    image: "popup_bg.png" COMP;
    image: "popup_overlay.png" COMP;
    image: "bt_glow.png" COMP;
@@ -22,6 +21,7 @@ images {
    image: "bt_sm_base1.png" COMP;
    image: "bt_sm_shine.png" COMP;
    image: "bt_sm_hilight.png" COMP;
+// image: "base_bg.png" COMP;
 }
 
 collections {
