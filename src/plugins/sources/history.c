@@ -151,7 +151,10 @@ _normalize_exe(const char *exe)
 {
    char *base, *buf, *cp, *space = NULL;
    const char *ret;
+   char name_desk[64];
    Eina_Bool flag = EINA_FALSE;
+   Eina_Bool found = EINA_FALSE;
+   int pos = 0;
 
    buf = strdup(exe);
    base = basename(buf);
@@ -185,14 +188,37 @@ _normalize_exe(const char *exe)
                      *cp = lower;
                }
           }
-        cp++;
+       /* hack for libreoffice --apps and others */
+       /* it normalizes to libreoffice-app style */
+       if (*cp == '-')
+         {
+            cp++; pos++;
+            if (*cp == '-')
+              {
+                found = EINA_TRUE;
+                while (!isspace(*cp))
+                  {
+                    base[pos - 2] = *cp;
+                    cp++; pos++;
+                  }
+                base[pos - 2] = '\0';
+              }
+          }
+       cp++;
+       pos++;
      }
 
    if (space) *space = '\0';
 
-   ret = eina_stringshare_add(base);
-   free(buf);
+   if (found)
+     {
+       sprintf(name_desk, "%s.desktop", base);
+       ret = eina_stringshare_add(name_desk);
+     }
+   else
+     ret = eina_stringshare_add(base);
 
+   free(buf);
    return ret;
 }
 
@@ -227,11 +253,12 @@ drawer_source_list(Drawer_Source *s)
      {
         Drawer_Source_Item *si = NULL;
         Efreet_Desktop *desktop = efreet_util_desktop_exec_find(file);
-
         if (!desktop)
           {
              const char *norm_exe = _normalize_exe(file);
              desktop = efreet_util_desktop_exec_find(norm_exe);
+             if (!desktop)
+               desktop =  efreet_util_desktop_file_id_find(norm_exe);
              eina_stringshare_del(norm_exe);
           }
         /* FIXME: SKIP files*/
