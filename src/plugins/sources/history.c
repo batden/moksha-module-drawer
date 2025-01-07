@@ -16,6 +16,7 @@ struct _Instance
    Drawer_Source        *source;
 
    Eina_List            *items, *handlers;
+   Eina_List            *blacklist_items;
    Conf                 *conf;
    E_Menu               *menu;
    struct
