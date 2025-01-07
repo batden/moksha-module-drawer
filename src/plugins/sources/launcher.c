@@ -15,48 +15,48 @@ typedef struct _Launcher_Menu_Data Launcher_Menu_Data;
 
 struct _Instance
 {
-   Drawer_Source *		source;
-   E_Order *			apps;
-   Eina_List *			items;
-   E_Menu *				menu;
-   Launcher_Menu_Data * m_data;
-   Conf *				conf;
+   Drawer_Source        *source;
+   E_Order              *apps;
+   Eina_List            *items;
+   E_Menu               *menu;
+   Launcher_Menu_Data   *m_data;
+   Conf                 *conf;
    struct
    {
-      E_Config_DD * conf;
-      E_Config_DD * conf_rel;
+      E_Config_DD       *conf;
+      E_Config_DD       *conf_rel;
    } edd;
    const char *description;
 };
 
 struct _Conf
 {
-   const char *			id;
-   const char *			dir;
-   Launcher_Sort_Type	sort_type;
-   Eina_List *			ratings;
+   const char           *id;
+   const char           *dir;
+   Launcher_Sort_Type    sort_type;
+   Eina_List            *ratings;
 };
 
 struct _Conf_Rating
 {
-   const char * label;
-   int			rating;
-   int			popularity;
+   const char           *label;
+   int                   rating;
+   int                   popularity;
 };
 
 struct _E_Config_Dialog_Data
 {
-   Instance *			inst;
-   Evas_Object *		ilist;
-   E_Confirm_Dialog *	dialog_delete;
-   const char *			dir;
-   int					sort_type;
+   Instance             *inst;
+   Evas_Object          *ilist;
+   E_Confirm_Dialog     *dialog_delete;
+   const char           *dir;
+   int                   sort_type;
 };
 
 struct _Launcher_Menu_Data
 {
-   Instance *			inst;
-   Drawer_Source_Item * si;
+   Instance             *inst;
+   Drawer_Source_Item   *si;
 };
 
 #define CONF_RATING(obj) ((Conf_Rating *) obj)

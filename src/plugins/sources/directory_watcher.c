@@ -16,43 +16,43 @@ typedef enum
 
 struct _Instance
 {
-   Drawer_Source *	source;
-   Conf *			conf;
-   Eina_List *		items;
-   E_Menu *			menu;
+   Drawer_Source      *source;
+   Conf               *conf;
+   Eina_List          *items;
+   E_Menu             *menu;
    struct
    {
-      E_Config_DD *conf;
+      E_Config_DD     *conf;
    } edd;
-   Ecore_File_Monitor * monitor;
-   const char *			description;
+   Ecore_File_Monitor *monitor;
+   const char         *description;
 };
 
 struct _Conf
 {
-   const char * id;
-   const char * dir;
-   const char * fm;
-   Sort_Type	sort_type;
-   Eina_Bool	sort_dir;
+   const char         *id;
+   const char         *dir;
+   const char         *fm;
+   Sort_Type           sort_type;
+   Eina_Bool           sort_dir;
 };
 
 struct _Dirwatcher_Priv
 {
-   Eina_Bool	dir : 1;
-   Eina_Bool	link : 1;
-   Eina_Bool	mount : 1;
-   const char * mime;
-   Instance *	inst;
+   Eina_Bool           dir : 1;
+   Eina_Bool           link : 1;
+   Eina_Bool           mount : 1;
+   const char         *mime;
+   Instance           *inst;
 };
 
 struct _E_Config_Dialog_Data
 {
-   Instance *	inst;
-   char *		dir;
-   char *		fm;
-   int			sort_dir;
-   int			sort_type;
+   Instance           *inst;
+   char               *dir;
+   char               *fm;
+   int                 sort_dir;
+   int                 sort_type;
 };
 
 EAPI Drawer_Plugin_Api drawer_plugin_api = { DRAWER_PLUGIN_API_VERSION, "Directory Watcher" };

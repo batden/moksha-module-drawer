@@ -23,43 +23,43 @@ typedef enum
 
 struct _Instance
 {
-   Drawer_View *	view;
-   Evas *			evas;
-   Eina_List *		entries;
-   Evas_Object *	o_box, *o_con;
+   Drawer_View        *view;
+   Evas               *evas;
+   Eina_List          *entries;
+   Evas_Object        *o_box, *o_con;
 
-   Ecore_Timer *	scroll_timer;
-   Ecore_Animator * scroll_animator;
-   double			scroll_wanted;
-   double			scroll_pos;
+   Ecore_Timer        *scroll_timer;
+   Ecore_Animator     *scroll_animator;
+   double              scroll_wanted;
+   double              scroll_pos;
 
-   char				theme_file[PATH_MAX];
-   char				item_group[43];
-   const char *		parent_id;
+   char                theme_file[PATH_MAX];
+   char                item_group[43];
+   const char         *parent_id;
 
-   List_Orient		orient;
-   Conf *			conf;
-   E_Config_DD *	edd_conf;
+   List_Orient         orient;
+   Conf               *conf;
+   E_Config_DD        *edd_conf;
 };
 
 struct _Entry
 {
-   Instance *			inst;
-   Evas_Object *		o_holder, *o_icon;
-   Drawer_Source_Item * si;
-   Eina_Bool			isa_cat;
+   Instance           *inst;
+   Evas_Object        *o_holder, *o_icon;
+   Drawer_Source_Item *si;
+   Eina_Bool           isa_cat;
 };
 
 struct _Conf
 {
-   const char *		id;
-   List_View_Type	view_type;
+   const char         *id;
+   List_View_Type      view_type;
 };
 
 struct _E_Config_Dialog_Data
 {
-   Instance *	inst;
-   int			view_type;
+   Instance           *inst;
+   int                 view_type;
 };
 
 static void _list_reconfigure(Instance *inst);

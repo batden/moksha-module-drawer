@@ -10,20 +10,20 @@ typedef struct _Conf Conf;
 
 struct _Instance
 {
-   Drawer_Source *	source;
-   Eina_List *		items, *handlers;
-   Conf *			conf;
-   E_Menu *			menu;
+   Drawer_Source  *source;
+   Eina_List      *items, *handlers;
+   Conf           *conf;
+   E_Menu         *menu;
    struct
    {
       E_Config_DD *conf;
    } edd;
    struct
    {
-      Eina_Bool changed;
-      E_Border *removed, *added;
+      Eina_Bool    changed;
+      E_Border    *removed, *added;
    } actions;
-   const char *description;
+   const char     *description;
 };
 
 struct _Conf

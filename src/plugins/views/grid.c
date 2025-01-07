@@ -16,21 +16,21 @@ typedef enum
 
 struct _Instance
 {
-   Drawer_View *view;
-   Evas *		evas;
-   Eina_List *	items;
-   Evas_Object *o_box, *o_con, *o_scroll;
-   char			theme_file[PATH_MAX];
-   const char * parent_id;
-   Grid_Orient	orient;
+   Drawer_View          *view;
+   Evas                 *evas;
+   Eina_List            *items;
+   Evas_Object          *o_box, *o_con, *o_scroll;
+   char                  theme_file[PATH_MAX];
+   const char           *parent_id;
+   Grid_Orient           orient;
 };
 
 struct _Item
 {
-   Instance *			inst;
-   Evas_Object *		o_holder, *o_icon;
-   Drawer_Source_Item * si;
-   Eina_Bool			isa_category;
+   Instance             *inst;
+   Evas_Object          *o_holder, *o_icon;
+   Drawer_Source_Item   *si;
+   Eina_Bool             isa_category;
 };
 
 static void _grid_reconfigure(Instance *inst);

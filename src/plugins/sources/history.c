@@ -13,32 +13,32 @@ typedef struct _Conf Conf;
 
 struct _Instance
 {
-   Drawer_Source *	source;
+   Drawer_Source        *source;
 
-   Eina_List *		items, *handlers;
-   Conf *			conf;
-   E_Menu *			menu;
+   Eina_List            *items, *handlers;
+   Conf                 *conf;
+   E_Menu               *menu;
    struct
    {
-      E_Config_DD *conf;
+      E_Config_DD       *conf;
    } edd;
-   const char *		description;
+   const char           *description;
 };
 
 struct _Conf
 {
-   const char *			id;
-   History_Sort_Type	sort_type;
+   const char           *id;
+   History_Sort_Type    sort_type;
    int                  blacklist;
 };
 
 struct _E_Config_Dialog_Data
 {
-   Instance *			inst;
-
-   Evas_Object *		ilist;
-   E_Confirm_Dialog *	dialog_delete;
-   int					sort_type;
+   Instance             *inst;
+   
+   Evas_Object          *ilist;
+   E_Confirm_Dialog     *dialog_delete;
+   int                  sort_type;
    int                  blacklist;
 };
 
