@@ -23,7 +23,7 @@ _set_blacklist_path(char *path)
 {
    EINA_SAFETY_ON_NULL_RETURN_VAL(path, EINA_FALSE);
 
-   char temp_str[PATH_MAX] = { 0 };
+   char temp_str[PATH_MAX];
    Eina_Bool success = EINA_TRUE;
 
    if (_set_data_path(path, PATH_MAX))
@@ -88,7 +88,7 @@ save_blacklist(Eina_List *items)
    Eina_List *l = NULL;
    char str[3];
    char *exe;
-   char blacklist_path[PATH_MAX] = { 0 };
+   char blacklist_path[PATH_MAX];
    unsigned int i = 1;
    Eet_Error ret = EET_ERROR_NONE;
 
@@ -126,7 +126,7 @@ read_blacklist(Eina_List **items)
 {
    Eet_File *blacklist_file = NULL;
    Eina_List *l = NULL;
-   char blacklist_path[PATH_MAX] = { 0 };
+   char blacklist_path[PATH_MAX];
    char *ret = NULL, **list;
    int i, num, size;
 
