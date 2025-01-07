@@ -29,6 +29,7 @@ struct _Conf
 {
    const char *			id;
    History_Sort_Type	sort_type;
+   int                  blacklist;
 };
 
 struct _E_Config_Dialog_Data
@@ -38,6 +39,7 @@ struct _E_Config_Dialog_Data
    Evas_Object *		ilist;
    E_Confirm_Dialog *	dialog_delete;
    int					sort_type;
+   int                  blacklist;
 };
 
 static void _history_description_create(Instance *inst);
@@ -79,6 +81,7 @@ drawer_plugin_init(Drawer_Plugin *p, const char *id)
 #define D inst->edd.conf
    E_CONFIG_VAL(D, T, id, STR);
    E_CONFIG_VAL(D, T, sort_type, INT);
+   E_CONFIG_VAL(D, T, blacklist, INT);
 
    snprintf(buf, sizeof(buf), "module.drawer/%s.history", id);
    inst->conf = e_config_domain_load(buf, inst->edd.conf);
@@ -87,6 +90,7 @@ drawer_plugin_init(Drawer_Plugin *p, const char *id)
         inst->conf = E_NEW(Conf, 1);
         inst->conf->id = eina_stringshare_add(id);
         inst->conf->sort_type = HISTORY_SORT_POPULARITY;
+        inst->conf->blacklist = 1;
 
         e_config_save_queue();
      }
@@ -531,6 +535,7 @@ static void
 _history_cf_fill_data(E_Config_Dialog_Data *cfdata)
 {
    cfdata->sort_type = cfdata->inst->conf->sort_type;
+   cfdata->blacklist = cfdata->inst->conf->blacklist;
 }
 
 static Evas_Object *
@@ -549,6 +554,10 @@ _history_cf_basic_create(E_Config_Dialog *cfd __UNUSED__, Evas *evas, E_Config_D
    e_widget_framelist_object_append(of, ob);
    ob = e_widget_radio_add(evas, D_("Sort applications by popularity"), HISTORY_SORT_POPULARITY, rg);
    e_widget_framelist_object_append(of, ob);
+   e_widget_list_object_append(o, of, 1, 1, 0.5);
+   of = e_widget_framelist_add(evas, D_("Blacklist"), 0);
+   ob = e_widget_check_add(evas, D_("Enable Blacklist"), &(cfdata->blacklist));
+   e_widget_framelist_object_append(of, ob);
 
    e_widget_list_object_append(o, of, 1, 1, 0.5);
 
@@ -563,6 +572,7 @@ _history_cf_basic_apply(E_Config_Dialog *cfd __UNUSED__, E_Config_Dialog_Data *c
 
    inst = cfdata->inst;
    cfdata->inst->conf->sort_type = cfdata->sort_type;
+   cfdata->inst->conf->blacklist = cfdata->blacklist;
 
    _history_description_create(inst);
 
