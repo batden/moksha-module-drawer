@@ -3542,6 +3542,15 @@ target: "e.text.label";
    group {
       name: "modules/drawer/grid/item";
       parts {
+#undef MOUSE_IN_TARGETS
+#define MOUSE_IN_TARGETS \
+target: "bg"; \
+target: "fg1"; \
+target: "fg2";
+#undef MOUSE_CLICK_TARGETS
+#define MOUSE_CLICK_TARGETS \
+target: "e.text.label"; \
+target: "glow";
          part {
             name: "bg";
             mouse_events: 0;
