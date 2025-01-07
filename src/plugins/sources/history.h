@@ -2,6 +2,7 @@
 #define HISTORY_H
 
 #include "../../Drawer.h"
+#include "blacklist.h"
 
 EAPI extern Drawer_Plugin_Api drawer_plugin_api;
 

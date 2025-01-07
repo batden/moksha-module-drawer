@@ -28,7 +28,7 @@ directory_watcher_la_LIBADD = @E_LIBS@
 directory_watcher_la_LDFLAGS = -module -avoid-version
 directory_watcher_la_DEPENDENCIES = $(top_builddir)/config.h
 
-history_la_SOURCES = history.h history.c
+history_la_SOURCES = history.h history.c blacklist.h blacklist.c
 history_ladir = $(pkgdir)
 history_la_DATA = history.desktop
 
