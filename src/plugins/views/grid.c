@@ -57,9 +57,7 @@ EAPI Drawer_Plugin_Api drawer_plugin_api = { DRAWER_PLUGIN_API_VERSION, "Grid" }
 EAPI void *
 drawer_plugin_init(Drawer_Plugin *p, const char *id)
 {
-   Instance *inst = NULL;
-
-   inst = E_NEW(Instance, 1);
+   Instance *inst = E_NEW(Instance, 1);
 
    inst->view = DRAWER_VIEW(p);
    inst->parent_id = eina_stringshare_add(id);
@@ -72,9 +70,7 @@ drawer_plugin_init(Drawer_Plugin *p, const char *id)
 EAPI int
 drawer_plugin_shutdown(Drawer_Plugin *p)
 {
-   Instance *inst = NULL;
-
-   inst = p->data;
+   Instance *inst = p->data;
 
    _grid_items_free(inst);
    eina_stringshare_del(inst->parent_id);
@@ -110,7 +106,7 @@ drawer_view_render(Drawer_View *v, Evas *evas, Eina_List *items)
    _grid_containers_create(inst);
 
    EINA_LIST_FOREACH(items, l, si)
-        ll = eina_list_append(ll, si);
+      ll = eina_list_append(ll, si);
    ll = eina_list_sort(ll, eina_list_count(ll), _grid_sort_by_category_cb);
    switch (inst->orient)
      {
@@ -233,9 +229,7 @@ calculate:
 EAPI void
 drawer_view_orient_set(Drawer_View *v, E_Gadcon_Orient orient)
 {
-   Instance *inst = NULL;
-
-   inst = DRAWER_PLUGIN(v)->data;
+   Instance *inst = DRAWER_PLUGIN(v)->data;
 
    switch (orient)
      {
@@ -270,9 +264,7 @@ drawer_view_orient_set(Drawer_View *v, E_Gadcon_Orient orient)
 EAPI void
 drawer_view_toggle_visibility(Drawer_View *v, Eina_Bool show)
 {
-   Instance *inst = NULL;
-
-   inst = DRAWER_PLUGIN(v)->data;
+   Instance *inst = DRAWER_PLUGIN(v)->data;
 
    if (show)
       edje_object_signal_emit(inst->o_box, "e,action,show", "drawer");
@@ -368,9 +360,7 @@ _grid_reconfigure(Instance *inst)
 static void
 _grid_containers_create(Instance *inst)
 {
-   Evas *evas;
-
-   evas = inst->evas;
+   Evas *evas = inst->evas;
    inst->o_con = edje_object_add(evas);
    inst->o_box = edje_object_add(evas);
 
@@ -385,12 +375,10 @@ _grid_containers_create(Instance *inst)
 static Item *
 _grid_item_create(Instance *inst, Drawer_Source_Item *si)
 {
-   Item *e;
+   Item *e = E_NEW(Item, 1);
    Evas_Coord w, h;
 
-   e = E_NEW(Item, 1);
-
-   e->o_holder = edje_object_add(inst->evas);
+    e->o_holder = edje_object_add(inst->evas);
    if (!e_theme_edje_object_set(e->o_holder, "base/theme/modules/drawer",
                                 "modules/drawer/grid/item"))
       edje_object_file_set(e->o_holder, inst->theme_file,
@@ -431,10 +419,8 @@ _grid_item_create(Instance *inst, Drawer_Source_Item *si)
 static Item *
 _grid_category_create(Instance *inst, Drawer_Source_Item *si)
 {
-   Item *e;
+   Item *e = E_NEW(Item, 1);
    char buf[1024];
-
-   e = E_NEW(Item, 1);
 
    e->o_holder = edje_object_add(inst->evas);
    if (!e_theme_edje_object_set(e->o_holder, "base/theme/modules/drawer",
@@ -442,7 +428,7 @@ _grid_category_create(Instance *inst, Drawer_Source_Item *si)
       edje_object_file_set(e->o_holder, inst->theme_file,
                            "modules/drawer/grid/category");
 
-   if (si->category) 
+   if (si->category)
       snprintf(buf, sizeof(buf), "%s", si->category);
    else
       snprintf(buf, sizeof(buf), "Uncategorised");
@@ -492,13 +478,10 @@ static void
 _grid_entry_select_cb(void *data, Evas_Object *obj __UNUSED__, const char *emission __UNUSED__,
                       const char *source __UNUSED__)
 {
-   Item *e = NULL;
-   Instance *inst = NULL;
-   Drawer_Source_Item *si = NULL;
+   Item *e = data;
+   Instance *inst = e->inst;
+   Drawer_Source_Item *si = e->si;
 
-   e = data;
-   inst = e->inst;
-   si = e->si;
    edje_object_part_text_set(inst->o_con, "e.text.label", si->label);
    edje_object_part_text_set(inst->o_con, "e.text.description", si->description);
 }
@@ -507,11 +490,9 @@ static void
 _grid_entry_deselect_cb(void *data, Evas_Object *obj __UNUSED__, const char *emission __UNUSED__,
                         const char *source __UNUSED__)
 {
-   Item *e = NULL;
-   Instance *inst = NULL;
+   Item *e = data;
+   Instance *inst = e->inst;
 
-   e = data;
-   inst = e->inst;
    edje_object_part_text_set(inst->o_con, "e.text.label", NULL);
    edje_object_part_text_set(inst->o_con, "e.text.description", NULL);
 }
@@ -520,15 +501,14 @@ static void
 _grid_entry_activate_cb(void *data, Evas_Object *obj __UNUSED__, const char *emission __UNUSED__,
                         const char *source __UNUSED__)
 {
-   Item *e = NULL;
-   Drawer_Event_View_Activate *ev;
+   Item *e = data;
+   Drawer_Event_View_Activate *ev = E_NEW(Drawer_Event_View_Activate, 1);
 
-   e = data;
-   ev = E_NEW(Drawer_Event_View_Activate, 1);
    ev->data = e->si;
    ev->view = e->inst->view;
    ev->id = eina_stringshare_add(e->inst->parent_id);
-   ecore_event_add(DRAWER_EVENT_VIEW_ITEM_ACTIVATE, ev, _grid_event_activate_free, NULL);
+   ecore_event_add(DRAWER_EVENT_VIEW_ITEM_ACTIVATE,
+                   ev, _grid_event_activate_free, NULL);
 
    /* XXX: this doesn't seem to work */
    edje_object_signal_emit(e->inst->o_con, "e,action,activate", "drawer");
@@ -537,28 +517,26 @@ _grid_entry_activate_cb(void *data, Evas_Object *obj __UNUSED__, const char *emi
 static void
 _grid_entry_context_cb(void *data, Evas_Object *obj, const char *emission __UNUSED__, const char *source __UNUSED__)
 {
-   Item *e = NULL;
-   Drawer_Event_View_Context *ev;
+   Item *e = data;
+   Drawer_Event_View_Context *ev = E_NEW(Drawer_Event_View_Context, 1);
    Evas_Coord ox, oy;
 
    evas_object_geometry_get(obj, &ox, &oy, NULL, NULL);
 
-   e = data;
-   ev = E_NEW(Drawer_Event_View_Context, 1);
    ev->data = e->si;
    ev->view = e->inst->view;
    ev->x = ox;
    ev->y = oy;
    ev->id = eina_stringshare_add(e->inst->parent_id);
-   ecore_event_add(DRAWER_EVENT_VIEW_ITEM_CONTEXT, ev, _grid_event_context_free, NULL);
+   ecore_event_add(DRAWER_EVENT_VIEW_ITEM_CONTEXT,
+                   ev, _grid_event_context_free, NULL);
 }
 
 static void
 _grid_event_activate_free(void *data __UNUSED__, void *event)
 {
-   Drawer_Event_View_Activate *ev;
+   Drawer_Event_View_Activate *ev = event;
 
-   ev = event;
    eina_stringshare_del(ev->id);
    free(ev);
 }
@@ -566,9 +544,8 @@ _grid_event_activate_free(void *data __UNUSED__, void *event)
 static void
 _grid_event_context_free(void *data __UNUSED__, void *event)
 {
-   Drawer_Event_View_Context *ev;
+   Drawer_Event_View_Context *ev = event;
 
-   ev = event;
    eina_stringshare_del(ev->id);
    free(ev);
 }
