@@ -160,11 +160,11 @@ msgstr "Nastavenie zoradenia"
 
 #: src/plugins/sources/directory_watcher.c:560
 msgid "Sort directories first"
-msgstr "Triediť najskôr adresáre"
+msgstr "Zoradiť najskôr adresáre"
 
 #: src/plugins/sources/directory_watcher.c:564
 msgid "Sort by name"
-msgstr "Zoradiť podľe mena"
+msgstr "Zoradiť podľa mena"
 
 #: src/plugins/sources/directory_watcher.c:566
 msgid "Sort by access time"
@@ -180,7 +180,7 @@ msgstr "Zoradiť podľa času zmeny"
 
 #: src/plugins/sources/directory_watcher.c:572
 msgid "Sort by size"
-msgstr "Zoradiť podľe veľkosti"
+msgstr "Zoradiť podľa veľkosti"
 
 #: src/plugins/sources/launcher.c:197
 msgid "Launcher settings"
