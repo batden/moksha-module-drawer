@@ -519,6 +519,7 @@ _history_cb_menu_item_blacklist(void *data, E_Menu *m __UNUSED__, E_Menu_Item *m
    //FIXME: Do I really need to save here
    save_blacklist(*bl->items);
    ecore_event_add(E_EVENT_EXEHIST_UPDATE, NULL, NULL, NULL);
+   //FIXME: free(bl)
 }
 
 static void
