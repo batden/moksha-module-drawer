@@ -103,7 +103,7 @@ drawer_plugin_init(Drawer_Plugin *p, const char *id)
 
         e_config_save_queue();
      }
-     
+  // FIXME: this is for temporary testing   
   if (read_blacklist(&inst->blacklist_items) == EET_ERROR_BAD_OBJECT)
     {
        inst->blacklist_items = eina_list_append(inst->blacklist_items,                                         strdup("nm-applet"));
@@ -129,7 +129,9 @@ drawer_plugin_shutdown(Drawer_Plugin *p)
    Instance *inst = NULL;
 
    inst = p->data;
-
+   // Be sure to save blacklist file
+   save_blacklist(inst->blacklist_items);
+   
    _history_source_items_free(inst);
 
    E_FREE_LIST(inst->blacklist_items, free);
