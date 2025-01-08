@@ -30,6 +30,9 @@ struct _Instance
    Drawer_Plugin *composite;
 
    Eina_List *handlers;
+   Ecore_X_Window input_win;
+   Ecore_Event_Handler *hand_mouse_down;
+   Ecore_Event_Handler *hand_key_down;
 
    struct
      {
@@ -80,9 +83,9 @@ static void _drawer_popup_create(Instance *inst);
 static void _drawer_popup_show(Instance *inst);
 static void _drawer_popup_hide(Instance *inst);
 static void _drawer_popup_update(Instance *inst);
-static Eina_Bool  _drawer_container_init_timer(void *data);
+static Eina_Bool _drawer_container_init_timer(void *data);
 static void _drawer_container_update(Instance *inst);
-static Evas_Object * _drawer_content_generate(Instance *inst, Evas *evas);
+static Evas_Object *_drawer_content_generate(Instance *inst, Evas *evas);
 static void _drawer_container_setup(Instance *inst, E_Gadcon_Orient orient);
 static void _drawer_container_resize_cb(void *data, Evas *evas, Evas_Object *obj, void *event_info);
 
@@ -117,7 +120,7 @@ static void _drawer_thumb_generate_cb(void *data, Ethumb_Client *e, int id, cons
 static void _drawer_thumb_object_del_cb(void *data, Evas *evas, Evas_Object *obj, void *event_info);
 
 
-static Evas_Object * _drawer_content_new(Evas *e, Evas_Object *child);
+static Evas_Object *_drawer_content_new(Evas *e, Evas_Object *child);
 static void _smart_init(void);
 static void _smart_add(Evas_Object *obj, Evas_Object *child);
 static void _smart_del(Evas_Object *obj);
@@ -696,6 +699,87 @@ _drawer_popup_create(Instance *inst)
    _drawer_popup_update(inst);
 }
 
+
+
+static void
+_drawer_input_win_del(Instance *inst)
+{
+   if (!inst->input_win) return;
+   e_grabinput_release(0, inst->input_win);
+   ecore_x_window_free(inst->input_win);
+   inst->input_win = 0;
+   ecore_event_handler_del(inst->hand_mouse_down);
+   inst->hand_mouse_down = NULL;
+   ecore_event_handler_del(inst->hand_key_down);
+   inst->hand_key_down = NULL;
+}
+
+static void
+_drawer_popup_free(Instance *inst)
+{
+   if (!inst->popup) return;
+   if (inst->popup)
+     {
+        _drawer_input_win_del(inst);
+        e_object_del(E_OBJECT(inst->popup));
+        inst->popup = NULL;
+     }
+}
+
+static Eina_Bool
+_drawer_input_win_mouse_down_cb(void *data, int type __UNUSED__, void *event)
+{
+   Ecore_Event_Mouse_Button *ev = event;
+   Instance *inst = data;
+
+   if (ev->window != inst->input_win) return ECORE_CALLBACK_PASS_ON;
+   _drawer_popup_free(inst);
+   return ECORE_CALLBACK_PASS_ON;
+}
+
+static Eina_Bool
+_drawer_input_win_key_down_cb(void *data, int type __UNUSED__, void *event)
+{
+   Ecore_Event_Key *ev = event;
+   Instance *inst = data;
+   const char *keysym;
+
+   if (ev->window != inst->input_win) return ECORE_CALLBACK_PASS_ON;
+
+   keysym = ev->key;
+   if (!strcmp(keysym, "Escape"))
+     _drawer_popup_free(inst);
+
+   return ECORE_CALLBACK_PASS_ON;
+}
+
+static void
+_drawer_input_win_new(Instance *inst)
+{
+   Ecore_X_Window_Configure_Mask mask;
+   Ecore_X_Window w, popup_w;
+   E_Manager *man;
+
+   man = inst->gcc->gadcon->zone->container->manager;
+
+   w = ecore_x_window_input_new(man->root, 0, 0, man->w, man->h);
+   mask = (ECORE_X_WINDOW_CONFIGURE_MASK_STACK_MODE |
+           ECORE_X_WINDOW_CONFIGURE_MASK_SIBLING);
+   popup_w = inst->popup->win->evas_win;
+   ecore_x_window_configure(w, mask, 0, 0, 0, 0, 0, popup_w,
+                            ECORE_X_WINDOW_STACK_BELOW);
+   ecore_x_window_show(w);
+
+   inst->hand_mouse_down =
+      ecore_event_handler_add(ECORE_EVENT_MOUSE_BUTTON_DOWN,
+                              _drawer_input_win_mouse_down_cb, inst);
+   inst->hand_key_down =
+      ecore_event_handler_add(ECORE_EVENT_KEY_DOWN,
+                              _drawer_input_win_key_down_cb, inst);
+   inst->input_win = w;
+   e_grabinput_get(0, 0, inst->input_win);
+}
+
 static void
 _drawer_popup_show(Instance *inst)
 {
@@ -746,6 +830,8 @@ _drawer_popup_show(Instance *inst)
    else if (inst->composite && DRAWER_COMPOSITE(inst->composite)->func.toggle_visibility)
      DRAWER_COMPOSITE(inst->composite)->func.toggle_visibility(
          DRAWER_COMPOSITE(inst->composite), EINA_TRUE);
+
+   _drawer_input_win_new(inst);
 }
 
 static void
