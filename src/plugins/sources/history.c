@@ -10,6 +10,7 @@ typedef enum _History_Sort_Type
 
 typedef struct _Instance Instance;
 typedef struct _Conf Conf;
+typedef struct _Blacklist_Item Blacklist_Item;
 
 struct _Instance
 {
@@ -41,6 +42,12 @@ struct _E_Config_Dialog_Data
    E_Confirm_Dialog     *dialog_delete;
    int                   sort_type;
    int                   blacklist;
+};
+
+struct _Blacklist_Item
+{
+   Eina_List            **items;
+   Drawer_Source_Item   *si;
 };
 
 static void _history_description_create(Instance *inst);
@@ -96,6 +103,12 @@ drawer_plugin_init(Drawer_Plugin *p, const char *id)
 
         e_config_save_queue();
      }
+     
+  if (read_blacklist(&inst->blacklist_items) == EET_ERROR_BAD_OBJECT)
+    {
+       inst->blacklist_items = eina_list_append(inst->blacklist_items,                                         strdup("nm-applet"));
+       save_blacklist(inst->blacklist_items);
+     }
 
 #if 0
    inst->handlers = eina_list_append(inst->handlers,
@@ -119,6 +132,7 @@ drawer_plugin_shutdown(Drawer_Plugin *p)
 
    _history_source_items_free(inst);
 
+   E_FREE_LIST(inst->blacklist_items, free);
    eina_stringshare_del(inst->description);
    eina_stringshare_del(inst->conf->id);
 
@@ -235,6 +249,7 @@ drawer_source_list(Drawer_Source *s)
    Eina_List *hist = NULL, *l;
    Drawer_Event_Source_Main_Icon_Update *ev;
    const char *file;
+   Eina_Compare_Cb cmp_func = (Eina_Compare_Cb)strcmp;
 
    if (!(inst = DRAWER_PLUGIN(s)->data)) return NULL;
 
@@ -269,12 +284,21 @@ drawer_source_list(Drawer_Source *s)
           }
         /* FIXME: SKIP files*/
         if (desktop)
-          {
-             /* Instead of desktops, work with executables directly */
-             si = _history_source_item_fill(inst, desktop, file);
-             inst->items = eina_list_append(inst->items, si);
+          {  
+		     if (inst->conf->blacklist && !eina_list_search_unsorted_list(inst->blacklist_items, cmp_func, file))
+			   {
+                  /* Instead of desktops, work with executables directly */
+                 si = _history_source_item_fill(inst, desktop, file);
+                 inst->items = eina_list_append(inst->items, si);
+               } else if (!inst->conf->blacklist) 
+               {
+                 si = _history_source_item_fill(inst, desktop, file);
+                 inst->items = eina_list_append(inst->items, si); 
+			   }
           }
      }
+   // FIXME: WHY  
+   if (!inst->items->data) return NULL;
 
    ev = E_NEW(Drawer_Event_Source_Main_Icon_Update, 1);
    ev->source = inst->source;
@@ -335,11 +359,15 @@ drawer_source_context(Drawer_Source *s, Drawer_Source_Item *si, E_Zone *zone, Dr
    e_menu_item_callback_set(mi, _history_cb_menu_item_properties, si);
 
    if (inst->conf->blacklist)
-     {
+     {  
+        Blacklist_Item *bl = E_NEW(Blacklist_Item, 1);
+		bl->items = &inst->blacklist_items;
+		bl->si = si;
         mi = e_menu_item_new(inst->menu);
         e_menu_item_label_set(mi, D_("Blacklist Item"));
         e_util_menu_item_theme_icon_set(mi, "edit-clear");
-        e_menu_item_callback_set(mi, _history_cb_menu_item_blacklist, inst->blacklist_items);
+        e_menu_item_callback_set(mi, _history_cb_menu_item_blacklist, bl);
+        // FIXME: free bl
 	 }
 
    mi = e_menu_item_new(inst->menu);
@@ -483,10 +511,12 @@ _history_cb_menu_item_properties(void *data, E_Menu *m __UNUSED__, E_Menu_Item *
 static void
 _history_cb_menu_item_blacklist(void *data, E_Menu *m __UNUSED__, E_Menu_Item *mi __UNUSED__)
 {
-   Eina_List *items = data;
-   
-   // FIXME: coming soon
-   
+   Blacklist_Item *bl = data;
+
+   *bl->items = eina_list_append(*bl->items, strdup(bl->si->priv));
+   //FIXME: Do I really need to save here
+   save_blacklist(*bl->items);
+   ecore_event_add(E_EVENT_EXEHIST_UPDATE, NULL, NULL, NULL);
 }
 
 static void
@@ -591,7 +621,8 @@ _history_cf_basic_apply(E_Config_Dialog *cfd __UNUSED__, E_Config_Dialog_Data *c
 
    inst = cfdata->inst;
    cfdata->inst->conf->sort_type = cfdata->sort_type;
-   cfdata->inst->conf->blacklist = cfdata->blacklist;
+inst->conf->blacklist = cfdata->inst->conf->blacklist = cfdata->blacklist;
+
 
    _history_description_create(inst);
 
