@@ -1,6 +1,7 @@
 First, make everything fully functional.
 
-Add blacklist ability to the history plugin.
+Test blacklist functionality to the history plugin.
+Add an ibar like way to edit Blacklist file items, maybe advanced button
 
 Original To Do list:
 
