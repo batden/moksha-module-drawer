@@ -29,8 +29,8 @@ struct _Instance
 struct _Conf
 {
    const char           *id;
-   History_Sort_Type    sort_type;
-   int                  blacklist;
+   History_Sort_Type     sort_type;
+   int                   blacklist;
 };
 
 struct _E_Config_Dialog_Data
@@ -39,8 +39,8 @@ struct _E_Config_Dialog_Data
    
    Evas_Object          *ilist;
    E_Confirm_Dialog     *dialog_delete;
-   int                  sort_type;
-   int                  blacklist;
+   int                   sort_type;
+   int                   blacklist;
 };
 
 static void _history_description_create(Instance *inst);
