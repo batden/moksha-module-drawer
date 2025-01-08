@@ -699,8 +699,6 @@ _drawer_popup_create(Instance *inst)
    _drawer_popup_update(inst);
 }
 
-
-
 static void
 _drawer_input_win_del(Instance *inst)
 {
@@ -1324,9 +1322,9 @@ _drawer_gc_init(E_Gadcon *gc, const char *name, const char *id, const char *styl
    inst->handlers = eina_list_append(inst->handlers,
          ecore_event_handler_add(DRAWER_EVENT_VIEW_ITEM_CONTEXT,
                                  _drawer_view_context_cb, NULL));
-   inst->handlers = eina_list_append(inst->handlers,
+   /* inst->handlers = eina_list_append(inst->handlers,
          ecore_event_handler_add(ECORE_EVENT_MOUSE_BUTTON_DOWN,
-                                 _drawer_global_mouse_down_cb, inst));
+                                 _drawer_global_mouse_down_cb, inst)); */
 
    if (inst->conf_item->composite)
      _drawer_composite_new(inst, inst->conf_item->composite);
@@ -1765,6 +1763,7 @@ _drawer_view_context_cb(void *data __UNUSED__, int ev_type, void *event)
    return EINA_FALSE;
 }
 
+/*
 static Eina_Bool
 _drawer_global_mouse_down_cb(void *data, int type __UNUSED__, void *event)
 {
@@ -1779,7 +1778,7 @@ _drawer_global_mouse_down_cb(void *data, int type __UNUSED__, void *event)
    _drawer_popup_hide(inst);
 
    return EINA_TRUE;
-}
+} */
 
 static void
 _drawer_popup_hidden_cb(void *data, Evas_Object *obj __UNUSED__, const char *emission __UNUSED__, const char *source __UNUSED__)
