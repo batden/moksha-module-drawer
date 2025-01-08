@@ -712,18 +712,6 @@ _drawer_input_win_del(Instance *inst)
    inst->hand_key_down = NULL;
 }
 
-static void
-_drawer_popup_free(Instance *inst)
-{
-   if (!inst->popup) return;
-   if (inst->popup)
-     {
-        _drawer_input_win_del(inst);
-        e_object_del(E_OBJECT(inst->popup));
-        inst->popup = NULL;
-     }
-}
-
 static Eina_Bool
 _drawer_input_win_mouse_down_cb(void *data, int type __UNUSED__, void *event)
 {
@@ -731,7 +719,7 @@ _drawer_input_win_mouse_down_cb(void *data, int type __UNUSED__, void *event)
    Instance *inst = data;
 
    if (ev->window != inst->input_win) return ECORE_CALLBACK_PASS_ON;
-   _drawer_popup_free(inst);
+   _drawer_popup_hide(inst);
    return ECORE_CALLBACK_PASS_ON;
 }
 
@@ -746,7 +734,7 @@ _drawer_input_win_key_down_cb(void *data, int type __UNUSED__, void *event)
 
    keysym = ev->key;
    if (!strcmp(keysym, "Escape"))
-     _drawer_popup_free(inst);
+     _drawer_popup_hide(inst);
 
    return ECORE_CALLBACK_PASS_ON;
 }
@@ -871,6 +859,8 @@ _drawer_popup_hide(Instance *inst)
    else if (inst->composite && DRAWER_COMPOSITE(inst->composite)->func.toggle_visibility)
      DRAWER_COMPOSITE(inst->composite)->func.toggle_visibility(
          DRAWER_COMPOSITE(inst->composite), EINA_FALSE);
+
+   _drawer_input_win_del(inst);
 }
 
 /* Updates the popup contents */
