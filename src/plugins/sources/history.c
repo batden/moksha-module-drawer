@@ -49,7 +49,8 @@ static Drawer_Source_Item *_history_source_item_fill(Instance *inst, Efreet_Desk
 static void _history_source_items_free(Instance *inst);
 static void _history_event_update_free(void *data __UNUSED__, void *event);
 static void _history_event_update_icon_free(void *data __UNUSED__, void *event);
-static Eina_Bool  _history_efreet_desktop_list_change_cb(void *data, int ev_type __UNUSED__, void *event __UNUSED__);
+static Eina_Bool _history_efreet_desktop_list_change_cb(void *data, int ev_type __UNUSED__, void *event __UNUSED__);
+static void _history_cb_menu_item_blacklist(void *data, E_Menu *m __UNUSED__, E_Menu_Item *mi __UNUSED__);
 static void _history_cb_menu_item_properties(void *data, E_Menu *m, E_Menu_Item *mi);
 static void _history_cb_menu_item_remove(void *data, E_Menu *m, E_Menu_Item *mi);
 static void _history_conf_activation_cb(void *data1, void *data2 __UNUSED__);
@@ -333,6 +334,14 @@ drawer_source_context(Drawer_Source *s, Drawer_Source_Item *si, E_Zone *zone, Dr
    e_util_menu_item_theme_icon_set(mi, "configure");
    e_menu_item_callback_set(mi, _history_cb_menu_item_properties, si);
 
+   if (inst->conf->blacklist)
+     {
+        mi = e_menu_item_new(inst->menu);
+        e_menu_item_label_set(mi, D_("Blacklist Item"));
+        e_util_menu_item_theme_icon_set(mi, "edit-clear");
+        e_menu_item_callback_set(mi, _history_cb_menu_item_blacklist, inst->blacklist_items);
+	 }
+
    mi = e_menu_item_new(inst->menu);
    e_menu_item_label_set(mi, D_("Remove Item"));
    e_util_menu_item_theme_icon_set(mi, "list-remove");
@@ -469,6 +478,15 @@ _history_cb_menu_item_properties(void *data, E_Menu *m __UNUSED__, E_Menu_Item *
 
    if (si->data_type != SOURCE_DATA_TYPE_DESKTOP) return;
    e_desktop_edit(e_container_current_get(e_manager_current_get()), si->data);
+}
+
+static void
+_history_cb_menu_item_blacklist(void *data, E_Menu *m __UNUSED__, E_Menu_Item *mi __UNUSED__)
+{
+   Eina_List *items = data;
+   
+   // FIXME: coming soon
+   
 }
 
 static void
