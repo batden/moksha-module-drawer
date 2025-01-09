@@ -172,13 +172,13 @@ _conf_plugin_sel(void *data1 __UNUSED__, void *data2)
    e_widget_ilist_freeze(oi);
    EINA_LIST_FOREACH(cfdata->sources, l, pi)
      {
-	i++;
-	if (!(strcmp(cfdata->source, pi->name)))
-          selnum = i;
-
-	/* XXX: plugin icon if one exists */
-	e_widget_ilist_append(oi, NULL, pi->title, NULL, pi, pi->name);
-	e_widget_on_change_hook_set(oi, _sources_list_cb_change, cfdata);
+        i++;
+        if (!(strcmp(cfdata->source, pi->name)))
+              selnum = i;
+    
+        /* XXX: plugin icon if one exists */
+        e_widget_ilist_append(oi, NULL, pi->title, NULL, pi, pi->name);
+        e_widget_on_change_hook_set(oi, _sources_list_cb_change, cfdata);
      }
    e_widget_ilist_go(oi);
    if (selnum >= 0)
@@ -197,15 +197,15 @@ _conf_plugin_sel(void *data1 __UNUSED__, void *data2)
    e_widget_ilist_freeze(oi);
    for (l = cfdata->views, i = 0, selnum = -1; l; l = l->next)
      {
-	Drawer_Plugin_Type *vpi = l->data;
-
-	i++;
-	if (!(strcmp(cfdata->view, vpi->name)))
-          selnum = i;
-
-	/* XXX: plugin icon if one exists */
-	e_widget_ilist_append(oi, NULL, vpi->title, NULL, vpi, vpi->name);
-	e_widget_on_change_hook_set(oi, _views_list_cb_change, cfdata);
+        Drawer_Plugin_Type *vpi = l->data;
+    
+        i++;
+        if (!(strcmp(cfdata->view, vpi->name)))
+              selnum = i;
+    
+        /* XXX: plugin icon if one exists */
+        e_widget_ilist_append(oi, NULL, vpi->title, NULL, vpi, vpi->name);
+        e_widget_on_change_hook_set(oi, _views_list_cb_change, cfdata);
      }
    e_widget_ilist_go(oi);
    if (selnum >= 0)
@@ -230,13 +230,13 @@ _sources_list_cb_change(void *data, Evas_Object *obj __UNUSED__)
    if (e_widget_ilist_selected_count_get(cfdata->s_ilist) < 1) return;
 
    pi = e_widget_ilist_nth_data_get(cfdata->s_ilist,
-				    e_widget_ilist_selected_get(cfdata->s_ilist));
+                    e_widget_ilist_selected_get(cfdata->s_ilist));
 
    if (pi->comment)
      e_widget_textblock_markup_set(cfdata->sources_comment, pi->comment);
    else
      e_widget_textblock_markup_set(cfdata->sources_comment,
-	   D_("Description: Unavailable"));
+        D_("Description: Unavailable"));
 }
 
 static void
@@ -251,13 +251,13 @@ _views_list_cb_change(void *data, Evas_Object *obj __UNUSED__)
    if (e_widget_ilist_selected_count_get(cfdata->v_ilist) < 1) return;
 
    pi = e_widget_ilist_nth_data_get(cfdata->v_ilist,
-				    e_widget_ilist_selected_get(cfdata->v_ilist));
+                    e_widget_ilist_selected_get(cfdata->v_ilist));
 
    if (pi->comment)
      e_widget_textblock_markup_set(cfdata->views_comment, pi->comment);
    else
      e_widget_textblock_markup_set(cfdata->views_comment,
-	   D_("Description: Unavailable"));
+       D_("Description: Unavailable"));
 }
 
 static void
