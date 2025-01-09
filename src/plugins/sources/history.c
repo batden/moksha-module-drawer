@@ -111,8 +111,9 @@ drawer_plugin_init(Drawer_Plugin *p, const char *id)
   // FIXME: this is for temporary testing
   if (read_blacklist(&inst->blacklist_items) == EET_ERROR_BAD_OBJECT)
     {
-       inst->blacklist_items = eina_list_append(inst->blacklist_items,                                         strdup("nm-applet"));
-       save_blacklist(inst->blacklist_items);
+       inst->blacklist_items = eina_list_append(inst->blacklist_items,
+                                                strdup("nm-applet"));
+                                                save_blacklist(inst->blacklist_items);
      }
 
 #if 0
@@ -377,7 +378,6 @@ drawer_source_context(Drawer_Source *s, Drawer_Source_Item *si, E_Zone *zone, Dr
         e_menu_item_label_set(mi, D_("Blacklist Item"));
         e_util_menu_item_theme_icon_set(mi, "edit-clear");
         e_menu_item_callback_set(mi, _history_cb_menu_item_blacklist, bl);
-        // FIXME: free bl
 	 }
 
    mi = e_menu_item_new(inst->menu);
