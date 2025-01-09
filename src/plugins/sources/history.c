@@ -37,7 +37,7 @@ struct _Conf
 struct _E_Config_Dialog_Data
 {
    Instance             *inst;
-   
+
    Evas_Object          *ilist;
    E_Confirm_Dialog     *dialog_delete;
    int                   sort_type;
@@ -49,6 +49,8 @@ struct _Blacklist_Item
    Eina_List            **items;
    Drawer_Source_Item   *si;
 };
+
+EINTERN int _e_history_log_dom = -1;
 
 static void _history_description_create(Instance *inst);
 
@@ -78,6 +80,9 @@ drawer_plugin_init(Drawer_Plugin *p, const char *id)
    Instance *inst = NULL;
    char buf[128];
 
+   _e_history_log_dom = eina_log_domain_register("History", EINA_COLOR_ORANGE);
+   eina_log_domain_level_set("History", EINA_LOG_LEVEL_DBG);
+   INF("History Init");
    inst = E_NEW(Instance, 1);
 
    inst->source = DRAWER_SOURCE(p);
@@ -103,7 +108,7 @@ drawer_plugin_init(Drawer_Plugin *p, const char *id)
 
         e_config_save_queue();
      }
-  // FIXME: this is for temporary testing   
+  // FIXME: this is for temporary testing
   if (read_blacklist(&inst->blacklist_items) == EET_ERROR_BAD_OBJECT)
     {
        inst->blacklist_items = eina_list_append(inst->blacklist_items,                                         strdup("nm-applet"));
@@ -131,7 +136,7 @@ drawer_plugin_shutdown(Drawer_Plugin *p)
    inst = p->data;
    // Be sure to save blacklist file
    save_blacklist(inst->blacklist_items);
-   
+
    _history_source_items_free(inst);
 
    E_FREE_LIST(inst->blacklist_items, free);
@@ -142,6 +147,9 @@ drawer_plugin_shutdown(Drawer_Plugin *p)
    E_FREE_LIST(inst->handlers, ecore_event_handler_del);
    E_FREE(inst->conf);
    E_FREE(inst);
+
+   eina_log_domain_unregister(_e_history_log_dom);
+   _e_history_log_dom = -1;
 
    return 1;
 }
@@ -286,20 +294,20 @@ drawer_source_list(Drawer_Source *s)
           }
         /* FIXME: SKIP files*/
         if (desktop)
-          {  
+          {
 		     if (inst->conf->blacklist && !eina_list_search_unsorted_list(inst->blacklist_items, cmp_func, file))
 			   {
                   /* Instead of desktops, work with executables directly */
                  si = _history_source_item_fill(inst, desktop, file);
                  inst->items = eina_list_append(inst->items, si);
-               } else if (!inst->conf->blacklist) 
+               } else if (!inst->conf->blacklist)
                {
                  si = _history_source_item_fill(inst, desktop, file);
-                 inst->items = eina_list_append(inst->items, si); 
+                 inst->items = eina_list_append(inst->items, si);
 			   }
           }
      }
-   // FIXME: WHY  
+   // FIXME: WHY
    if (!inst->items->data) return NULL;
 
    ev = E_NEW(Drawer_Event_Source_Main_Icon_Update, 1);
@@ -361,7 +369,7 @@ drawer_source_context(Drawer_Source *s, Drawer_Source_Item *si, E_Zone *zone, Dr
    e_menu_item_callback_set(mi, _history_cb_menu_item_properties, si);
 
    if (inst->conf->blacklist)
-     {  
+     {
         Blacklist_Item *bl = E_NEW(Blacklist_Item, 1);
 		bl->items = &inst->blacklist_items;
 		bl->si = si;

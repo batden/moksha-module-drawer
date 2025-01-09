@@ -4,6 +4,18 @@
 #include "../../Drawer.h"
 #include "blacklist.h"
 
+extern int _e_history_log_dom;
+#undef DBG
+#undef INF
+#undef WRN
+#undef ERR
+#undef CRI
+#define DBG(...)            EINA_LOG_DOM_DBG(_e_history_log_dom, __VA_ARGS__)
+#define INF(...)            EINA_LOG_DOM_INFO(_e_history_log_dom, __VA_ARGS__)
+#define WRN(...)            EINA_LOG_DOM_WARN(_e_history_log_dom, __VA_ARGS__)
+#define ERR(...)            EINA_LOG_DOM_ERR(_e_history_log_dom, __VA_ARGS__)
+#define CRI(...)            EINA_LOG_DOM_CRIT(_e_history_log_dom, __VA_ARGS__)
+
 EAPI extern Drawer_Plugin_Api drawer_plugin_api;
 
 EAPI void *drawer_plugin_init(Drawer_Plugin *p, const char *id);
