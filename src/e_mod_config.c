@@ -167,6 +167,7 @@ _conf_plugin_sel(void *data1 __UNUSED__, void *data2)
    e_widget_ilist_header_append(oi, NULL, D_("Source plugins"));
    e_widget_list_object_append(of, oi, 1, 1, 0.0);
    cfdata->sources_comment = otx = e_widget_textblock_add(evas);
+   e_widget_size_min_set(otx, 200, 70);
    e_widget_list_object_append(of, otx, 1, 0, 1.0);
    cfdata->sources = drawer_plugins_list(DRAWER_SOURCES);
    e_widget_ilist_freeze(oi);
@@ -192,6 +193,7 @@ _conf_plugin_sel(void *data1 __UNUSED__, void *data2)
    e_widget_ilist_header_append(oi, NULL, D_("View plugins"));
    e_widget_list_object_append(of, oi, 1, 1, 0.0);
    cfdata->views_comment = otx = e_widget_textblock_add(evas);
+   e_widget_size_min_set(otx, 200, 70);
    e_widget_list_object_append(of, otx, 1, 0, 1.0);
    cfdata->views = drawer_plugins_list(DRAWER_VIEWS);
    e_widget_ilist_freeze(oi);
