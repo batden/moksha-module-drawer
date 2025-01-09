@@ -182,10 +182,8 @@ e_modapi_init(E_Module *m)
             homedir, e_config_profile_get());
    ecore_file_mkdir(buf);
 
-   /* Location of theme to load for this module */
    snprintf(buf, sizeof(buf), "%s/e-module-drawer.edj", m->dir);
 
-   /* Define EET Data Storage */
    conf_item_edd = E_CONFIG_DD_NEW("Config_Item", Config_Item);
    #undef T
    #undef D
@@ -202,16 +200,13 @@ e_modapi_init(E_Module *m)
    #define T Config
    #define D conf_edd
    E_CONFIG_VAL(D, T, version, INT);
-   E_CONFIG_LIST(D, T, conf_items, conf_item_edd); /* the list */
+   E_CONFIG_LIST(D, T, conf_items, conf_item_edd);
 
-   /* Tell E to find any existing module data. First run ? */
    drawer_conf = e_config_domain_load("module.drawer", conf_edd);
    if (drawer_conf)
      {
-        /* Check config version */
         if ((drawer_conf->version >> 16) < MOD_CONFIG_FILE_EPOCH)
           {
-             /* config too old */
              _drawer_conf_free();
              ecore_timer_add(1.0, _drawer_conf_timer,
                              D_("Drawer Module Configuration data needed "
@@ -228,10 +223,8 @@ e_modapi_init(E_Module *m)
                              "liking. Sorry for the inconvenience.<br>"));
           }
 
-        /* Ardvarks */
         else if (drawer_conf->version > MOD_CONFIG_FILE_VERSION)
           {
-             /* config too new...wtf ? */
              _drawer_conf_free();
              ecore_timer_add(1.0, _drawer_conf_timer,
                              D_("Your Drawer Module configuration is NEWER "
@@ -244,9 +237,7 @@ e_modapi_init(E_Module *m)
                              "precaution your configuration has been now "
                              "restored to<br>defaults. Sorry for the "
                              "inconvenience.<br>"));
-          }
-        /* Millepedes */
-        else
+          } else
           {
              Config_Item *ci = NULL;
              Eina_List *l, *l_next;
@@ -258,8 +249,7 @@ e_modapi_init(E_Module *m)
                     {
                        dup = ci->id;
                        continue;
-                    }
-                  else
+                    } else
                     {
                        _drawer_conf_item_free(ci);
                        drawer_conf->conf_items =
@@ -269,16 +259,10 @@ e_modapi_init(E_Module *m)
           }
      }
 
-   /* if we don't have a config yet, or it got erased above,
-    * then create a default one */
    if (!drawer_conf) _drawer_conf_new();
 
-   /* create a link from the modules config to the module
-    * this is not written */
    drawer_conf->module = m;
 
-   /* Tell any gadget containers (shelves, etc) that we provide a module
-    * for the user to enjoy */
    e_gadcon_provider_register(&_drawer_gc_class);
 
    if (!DRAWER_EVENT_SOURCE_UPDATE)
@@ -290,7 +274,6 @@ e_modapi_init(E_Module *m)
    if (!DRAWER_EVENT_VIEW_ITEM_CONTEXT)
      DRAWER_EVENT_VIEW_ITEM_CONTEXT = ecore_event_type_new();
 
-   /* Give E the module */
    return m;
 }
 
@@ -300,41 +283,26 @@ e_modapi_init(E_Module *m)
 EAPI int
 e_modapi_shutdown(E_Module *m __UNUSED__)
 {
-   /* Unregister the config dialog from the main panel */
    e_configure_registry_item_del("extensions/drawer");
-
-   /* Remove the config panel category if we can. E will tell us.
-    category stays if other items using it */
    e_configure_registry_category_del("extensions");
 
-   /* Kill the config dialog */
    if (drawer_conf->cfd) e_object_del(E_OBJECT(drawer_conf->cfd));
    drawer_conf->cfd = NULL;
 
-   /* Tell E the module is now unloaded. Gets removed from shelves, etc. */
    drawer_conf->module = NULL;
    e_gadcon_provider_unregister(&_drawer_gc_class);
 
-   /* Cleanup our item list */
    while (drawer_conf->conf_items)
      {
         Config_Item *ci = NULL;
-
-        /* Grab an item from the list */
         ci = drawer_conf->conf_items->data;
 
-        /* remove it */
-        drawer_conf->conf_items =
-          eina_list_remove_list(drawer_conf->conf_items,
-                                drawer_conf->conf_items);
-
+        drawer_conf->conf_items = eina_list_remove_list(drawer_conf->conf_items,
+                                                        drawer_conf->conf_items);
         _drawer_conf_item_free(ci);
      }
 
-   /* Cleanup the main config structure */
    E_FREE(drawer_conf);
-
-   /* Clean EET */
    E_CONFIG_DD_FREE(conf_item_edd);
    E_CONFIG_DD_FREE(conf_edd);
 
