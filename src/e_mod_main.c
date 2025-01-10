@@ -1584,6 +1584,9 @@ _drawer_content_recalc(Instance *inst, Evas_Object *obj)
    Evas_Object *child = sd->child;
    Evas_Coord gx, gy, gw, gh, zw, zh, zx, zy, px, py,
               pw, ph, ew, eh, mt, mb, ml, mr, w, h;
+   
+   if (!inst->popup) return;
+
    E_Gadcon_Client *gcc = inst->popup->gcc;
 
    edje_object_part_geometry_get(inst->popup->o_bg, "e.swallow.content",
