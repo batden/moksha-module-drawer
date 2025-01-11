@@ -388,25 +388,25 @@ _list_reconfigure(Instance *inst)
 
         e_box_freeze(inst->o_box);
         EINA_LIST_FOREACH(inst->entries, l, e)
-        {
-           Evas_Coord ew, eh;
+          {
+             Evas_Coord ew, eh;
 
-           if (e->isa_cat) continue;
-           if (e->o_icon) evas_object_del(e->o_icon);
-           if (!e_theme_edje_object_set
+             if (e->isa_cat) continue;
+             if (e->o_icon) evas_object_del(e->o_icon);
+             if (!e_theme_edje_object_set
                   (e->o_holder, "base/theme/modules/drawer", inst->item_group))
-              edje_object_file_set(e->o_holder, inst->theme_file, inst->item_group);
+                edje_object_file_set(e->o_holder, inst->theme_file, inst->item_group);
 
-           edje_object_part_text_set(e->o_holder, "e.text.label", e->si->label);
-           edje_object_part_text_set(e->o_holder, "e.text.description", e->si->description);
+             edje_object_part_text_set(e->o_holder, "e.text.label", e->si->label);
+             edje_object_part_text_set(e->o_holder, "e.text.description", e->si->description);
 
-           edje_object_part_geometry_get(e->o_holder, "e.swallow.content", NULL, NULL, &ew, &eh);
-           e->o_icon = drawer_util_icon_create(e->si, inst->evas, ew, eh);
-           edje_object_part_swallow(e->o_holder, "e.swallow.content", e->o_icon);
-           evas_object_pass_events_set(e->o_icon, 1);
-           evas_object_show(e->o_icon);
-           _list_item_pack_options(inst, e);
-        }
+             edje_object_part_geometry_get(e->o_holder, "e.swallow.content", NULL, NULL, &ew, &eh);
+             e->o_icon = drawer_util_icon_create(e->si, inst->evas, ew, eh);
+             edje_object_part_swallow(e->o_holder, "e.swallow.content", e->o_icon);
+             evas_object_pass_events_set(e->o_icon, 1);
+             evas_object_show(e->o_icon);
+             _list_item_pack_options(inst, e);
+          }
         e_box_thaw(inst->o_box);
      }
 

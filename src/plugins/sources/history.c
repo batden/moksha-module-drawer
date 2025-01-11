@@ -296,8 +296,8 @@ drawer_source_list(Drawer_Source *s)
         /* FIXME: SKIP files*/
         if (desktop)
           {
-		     if (inst->conf->blacklist && !eina_list_search_unsorted_list(inst->blacklist_items, cmp_func, file))
-			   {
+             if (inst->conf->blacklist && !eina_list_search_unsorted_list(inst->blacklist_items, cmp_func, file))
+               {
                   /* Instead of desktops, work with executables directly */
                  si = _history_source_item_fill(inst, desktop, file);
                  inst->items = eina_list_append(inst->items, si);
@@ -305,7 +305,7 @@ drawer_source_list(Drawer_Source *s)
                {
                  si = _history_source_item_fill(inst, desktop, file);
                  inst->items = eina_list_append(inst->items, si);
-			   }
+               }
           }
      }
    // FIXME: WHY
@@ -328,23 +328,23 @@ drawer_source_activate(Drawer_Source *s __UNUSED__, Drawer_Source_Item *si, E_Zo
 
    switch (si->data_type)
      {
-        case SOURCE_DATA_TYPE_DESKTOP:
-           desktop = si->data;
+       case SOURCE_DATA_TYPE_DESKTOP:
+          desktop = si->data;
 
-           if (desktop->type == EFREET_DESKTOP_TYPE_APPLICATION)
-             {
-                e_exec(zone, desktop, NULL, NULL, "drawer");
-             } else if (desktop->type == EFREET_DESKTOP_TYPE_LINK)
-             {
-                if (!strncasecmp(desktop->url, "file:", 5))
-                  {
-                     E_Action *act;
+          if (desktop->type == EFREET_DESKTOP_TYPE_APPLICATION)
+            {
+               e_exec(zone, desktop, NULL, NULL, "drawer");
+            } else if (desktop->type == EFREET_DESKTOP_TYPE_LINK)
+            {
+              if (!strncasecmp(desktop->url, "file:", 5))
+                {
+                   E_Action *act;
 
-                     act = e_action_find("fileman");
-                     if (act)
-                        act->func.go(NULL, desktop->url + 5);
-                  }
-             }
+                   act = e_action_find("fileman");
+                   if (act)
+                      act->func.go(NULL, desktop->url + 5);
+                }
+            }
            break;
         case SOURCE_DATA_TYPE_FILE_PATH:
            e_exec(zone, NULL, si->data, NULL, "drawer");
@@ -372,13 +372,13 @@ drawer_source_context(Drawer_Source *s, Drawer_Source_Item *si, E_Zone *zone, Dr
    if (inst->conf->blacklist)
      {
         Blacklist_Item *bl = E_NEW(Blacklist_Item, 1);
-		bl->items = &inst->blacklist_items;
-		bl->si = si;
+        bl->items = &inst->blacklist_items;
+        bl->si = si;
         mi = e_menu_item_new(inst->menu);
         e_menu_item_label_set(mi, D_("Blacklist Item"));
         e_util_menu_item_theme_icon_set(mi, "edit-clear");
         e_menu_item_callback_set(mi, _history_cb_menu_item_blacklist, bl);
-	 }
+     }
 
    mi = e_menu_item_new(inst->menu);
    e_menu_item_label_set(mi, D_("Remove Item"));

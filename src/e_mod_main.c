@@ -1499,8 +1499,8 @@ _drawer_instance_get(Config_Item *ci)
    Instance *inst = NULL;
 
    EINA_LIST_FOREACH(instances, l, inst)
-        if (inst->conf_item == ci)
-          return inst;
+      if (inst->conf_item == ci)
+         return inst;
 
    return NULL;
 }
