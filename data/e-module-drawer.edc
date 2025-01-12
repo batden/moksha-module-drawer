@@ -1823,7 +1823,9 @@ target: "glow";
 target: "bg"; \
 target: "content_clipper"; \
 target: "fg1"; \
-target: "fg2";
+target: "fg2"; \
+target: "glow"; \
+target: "e.text.label";
 
 #undef MOUSE_CLICK_TARGETS
 #define MOUSE_CLICK_TARGETS \
@@ -1923,6 +1925,10 @@ target: "e.text.label";
                inherit: "default" 0.0;
                color: 255 15 0 255;
             }
+            description {
+               state: "selected" 0.0;
+               inherit: "default" 0.0;
+            }
          }
          part {
             name: "e.text.description";
@@ -2018,6 +2024,10 @@ target: "e.text.label";
                visible: 1;
                color: 255 255 255 255;
             }
+            description {
+               state: "selected" 0.0;
+               inherit: "default" 0.0;
+            }
          }
          part {
             name: "event";
@@ -2079,7 +2089,7 @@ target: "e.text.label";
          }
          program {
             name: "item_up";
-            signal: "mouse,up,1";
+            signal: "mouse,clicked,1";
             source: "event";
             action: SIGNAL_EMIT "e,action,activate" "drawer";
             after: "item_up_el";
@@ -2170,6 +2180,10 @@ target: "e.text.label";
                inherit: "default" 0.0;
                color: 255 15 0 255;
             }
+            description {
+               state: "selected" 0.0;
+               inherit: "default" 0.0;
+            }
          }
          part {
             name: "e.text.description";
@@ -2220,6 +2234,10 @@ target: "e.text.label";
             description {
                state: "default" 0.0;
                text.size: 12;
+            }
+            description {
+               state: "selected" 0.0;
+               inherit: "default" 0.0;
             }
          }
          part {
