@@ -85,7 +85,7 @@ drawer_plugin_init(Drawer_Plugin *p, const char *id)
 
    _e_history_log_dom = eina_log_domain_register("History", EINA_COLOR_ORANGE);
    eina_log_domain_level_set("History", EINA_LOG_LEVEL_DBG);
-   INF("History Init");
+
    inst = E_NEW(Instance, 1);
 
    inst->source = DRAWER_SOURCE(p);
