@@ -2088,20 +2088,20 @@ target: "e.text.label";
             MOUSE_CLICK_TARGETS
          }
          program {
-            name: "item_up";
+            name: "item_click";
             signal: "mouse,clicked,1";
             source: "event";
             action: SIGNAL_EMIT "e,action,activate" "drawer";
-            after: "item_up_el";
+            after: "item_click_el";
          }
          program {
-            name: "item_up_el";
+            name: "item_click_el";
             action: STATE_SET "active" 0.0;
             MOUSE_CLICK_TARGETS
-            after: "item_up_after";
+            after: "item_click_after";
          }
          program {
-            name: "item_up_after";
+            name: "item_click_after";
             action: STATE_SET "default" 0.0;
             transition: SINUSOIDAL 0.5;
             MOUSE_CLICK_TARGETS
