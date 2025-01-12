@@ -1573,7 +1573,7 @@ _drawer_thumb_data_free(void *data)
 {
    Drawer_Thumb_Data *td = data;
    eina_stringshare_del(td->file);
-   // FIXME: double free segfault issue 
+   // FIXME: double free segfault issue
    // E_FREE(td);
 }
 
@@ -1584,10 +1584,18 @@ _drawer_content_recalc(Instance *inst, Evas_Object *obj)
    Evas_Object *child = sd->child;
    Evas_Coord gx, gy, gw, gh, zw, zh, zx, zy, px, py,
               pw, ph, ew, eh, mt, mb, ml, mr, w, h;
-   
+
    if (!inst->popup) return;
 
    E_Gadcon_Client *gcc = inst->popup->gcc;
+
+   // Ensure _drawer_popup_update is called to adjust popup size
+   // so icon size changes are applied
+   if ((inst->composite || (inst->source && inst->view)))
+     {
+       if (!inst->flags.is_floating)
+         inst->flags.pop_update = EINA_TRUE;
+     }
 
    edje_object_part_geometry_get(inst->popup->o_bg, "e.swallow.content",
                                  &px, &py, &pw, &ph);
