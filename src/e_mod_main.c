@@ -69,6 +69,8 @@ static const char *_drawer_gc_label(const E_Gadcon_Client_Class *client_class);
 static const char *_drawer_gc_id_new(const E_Gadcon_Client_Class *client_class);
 static Evas_Object *_drawer_gc_icon(const E_Gadcon_Client_Class *client_class, Evas *evas);
 
+static void _drawer_error(const char *src, const char *msg, const char *name);
+
 static void _drawer_conf_new(void);
 static void _drawer_conf_free(void);
 static void _drawer_conf_item_free(Config_Item *ci);
@@ -585,6 +587,14 @@ drawer_util_icon_create(Drawer_Source_Item *si, Evas *evas, int w, int h)
 /* Local Functions */
 
 /* Updates the shelf icon */
+
+static void
+_drawer_error(const char *src, const char *msg, const char *name)
+{
+	WRN("%s %s %s", src, msg, name);
+	e_util_dialog_show(src, msg, name);
+}
+
 static void
 _drawer_shelf_update(Instance *inst, Drawer_Source_Item *si)
 {
@@ -1011,7 +1021,7 @@ _drawer_plugin_new(Instance *inst __UNUSED__, const char *name, const char *cate
    modpath = e_path_find(path_modules, buf);
    if (!modpath)
      {
-        e_util_dialog_show( D_("Drawer Plugins"),
+        _drawer_error( D_("Drawer Plugins"),
               D_("The plugin '%s' was not found."), name);
         p->error = EINA_TRUE;
         goto init_done;
@@ -1019,7 +1029,7 @@ _drawer_plugin_new(Instance *inst __UNUSED__, const char *name, const char *cate
    p->handle = dlopen(modpath, RTLD_NOW | RTLD_GLOBAL);
    if (!p->handle)
      {
-        e_util_dialog_show( D_("Drawer Plugins"),
+        _drawer_error( D_("Drawer Plugins"),
               D_("The plugin '%s' could not be opened."), name);
         p->error = EINA_TRUE;
         goto init_done;
@@ -1033,7 +1043,7 @@ _drawer_plugin_new(Instance *inst __UNUSED__, const char *name, const char *cate
        (!p->api)
       )
      {
-        e_util_dialog_show( D_("Drawer Plugins"),
+        _drawer_error( D_("Drawer Plugins"),
               D_("The plugin '%s' does not contain all required functions."), name);
         p->api = NULL;
         p->func.init = NULL;
@@ -1045,7 +1055,7 @@ _drawer_plugin_new(Instance *inst __UNUSED__, const char *name, const char *cate
 
    if (p->api->version < DRAWER_PLUGIN_API_VERSION)
      {
-        e_util_dialog_show( D_("Drawer Plugins"),
+        _drawer_error( D_("Drawer Plugins"),
               D_("The plugin '%s' does not have the required API version."), name);
         p->api = NULL;
         dlclose(p->handle);
@@ -1113,7 +1123,7 @@ _drawer_source_new(Instance *inst, const char *name)
 
    if (!s->func.list)
      {
-        e_util_dialog_show( D_("Drawer Plugins"),
+        _drawer_error( D_("Drawer Plugins"),
               D_("The plugin '%s' does not contain all required functions."), name);
         s->func.list = NULL;
         dlclose(p->handle);
@@ -1164,7 +1174,7 @@ _drawer_view_new(Instance *inst, const char *name)
 
    if (!v->func.render)
      {
-        e_util_dialog_show( D_("Drawer Plugins"),
+        _drawer_error( D_("Drawer Plugins"),
               D_("The plugin '%s' does not contain all required functions."), name);
         v->func.render = NULL;
         dlclose(p->handle);
@@ -1210,7 +1220,7 @@ _drawer_composite_new(Instance *inst, const char *name)
 
    if (!c->func.render)
      {
-        e_util_dialog_show( D_("Drawer Plugins"),
+        _drawer_error( D_("Drawer Plugins"),
               D_("The plugin '%s' does not contain all required functions."), name);
         c->func.render = NULL;
         dlclose(p->handle);
