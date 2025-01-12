@@ -64,6 +64,9 @@ static void _history_cb_menu_item_properties(void *data, E_Menu *m, E_Menu_Item 
 static void _history_cb_menu_item_remove(void *data, E_Menu *m, E_Menu_Item *mi);
 static void _history_conf_activation_cb(void *data1, void *data2 __UNUSED__);
 
+static void _cb_add(void *data, void *data2);
+static void _cb_del(void *data, void *data2);
+static void _history_cf_load_ilist(E_Config_Dialog_Data *cfdata);
 static void *_history_cf_create_data(E_Config_Dialog *cfd);
 static void _history_cf_free_data(E_Config_Dialog *cfd __UNUSED__, E_Config_Dialog_Data *cfdata);
 static void _history_cf_fill_data(E_Config_Dialog_Data *cfdata);
@@ -601,9 +604,12 @@ _history_cf_fill_data(E_Config_Dialog_Data *cfdata)
 static Evas_Object *
 _history_cf_basic_create(E_Config_Dialog *cfd __UNUSED__, Evas *evas, E_Config_Dialog_Data *cfdata)
 {
-   Evas_Object *o, *of, *ob;
+    Evas_Object *otb, *o, *of, *ob, *ol, *ot;
    E_Radio_Group *rg;
 
+   otb = e_widget_toolbook_add(evas, (48 * e_scale), (48 * e_scale));
+
+   /* General Page */
    o = e_widget_list_add(evas, 0, 0);
 
    rg = e_widget_radio_group_new(&(cfdata->sort_type));
@@ -621,7 +627,32 @@ _history_cf_basic_create(E_Config_Dialog *cfd __UNUSED__, Evas *evas, E_Config_D
 
    e_widget_list_object_append(o, of, 1, 1, 0.5);
 
-   return o;
+   e_widget_toolbook_page_append(otb, NULL, D_("General"), o, 1, 0, 1, 0,
+                                 0.5, 0.0);
+
+   /* Blacklist Page */
+   o = e_widget_list_add(evas, 0, 0);
+   of = e_widget_frametable_add(evas, D_("Blacklisted Applications"), 0);
+   ol = e_widget_ilist_add(evas, 32, 32, NULL);
+   cfdata->ilist = ol;
+   _history_cf_load_ilist(cfdata);
+   e_widget_size_min_set(ol, 140, 140);
+   e_widget_frametable_object_append(of, ol, 0, 0, 1, 2, 1, 1, 1, 0);
+
+   ot = e_widget_table_add(evas, 0);
+   ob = e_widget_button_add(evas, D_("Add"), "list-add", _cb_add, cfdata, NULL);
+   e_widget_table_object_append(ot, ob, 0, 0, 1, 1, 1, 1, 1, 0);
+   ob = e_widget_button_add(evas, D_("Delete"), "list-remove", _cb_del, cfdata, NULL);
+   e_widget_table_object_append(ot, ob, 0, 1, 1, 1, 1, 1, 1, 0);
+
+
+   e_widget_frametable_object_append(of, ot, 1, 0, 1, 1, 1, 1, 1, 0);
+   e_widget_list_object_append(o, of, 1, 1, 0.5);
+   e_widget_toolbook_page_append(otb, NULL, D_("Blacklist"), o, 1, 0, 1, 0,
+                                 0.5, 0.0);
+
+   e_widget_toolbook_page_show(otb, 0);
+   return otb;
 }
 
 static int
@@ -644,4 +675,41 @@ inst->conf->blacklist = cfdata->inst->conf->blacklist = cfdata->blacklist;
 
    e_config_save_queue();
    return 1;
+}
+
+
+static void
+_cb_add(void *data, void *data2 __UNUSED__)
+{
+   E_Config_Dialog_Data *cfdata = data;
+   e_util_dialog_show("Blacklist", "Function Not Implemented");
+return;
+}
+
+static void
+_cb_del(void *data, void *data2 __UNUSED__)
+{
+   E_Config_Dialog_Data *cfdata = data;
+   e_util_dialog_show("Blacklist", "Function Not Implemented");
+return;
+}
+
+static void
+_history_cf_load_ilist(E_Config_Dialog_Data *cfdata)
+{
+   Instance *inst = cfdata->inst;
+   Eina_List *items, *l;
+   char *exe;
+
+   e_widget_ilist_clear(cfdata->ilist);
+
+   if (!inst->blacklist_items) return;
+
+   items = inst->blacklist_items;
+   EINA_LIST_FOREACH(items, l, exe)
+    {  INF("%s", exe);
+       e_widget_ilist_append(cfdata->ilist, NULL, exe, NULL, NULL, exe);
+    }
+   e_widget_ilist_go(cfdata->ilist);
+   e_widget_ilist_selected_set(cfdata->ilist, 1);
 }
