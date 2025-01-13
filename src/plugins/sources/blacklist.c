@@ -156,3 +156,17 @@ read_blacklist(Eina_List **items)
      }
    return eet_close(blacklist_file);
 }
+
+
+Eina_List *
+clone_blacklist(Eina_List *items)
+{
+   Eina_List *l, *clone = NULL;
+   char *exe;
+
+   EINA_LIST_FOREACH(items, l, exe)
+     {  INF("%s", exe);
+        clone = eina_list_append(clone, strdup(exe));
+      }
+   return clone;
+}
