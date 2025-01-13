@@ -1202,7 +1202,8 @@ target: "bg";
 #define MOUSE_IN_TARGETS \
 target: "bg"; \
 target: "fg1"; \
-target: "fg2";
+target: "fg2"; \
+target: "glow";
 #define MOUSE_CLICK_TARGETS \
 target: "glow";
 
@@ -1303,6 +1304,12 @@ target: "glow";
                visible: 1;
                color: 255 255 255 255;
             }
+            description {
+               state: "selected" 0.0;
+               inherit: "default" 0.0;
+               visible: 1;
+               color: 255 255 255 255;
+            }
          }
          part {
             name: "event";
@@ -1373,20 +1380,20 @@ target: "glow";
             MOUSE_CLICK_TARGETS
          }
          program {
-            name: "item_up";
-            signal: "mouse,up,1";
+            name: "item_click";
+            signal: "mouse,clicked,1";
             source: "event";
             action: SIGNAL_EMIT "e,action,activate" "drawer";
-            after: "item_up_el";
+            after: "item_clicked_el";
          }
          program {
-            name: "item_up_el";
+            name: "item_clicked_el";
             action: STATE_SET "active" 0.0;
             MOUSE_CLICK_TARGETS
-            after: "item_up_after";
+            after: "item_clicked_after";
          }
          program {
-            name: "item_up_after";
+            name: "item_clicked_after";
             action: STATE_SET "default" 0.0;
             transition: SINUSOIDAL 0.5;
             MOUSE_CLICK_TARGETS
