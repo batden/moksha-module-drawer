@@ -38,10 +38,16 @@ struct _E_Config_Dialog_Data
 {
    Instance             *inst;
 
-   Evas_Object          *ilist;
+   //Evas_Object          *ilist;
    E_Confirm_Dialog     *dialog_delete;
+   Eina_List            *blacklist_items;
    int                   sort_type;
    int                   blacklist;
+   struct
+     {
+        Evas_Object *ilist, *bt_add, *bt_del;
+     } obj;
+   Eina_Bool init;
 };
 
 struct _Blacklist_Item
@@ -66,6 +72,8 @@ static void _history_conf_activation_cb(void *data1, void *data2 __UNUSED__);
 
 static void _cb_add(void *data, void *data2);
 static void _cb_del(void *data, void *data2);
+static void _cb_entry_ok(void *data, char *text);
+static void _widget_list_selection_changed(void *data, Evas_Object *obj __UNUSED__);
 static void _history_cf_load_ilist(E_Config_Dialog_Data *cfdata);
 static void *_history_cf_create_data(E_Config_Dialog *cfd);
 static void _history_cf_free_data(E_Config_Dialog *cfd __UNUSED__, E_Config_Dialog_Data *cfdata);
@@ -112,12 +120,17 @@ drawer_plugin_init(Drawer_Plugin *p, const char *id)
         e_config_save_queue();
      }
   // FIXME: this is for temporary testing
+
   if (read_blacklist(&inst->blacklist_items) == EET_ERROR_BAD_OBJECT)
     {
+#if 0
        inst->blacklist_items = eina_list_append(inst->blacklist_items,
                                                 strdup("nm-applet"));
                                                 save_blacklist(inst->blacklist_items);
+#endif
+        WRN("Empty Blacklist");
      }
+
 
 #if 0
    inst->handlers = eina_list_append(inst->handlers,
@@ -591,6 +604,7 @@ static void
 _history_cf_free_data(E_Config_Dialog *cfd __UNUSED__, E_Config_Dialog_Data *cfdata)
 {
    _cfd = NULL;
+   cfdata->blacklist_items = eina_list_free(cfdata->blacklist_items);
    E_FREE(cfdata);
 }
 
@@ -604,7 +618,7 @@ _history_cf_fill_data(E_Config_Dialog_Data *cfdata)
 static Evas_Object *
 _history_cf_basic_create(E_Config_Dialog *cfd __UNUSED__, Evas *evas, E_Config_Dialog_Data *cfdata)
 {
-    Evas_Object *otb, *o, *of, *ob, *ol, *ot;
+   Evas_Object *otb, *o, *of, *ob, *ol, *ot;
    E_Radio_Group *rg;
 
    otb = e_widget_toolbook_add(evas, (48 * e_scale), (48 * e_scale));
@@ -634,15 +648,20 @@ _history_cf_basic_create(E_Config_Dialog *cfd __UNUSED__, Evas *evas, E_Config_D
    o = e_widget_list_add(evas, 0, 0);
    of = e_widget_frametable_add(evas, D_("Blacklisted Applications"), 0);
    ol = e_widget_ilist_add(evas, 32, 32, NULL);
-   cfdata->ilist = ol;
-   _history_cf_load_ilist(cfdata);
+   cfdata->obj.ilist = ol;
    e_widget_size_min_set(ol, 140, 140);
+   cfdata->init = EINA_TRUE;
+   _history_cf_load_ilist(cfdata);
+   e_widget_on_change_hook_set(ol, _widget_list_selection_changed, cfdata);
+
    e_widget_frametable_object_append(of, ol, 0, 0, 1, 2, 1, 1, 1, 0);
 
    ot = e_widget_table_add(evas, 0);
    ob = e_widget_button_add(evas, D_("Add"), "list-add", _cb_add, cfdata, NULL);
+   cfdata->obj.bt_add = ob;
    e_widget_table_object_append(ot, ob, 0, 0, 1, 1, 1, 1, 1, 0);
    ob = e_widget_button_add(evas, D_("Delete"), "list-remove", _cb_del, cfdata, NULL);
+   cfdata->obj.bt_add = ob;
    e_widget_table_object_append(ot, ob, 0, 1, 1, 1, 1, 1, 1, 0);
 
 
@@ -660,11 +679,21 @@ _history_cf_basic_apply(E_Config_Dialog *cfd __UNUSED__, E_Config_Dialog_Data *c
 {
    Instance *inst = NULL;
    Drawer_Event_Source_Update *ev;
+   Eina_List *l;
+   char *exe;
 
    inst = cfdata->inst;
    cfdata->inst->conf->sort_type = cfdata->sort_type;
-inst->conf->blacklist = cfdata->inst->conf->blacklist = cfdata->blacklist;
+   inst->conf->blacklist = cfdata->inst->conf->blacklist = cfdata->blacklist;
 
+   if (eina_list_count(cfdata->blacklist_items))
+     {
+        inst->blacklist_items = clone_blacklist(cfdata->blacklist_items);
+        save_blacklist(inst->blacklist_items);
+      } else
+      {
+         remove_blacklist();
+      }
 
    _history_description_create(inst);
 
@@ -677,39 +706,88 @@ inst->conf->blacklist = cfdata->inst->conf->blacklist = cfdata->blacklist;
    return 1;
 }
 
-
 static void
 _cb_add(void *data, void *data2 __UNUSED__)
 {
    E_Config_Dialog_Data *cfdata = data;
-   e_util_dialog_show("Blacklist", "Function Not Implemented");
-return;
+   e_entry_dialog_show(D_("Add Blacklisted Application"), "enlightenment",
+                       D_("Enter application name"), "", NULL, NULL,
+                       _cb_entry_ok, NULL, cfdata);
 }
 
 static void
 _cb_del(void *data, void *data2 __UNUSED__)
 {
    E_Config_Dialog_Data *cfdata = data;
-   e_util_dialog_show("Blacklist", "Function Not Implemented");
-return;
+   const Eina_List *l;
+   Eina_List *ll;
+   Eina_List *l_next;
+   char      *ldata;
+   const E_Ilist_Item *it;
+   int count = -1;
+
+   EINA_LIST_FOREACH(e_widget_ilist_items_get(cfdata->obj.ilist), l, it)
+     {
+        count++;
+        if (!it->selected) continue;
+        const char *exe = e_widget_ilist_nth_value_get(cfdata->obj.ilist, count);
+        EINA_LIST_FOREACH_SAFE(cfdata->blacklist_items, ll, l_next, ldata)
+          if (strcmp(ldata, exe) == 0)
+            {
+              // FIXME: free(ldata);
+              INF("FREE DATA %s",ldata);
+              cfdata->blacklist_items = eina_list_remove_list(cfdata->blacklist_items, ll);
+            }
+        EINA_LIST_FOREACH(cfdata->blacklist_items, l, exe)
+            e_widget_ilist_append(cfdata->obj.ilist, NULL, exe, NULL, NULL, exe);
+
+        e_widget_ilist_remove_num(cfdata->obj.ilist, count);
+        break;
+     }
 }
+
+static void
+_cb_entry_ok(void *data, char *exe)
+{
+   E_Config_Dialog_Data *cfdata = data;
+   e_widget_ilist_append(cfdata->obj.ilist, NULL, exe, NULL, NULL,exe);
+   cfdata->blacklist_items = eina_list_append(cfdata->blacklist_items, strdup(exe));
+}
+
+static void
+_widget_list_selection_changed(void *data, Evas_Object *obj __UNUSED__)
+{
+   E_Config_Dialog_Data *cfdata = data;
+
+   //e_widget_disabled_set(cfdata->obj.bt_del, !e_widget_ilist_selected_count_get(cfdata->obj.ilist));
+   //e_widget_disabled_set(cfdata->obj.bt_add, !e_widget_ilist_selected_count_get(cfdata->obj.ilist));
+}
+
 
 static void
 _history_cf_load_ilist(E_Config_Dialog_Data *cfdata)
 {
    Instance *inst = cfdata->inst;
-   Eina_List *items, *l;
+   Eina_List *l;
    char *exe;
 
-   e_widget_ilist_clear(cfdata->ilist);
+   if (cfdata->init == EINA_FALSE) return;
+   cfdata->init = EINA_FALSE;
+   e_widget_ilist_clear(cfdata->obj.ilist);
 
    if (!inst->blacklist_items) return;
 
-   items = inst->blacklist_items;
-   EINA_LIST_FOREACH(items, l, exe)
-    {  INF("%s", exe);
-       e_widget_ilist_append(cfdata->ilist, NULL, exe, NULL, NULL, exe);
-    }
-   e_widget_ilist_go(cfdata->ilist);
-   e_widget_ilist_selected_set(cfdata->ilist, 1);
+   cfdata->blacklist_items = eina_list_clone(inst->blacklist_items);
+   if (cfdata->blacklist_items && eina_list_count(cfdata->blacklist_items) > 0)
+     {
+        EINA_LIST_FOREACH(cfdata->blacklist_items, l, exe)
+         {
+            e_widget_ilist_append(cfdata->obj.ilist, NULL, exe, NULL, NULL, exe);
+         }
+     } else
+     {  INF("Empty blacklist items");
+        e_widget_ilist_append(cfdata->obj.ilist, NULL, "", NULL, NULL, "");
+     }
+   e_widget_ilist_go(cfdata->obj.ilist);
+   e_widget_ilist_selected_set(cfdata->obj.ilist, 1);
 }
