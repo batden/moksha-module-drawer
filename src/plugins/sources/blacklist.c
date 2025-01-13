@@ -165,8 +165,21 @@ clone_blacklist(Eina_List *items)
    char *exe;
 
    EINA_LIST_FOREACH(items, l, exe)
-     {  INF("%s", exe);
+     {
         clone = eina_list_append(clone, strdup(exe));
       }
    return clone;
+}
+
+void
+remove_blacklist()
+{
+   char blacklist_path[PATH_MAX];
+   
+   if (!_set_blacklist_path(blacklist_path))
+     {
+        printf("blacklist File Creation Error: %s\n", blacklist_path);
+        return;
+     }
+   ecore_file_unlink(blacklist_path);
 }
