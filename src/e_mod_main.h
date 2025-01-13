@@ -40,6 +40,7 @@ struct _Config_Item
    const char *source;
    const char *view;
    const char *composite;
+   int theme;
 };
 
 /* Setup the E Module Version, Needed to check if module can run. */

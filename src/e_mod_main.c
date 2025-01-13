@@ -195,6 +195,7 @@ e_modapi_init(E_Module *m)
    E_CONFIG_VAL(D, T, source, STR);
    E_CONFIG_VAL(D, T, view, STR);
    E_CONFIG_VAL(D, T, composite, STR);
+   E_CONFIG_VAL(D, T, theme, INT);
 
    conf_edd = E_CONFIG_DD_NEW("Config", Config);
    #undef T

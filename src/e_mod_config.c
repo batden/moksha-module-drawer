@@ -9,6 +9,7 @@ struct _E_Config_Dialog_Data
 
    Eina_List *sources, *views;
    const char *source, *view;
+   int theme;
 
    Config_Item *ci;
    void *data;
@@ -86,6 +87,7 @@ _fill_data(E_Config_Dialog_Data *cfdata)
 {
    cfdata->view = eina_stringshare_add(cfdata->ci->view);
    cfdata->source = eina_stringshare_add(cfdata->ci->source);
+   cfdata->theme = cfdata->ci->theme;
 }
 
 static Evas_Object *
@@ -131,6 +133,8 @@ _basic_apply(E_Config_Dialog *cfd __UNUSED__, E_Config_Dialog_Data *cfdata)
      drawer_plugin_load(cfdata->ci, DRAWER_VIEWS, cfdata->view);
    if (strcmp(cfdata->ci->source, cfdata->source))
      drawer_plugin_load(cfdata->ci, DRAWER_SOURCES, cfdata->source);
+
+   cfdata->ci->theme = cfdata->theme;
 
    e_config_save_queue();
    return 1;
@@ -266,7 +270,7 @@ static void
 _conf_plugin_set(void *data1 __UNUSED__, void *data2)
 {
    E_Config_Dialog_Data *cfdata;
-   Evas_Object *of, *ol, *packed;
+   Evas_Object *of, *ol, *ob, *packed;
    Eina_List *l;
    Evas *evas;
 
@@ -290,9 +294,10 @@ _conf_plugin_set(void *data1 __UNUSED__, void *data2)
    e_widget_framelist_content_align_set(of, 0.5, 0.5);
    e_widget_list_object_append(ol, of, 0, 0, 0.5);
 
-   of = e_widget_framelist_add(evas, D_("View settings"), 1);
+   of = e_widget_framelist_add(evas, D_("View settings"), 0);
    e_widget_framelist_object_append(of, drawer_plugin_config_button_get(cfdata->ci, evas, DRAWER_VIEWS));
-   e_widget_framelist_content_align_set(of, 0.5, 0.5);
+   ob = e_widget_check_add(evas, D_("Moksha theme"), &(cfdata->theme));
+   e_widget_framelist_object_append(of, ob);
    e_widget_list_object_append(ol, of, 0, 0, 0.5);
 
    edje_thaw();
