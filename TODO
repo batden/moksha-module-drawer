@@ -1,7 +1,8 @@
 First, make everything fully functional.
 
 Test blacklist functionality to the history plugin.
-Add an ibar like way to edit Blacklist file items, maybe advanced button
+Finish blacklist edit functions and figure out the smart object error:
+   ERR<1373>:evas_main ../src/lib/evas/canvas/evas_object_smart.c:151 evas_object_smart_data_get() calling smart object API on non-smart object!
 
 Original To Do list:
 
