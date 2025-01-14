@@ -738,8 +738,6 @@ _cb_del(void *data, void *data2 __UNUSED__)
               INF("FREE DATA %s",ldata);
               cfdata->blacklist_items = eina_list_remove_list(cfdata->blacklist_items, ll);
             }
-        EINA_LIST_FOREACH(cfdata->blacklist_items, l, exe)
-            e_widget_ilist_append(cfdata->obj.ilist, NULL, exe, NULL, NULL, exe);
 
         e_widget_ilist_remove_num(cfdata->obj.ilist, count);
         break;
@@ -759,8 +757,8 @@ _widget_list_selection_changed(void *data, Evas_Object *obj __UNUSED__)
 {
    E_Config_Dialog_Data *cfdata = data;
 
-   //e_widget_disabled_set(cfdata->obj.bt_del, !e_widget_ilist_selected_count_get(cfdata->obj.ilist));
-   //e_widget_disabled_set(cfdata->obj.bt_add, !e_widget_ilist_selected_count_get(cfdata->obj.ilist));
+   e_widget_disabled_set(cfdata->obj.bt_del, !e_widget_ilist_selected_count_get(cfdata->obj.ilist));
+   e_widget_disabled_set(cfdata->obj.bt_add, !e_widget_ilist_selected_count_get(cfdata->obj.ilist));
 }
 
 
