@@ -734,8 +734,7 @@ _cb_del(void *data, void *data2 __UNUSED__)
         EINA_LIST_FOREACH_SAFE(cfdata->blacklist_items, ll, l_next, ldata)
           if (strcmp(ldata, exe) == 0)
             {
-              // FIXME: free(ldata);
-              INF("FREE DATA %s",ldata);
+              free(ldata);
               cfdata->blacklist_items = eina_list_remove_list(cfdata->blacklist_items, ll);
             }
 
