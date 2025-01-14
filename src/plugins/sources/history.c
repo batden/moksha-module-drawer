@@ -604,7 +604,7 @@ static void
 _history_cf_free_data(E_Config_Dialog *cfd __UNUSED__, E_Config_Dialog_Data *cfdata)
 {
    _cfd = NULL;
-   cfdata->blacklist_items = eina_list_free(cfdata->blacklist_items);
+   E_FREE_LIST(cfdata->blacklist_items, free);
    E_FREE(cfdata);
 }
 
@@ -686,6 +686,7 @@ _history_cf_basic_apply(E_Config_Dialog *cfd __UNUSED__, E_Config_Dialog_Data *c
    cfdata->inst->conf->sort_type = cfdata->sort_type;
    inst->conf->blacklist = cfdata->inst->conf->blacklist = cfdata->blacklist;
 
+   E_FREE_LIST(inst->blacklist_items, free);
    if (eina_list_count(cfdata->blacklist_items))
      {
         inst->blacklist_items = clone_blacklist(cfdata->blacklist_items);
@@ -733,10 +734,7 @@ _cb_del(void *data, void *data2 __UNUSED__)
         const char *exe = e_widget_ilist_nth_value_get(cfdata->obj.ilist, count);
         EINA_LIST_FOREACH_SAFE(cfdata->blacklist_items, ll, l_next, ldata)
           if (strcmp(ldata, exe) == 0)
-            {
-              free(ldata);
-              cfdata->blacklist_items = eina_list_remove_list(cfdata->blacklist_items, ll);
-            }
+            cfdata->blacklist_items = eina_list_remove_list(cfdata->blacklist_items, ll);
 
         e_widget_ilist_remove_num(cfdata->obj.ilist, count);
         break;
@@ -774,7 +772,7 @@ _history_cf_load_ilist(E_Config_Dialog_Data *cfdata)
 
    if (!inst->blacklist_items) return;
 
-   cfdata->blacklist_items = eina_list_clone(inst->blacklist_items);
+   cfdata->blacklist_items = clone_blacklist(inst->blacklist_items);
    if (cfdata->blacklist_items && eina_list_count(cfdata->blacklist_items) > 0)
      {
         EINA_LIST_FOREACH(cfdata->blacklist_items, l, exe)
