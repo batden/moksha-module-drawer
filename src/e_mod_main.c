@@ -656,7 +656,7 @@ _drawer_popup_theme_set(Instance *inst)
         char buf[PATH_MAX];
 
         snprintf(buf, sizeof(buf), "%s/e-module-drawer.edj", drawer_conf->module->dir);
-        if (edje_file_group_exists(buf, theme))
+        if (edje_file_group_exists(buf, theme) && !(inst->conf_item->theme))
           edje_object_file_set(inst->popup->o_bg, buf, theme);
         else
           e_theme_edje_object_set(inst->popup->o_bg, "base/theme/gadman", "e/gadman/popup");
@@ -832,13 +832,14 @@ _drawer_popup_hide(Instance *inst)
        default:
          break;
      }
-   inst->flags.pop_hiding = EINA_TRUE;
+   //~ inst->flags.pop_hiding = EINA_TRUE;
    if (inst->view && DRAWER_VIEW(inst->view)->func.toggle_visibility)
      DRAWER_VIEW(inst->view)->func.toggle_visibility(DRAWER_VIEW(inst->view), EINA_FALSE);
    else if (inst->composite && DRAWER_COMPOSITE(inst->composite)->func.toggle_visibility)
      DRAWER_COMPOSITE(inst->composite)->func.toggle_visibility(
          DRAWER_COMPOSITE(inst->composite), EINA_FALSE);
 
+   e_gadcon_popup_hide(inst->popup);
    _drawer_input_win_del(inst);
 }
 
