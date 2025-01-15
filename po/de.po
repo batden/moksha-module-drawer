@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: drawer\n"
 "Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2025-01-04 12:39+0100\n"
+"POT-Creation-Date: 2025-01-15 21:26+0100\n"
 "PO-Revision-Date: 2010-11-26 17:53+0100\n"
 "Last-Translator: Fabian Nowak <timystery@arcor.de>\n"
 "Language-Team: German\n"
@@ -17,39 +17,43 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/e_mod_config.c:51
+#: src/e_mod_config.c:52
 msgid "Drawer Module"
 msgstr "Ablagenmodul"
 
-#: src/e_mod_config.c:104
+#: src/e_mod_config.c:106
 msgid "Plugins selection"
 msgstr "Plugin-Auswahl"
 
-#: src/e_mod_config.c:107
+#: src/e_mod_config.c:109
 msgid "Plugins settings"
 msgstr "Plugin-Einstellungen"
 
-#: src/e_mod_config.c:167
+#: src/e_mod_config.c:171
 msgid "Source plugins"
 msgstr "Quellen-Plugins"
 
-#: src/e_mod_config.c:192
+#: src/e_mod_config.c:197
 msgid "View plugins"
 msgstr "Ansichten-Plugins"
 
-#: src/e_mod_config.c:239 src/e_mod_config.c:260
+#: src/e_mod_config.c:245 src/e_mod_config.c:266
 msgid "Description: Unavailable"
 msgstr "Beschreibung: Nicht verfügbar"
 
-#: src/e_mod_config.c:286
+#: src/e_mod_config.c:292
 msgid "Source settings"
 msgstr "Quellen-Einstellungen"
 
-#: src/e_mod_config.c:291
+#: src/e_mod_config.c:297
 msgid "View settings"
 msgstr "Ansichten-Einstellungen"
 
-#: src/e_mod_main.c:214
+#: src/e_mod_config.c:300
+msgid "Moksha theme"
+msgstr ""
+
+#: src/e_mod_main.c:215
 msgid ""
 "Drawer Module Configuration data needed upgrading. Your old "
 "configuration<br> has been wiped and a new set of defaults initialized. "
@@ -69,7 +73,7 @@ msgstr ""
 "Ihren<br>Vorlieben einstellen. Entschuldigen Sie bitte die "
 "Unannehmlichkeiten.<br>"
 
-#: src/e_mod_main.c:234
+#: src/e_mod_main.c:233
 msgid ""
 "Your Drawer Module configuration is NEWER than the module version. This is "
 "very<br>strange. This should not happen unless you downgraded<br>the module "
@@ -84,168 +88,168 @@ msgstr ""
 "Ihre Einstellung<br>auf den Standard zurückgesetzt. Entschuldigen Sie bitte "
 "die Unannehmlichkeiten.<br>"
 
-#: src/e_mod_main.c:482
+#: src/e_mod_main.c:456
 msgid "The plugin is not configurable"
 msgstr "Das Plugin ist nicht einstellbar"
 
-#: src/e_mod_main.c:972 src/e_mod_main.c:980 src/e_mod_main.c:994
-#: src/e_mod_main.c:1006 src/e_mod_main.c:1074 src/e_mod_main.c:1125
-#: src/e_mod_main.c:1171
+#: src/e_mod_main.c:1026 src/e_mod_main.c:1034 src/e_mod_main.c:1048
+#: src/e_mod_main.c:1060 src/e_mod_main.c:1128 src/e_mod_main.c:1179
+#: src/e_mod_main.c:1225
 msgid "Drawer Plugins"
 msgstr "Ablagen-Plugins"
 
-#: src/e_mod_main.c:973
+#: src/e_mod_main.c:1027
 #, c-format
 msgid "The plugin '%s' was not found."
 msgstr "Das Plugin \"%s\" wurde nicht gefunden."
 
-#: src/e_mod_main.c:981
+#: src/e_mod_main.c:1035
 #, c-format
 msgid "The plugin '%s' could not be opened."
 msgstr "Das Plugin \"%s\" konnte nicht geöffnet werden."
 
-#: src/e_mod_main.c:995 src/e_mod_main.c:1075 src/e_mod_main.c:1126
-#: src/e_mod_main.c:1172
+#: src/e_mod_main.c:1049 src/e_mod_main.c:1129 src/e_mod_main.c:1180
+#: src/e_mod_main.c:1226
 #, c-format
 msgid "The plugin '%s' does not contain all required functions."
 msgstr "Das Plugin \"%s\" enthält nicht alle benötigten Funktionen."
 
-#: src/e_mod_main.c:1007
+#: src/e_mod_main.c:1061
 #, c-format
 msgid "The plugin '%s' does not have the required API version."
 msgstr "Das Plugin \"%s\" hat nicht die benötigte API-Version."
 
-#: src/e_mod_main.c:1337
+#: src/e_mod_main.c:1391
 msgid "Drawer"
 msgstr "Ablage"
 
-#: src/e_mod_main.c:1430
+#: src/e_mod_main.c:1484
 msgid "Drawer Configuration Updated"
 msgstr "Ablagen-Einstellung aktualisiert"
 
-#: src/e_mod_main.c:1785
+#: src/e_mod_main.c:1851
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: src/plugins/sources/directory_watcher.c:275
+#: src/plugins/sources/directory_watcher.c:251
 msgid "Open Containing Directory"
 msgstr "Das beinhaltende Verzeichnis öffnen"
 
-#: src/plugins/sources/directory_watcher.c:287
+#: src/plugins/sources/directory_watcher.c:261
 msgid "Directory Watcher settings"
 msgstr "Einstellungen für den Verzeichnisbeobachter"
 
-#: src/plugins/sources/directory_watcher.c:346
+#: src/plugins/sources/directory_watcher.c:315
 msgid "Home"
 msgstr "Persönlicher Ordner"
 
-#: src/plugins/sources/directory_watcher.c:413
+#: src/plugins/sources/directory_watcher.c:378
 #, c-format
 msgid "Directory (%s)"
 msgstr "Verzeichnis (%s)"
 
-#: src/plugins/sources/directory_watcher.c:504
+#: src/plugins/sources/directory_watcher.c:464
 msgid "Drawer Plugin : Directory Watcher"
 msgstr "Ablagen-Plugin: Verzeichnis beobachten"
 
-#: src/plugins/sources/directory_watcher.c:547
+#: src/plugins/sources/directory_watcher.c:505
 msgid "Watch path"
 msgstr "Pfad beobachten"
 
-#: src/plugins/sources/directory_watcher.c:553
+#: src/plugins/sources/directory_watcher.c:511
 msgid "Custom file manager"
 msgstr "Benutzerdefinierter Dateimanager"
 
-#: src/plugins/sources/directory_watcher.c:559
+#: src/plugins/sources/directory_watcher.c:517
 msgid "Sort Options"
 msgstr "Sortiereinstellungen"
 
-#: src/plugins/sources/directory_watcher.c:560
+#: src/plugins/sources/directory_watcher.c:518
 msgid "Sort directories first"
 msgstr "Verzeichnisse zuerst"
 
-#: src/plugins/sources/directory_watcher.c:564
+#: src/plugins/sources/directory_watcher.c:522
 msgid "Sort by name"
 msgstr "Nach Namen sortieren"
 
-#: src/plugins/sources/directory_watcher.c:566
+#: src/plugins/sources/directory_watcher.c:524
 msgid "Sort by access time"
 msgstr "Nach Zugriffszeit sortieren"
 
-#: src/plugins/sources/directory_watcher.c:568
+#: src/plugins/sources/directory_watcher.c:526
 msgid "Sort by modification time"
 msgstr "Nach Veränderungsdatum sortieren"
 
-#: src/plugins/sources/directory_watcher.c:570
+#: src/plugins/sources/directory_watcher.c:528
 msgid "Sort by change time"
 msgstr "Nach Veränderungsdatum sortieren"
 
-#: src/plugins/sources/directory_watcher.c:572
+#: src/plugins/sources/directory_watcher.c:530
 msgid "Sort by size"
 msgstr "Nach Größe sortieren"
 
-#: src/plugins/sources/launcher.c:197
+#: src/plugins/sources/launcher.c:182
 msgid "Launcher settings"
 msgstr "Startereinstellungen"
 
-#: src/plugins/sources/launcher.c:318
+#: src/plugins/sources/launcher.c:301
 msgid "Change Item Properties"
 msgstr "Elementeigenschaften ändern"
 
-#: src/plugins/sources/launcher.c:323
+#: src/plugins/sources/launcher.c:306
 msgid "Remove Item"
 msgstr "Element entfernen"
 
-#: src/plugins/sources/launcher.c:346
+#: src/plugins/sources/launcher.c:327
 #, c-format
 msgid "%s source"
 msgstr "Quelle %s"
 
-#: src/plugins/sources/launcher.c:529
+#: src/plugins/sources/launcher.c:507
 msgid "Drawer Plugin : Launcher"
 msgstr "Ablagen-Plugin: Starter"
 
-#: src/plugins/sources/launcher.c:587
+#: src/plugins/sources/launcher.c:563
 msgid "Selected Bar Source"
 msgstr "Ausgewählte Leistenquelle"
 
-#: src/plugins/sources/launcher.c:595
+#: src/plugins/sources/launcher.c:571
 msgid "Add"
 msgstr "Hinzufügen"
 
-#: src/plugins/sources/launcher.c:597
+#: src/plugins/sources/launcher.c:573
 msgid "Delete"
 msgstr "Löschen"
 
-#: src/plugins/sources/launcher.c:599
+#: src/plugins/sources/launcher.c:575
 msgid "Configure"
 msgstr "Einstellen"
 
-#: src/plugins/sources/launcher.c:609
+#: src/plugins/sources/launcher.c:585
 msgid "Sorting options"
 msgstr "Sortiereinstellungen"
 
-#: src/plugins/sources/launcher.c:610
+#: src/plugins/sources/launcher.c:586
 msgid "Unsorted"
 msgstr "Unsortiert"
 
-#: src/plugins/sources/launcher.c:612
+#: src/plugins/sources/launcher.c:588
 msgid "Sort applications by local rating"
 msgstr "Anwendungen nach lokaler Bewertung sortieren"
 
-#: src/plugins/sources/launcher.c:614
+#: src/plugins/sources/launcher.c:590
 msgid "Sort applications by overall popularity"
 msgstr "Anwendungen nach insgesamter Beliebtheit sortieren"
 
-#: src/plugins/sources/launcher.c:651
+#: src/plugins/sources/launcher.c:625
 msgid "Create new Launcher source"
 msgstr "Neue Starterquelle erstellen"
 
-#: src/plugins/sources/launcher.c:652
+#: src/plugins/sources/launcher.c:626
 msgid "Enter a name for this new source:"
 msgstr "Geben Sie einen Namen für diese neue Quelle ein:"
 
-#: src/plugins/sources/launcher.c:667
+#: src/plugins/sources/launcher.c:639
 #, c-format
 msgid ""
 "You requested to delete \"%s\".<br><br>Are you sure you want to delete this "
@@ -254,7 +258,7 @@ msgstr ""
 "Sie möchten \"%s\" entfernen.<br><br>Möchten Sie diese Leistenquelle "
 "wirklich löschen?"
 
-#: src/plugins/sources/launcher.c:671
+#: src/plugins/sources/launcher.c:643
 msgid "Are you sure you want to delete this bar source?"
 msgstr "Möchten Sie diese Leistenquelle löschen?"
 
@@ -262,22 +266,22 @@ msgstr "Möchten Sie diese Leistenquelle löschen?"
 msgid "List settings"
 msgstr "Listeneinstellungen"
 
-#: src/plugins/views/list.c:811
+#: src/plugins/views/list.c:778
 msgid "Drawer Plugin : List"
 msgstr "Ablagen-Plugin: Liste"
 
-#: src/plugins/views/list.c:848
+#: src/plugins/views/list.c:814
 msgid "Item size options"
 msgstr "Elementgröße einstellen"
 
-#: src/plugins/views/list.c:849
+#: src/plugins/views/list.c:815
 msgid "Large"
 msgstr "Groß"
 
-#: src/plugins/views/list.c:851
+#: src/plugins/views/list.c:817
 msgid "Medium"
 msgstr "Mittel"
 
-#: src/plugins/views/list.c:853
+#: src/plugins/views/list.c:819
 msgid "Small"
 msgstr "Klein"
