@@ -1,12 +1,16 @@
 [Desktop Entry]
 Type=Link
 Name=launcher
-Name[ru]=Пуск
-Name[eo]=Lanĉilo
+Name[ru]=ÐÑÑÐº
+Name[eo]=LanÄilo
+Name[cs]=spouštěč
+Name[sk]=spúšťač
 Comment=An application launcher source plugin
-Comment[ru]=Плагин запуска приложений
-Comment[cs]=Zdrojov� plugin pro spou�t�n� aplikac�
+Comment[ru]=ÐÐ»Ð°Ð³Ð¸Ð½ Ð·Ð°Ð¿ÑÑÐºÐ° Ð¿ÑÐ¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ð¹
+Comment[cs]=Zdrojový plugin pro spoutìní aplikací
 Comment[it]=Un plugin per lanciare applicazioni
-Comment[eo]=Lanĉilo de aplikaĵoj
+Comment[eo]=LanÄilo de aplikaÄµoj
+Comment[cs]=Rozšíření pro spouštěč aplikací
+Comment[sk]=Rozšírenie pre spúšťač aplikácií
 
 X-Drawer-Title=Launcher

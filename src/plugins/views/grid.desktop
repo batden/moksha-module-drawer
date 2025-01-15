@@ -1,12 +1,16 @@
 [Desktop Entry]
 Type=Link
 Name=grid
-Name[ru]=Сетка
+Name[ru]=Ð¡ÐµÑÐºÐ°
 Name[eo]=Krado
+Name[cs]=mříž
+Name[sk]=mriežka
 Comment=A grid representation of elements
-Comment[ru]=Расположение элементов сеткой.
-Comment[cs]=Tabulkov� zobrazen�
+Comment[ru]=Ð Ð°ÑÐ¿Ð¾Ð»Ð¾Ð¶ÐµÐ½Ð¸Ðµ ÑÐ»ÐµÐ¼ÐµÐ½ÑÐ¾Ð² ÑÐµÑÐºÐ¾Ð¹.
+Comment[cs]=Tabulkové zobrazení
 Comment[eo]=Krada prezentado de elementoj
 Comment[it]=Rappresentazione in griglia degli elementi
+Comment[cs]=Položky zobrazené v mřížce
+Comment[sk]=Položky zobrazené v mriežke
 
 X-Drawer-Title=Grid

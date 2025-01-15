@@ -1,12 +1,16 @@
 [Desktop Entry]
 Type=Link
 Name=history
-Name[ru]=История
+Name[ru]=ÐÑÑÐ¾ÑÐ¸Ñ
 Name[eo]=Historio
+Name[cs]=historie
+Name[sk]=história
 Comment=An application history launcher source plugin
-Comment[ru]=Плагин для запуска приложений из списка истории
-Comment[cs]=Zdrojov� plugin - historie p��kaz�
-Comment[eo]=Lanĉilo de aplikaĵoj memoritaj.
+Comment[ru]=ÐÐ»Ð°Ð³Ð¸Ð½ Ð´Ð»Ñ Ð·Ð°Ð¿ÑÑÐºÐ° Ð¿ÑÐ¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ð¹ Ð¸Ð· ÑÐ¿Ð¸ÑÐºÐ° Ð¸ÑÑÐ¾ÑÐ¸Ð¸
+Comment[cs]=Zdrojový plugin - historie pøíkazù
+Comment[eo]=LanÄilo de aplikaÄµoj memoritaj.
 Comment[it]=Un plugin per uno storico del lancio applicazioni
+Comment[cs]=Rozšíření pro zobrazení historie spuštěných aplikací
+Comment[sk]=Rozšírenie pre zobrazenie histórie spustených aplikácií
 
 X-Drawer-Title=History launcher
