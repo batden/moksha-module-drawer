@@ -1,10 +1,10 @@
 [Desktop Entry]
 Type=Link
-Name=grid
+Name=Grid
 Name[ru]=Ð¡ÐµÑÐºÐ°
 Name[eo]=Krado
-Name[cs]=mříž
-Name[sk]=mriežka
+Name[cs]=Mříž
+Name[sk]=Mriežka
 Comment=A grid representation of elements
 Comment[ru]=Ð Ð°ÑÐ¿Ð¾Ð»Ð¾Ð¶ÐµÐ½Ð¸Ðµ ÑÐ»ÐµÐ¼ÐµÐ½ÑÐ¾Ð² ÑÐµÑÐºÐ¾Ð¹.
 Comment[cs]=Tabulkové zobrazení

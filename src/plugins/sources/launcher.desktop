@@ -1,10 +1,10 @@
 [Desktop Entry]
 Type=Link
-Name=launcher
+Name=Launcher
 Name[ru]=ÐÑÑÐº
 Name[eo]=LanÄilo
-Name[cs]=spouštěč
-Name[sk]=spúšťač
+Name[cs]=Spouštěč
+Name[sk]=Spúšťač
 Comment=An application launcher source plugin
 Comment[ru]=ÐÐ»Ð°Ð³Ð¸Ð½ Ð·Ð°Ð¿ÑÑÐºÐ° Ð¿ÑÐ¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ð¹
 Comment[cs]=Zdrojový plugin pro spoutìní aplikací

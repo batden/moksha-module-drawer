@@ -1,16 +1,16 @@
 [Desktop Entry]
 Type=Link
-Name=directory_watcher
+Name=Directory watcher
 Name[ru]=ÑÐ¼Ð¾ÑÑÐ¸ÑÐµÐ»Ñ_Ð¿Ð°Ð¿ÐºÐ¸
-Name[eo]=dosierujo_atentilo
-Name[cs]=sledovač_adresářů
-Name[sk]=sledovač_adresárov
+Name[eo]=Dosierujo atentilo
+Name[cs]=Zobrazení adresáře
+Name[sk]=Zobrazenie adresára
 Comment=A directory watcher source plugin
 Comment[ru]=ÐÐ»Ð°Ð³Ð¸Ð½ Ð´Ð»Ñ Ð½Ð°Ð±Ð»ÑÐ´ÐµÐ½Ð¸Ñ Ð·Ð° Ð¿Ð°Ð¿ÐºÐ¾Ð¹
 Comment[cs]=Zdrojový plugin - hlídaè sloek
 Comment[eo]=KromaÄµo kiu atentas la enhavon de dosierujo
 Comment[it]=Un plugin per il controllo di directory
-Comment[cs]=Rozšíření pro sledování adresářů
-Comment[sk]=Rozšírenie pre sledovanie adresárov
+Comment[cs]=Rozšíření pro zobrezní súborů adresáře
+Comment[sk]=Rozšírenie pre zobraznie súborov v adresári
 
 X-Drawer-Title=Directory Watcher

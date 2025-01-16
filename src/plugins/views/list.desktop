@@ -1,16 +1,16 @@
 [Desktop Entry]
 Type=Link
-Name=list
+Name=List
 Name[ru]=Ð¡Ð¿Ð¸ÑÐ¾Ðº
 Name[eo]=Listo
-Name[cs]=seznam
-Name[sk]=zoznam
+Name[cs]=Seznam
+Name[sk]=Zoznam
 Comment=A list representation of elements
 Comment[ru]=Ð Ð°ÑÐ¿Ð¾Ð»Ð¾Ð¶ÐµÐ½Ð¸Ðµ ÑÐ»ÐµÐ¼ÐµÐ½ÑÐ¾Ð² ÑÐ¿Ð¸ÑÐºÐ¾Ð¼.
 Comment[cs]=Seznamové zobrazení
 Comment[eo]=Lista prezentado de elementoj
 Comment[it]=Rappresentazione ad elenco degli elementi
-Comment[cs]=Položky zobrazeny v seznamu
-Comment[sk]=Položky zobrazené v zozname
+Comment[cs]=Položky zobrazit v seznamu
+Comment[sk]=Položky zobraziť v zozname
 
 X-Drawer-Title=List
