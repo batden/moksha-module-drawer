@@ -1,12 +1,12 @@
 [Desktop Entry]
 Type=Link
 Name=Window list
-Name[ru]=ÑÐ¿Ð¸ÑÐ¾Ðº Ð¾ÐºÐ¾Ð½
+Name[ru]=Cписок окон
 Name[eo]=Fnestrolisto
 Name[cs]=Seznam oken
 Name[sk]=Zoznam okien
 Comment=A window list source plugin
-Comment[ru]=ÐÐ»Ð°Ð³Ð¸Ð½ ÑÐ¿Ð¸ÑÐºÐ° Ð¾ÐºÐ¾Ð½
+Comment[ru]=Плагин списка окон
 Comment[cs]=Zdrojový plugin - seznam oken
 Comment[eo]=Listo de fenestroj
 Comment[it]=Un plugin per una lista finestre

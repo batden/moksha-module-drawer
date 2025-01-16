@@ -1,12 +1,12 @@
 [Desktop Entry]
 Type=Link
 Name=Grid
-Name[ru]=Ð¡ÐµÑÐºÐ°
+Name[ru]=Сетка
 Name[eo]=Krado
 Name[cs]=Mříž
 Name[sk]=Mriežka
 Comment=A grid representation of elements
-Comment[ru]=Ð Ð°ÑÐ¿Ð¾Ð»Ð¾Ð¶ÐµÐ½Ð¸Ðµ ÑÐ»ÐµÐ¼ÐµÐ½ÑÐ¾Ð² ÑÐµÑÐºÐ¾Ð¹.
+Comment[ru]=Расположение элементов сеткой
 Comment[cs]=Tabulkové zobrazení
 Comment[eo]=Krada prezentado de elementoj
 Comment[it]=Rappresentazione in griglia degli elementi
