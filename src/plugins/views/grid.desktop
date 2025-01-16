@@ -3,14 +3,13 @@ Type=Link
 Name=Grid
 Name[ru]=Сетка
 Name[eo]=Krado
-Name[cs]=Mříž
+Name[cs]=Tabulka
 Name[sk]=Mriežka
 Comment=A grid representation of elements
 Comment[ru]=Расположение элементов сеткой
-Comment[cs]=Tabulkové zobrazení
 Comment[eo]=Krada prezentado de elementoj
 Comment[it]=Rappresentazione in griglia degli elementi
-Comment[cs]=Položky zobrazené v mřížce
-Comment[sk]=Položky zobrazené v mriežke
+Comment[cs]=Položky zobrazit v tabulce
+Comment[sk]=Položky zobraziř v mriežke
 
 X-Drawer-Title=Grid

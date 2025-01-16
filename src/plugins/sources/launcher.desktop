@@ -7,9 +7,9 @@ Name[cs]=Spouštěč
 Name[sk]=Spúšťač
 Comment=An application launcher source plugin
 Comment[ru]=Плагин запуска приложений
-Comment[cs]=Zdrojový plugin pro spouštěn aplikací
 Comment[it]=Un plugin per lanciare applicazioni
 Comment[eo]=Lanĉilo de aplikaĵoj
+Comment[cs]=Rozšíření pro spouštěč aplikací
 Comment[sk]=Rozšírenie pre spúšťač aplikácií
 
 X-Drawer-Title=Launcher
