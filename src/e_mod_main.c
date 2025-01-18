@@ -593,8 +593,8 @@ drawer_util_icon_create(Drawer_Source_Item *si, Evas *evas, int w, int h)
 static void
 _drawer_error(const char *src, const char *msg, const char *name)
 {
-	WRN("%s %s %s", src, msg, name);
-	e_util_dialog_show(src, msg, name);
+   WRN("%s %s %s", src, msg, name);
+   e_util_dialog_show(src, msg, name);
 }
 
 static void
