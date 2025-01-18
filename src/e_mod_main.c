@@ -379,8 +379,7 @@ drawer_plugins_list(Drawer_Plugin_Category cat)
         snprintf(buf2, sizeof(buf2), "%s%s", moddir, mod);
         if (!(desk = efreet_desktop_new(buf2))) goto end;
         if (desk->x)
-          pi->title = eina_stringshare_add(eina_hash_find(desk->x, "Name"));
-          //~ pi->title = eina_stringshare_add(eina_hash_find(desk->x, "X-Drawer-Title"));
+          pi->title = eina_stringshare_add(eina_hash_find(desk->x, "X-Drawer-Title"));
         if (!pi->title) pi->title = eina_stringshare_add(desk->name);
 
         pi->name = eina_stringshare_add(desk->name);
