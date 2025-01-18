@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Link
-Name=directory_watcher
+Name=Directory watcher
 Name[ru]=Cмотритель папки
 Name[eo]=Dosierujo atentilo
 Name[cs]=Zobrazení adresáře
@@ -12,4 +12,4 @@ Comment[it]=Un plugin per il controllo di directory
 Comment[cs]=Rozšíření pro zobrazení souborů v adresáři
 Comment[sk]=Rozšírenie pre zobraznie súborov v adresári
 
-X-Drawer-Title=Directory Watcher
+X-Drawer-Title=directory_watcher

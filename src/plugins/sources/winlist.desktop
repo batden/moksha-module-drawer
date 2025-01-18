@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Link
-Name=winlist
+Name=Window list
 Name[ru]=Cписок окон
 Name[eo]=Fnestrolisto
 Name[cs]=Seznam oken
@@ -12,4 +12,4 @@ Comment[it]=Un plugin per una lista finestre
 Comment[cs]=Rozšíření pro zobrazení seznamu oken
 Comment[sk]=Rozšírenie pre zobrazenie zoznamu okien
 
-X-Drawer-Title=Window list
+X-Drawer-Title=winlist

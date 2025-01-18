@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Link
-Name=history
+Name=History launcher
 Name[ru]=История
 Name[eo]=Historio
 Name[cs]=Historie aplikací
@@ -12,4 +12,4 @@ Comment[it]=Un plugin per uno storico del lancio applicazioni
 Comment[cs]=Rozšíření pro zobrazení historie spuštěných aplikací
 Comment[sk]=Rozšírenie pre zobrazenie histórie spustených aplikácií
 
-X-Drawer-Title=History launcher
+X-Drawer-Title=history

@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Link
-Name=list
+Name=List
 Name[ru]=Список
 Name[eo]=Listo
 Name[cs]=Seznam
@@ -12,4 +12,4 @@ Comment[it]=Rappresentazione ad elenco degli elementi
 Comment[cs]=Položky zobrazit v seznamu
 Comment[sk]=Položky zobraziť v zozname
 
-X-Drawer-Title=List
+X-Drawer-Title=list

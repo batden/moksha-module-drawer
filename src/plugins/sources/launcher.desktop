@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Link
-Name=launcher
+Name=Launcher
 Name[ru]=Пуск
 Name[eo]=Lanĉilo
 Name[cs]=Spouštěč
@@ -12,4 +12,4 @@ Comment[eo]=Lanĉilo de aplikaĵoj
 Comment[cs]=Rozšíření pro spouštěč aplikací
 Comment[sk]=Rozšírenie pre spúšťač aplikácií
 
-X-Drawer-Title=Launcher
+X-Drawer-Title=launcher

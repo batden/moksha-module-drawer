@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Link
-Name=grid
+Name=Grid
 Name[ru]=Сетка
 Name[eo]=Krado
 Name[cs]=Tabulka
@@ -12,4 +12,4 @@ Comment[it]=Rappresentazione in griglia degli elementi
 Comment[cs]=Položky zobrazit v tabulce
 Comment[sk]=Položky zobraziř v mriežke
 
-X-Drawer-Title=Grid
+X-Drawer-Title=grid
