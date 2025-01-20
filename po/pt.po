@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: drawer\n"
 "Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2025-01-15 21:26+0100\n"
-"PO-Revision-Date: 2025-01-06 23:27+0000\n"
+"PO-Revision-Date: 2025-01-20 15:55+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese\n"
 "Language: pt\n"
@@ -17,35 +17,35 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: src/e_mod_config.c:52
 msgid "Drawer Module"
-msgstr "Módulo Drawer"
+msgstr "Módulo Gaveta"
 
 #: src/e_mod_config.c:106
 msgid "Plugins selection"
-msgstr "Seleção de \"plugins\""
+msgstr "Seleção de plugins"
 
 #: src/e_mod_config.c:109
 msgid "Plugins settings"
-msgstr "Definições dos \"plugins\""
+msgstr "Definições dos plugins"
 
 #: src/e_mod_config.c:171
 msgid "Source plugins"
-msgstr "\"Plugins\" fonte"
+msgstr "Plugins fonte"
 
 #: src/e_mod_config.c:197
 msgid "View plugins"
-msgstr "Ver \"plugins\""
+msgstr "Visualizar plugins"
 
 #: src/e_mod_config.c:245 src/e_mod_config.c:266
 msgid "Description: Unavailable"
-msgstr "Descrição: indisponível"
+msgstr "Descrição: Indisponível"
 
 #: src/e_mod_config.c:292
 msgid "Source settings"
-msgstr "Definições de fonte"
+msgstr "Definições da fonte"
 
 #: src/e_mod_config.c:297
 msgid "View settings"
@@ -53,7 +53,7 @@ msgstr "Definições de visualização"
 
 #: src/e_mod_config.c:300
 msgid "Moksha theme"
-msgstr ""
+msgstr "Tema Moksha"
 
 #: src/e_mod_main.c:215
 msgid ""
@@ -65,13 +65,14 @@ msgid ""
 "set of defaults will fix<br>that by adding it in. You can re-configure "
 "things now to your<br>liking. Sorry for the inconvenience.<br>"
 msgstr ""
-"A configuração do Drawer tem de ser atualizada. A sua configuração será "
-"removida e ser iniciada uma nova.<br>Isto irá acontecer recorrentemente "
-"durante o ciclo de desenvolvimento e não deve reportar qualquer erro.<br>O "
-"módulo precisava de novos dados para funcionar corretamente e a sua antiga "
-"configuração não os possuía.<br>Este conjunto de valores corrige a "
-"configuração e posteriormente pode configurar o módulo ao seu gosto."
-"<br>Lamentamos o incómodo.<br>"
+"Os dados de configuração do módulo Gaveta precisam de ser atualizados.<br>A "
+"sua configuração antiga foi apagada e um novo conjunto de<br>predefinições "
+"foi iniciado. Isto acontecerá regularmente<br>durante o desenvolvimento, por "
+"isso não comunique qualquer erro.<br>Isto significa simplesmente que o "
+"módulo precisava<br>de novos dados de configuração por defeito para uma "
+"funcionalidade<br>utilizável que que a sua configuração simplesmente não tem."
+"<br>Este conjunto de predefinições irá corrigir isto adicionando-o."
+"<br>Pedimos desculpa pelo incómodo.<br>"
 
 #: src/e_mod_main.c:233
 msgid ""
@@ -81,51 +82,52 @@ msgid ""
 "module was running. This is bad and<br>as a precaution your configuration "
 "has been now restored to<br>defaults. Sorry for the inconvenience.<br>"
 msgstr ""
-"A sua versão do Drawer é mais recente do que a do módulo<br>Esta situação é "
-"estranha e não deveria acontecer a menos que tivesse revertido o módulo para "
-"uma versão inferior ou tenha copiado a configuração de um local em que "
-"esteja a ser executada uma versão mais recente do módulo.<br>Isto é mau e "
-"por precaução, a sua configuração foi reiniciada.<br>Lamentamos o incómodo."
-"<br>"
+"A configuração do seu módulo Gaveta é MAIS RECENTE do que a versão do "
+"módulo<br>Isto é muito estranho. Isto não deve acontecer a menos "
+"que<br>tivesse revertido o módulo para uma versão anterior ou "
+"tenha<br>copiado a configuração de um local onde estava a ser "
+"executada<br>uma versão mais recente do módulo. Isto é mau e<br>por "
+"precaução, a sua configuração foi restaurada às predefinições.<br>Pedimos "
+"desculpa pelo o incómodo.<br>"
 
 #: src/e_mod_main.c:456
 msgid "The plugin is not configurable"
-msgstr "Não pode configurar o \"plugin\""
+msgstr "O plugin não é configurável"
 
 #: src/e_mod_main.c:1026 src/e_mod_main.c:1034 src/e_mod_main.c:1048
 #: src/e_mod_main.c:1060 src/e_mod_main.c:1128 src/e_mod_main.c:1179
 #: src/e_mod_main.c:1225
 msgid "Drawer Plugins"
-msgstr "\"Plugins\" do Drawer"
+msgstr "Plugins da Gaveta"
 
 #: src/e_mod_main.c:1027
 #, c-format
 msgid "The plugin '%s' was not found."
-msgstr "O \"plugin\" '%s' não foi encontrado."
+msgstr "O plugin '%s' não foi encontrado."
 
 #: src/e_mod_main.c:1035
 #, c-format
 msgid "The plugin '%s' could not be opened."
-msgstr "O \"plugin\" '%s' não foi iniciado."
+msgstr "O plugin '%s' não foi iniciado."
 
 #: src/e_mod_main.c:1049 src/e_mod_main.c:1129 src/e_mod_main.c:1180
 #: src/e_mod_main.c:1226
 #, c-format
 msgid "The plugin '%s' does not contain all required functions."
-msgstr "O \"plugin\" '%s' não possui as funções necessárias."
+msgstr "O plugin '%s' não contém todas as funções necessárias."
 
 #: src/e_mod_main.c:1061
 #, c-format
 msgid "The plugin '%s' does not have the required API version."
-msgstr "O \"plugin\" '%s' não possui a versão API necessária."
+msgstr "O plugin '%s' não possui a versão API necessária."
 
 #: src/e_mod_main.c:1391
 msgid "Drawer"
-msgstr "Drawer"
+msgstr "Gaveta"
 
 #: src/e_mod_main.c:1484
 msgid "Drawer Configuration Updated"
-msgstr "A configuração do Drawer foi atualizada"
+msgstr "A configuração da Gaveta foi atualizada"
 
 #: src/e_mod_main.c:1851
 msgid "Settings"
@@ -133,11 +135,11 @@ msgstr "Definições"
 
 #: src/plugins/sources/directory_watcher.c:251
 msgid "Open Containing Directory"
-msgstr "Abrir diretório"
+msgstr "Abrir diretório de conteúdo"
 
 #: src/plugins/sources/directory_watcher.c:261
 msgid "Directory Watcher settings"
-msgstr "Definições do monitorizador de diretórios"
+msgstr "Definições do Monitorizador de diretórios"
 
 #: src/plugins/sources/directory_watcher.c:315
 msgid "Home"
@@ -150,11 +152,11 @@ msgstr "Diretório (%s)"
 
 #: src/plugins/sources/directory_watcher.c:464
 msgid "Drawer Plugin : Directory Watcher"
-msgstr "\"Plugin\" Drawer: Monitorizador de diretórios"
+msgstr "Plugin Gaveta: Monitorizador de diretórios"
 
 #: src/plugins/sources/directory_watcher.c:505
 msgid "Watch path"
-msgstr "Monitorizar caminhos"
+msgstr "Monitorizar caminho"
 
 #: src/plugins/sources/directory_watcher.c:511
 msgid "Custom file manager"
@@ -162,7 +164,7 @@ msgstr "Gestor de ficheiros personalizado"
 
 #: src/plugins/sources/directory_watcher.c:517
 msgid "Sort Options"
-msgstr "Opções de organização"
+msgstr "Opções de ordenação"
 
 #: src/plugins/sources/directory_watcher.c:518
 msgid "Sort directories first"
@@ -207,7 +209,7 @@ msgstr "Fonte de %s"
 
 #: src/plugins/sources/launcher.c:507
 msgid "Drawer Plugin : Launcher"
-msgstr "\"Plugin\" Drawer: Lançador"
+msgstr "Plugin Gaveta: Lançador"
 
 #: src/plugins/sources/launcher.c:563
 msgid "Selected Bar Source"
@@ -227,11 +229,11 @@ msgstr "Configurar"
 
 #: src/plugins/sources/launcher.c:585
 msgid "Sorting options"
-msgstr "Opções de organização"
+msgstr "Opções de ordenação"
 
 #: src/plugins/sources/launcher.c:586
 msgid "Unsorted"
-msgstr "Não ordenar"
+msgstr "Não ordenado"
 
 #: src/plugins/sources/launcher.c:588
 msgid "Sort applications by local rating"
@@ -247,7 +249,7 @@ msgstr "Criar nova fonte do Lançador"
 
 #: src/plugins/sources/launcher.c:626
 msgid "Enter a name for this new source:"
-msgstr "Indique o nome para esta fonte:"
+msgstr "Introduza um nome para esta nova fonte:"
 
 #: src/plugins/sources/launcher.c:639
 #, c-format
@@ -268,7 +270,7 @@ msgstr "Definições da lista"
 
 #: src/plugins/views/list.c:778
 msgid "Drawer Plugin : List"
-msgstr "\"Plugin\" Drawer: Lista"
+msgstr "Plugin Gaveta: Lista"
 
 #: src/plugins/views/list.c:814
 msgid "Item size options"
