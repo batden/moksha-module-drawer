@@ -309,6 +309,7 @@ _grid_reconfigure(Instance *inst)
 
    /* Calculate a symetric grid from max items count*/
    int row_item_count = ceil((float) sqrt(max_item_count));
+   if (row_item_count > 5) row_item_count = 5; // max 5 rows grid
    cw = ew * row_item_count;
    ch = eh * ceil((float) max_item_count / row_item_count) + cath;
 
