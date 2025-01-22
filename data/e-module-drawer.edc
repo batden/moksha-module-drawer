@@ -27,7 +27,6 @@ images {
 collections {
    group {
       name: "icon";
-      max: 24 24;
       parts {
          part {
             name: "image";
