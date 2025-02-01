@@ -1,6 +1,10 @@
 src/e_mod_config.c
 src/e_mod_main.c
 src/e_mod_main.h
+src/plugins/sources/blacklist.c
 src/plugins/sources/directory_watcher.c
+src/plugins/sources/history.c
 src/plugins/sources/launcher.c
+src/plugins/sources/winlist.c
 src/plugins/views/list.c
+src/plugins/views/grid.c

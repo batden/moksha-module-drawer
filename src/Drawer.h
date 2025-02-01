@@ -3,9 +3,7 @@
 
 #include <e.h>
 
-#ifndef __UNUSED__
-#define __UNUSED__
-#endif
+#include "config.h"
 
 extern int _e_drawer_log_dom;
 #undef DBG
@@ -19,14 +17,15 @@ extern int _e_drawer_log_dom;
 #define ERR(...)            EINA_LOG_DOM_ERR(_e_drawer_log_dom, __VA_ARGS__)
 #define CRI(...)            EINA_LOG_DOM_CRIT(_e_drawer_log_dom, __VA_ARGS__)
 
-#ifdef ENABLE_NLS
+#ifdef HAVE_GETTEXT
 # include <libintl.h>
-# define D_(string) dgettext(PACKAGE, string)
+# define D_(string) dgettext(LOCALEDOMAIN, string)
 #else
 # define bindtextdomain(domain,dir)
 # define bind_textdomain_codeset(domain,codeset)
 # define D_(string) (string)
 #endif
+#define N_(string) (string)
 
 typedef enum
 {
