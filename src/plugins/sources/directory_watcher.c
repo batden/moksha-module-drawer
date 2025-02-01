@@ -227,14 +227,7 @@ drawer_source_activate(Drawer_Source *s, Drawer_Source_Item *si, E_Zone *zone)
                   return;
                }
              else
-               {
-                 Ecore_Exe *exe;
-                 char buf[PATH_MAX];
-
-                 snprintf(buf, sizeof(buf), "%s %s", "xdg-open", (char *)si->data);
-                 exe = e_util_exe_safe_run(buf, NULL);
-                 if (exe) ecore_exe_free(exe);
-               }
+               e_util_open((char *)si->data, NULL);
           }
         return;
      }
