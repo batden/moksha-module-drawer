@@ -211,7 +211,7 @@ msgstr "Nastavení řazení"
 
 #: src/plugins/sources/history.c:631
 msgid "Sort applications by executable"
-msgstr "Seřadit podle lokální spouštění"
+msgstr "Seřadit podle frekvence spouštění"
 
 #: src/plugins/sources/history.c:633
 msgid "Sort applications by date"
