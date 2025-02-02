@@ -186,61 +186,56 @@ msgid "Sort by size"
 msgstr "Seřadit podle velikosti"
 
 #: src/plugins/sources/history.c:179
-#, fuzzy
 msgid "History settings"
-msgstr "Nastavení seznamu"
+msgstr "Nastavení historie"
 
 #: src/plugins/sources/history.c:384 src/plugins/sources/launcher.c:301
 msgid "Change Item Properties"
-msgstr "Změnit vlastnosti"
+msgstr "Změnit vlastnosti položky"
 
 #: src/plugins/sources/history.c:394
 msgid "Blacklist Item"
-msgstr ""
+msgstr "Položka Blacklistu"
 
 #: src/plugins/sources/history.c:400 src/plugins/sources/launcher.c:306
 msgid "Remove Item"
 msgstr "Vymazat"
 
 #: src/plugins/sources/history.c:583
-#, fuzzy
 msgid "Drawer Plugin : History"
-msgstr "Drawer Modul : Seznam"
+msgstr "Drawer Modul : Historie"
 
 #: src/plugins/sources/history.c:630 src/plugins/sources/launcher.c:585
 msgid "Sorting options"
 msgstr "Nastavení řazení"
 
 #: src/plugins/sources/history.c:631
-#, fuzzy
 msgid "Sort applications by executable"
-msgstr "Seřadit podle lokální oblíbenosti"
+msgstr "Seřadit podle lokální spouštění"
 
 #: src/plugins/sources/history.c:633
-#, fuzzy
 msgid "Sort applications by date"
-msgstr "Seřadit podle lokální oblíbenosti"
+msgstr "Seřadit podle data"
 
 #: src/plugins/sources/history.c:635
-#, fuzzy
 msgid "Sort applications by popularity"
-msgstr "Seřadit podle celkové oblíbenosti"
+msgstr "Seřadit podle oblíbenosti"
 
 #: src/plugins/sources/history.c:638 src/plugins/sources/history.c:670
 msgid "Blacklist"
-msgstr ""
+msgstr "Blacklist"
 
 #: src/plugins/sources/history.c:639
 msgid "Enable Blacklist"
-msgstr ""
+msgstr "Povolit Blacklist"
 
 #: src/plugins/sources/history.c:644
 msgid "General"
-msgstr ""
+msgstr "Všeobecné"
 
 #: src/plugins/sources/history.c:649
 msgid "Blacklisted Applications"
-msgstr ""
+msgstr "Aplikace v Blacklistu"
 
 #: src/plugins/sources/history.c:660 src/plugins/sources/launcher.c:571
 msgid "Add"
@@ -252,11 +247,11 @@ msgstr "Smazat"
 
 #: src/plugins/sources/history.c:714
 msgid "Add Blacklisted Application"
-msgstr ""
+msgstr "Přidat aplikaci do Blacklistu"
 
 #: src/plugins/sources/history.c:715
 msgid "Enter application name"
-msgstr ""
+msgstr "Zadat název aplikace"
 
 #: src/plugins/sources/launcher.c:182
 msgid "Launcher settings"
