@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: drawer\n"
-"Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2025-01-15 21:26+0100\n"
+"Report-Msgid-Bugs-To: moksha@bodhilinux.com\n"
+"POT-Creation-Date: 2025-02-02 06:18-0500\n"
 "PO-Revision-Date: 2009-12-14 17:39+0200\n"
 "Last-Translator: Giorgos Koutsikos <ragecryx@yahoo.gr>\n"
 "Language-Team: Greek\n"
@@ -50,11 +50,11 @@ msgstr "Ρυθμίσεις πηγής"
 msgid "View settings"
 msgstr "Ρυθμίσεις προβολής"
 
-#: src/e_mod_config.c:300
+#: src/e_mod_config.c:299
 msgid "Moksha theme"
 msgstr ""
 
-#: src/e_mod_main.c:215
+#: src/e_mod_main.c:216
 msgid ""
 "Drawer Module Configuration data needed upgrading. Your old "
 "configuration<br> has been wiped and a new set of defaults initialized. "
@@ -65,7 +65,7 @@ msgid ""
 "things now to your<br>liking. Sorry for the inconvenience.<br>"
 msgstr ""
 
-#: src/e_mod_main.c:233
+#: src/e_mod_main.c:234
 msgid ""
 "Your Drawer Module configuration is NEWER than the module version. This is "
 "very<br>strange. This should not happen unless you downgraded<br>the module "
@@ -74,117 +74,180 @@ msgid ""
 "has been now restored to<br>defaults. Sorry for the inconvenience.<br>"
 msgstr ""
 
-#: src/e_mod_main.c:456
+#: src/e_mod_main.c:459
 msgid "The plugin is not configurable"
 msgstr "Η επέκταση δεν ρυθμίζεται"
 
-#: src/e_mod_main.c:1026 src/e_mod_main.c:1034 src/e_mod_main.c:1048
-#: src/e_mod_main.c:1060 src/e_mod_main.c:1128 src/e_mod_main.c:1179
-#: src/e_mod_main.c:1225
+#: src/e_mod_main.c:1029 src/e_mod_main.c:1037 src/e_mod_main.c:1051
+#: src/e_mod_main.c:1063 src/e_mod_main.c:1131 src/e_mod_main.c:1182
+#: src/e_mod_main.c:1228
 msgid "Drawer Plugins"
 msgstr "Επεκτάσεις συρταριού"
 
-#: src/e_mod_main.c:1027
+#: src/e_mod_main.c:1030
 #, c-format
 msgid "The plugin '%s' was not found."
 msgstr "Η επέκταση '%s' δεν βρέθηκε."
 
-#: src/e_mod_main.c:1035
+#: src/e_mod_main.c:1038
 #, c-format
 msgid "The plugin '%s' could not be opened."
 msgstr "Η επέκταση '%s' δεν μπόρεσε να ανοιχθεί."
 
-#: src/e_mod_main.c:1049 src/e_mod_main.c:1129 src/e_mod_main.c:1180
-#: src/e_mod_main.c:1226
+#: src/e_mod_main.c:1052 src/e_mod_main.c:1132 src/e_mod_main.c:1183
+#: src/e_mod_main.c:1229
 #, c-format
 msgid "The plugin '%s' does not contain all required functions."
 msgstr "Η επέκταση '%s' δεν περιέχει όλες τις απαιτούμενες λειτουργίες."
 
-#: src/e_mod_main.c:1061
+#: src/e_mod_main.c:1064
 #, c-format
 msgid "The plugin '%s' does not have the required API version."
 msgstr "Η επέκταση '%s' δεν έχει την απαιτούμενη έκδοση ΑΡΙ"
 
-#: src/e_mod_main.c:1391
+#: src/e_mod_main.c:1394
 msgid "Drawer"
 msgstr "Συρτάρι"
 
-#: src/e_mod_main.c:1484
+#: src/e_mod_main.c:1487
 msgid "Drawer Configuration Updated"
 msgstr "Ρύθμιση συρταριού ανανεώθηκε"
 
-#: src/e_mod_main.c:1851
+#: src/e_mod_main.c:1854
 msgid "Settings"
 msgstr "Ρυθμίσεις"
 
-#: src/plugins/sources/directory_watcher.c:251
+#: src/plugins/sources/directory_watcher.c:253
 msgid "Open Containing Directory"
 msgstr "Άνοιγμα περιεχόμενου καταλόγου"
 
-#: src/plugins/sources/directory_watcher.c:261
+#: src/plugins/sources/directory_watcher.c:263
 msgid "Directory Watcher settings"
 msgstr "Ρυθμίσεις "
 
-#: src/plugins/sources/directory_watcher.c:315
+#: src/plugins/sources/directory_watcher.c:317
 msgid "Home"
 msgstr "Αρχικό"
 
-#: src/plugins/sources/directory_watcher.c:378
+#: src/plugins/sources/directory_watcher.c:380
 #, c-format
 msgid "Directory (%s)"
 msgstr "Κατάλογος (%s)"
 
-#: src/plugins/sources/directory_watcher.c:464
+#: src/plugins/sources/directory_watcher.c:466
 msgid "Drawer Plugin : Directory Watcher"
 msgstr "Συρτάρι: Παρακολούθηση καταλόγου"
 
-#: src/plugins/sources/directory_watcher.c:505
+#: src/plugins/sources/directory_watcher.c:507
 msgid "Watch path"
 msgstr ""
 
-#: src/plugins/sources/directory_watcher.c:511
+#: src/plugins/sources/directory_watcher.c:513
 msgid "Custom file manager"
 msgstr "Προσαρμοσμένος διαχειριστής αρχείων"
 
-#: src/plugins/sources/directory_watcher.c:517
+#: src/plugins/sources/directory_watcher.c:519
 msgid "Sort Options"
 msgstr "Επιλογές ταξινόμησης"
 
-#: src/plugins/sources/directory_watcher.c:518
+#: src/plugins/sources/directory_watcher.c:520
 msgid "Sort directories first"
 msgstr "Ταξινόμηση των καταλόγων πρώτα"
 
-#: src/plugins/sources/directory_watcher.c:522
+#: src/plugins/sources/directory_watcher.c:524
 msgid "Sort by name"
 msgstr "Ταξινόμηση κατά όνομα"
 
-#: src/plugins/sources/directory_watcher.c:524
+#: src/plugins/sources/directory_watcher.c:526
 msgid "Sort by access time"
 msgstr "Ταξινόμηση κατά ώρα πρόσβασης"
 
-#: src/plugins/sources/directory_watcher.c:526
+#: src/plugins/sources/directory_watcher.c:528
 msgid "Sort by modification time"
 msgstr "Ταξινόμηση κατά ώρα τροποποίησης"
 
-#: src/plugins/sources/directory_watcher.c:528
+#: src/plugins/sources/directory_watcher.c:530
 msgid "Sort by change time"
 msgstr "Ταξινόμηση κατά ώρα αλλαγής"
 
-#: src/plugins/sources/directory_watcher.c:530
+#: src/plugins/sources/directory_watcher.c:532
 msgid "Sort by size"
 msgstr "Ταξινόμηση κατά μέγεθος"
+
+#: src/plugins/sources/history.c:179
+#, fuzzy
+msgid "History settings"
+msgstr "Ρυθμίσεις λίστας"
+
+#: src/plugins/sources/history.c:384 src/plugins/sources/launcher.c:301
+msgid "Change Item Properties"
+msgstr "Αλλαγή ιδιοτήτων αντικειμένου"
+
+#: src/plugins/sources/history.c:394
+msgid "Blacklist Item"
+msgstr ""
+
+#: src/plugins/sources/history.c:400 src/plugins/sources/launcher.c:306
+msgid "Remove Item"
+msgstr "Αφαίρεση αντικειμένου"
+
+#: src/plugins/sources/history.c:583
+#, fuzzy
+msgid "Drawer Plugin : History"
+msgstr "Συρτάρι: Λίστα"
+
+#: src/plugins/sources/history.c:630 src/plugins/sources/launcher.c:585
+msgid "Sorting options"
+msgstr "Επιλογές ταξινόμησης"
+
+#: src/plugins/sources/history.c:631
+msgid "Sort applications by executable"
+msgstr "Ταξινόμηση εφαρμογών κατά εκτελέσιμο"
+
+#: src/plugins/sources/history.c:633
+msgid "Sort applications by date"
+msgstr "Ταξινόμηση εφαρμογών κατά ημ/νία"
+
+#: src/plugins/sources/history.c:635
+msgid "Sort applications by popularity"
+msgstr "Ταξινόμηση εφαρμογών κατά δημοτικότητα"
+
+#: src/plugins/sources/history.c:638 src/plugins/sources/history.c:670
+msgid "Blacklist"
+msgstr ""
+
+#: src/plugins/sources/history.c:639
+msgid "Enable Blacklist"
+msgstr ""
+
+#: src/plugins/sources/history.c:644
+msgid "General"
+msgstr ""
+
+#: src/plugins/sources/history.c:649
+msgid "Blacklisted Applications"
+msgstr ""
+
+#: src/plugins/sources/history.c:660 src/plugins/sources/launcher.c:571
+msgid "Add"
+msgstr "Προσθήκη"
+
+#: src/plugins/sources/history.c:663 src/plugins/sources/launcher.c:573
+msgid "Delete"
+msgstr "Διαγραφή"
+
+#: src/plugins/sources/history.c:714
+msgid "Add Blacklisted Application"
+msgstr ""
+
+#: src/plugins/sources/history.c:715
+#, fuzzy
+msgid "Enter application name"
+msgstr "Ταξινόμηση εφαρμογών κατά ημ/νία"
 
 #: src/plugins/sources/launcher.c:182
 msgid "Launcher settings"
 msgstr "Ρυθμίσεις εκκινητή"
-
-#: src/plugins/sources/launcher.c:301
-msgid "Change Item Properties"
-msgstr "Αλλαγή ιδιοτήτων αντικειμένου"
-
-#: src/plugins/sources/launcher.c:306
-msgid "Remove Item"
-msgstr "Αφαίρεση αντικειμένου"
 
 #: src/plugins/sources/launcher.c:327
 #, c-format
@@ -199,21 +262,9 @@ msgstr "Συρτάρι: Εκκινητής"
 msgid "Selected Bar Source"
 msgstr "Επιλογή μιας πηγής μπάρας"
 
-#: src/plugins/sources/launcher.c:571
-msgid "Add"
-msgstr "Προσθήκη"
-
-#: src/plugins/sources/launcher.c:573
-msgid "Delete"
-msgstr "Διαγραφή"
-
 #: src/plugins/sources/launcher.c:575
 msgid "Configure"
 msgstr "Ρύθμιση"
-
-#: src/plugins/sources/launcher.c:585
-msgid "Sorting options"
-msgstr "Επιλογές ταξινόμησης"
 
 #: src/plugins/sources/launcher.c:586
 msgid "Unsorted"
@@ -272,15 +323,6 @@ msgstr "Μικρό"
 
 #~ msgid "Show rating/popularity"
 #~ msgstr "Εμφάνιση εκτίμησης/δημοτικότητας"
-
-#~ msgid "Sort applications by executable"
-#~ msgstr "Ταξινόμηση εφαρμογών κατά εκτελέσιμο"
-
-#~ msgid "Sort applications by date"
-#~ msgstr "Ταξινόμηση εφαρμογών κατά ημ/νία"
-
-#~ msgid "Sort applications by popularity"
-#~ msgstr "Ταξινόμηση εφαρμογών κατά δημοτικότητα"
 
 #~ msgid "Show popularity"
 #~ msgstr "Εμφάνιση δημοτικότητας"

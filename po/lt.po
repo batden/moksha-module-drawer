@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: drawer\n"
-"Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2025-01-15 21:26+0100\n"
+"Report-Msgid-Bugs-To: moksha@bodhilinux.com\n"
+"POT-Creation-Date: 2025-02-02 06:18-0500\n"
 "PO-Revision-Date: 2010-01-31 15:00+0000\n"
 "Last-Translator: Joshas <Unknown>\n"
 "Language-Team: Lithuanian\n"
@@ -50,11 +50,11 @@ msgstr "Šaltinio nuostatos"
 msgid "View settings"
 msgstr "Rodymo nuostatos"
 
-#: src/e_mod_config.c:300
+#: src/e_mod_config.c:299
 msgid "Moksha theme"
 msgstr ""
 
-#: src/e_mod_main.c:215
+#: src/e_mod_main.c:216
 msgid ""
 "Drawer Module Configuration data needed upgrading. Your old "
 "configuration<br> has been wiped and a new set of defaults initialized. "
@@ -73,7 +73,7 @@ msgstr ""
 "pasikeisti nustatymus pagal savo poreikius.<br>Atsiprašome už sukeltus "
 "nepatogumus.<br>"
 
-#: src/e_mod_main.c:233
+#: src/e_mod_main.c:234
 msgid ""
 "Your Drawer Module configuration is NEWER than the module version. This is "
 "very<br>strange. This should not happen unless you downgraded<br>the module "
@@ -87,117 +87,182 @@ msgstr ""
 "<br>Tai yra blogai, todėl saugumo sumetimais Jūsų konfigūracijos reikšmės "
 "buvo atstatytos į numatytąsias.<br>Atsiprašome už sukeltus nepatogumus.<br>"
 
-#: src/e_mod_main.c:456
+#: src/e_mod_main.c:459
 msgid "The plugin is not configurable"
 msgstr "Šis papildinys nekonfigūruojamas"
 
-#: src/e_mod_main.c:1026 src/e_mod_main.c:1034 src/e_mod_main.c:1048
-#: src/e_mod_main.c:1060 src/e_mod_main.c:1128 src/e_mod_main.c:1179
-#: src/e_mod_main.c:1225
+#: src/e_mod_main.c:1029 src/e_mod_main.c:1037 src/e_mod_main.c:1051
+#: src/e_mod_main.c:1063 src/e_mod_main.c:1131 src/e_mod_main.c:1182
+#: src/e_mod_main.c:1228
 msgid "Drawer Plugins"
 msgstr "Stalčiaus papildiniai"
 
-#: src/e_mod_main.c:1027
+#: src/e_mod_main.c:1030
 #, c-format
 msgid "The plugin '%s' was not found."
 msgstr "Papildinys '%s' nerastas."
 
-#: src/e_mod_main.c:1035
+#: src/e_mod_main.c:1038
 #, c-format
 msgid "The plugin '%s' could not be opened."
 msgstr "Nepavyko atverti papildinio '%s'."
 
-#: src/e_mod_main.c:1049 src/e_mod_main.c:1129 src/e_mod_main.c:1180
-#: src/e_mod_main.c:1226
+#: src/e_mod_main.c:1052 src/e_mod_main.c:1132 src/e_mod_main.c:1183
+#: src/e_mod_main.c:1229
 #, c-format
 msgid "The plugin '%s' does not contain all required functions."
 msgstr "Papildinys '%s' neturi visų reikalingų funkcijų."
 
-#: src/e_mod_main.c:1061
+#: src/e_mod_main.c:1064
 #, c-format
 msgid "The plugin '%s' does not have the required API version."
 msgstr "Papildinys '%s' neturi reikiamos API versijos."
 
-#: src/e_mod_main.c:1391
+#: src/e_mod_main.c:1394
 msgid "Drawer"
 msgstr "Stalčius"
 
-#: src/e_mod_main.c:1484
+#: src/e_mod_main.c:1487
 msgid "Drawer Configuration Updated"
 msgstr "Stalčiaus konfigūracija atnaujinta"
 
-#: src/e_mod_main.c:1851
+#: src/e_mod_main.c:1854
 msgid "Settings"
 msgstr "Nuostatos"
 
-#: src/plugins/sources/directory_watcher.c:251
+#: src/plugins/sources/directory_watcher.c:253
 msgid "Open Containing Directory"
 msgstr "Atverti talpinantįjį katalogą"
 
-#: src/plugins/sources/directory_watcher.c:261
+#: src/plugins/sources/directory_watcher.c:263
 msgid "Directory Watcher settings"
 msgstr "Katalogo stebėtojo nuostatos"
 
-#: src/plugins/sources/directory_watcher.c:315
+#: src/plugins/sources/directory_watcher.c:317
 msgid "Home"
 msgstr "Namai"
 
-#: src/plugins/sources/directory_watcher.c:378
+#: src/plugins/sources/directory_watcher.c:380
 #, c-format
 msgid "Directory (%s)"
 msgstr "Katalogas (%s)"
 
-#: src/plugins/sources/directory_watcher.c:464
+#: src/plugins/sources/directory_watcher.c:466
 msgid "Drawer Plugin : Directory Watcher"
 msgstr "Stalčiaus papildinys : Katalogo stebėtojas"
 
-#: src/plugins/sources/directory_watcher.c:505
+#: src/plugins/sources/directory_watcher.c:507
 msgid "Watch path"
 msgstr "Stebėjimo kelias"
 
-#: src/plugins/sources/directory_watcher.c:511
+#: src/plugins/sources/directory_watcher.c:513
 msgid "Custom file manager"
 msgstr "Sava failų tvarkyklė"
 
-#: src/plugins/sources/directory_watcher.c:517
+#: src/plugins/sources/directory_watcher.c:519
 msgid "Sort Options"
 msgstr "Rikiavimo pariktys"
 
-#: src/plugins/sources/directory_watcher.c:518
+#: src/plugins/sources/directory_watcher.c:520
 msgid "Sort directories first"
 msgstr "Pirmiau rikiuoti katalogus"
 
-#: src/plugins/sources/directory_watcher.c:522
+#: src/plugins/sources/directory_watcher.c:524
 msgid "Sort by name"
 msgstr "Rikiuoti pagal vardą"
 
-#: src/plugins/sources/directory_watcher.c:524
+#: src/plugins/sources/directory_watcher.c:526
 msgid "Sort by access time"
 msgstr "Rikiuoti pagal prieigos laiką"
 
-#: src/plugins/sources/directory_watcher.c:526
+#: src/plugins/sources/directory_watcher.c:528
 msgid "Sort by modification time"
 msgstr "Rikiuoti pagal modifikacijos laiką"
 
-#: src/plugins/sources/directory_watcher.c:528
+#: src/plugins/sources/directory_watcher.c:530
 msgid "Sort by change time"
 msgstr "Rikiuoti pagal pakeitimo laiką"
 
-#: src/plugins/sources/directory_watcher.c:530
+#: src/plugins/sources/directory_watcher.c:532
 msgid "Sort by size"
 msgstr "Rikiuoti pagal dydį"
+
+#: src/plugins/sources/history.c:179
+#, fuzzy
+msgid "History settings"
+msgstr "Sąrašo nuostatos"
+
+#: src/plugins/sources/history.c:384 src/plugins/sources/launcher.c:301
+msgid "Change Item Properties"
+msgstr "Keisti elemento savybes"
+
+#: src/plugins/sources/history.c:394
+msgid "Blacklist Item"
+msgstr ""
+
+#: src/plugins/sources/history.c:400 src/plugins/sources/launcher.c:306
+msgid "Remove Item"
+msgstr "Pašalinti elementą"
+
+#: src/plugins/sources/history.c:583
+#, fuzzy
+msgid "Drawer Plugin : History"
+msgstr "Stalčiaus papildinys : Sąrašas"
+
+#: src/plugins/sources/history.c:630 src/plugins/sources/launcher.c:585
+msgid "Sorting options"
+msgstr "Rikiavimo parinktys"
+
+#: src/plugins/sources/history.c:631
+#, fuzzy
+msgid "Sort applications by executable"
+msgstr "Rikiuoti programas pagal vietinį įvertį"
+
+#: src/plugins/sources/history.c:633
+#, fuzzy
+msgid "Sort applications by date"
+msgstr "Rikiuoti programas pagal vietinį įvertį"
+
+#: src/plugins/sources/history.c:635
+#, fuzzy
+msgid "Sort applications by popularity"
+msgstr "Rikiuoti programas pagal bendrąjį populiarumą"
+
+#: src/plugins/sources/history.c:638 src/plugins/sources/history.c:670
+msgid "Blacklist"
+msgstr ""
+
+#: src/plugins/sources/history.c:639
+msgid "Enable Blacklist"
+msgstr ""
+
+#: src/plugins/sources/history.c:644
+msgid "General"
+msgstr ""
+
+#: src/plugins/sources/history.c:649
+msgid "Blacklisted Applications"
+msgstr ""
+
+#: src/plugins/sources/history.c:660 src/plugins/sources/launcher.c:571
+msgid "Add"
+msgstr "Pridėti"
+
+#: src/plugins/sources/history.c:663 src/plugins/sources/launcher.c:573
+msgid "Delete"
+msgstr "Pašalinti"
+
+#: src/plugins/sources/history.c:714
+msgid "Add Blacklisted Application"
+msgstr ""
+
+#: src/plugins/sources/history.c:715
+msgid "Enter application name"
+msgstr ""
 
 #: src/plugins/sources/launcher.c:182
 msgid "Launcher settings"
 msgstr "Leistukas"
-
-#: src/plugins/sources/launcher.c:301
-msgid "Change Item Properties"
-msgstr "Keisti elemento savybes"
-
-#: src/plugins/sources/launcher.c:306
-msgid "Remove Item"
-msgstr "Pašalinti elementą"
 
 #: src/plugins/sources/launcher.c:327
 #, c-format
@@ -212,21 +277,9 @@ msgstr "Stalčiaus papildinys : Leistukas"
 msgid "Selected Bar Source"
 msgstr "Parinktos juostos šaltinis"
 
-#: src/plugins/sources/launcher.c:571
-msgid "Add"
-msgstr "Pridėti"
-
-#: src/plugins/sources/launcher.c:573
-msgid "Delete"
-msgstr "Pašalinti"
-
 #: src/plugins/sources/launcher.c:575
 msgid "Configure"
 msgstr "Konfigūruoti"
-
-#: src/plugins/sources/launcher.c:585
-msgid "Sorting options"
-msgstr "Rikiavimo parinktys"
 
 #: src/plugins/sources/launcher.c:586
 msgid "Unsorted"

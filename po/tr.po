@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: drawer\n"
-"Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2025-01-15 21:26+0100\n"
+"Report-Msgid-Bugs-To: moksha@bodhilinux.com\n"
+"POT-Creation-Date: 2025-02-02 06:18-0500\n"
 "PO-Revision-Date: 2009-11-15 11:06+0000\n"
 "Last-Translator: Mustafa Yılmaz <apshalasha@gmail.com>\n"
 "Language-Team: Turkish\n"
@@ -50,11 +50,11 @@ msgstr "Kaynak ayarları"
 msgid "View settings"
 msgstr "Görünüm ayarları"
 
-#: src/e_mod_config.c:300
+#: src/e_mod_config.c:299
 msgid "Moksha theme"
 msgstr ""
 
-#: src/e_mod_main.c:215
+#: src/e_mod_main.c:216
 msgid ""
 "Drawer Module Configuration data needed upgrading. Your old "
 "configuration<br> has been wiped and a new set of defaults initialized. "
@@ -65,7 +65,7 @@ msgid ""
 "things now to your<br>liking. Sorry for the inconvenience.<br>"
 msgstr ""
 
-#: src/e_mod_main.c:233
+#: src/e_mod_main.c:234
 msgid ""
 "Your Drawer Module configuration is NEWER than the module version. This is "
 "very<br>strange. This should not happen unless you downgraded<br>the module "
@@ -74,117 +74,182 @@ msgid ""
 "has been now restored to<br>defaults. Sorry for the inconvenience.<br>"
 msgstr ""
 
-#: src/e_mod_main.c:456
+#: src/e_mod_main.c:459
 msgid "The plugin is not configurable"
 msgstr "Bu eklenti yapılandırılamaz"
 
-#: src/e_mod_main.c:1026 src/e_mod_main.c:1034 src/e_mod_main.c:1048
-#: src/e_mod_main.c:1060 src/e_mod_main.c:1128 src/e_mod_main.c:1179
-#: src/e_mod_main.c:1225
+#: src/e_mod_main.c:1029 src/e_mod_main.c:1037 src/e_mod_main.c:1051
+#: src/e_mod_main.c:1063 src/e_mod_main.c:1131 src/e_mod_main.c:1182
+#: src/e_mod_main.c:1228
 msgid "Drawer Plugins"
 msgstr "Çekmece Eklentileri"
 
-#: src/e_mod_main.c:1027
+#: src/e_mod_main.c:1030
 #, c-format
 msgid "The plugin '%s' was not found."
 msgstr "'%s' eklentisi bulunamadı."
 
-#: src/e_mod_main.c:1035
+#: src/e_mod_main.c:1038
 #, c-format
 msgid "The plugin '%s' could not be opened."
 msgstr "'%s' eklentisi bulunamadı."
 
-#: src/e_mod_main.c:1049 src/e_mod_main.c:1129 src/e_mod_main.c:1180
-#: src/e_mod_main.c:1226
+#: src/e_mod_main.c:1052 src/e_mod_main.c:1132 src/e_mod_main.c:1183
+#: src/e_mod_main.c:1229
 #, c-format
 msgid "The plugin '%s' does not contain all required functions."
 msgstr "'%s' eklentisi gereken tüm fonksiyonları içermiyor."
 
-#: src/e_mod_main.c:1061
+#: src/e_mod_main.c:1064
 #, c-format
 msgid "The plugin '%s' does not have the required API version."
 msgstr "'%s' eklentisi gereken API sürümüne sahip değil."
 
-#: src/e_mod_main.c:1391
+#: src/e_mod_main.c:1394
 msgid "Drawer"
 msgstr "Çekmece"
 
-#: src/e_mod_main.c:1484
+#: src/e_mod_main.c:1487
 msgid "Drawer Configuration Updated"
 msgstr "Çekmece Yapılandırması Güncellendi"
 
-#: src/e_mod_main.c:1851
+#: src/e_mod_main.c:1854
 msgid "Settings"
 msgstr "Ayarlar"
 
-#: src/plugins/sources/directory_watcher.c:251
+#: src/plugins/sources/directory_watcher.c:253
 msgid "Open Containing Directory"
 msgstr "Kapsayan Dizini Aç"
 
-#: src/plugins/sources/directory_watcher.c:261
+#: src/plugins/sources/directory_watcher.c:263
 msgid "Directory Watcher settings"
 msgstr "Dizin İzleyici ayarları"
 
-#: src/plugins/sources/directory_watcher.c:315
+#: src/plugins/sources/directory_watcher.c:317
 msgid "Home"
 msgstr "Ev"
 
-#: src/plugins/sources/directory_watcher.c:378
+#: src/plugins/sources/directory_watcher.c:380
 #, c-format
 msgid "Directory (%s)"
 msgstr "(%s) Dizini"
 
-#: src/plugins/sources/directory_watcher.c:464
+#: src/plugins/sources/directory_watcher.c:466
 msgid "Drawer Plugin : Directory Watcher"
 msgstr "Dizin Eklentisi : Dizin İzleyici"
 
-#: src/plugins/sources/directory_watcher.c:505
+#: src/plugins/sources/directory_watcher.c:507
 msgid "Watch path"
 msgstr "İzleme yolu"
 
-#: src/plugins/sources/directory_watcher.c:511
+#: src/plugins/sources/directory_watcher.c:513
 msgid "Custom file manager"
 msgstr "Varsayılan Dosya Yöneticisi"
 
-#: src/plugins/sources/directory_watcher.c:517
+#: src/plugins/sources/directory_watcher.c:519
 msgid "Sort Options"
 msgstr "Sıralama Seçenekleri"
 
-#: src/plugins/sources/directory_watcher.c:518
+#: src/plugins/sources/directory_watcher.c:520
 msgid "Sort directories first"
 msgstr "Önce dizinleri sırala"
 
-#: src/plugins/sources/directory_watcher.c:522
+#: src/plugins/sources/directory_watcher.c:524
 msgid "Sort by name"
 msgstr "İsme göre sırala"
 
-#: src/plugins/sources/directory_watcher.c:524
+#: src/plugins/sources/directory_watcher.c:526
 msgid "Sort by access time"
 msgstr "Erişim zamanına göre sırala"
 
-#: src/plugins/sources/directory_watcher.c:526
+#: src/plugins/sources/directory_watcher.c:528
 msgid "Sort by modification time"
 msgstr "Düzenleme tarihin göre sırala"
 
-#: src/plugins/sources/directory_watcher.c:528
+#: src/plugins/sources/directory_watcher.c:530
 msgid "Sort by change time"
 msgstr "Değiştirme tarihine göre sırala"
 
-#: src/plugins/sources/directory_watcher.c:530
+#: src/plugins/sources/directory_watcher.c:532
 msgid "Sort by size"
 msgstr "Boyuta göre sırala"
+
+#: src/plugins/sources/history.c:179
+#, fuzzy
+msgid "History settings"
+msgstr "Liste ayarları"
+
+#: src/plugins/sources/history.c:384 src/plugins/sources/launcher.c:301
+msgid "Change Item Properties"
+msgstr "Öge Özelliklerini Değiştir"
+
+#: src/plugins/sources/history.c:394
+msgid "Blacklist Item"
+msgstr ""
+
+#: src/plugins/sources/history.c:400 src/plugins/sources/launcher.c:306
+msgid "Remove Item"
+msgstr "Ögeyi Kaldır"
+
+#: src/plugins/sources/history.c:583
+#, fuzzy
+msgid "Drawer Plugin : History"
+msgstr "Çekmece Eklentisi : Liste"
+
+#: src/plugins/sources/history.c:630 src/plugins/sources/launcher.c:585
+msgid "Sorting options"
+msgstr "Sıralama özellikleri"
+
+#: src/plugins/sources/history.c:631
+#, fuzzy
+msgid "Sort applications by executable"
+msgstr "Yerel değerlendirmeye göre sırala"
+
+#: src/plugins/sources/history.c:633
+#, fuzzy
+msgid "Sort applications by date"
+msgstr "Yerel değerlendirmeye göre sırala"
+
+#: src/plugins/sources/history.c:635
+#, fuzzy
+msgid "Sort applications by popularity"
+msgstr "Toplam popülerliğe göre sırala"
+
+#: src/plugins/sources/history.c:638 src/plugins/sources/history.c:670
+msgid "Blacklist"
+msgstr ""
+
+#: src/plugins/sources/history.c:639
+msgid "Enable Blacklist"
+msgstr ""
+
+#: src/plugins/sources/history.c:644
+msgid "General"
+msgstr ""
+
+#: src/plugins/sources/history.c:649
+msgid "Blacklisted Applications"
+msgstr ""
+
+#: src/plugins/sources/history.c:660 src/plugins/sources/launcher.c:571
+msgid "Add"
+msgstr "Ekle"
+
+#: src/plugins/sources/history.c:663 src/plugins/sources/launcher.c:573
+msgid "Delete"
+msgstr "Sil"
+
+#: src/plugins/sources/history.c:714
+msgid "Add Blacklisted Application"
+msgstr ""
+
+#: src/plugins/sources/history.c:715
+msgid "Enter application name"
+msgstr ""
 
 #: src/plugins/sources/launcher.c:182
 msgid "Launcher settings"
 msgstr "Başlatıcı ayarları"
-
-#: src/plugins/sources/launcher.c:301
-msgid "Change Item Properties"
-msgstr "Öge Özelliklerini Değiştir"
-
-#: src/plugins/sources/launcher.c:306
-msgid "Remove Item"
-msgstr "Ögeyi Kaldır"
 
 #: src/plugins/sources/launcher.c:327
 #, c-format
@@ -199,21 +264,9 @@ msgstr "Çekmece Eklntisi : Başlatıcı"
 msgid "Selected Bar Source"
 msgstr "Seçili Çubuk Kaynağı"
 
-#: src/plugins/sources/launcher.c:571
-msgid "Add"
-msgstr "Ekle"
-
-#: src/plugins/sources/launcher.c:573
-msgid "Delete"
-msgstr "Sil"
-
 #: src/plugins/sources/launcher.c:575
 msgid "Configure"
 msgstr "Yapılandır"
-
-#: src/plugins/sources/launcher.c:585
-msgid "Sorting options"
-msgstr "Sıralama özellikleri"
 
 #: src/plugins/sources/launcher.c:586
 msgid "Unsorted"

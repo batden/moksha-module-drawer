@@ -6,14 +6,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: drawer\n"
-"Report-Msgid-Bugs-To: enlightenment-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2025-01-15 21:26+0100\n"
+"Report-Msgid-Bugs-To: moksha@bodhilinux.com\n"
+"POT-Creation-Date: 2025-02-02 06:18-0500\n"
 "PO-Revision-Date: 2012-01-24 20:45+0300\n"
 "Last-Translator: سمير حسين <almusalimalmusalimah@gmail.com>\n"
 "Language-Team: Arabic\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Arabic\n"
 "X-Poedit-Country: SAUDI ARABIA\n"
@@ -51,11 +51,11 @@ msgstr "إعدادات المصدر"
 msgid "View settings"
 msgstr "إعدادات العرض"
 
-#: src/e_mod_config.c:300
+#: src/e_mod_config.c:299
 msgid "Moksha theme"
 msgstr ""
 
-#: src/e_mod_main.c:215
+#: src/e_mod_main.c:216
 msgid ""
 "Drawer Module Configuration data needed upgrading. Your old "
 "configuration<br> has been wiped and a new set of defaults initialized. "
@@ -72,7 +72,7 @@ msgstr ""
 "اﻹعدادات الجديدة ستصلح<br>ذلك عبر إضافتها فيها. يمكنك اﻵن إعادة إعداد اﻷشياء "
 "حسب<br>رغبتك. نأسف ﻹزعاجك.<br>"
 
-#: src/e_mod_main.c:233
+#: src/e_mod_main.c:234
 msgid ""
 "Your Drawer Module configuration is NEWER than the module version. This is "
 "very<br>strange. This should not happen unless you downgraded<br>the module "
@@ -85,117 +85,180 @@ msgstr ""
 "جديدة من الوحدة تعمل عليه. هذا سيء<br>و كإجراء إحترازي فإن إعداداتك ستعاد "
 "إلى<br>اﻹفتراضيات. نأسف ﻹزعاجك.<br>"
 
-#: src/e_mod_main.c:456
+#: src/e_mod_main.c:459
 msgid "The plugin is not configurable"
 msgstr "الملحق غير قابل للإعداد"
 
-#: src/e_mod_main.c:1026 src/e_mod_main.c:1034 src/e_mod_main.c:1048
-#: src/e_mod_main.c:1060 src/e_mod_main.c:1128 src/e_mod_main.c:1179
-#: src/e_mod_main.c:1225
+#: src/e_mod_main.c:1029 src/e_mod_main.c:1037 src/e_mod_main.c:1051
+#: src/e_mod_main.c:1063 src/e_mod_main.c:1131 src/e_mod_main.c:1182
+#: src/e_mod_main.c:1228
 msgid "Drawer Plugins"
 msgstr "ملحق الدرج"
 
-#: src/e_mod_main.c:1027
+#: src/e_mod_main.c:1030
 #, c-format
 msgid "The plugin '%s' was not found."
 msgstr "لم يعثر على الملحق '%s' ."
 
-#: src/e_mod_main.c:1035
+#: src/e_mod_main.c:1038
 #, c-format
 msgid "The plugin '%s' could not be opened."
 msgstr "لا يمكن فتح الملحق '%s' ."
 
-#: src/e_mod_main.c:1049 src/e_mod_main.c:1129 src/e_mod_main.c:1180
-#: src/e_mod_main.c:1226
+#: src/e_mod_main.c:1052 src/e_mod_main.c:1132 src/e_mod_main.c:1183
+#: src/e_mod_main.c:1229
 #, c-format
 msgid "The plugin '%s' does not contain all required functions."
 msgstr "لا يحتوي الملحق '%s' على كل الوظائف المطلوبة."
 
-#: src/e_mod_main.c:1061
+#: src/e_mod_main.c:1064
 #, c-format
 msgid "The plugin '%s' does not have the required API version."
 msgstr "لا يحتوي الملحق '%s' على إصدارة API المطلوبة."
 
-#: src/e_mod_main.c:1391
+#: src/e_mod_main.c:1394
 msgid "Drawer"
 msgstr "درج"
 
-#: src/e_mod_main.c:1484
+#: src/e_mod_main.c:1487
 msgid "Drawer Configuration Updated"
 msgstr "تم تحديث إعدادات الدرج"
 
-#: src/e_mod_main.c:1851
+#: src/e_mod_main.c:1854
 msgid "Settings"
 msgstr "اﻹعدادات"
 
-#: src/plugins/sources/directory_watcher.c:251
+#: src/plugins/sources/directory_watcher.c:253
 msgid "Open Containing Directory"
 msgstr "افتح المجلد المحتوي"
 
-#: src/plugins/sources/directory_watcher.c:261
+#: src/plugins/sources/directory_watcher.c:263
 msgid "Directory Watcher settings"
 msgstr "إعدادات مراقب المجلد"
 
-#: src/plugins/sources/directory_watcher.c:315
+#: src/plugins/sources/directory_watcher.c:317
 msgid "Home"
 msgstr "المنزل"
 
-#: src/plugins/sources/directory_watcher.c:378
+#: src/plugins/sources/directory_watcher.c:380
 #, c-format
 msgid "Directory (%s)"
 msgstr "المجلد (%s)"
 
-#: src/plugins/sources/directory_watcher.c:464
+#: src/plugins/sources/directory_watcher.c:466
 msgid "Drawer Plugin : Directory Watcher"
 msgstr "ملحق الدرج : مراقب المجلد"
 
-#: src/plugins/sources/directory_watcher.c:505
+#: src/plugins/sources/directory_watcher.c:507
 msgid "Watch path"
 msgstr "راقب المسار"
 
-#: src/plugins/sources/directory_watcher.c:511
+#: src/plugins/sources/directory_watcher.c:513
 msgid "Custom file manager"
 msgstr "خصِّص مدير الملفات"
 
-#: src/plugins/sources/directory_watcher.c:517
+#: src/plugins/sources/directory_watcher.c:519
 msgid "Sort Options"
 msgstr "رتب الخيارات"
 
-#: src/plugins/sources/directory_watcher.c:518
+#: src/plugins/sources/directory_watcher.c:520
 msgid "Sort directories first"
 msgstr "رتب المجلدات أولا"
 
-#: src/plugins/sources/directory_watcher.c:522
+#: src/plugins/sources/directory_watcher.c:524
 msgid "Sort by name"
 msgstr "رتب حسب اﻹسم"
 
-#: src/plugins/sources/directory_watcher.c:524
+#: src/plugins/sources/directory_watcher.c:526
 msgid "Sort by access time"
 msgstr "رتب حسب و قت الوصول"
 
-#: src/plugins/sources/directory_watcher.c:526
+#: src/plugins/sources/directory_watcher.c:528
 msgid "Sort by modification time"
 msgstr "رتب حسب وقت التعديل"
 
-#: src/plugins/sources/directory_watcher.c:528
+#: src/plugins/sources/directory_watcher.c:530
 msgid "Sort by change time"
 msgstr "رتب حسب تغير الوقت"
 
-#: src/plugins/sources/directory_watcher.c:530
+#: src/plugins/sources/directory_watcher.c:532
 msgid "Sort by size"
 msgstr "رتب حسب الحجم"
+
+#: src/plugins/sources/history.c:179
+#, fuzzy
+msgid "History settings"
+msgstr "إعدادات اللائحة"
+
+#: src/plugins/sources/history.c:384 src/plugins/sources/launcher.c:301
+msgid "Change Item Properties"
+msgstr "تغيير خصائص العنصر "
+
+#: src/plugins/sources/history.c:394
+msgid "Blacklist Item"
+msgstr ""
+
+#: src/plugins/sources/history.c:400 src/plugins/sources/launcher.c:306
+msgid "Remove Item"
+msgstr "أزل العنصر"
+
+#: src/plugins/sources/history.c:583
+#, fuzzy
+msgid "Drawer Plugin : History"
+msgstr "ملحق الدرج : اللائحة"
+
+#: src/plugins/sources/history.c:630 src/plugins/sources/launcher.c:585
+msgid "Sorting options"
+msgstr "خيارات الترتيب"
+
+#: src/plugins/sources/history.c:631
+msgid "Sort applications by executable"
+msgstr "Ordina applicazioni per eseguibile"
+
+#: src/plugins/sources/history.c:633
+msgid "Sort applications by date"
+msgstr "Ordina applicazioni per data"
+
+#: src/plugins/sources/history.c:635
+msgid "Sort applications by popularity"
+msgstr "Ordina applicazioni per popolarità"
+
+#: src/plugins/sources/history.c:638 src/plugins/sources/history.c:670
+msgid "Blacklist"
+msgstr ""
+
+#: src/plugins/sources/history.c:639
+msgid "Enable Blacklist"
+msgstr ""
+
+#: src/plugins/sources/history.c:644
+msgid "General"
+msgstr ""
+
+#: src/plugins/sources/history.c:649
+msgid "Blacklisted Applications"
+msgstr ""
+
+#: src/plugins/sources/history.c:660 src/plugins/sources/launcher.c:571
+msgid "Add"
+msgstr "أضف"
+
+#: src/plugins/sources/history.c:663 src/plugins/sources/launcher.c:573
+msgid "Delete"
+msgstr "امح"
+
+#: src/plugins/sources/history.c:714
+msgid "Add Blacklisted Application"
+msgstr ""
+
+#: src/plugins/sources/history.c:715
+#, fuzzy
+msgid "Enter application name"
+msgstr "Ordina applicazioni per data"
 
 #: src/plugins/sources/launcher.c:182
 msgid "Launcher settings"
 msgstr "إعدادات المطلق"
-
-#: src/plugins/sources/launcher.c:301
-msgid "Change Item Properties"
-msgstr "تغيير خصائص العنصر "
-
-#: src/plugins/sources/launcher.c:306
-msgid "Remove Item"
-msgstr "أزل العنصر"
 
 #: src/plugins/sources/launcher.c:327
 #, c-format
@@ -210,21 +273,9 @@ msgstr "ملحق الدرج : المطلق"
 msgid "Selected Bar Source"
 msgstr "مصدر الشريط المختار"
 
-#: src/plugins/sources/launcher.c:571
-msgid "Add"
-msgstr "أضف"
-
-#: src/plugins/sources/launcher.c:573
-msgid "Delete"
-msgstr "امح"
-
 #: src/plugins/sources/launcher.c:575
 msgid "Configure"
 msgstr "أعدّ"
-
-#: src/plugins/sources/launcher.c:585
-msgid "Sorting options"
-msgstr "خيارات الترتيب"
 
 #: src/plugins/sources/launcher.c:586
 msgid "Unsorted"
@@ -284,15 +335,6 @@ msgstr "صغير"
 
 #~ msgid "Show rating/popularity"
 #~ msgstr "Afficher l'évaluation / la popularité"
-
-#~ msgid "Sort applications by executable"
-#~ msgstr "Ordina applicazioni per eseguibile"
-
-#~ msgid "Sort applications by date"
-#~ msgstr "Ordina applicazioni per data"
-
-#~ msgid "Sort applications by popularity"
-#~ msgstr "Ordina applicazioni per popolarità"
 
 #~ msgid "Show popularity"
 #~ msgstr "Mostra popolarità"
