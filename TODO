@@ -1,10 +1,20 @@
-First, make everything fully functional.
+Everything should be fully functional now and converted to meson build.
 
-Test blacklist functionality to the history plugin.
+Bodhi To Do list:
+------------------------------------------------------------------------
+
 use eina_string share in hist blacklist code
 Finish blacklist edit functions and figure out the smart object error:
    ERR<1373>:evas_main ../src/lib/evas/canvas/evas_object_smart.c:151 evas_object_smart_data_get() calling smart object API on non-smart object!
 
+Directory_ watcher Plugin should have right click option to open or open with on drawer_item.
+This is prob pretty hard.
+
+Ideas on future plugins:
+- gtk-recently used?
+- ?? 
+
+------------------------------------------------------------------------
 Original To Do list:
 
 Thumbnailing needs a LOT more work
