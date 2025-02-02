@@ -107,7 +107,7 @@ static Eina_Bool _drawer_source_update_cb(void *data __UNUSED__, int ev_type, vo
 static Eina_Bool _drawer_source_main_icon_update_cb(void *data __UNUSED__, int ev_type, void *event);
 static Eina_Bool _drawer_view_activate_cb(void *data __UNUSED__, int ev_type, void *event);
 static Eina_Bool _drawer_view_context_cb(void *data __UNUSED__, int ev_type, void *event);
-static Eina_Bool _drawer_global_mouse_down_cb(void *data, int type, void *event);
+//~ static Eina_Bool _drawer_global_mouse_down_cb(void *data, int type, void *event);
 
 static void _drawer_popup_hidden_cb(void *data, Evas_Object *obj __UNUSED__, const char *emission __UNUSED__, const char *source __UNUSED__);
 static void _drawer_popup_shown_cb(void *data, Evas_Object *obj __UNUSED__, const char *emission __UNUSED__, const char *source __UNUSED__);

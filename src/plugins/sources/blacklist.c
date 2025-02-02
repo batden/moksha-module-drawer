@@ -125,7 +125,6 @@ Eet_Error
 read_blacklist(Eina_List **items)
 {
    Eet_File *blacklist_file = NULL;
-   Eina_List *l = NULL;
    char blacklist_path[PATH_MAX];
    char *ret = NULL, **list;
    int i, num, size;
