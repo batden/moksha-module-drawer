@@ -602,6 +602,8 @@ _drawer_error(const char *src, const char *msg, const char *name)
 static void
 _drawer_shelf_update(Instance *inst, Drawer_Source_Item *si)
 {
+   if (!si) return;
+
    Evas *evas;
 
    if (inst->o_content)
