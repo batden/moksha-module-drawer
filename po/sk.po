@@ -248,7 +248,7 @@ msgstr "Vymazať"
 
 #: src/plugins/sources/history.c:714
 msgid "Add Blacklisted Application"
-msgstr "Pridať applikáciu do Blacklistu"
+msgstr "Pridať aplikáciu do Blacklistu"
 
 #: src/plugins/sources/history.c:715
 msgid "Enter application name"
