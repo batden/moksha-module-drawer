@@ -25,7 +25,7 @@ config_h.set_quoted('PACKAGE', meson.project_name())
 config_h.set_quoted('LOCALEDIR', join_paths(get_option('prefix'), get_option('localedir')))
 config_h.set_quoted('LOCALEDOMAIN', gettext_domain)
 config_h.set_quoted('MODULE_ARCH', e_module_arch)
-if deb_ethumb.found()
+if get_option('thumbnails') and deb_ethumb.found()
     config_h.set('HAVE_ETHUMB', true)
 endif
 config_h.set('__UNUSED__', '__attribute__((unused))')
