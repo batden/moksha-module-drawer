@@ -1,9 +1,7 @@
 #include "e_mod_main.h"
 #include <strings.h>
+#include <Ethumb_Client.h>
 
-#ifdef HAVE_ETHUMB
-  #include <Ethumb_Client.h>
-#endif
 
 /* Local Structures */
 typedef struct _Instance Instance;
@@ -99,8 +97,10 @@ static Drawer_Composite *_drawer_composite_new(Instance *inst, const char *name)
 
 static void _drawer_thumbnail_theme(Evas_Object *thumbnail, Drawer_Source_Item *si);
 static void _drawer_thumbnail_swallow(Evas_Object *thumbnail, Evas_Object *swallow);
+#ifdef HAVE_ETHUMB 
 static void _drawer_thumb_process(Drawer_Thumb_Data *td);
 static void _drawer_thumb_data_free(void *data);
+#endif
 static void _drawer_content_recalc(Instance *inst, Evas_Object *obj);
 
 static Eina_Bool _drawer_source_update_cb(void *data __UNUSED__, int ev_type, void *event);
@@ -116,10 +116,12 @@ static void _drawer_mouse_down_cb(void *data, Evas *evas, Evas_Object *obj, void
 static void _drawer_menu_configure_cb(void *data, E_Menu *mn, E_Menu_Item *mi);
 static void _drawer_thumbnail_del_cb(void *data, Evas *e __UNUSED__, Evas_Object *obj __UNUSED__, void *event __UNUSED__);
 static void _drawer_changed_size_hints_cb(void *data, Evas *e, Evas_Object *obj, void *event_info);
+#ifdef HAVE_ETHUMB 
 static void _drawer_thumb_connect_cb(void *data, Ethumb_Client *e, Eina_Bool success);
 static void _drawer_thumb_die_cb(void *data, Ethumb_Client *e);
 static void _drawer_thumb_generate_cb(void *data, Ethumb_Client *e, int id, const char *file, const char *key, const char *thumb_path, const char *thumb_key, Eina_Bool success);
 static void _drawer_thumb_object_del_cb(void *data, Evas *evas, Evas_Object *obj, void *event_info);
+#endif
 
 
 static Evas_Object *_drawer_content_new(Evas *e, Evas_Object *child);
@@ -468,7 +470,9 @@ drawer_module_dir_get()
 EAPI Evas_Object *
 drawer_util_icon_create(Drawer_Source_Item *si, Evas *evas, int w, int h)
 {
+#ifdef HAVE_ETHUMB
    Drawer_Thumb_Data *td = NULL;
+#endif
    Evas_Object *o = NULL;
 
    switch(si->data_type)
@@ -1558,7 +1562,7 @@ _drawer_thumbnail_swallow(Evas_Object *thumbnail, Evas_Object *swallow)
    else if (!(strcmp(type, "e_icon")))
      e_icon_scale_up_set(swallow, 0);
 }
-
+#ifdef HAVE_ETHUMB 
 static void
 _drawer_thumb_exist_cb(void *data, Ethumb_Client *client __UNUSED__, Ethumb_Exists *thread __UNUSED__, Eina_Bool exists)
 {
@@ -1585,6 +1589,7 @@ _drawer_thumb_process(Drawer_Thumb_Data *td)
    ethumb_client_thumb_exists(ethumb_client, _drawer_thumb_exist_cb, td);
 }
 
+
 static void
 _drawer_thumb_data_free(void *data)
 {
@@ -1593,6 +1598,7 @@ _drawer_thumb_data_free(void *data)
    // FIXME: double free segfault issue
    // E_FREE(td);
 }
+#endif
 
 static void
 _drawer_content_recalc(Instance *inst, Evas_Object *obj)
@@ -1901,7 +1907,7 @@ _drawer_changed_size_hints_cb(void *data, Evas *e __UNUSED__, Evas_Object *obj, 
    if (parent)
      _drawer_content_recalc((Instance *) data, parent);
 }
-
+#ifdef HAVE_ETHUMB 
 static void
 _drawer_thumb_connect_cb(void *data, Ethumb_Client *e, Eina_Bool success)
 {
@@ -1997,6 +2003,7 @@ _drawer_thumb_object_del_cb(void *data, Evas *evas __UNUSED__, Evas_Object *obj 
    Drawer_Thumb_Data *td = data;
    td->object_deleted = EINA_TRUE;
 }
+#endif
 
 static Evas_Object *
 _drawer_content_new(Evas *e, Evas_Object *child)
