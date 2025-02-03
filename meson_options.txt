@@ -6,3 +6,8 @@ option('nls',
        type: 'boolean',
        value: true,
        description: 'enable localization (default=true)')
+
+option('thumbnails',
+       type: 'boolean',
+       value: false,
+       description: 'enable thumbnailing (default=false)')

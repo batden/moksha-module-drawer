@@ -1,7 +1,13 @@
 Everything should be fully functional now and converted to meson build.
 
+BUT thumbnailing is significantly broke so for now is disabled in the build. 
+Do NOT compile with thumbnailing support unless you are prepared for segfaults 
+and other issues.
+
 Bodhi To Do list:
 ------------------------------------------------------------------------
+
+Fix Thumbnailing
 
 use eina_string share in hist blacklist code
 Finish blacklist edit functions and figure out the smart object error:
