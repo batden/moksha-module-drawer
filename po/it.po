@@ -252,7 +252,6 @@ msgid "Add Blacklisted Application"
 msgstr "Aggiungi applicazione nella blacklist"
 
 #: src/plugins/sources/history.c:715
-#, 
 msgid "Enter application name"
 msgstr "Inserisci nome applicazione"
 
