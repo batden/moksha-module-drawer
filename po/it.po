@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: drawer\n"
 "Report-Msgid-Bugs-To: moksha@bodhilinux.com\n"
 "POT-Creation-Date: 2025-02-02 06:18-0500\n"
-"PO-Revision-Date: 2009-06-07 12:47+0200\n"
-"Last-Translator: Massimo Maiurana <maiurana@gmail.com>\n"
-"Language-Team: Italian\n"
+"PO-Revision-Date: 2025-02-03 21:57+0100\n"
+"Last-Translator: diekrz2\n"
+"Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,19 +38,19 @@ msgstr "Plugin per viste"
 
 #: src/e_mod_config.c:245 src/e_mod_config.c:266
 msgid "Description: Unavailable"
-msgstr "Descrizione: indisponibile"
+msgstr "Descrizione: non disponibile"
 
 #: src/e_mod_config.c:292
 msgid "Source settings"
-msgstr "Impostazioni plugin sorgenti"
+msgstr "Impostazioni sorgenti"
 
 #: src/e_mod_config.c:297
 msgid "View settings"
-msgstr "Impostazioni plugin viste"
+msgstr "Impostazioni vista"
 
 #: src/e_mod_config.c:299
 msgid "Moksha theme"
-msgstr ""
+msgstr "tema Moksha"
 
 #: src/e_mod_main.c:216
 msgid ""
@@ -80,10 +80,10 @@ msgid ""
 "module was running. This is bad and<br>as a precaution your configuration "
 "has been now restored to<br>defaults. Sorry for the inconvenience.<br>"
 msgstr ""
-"La vostra configurazione del modulo Drawer è più NUOVA della<br>versione del "
+"La vostra configurazione del modulo Drawer è più RECENTE della<br>versione del "
 "modulo. Questo è molto strano. Non dovrebbe succedere a meno<br>che siate "
 "passati ad una vecchia versione del modulo Drawer o avete<br>copiato la "
-"configurazione di un sistema su cui gira una versione<br>più nuova del "
+"configurazione di un sistema su cui gira una versione<br>più recente del "
 "modulo. A scopo precauzionale la vostra<br>configurazione è stata adesso "
 "ripristinata ai valori predefiniti.<br>Ci scusiamo per l'inconveniente."
 
@@ -149,7 +149,7 @@ msgstr "Directory (%s)"
 
 #: src/plugins/sources/directory_watcher.c:466
 msgid "Drawer Plugin : Directory Watcher"
-msgstr "Plugin di Drawer: controllore directory"
+msgstr "Plugin di Drawer: Controllore directory"
 
 #: src/plugins/sources/directory_watcher.c:507
 msgid "Watch path"
@@ -161,7 +161,7 @@ msgstr "File manager personalizzato"
 
 #: src/plugins/sources/directory_watcher.c:519
 msgid "Sort Options"
-msgstr "Opzioni per ordinamento"
+msgstr "Opzioni di ordinamento"
 
 #: src/plugins/sources/directory_watcher.c:520
 msgid "Sort directories first"
@@ -197,7 +197,7 @@ msgstr "Cambia proprietà oggetto"
 
 #: src/plugins/sources/history.c:394
 msgid "Blacklist Item"
-msgstr ""
+msgstr "Metti oggetto nella blacklist"
 
 #: src/plugins/sources/history.c:400 src/plugins/sources/launcher.c:306
 msgid "Remove Item"
@@ -229,15 +229,15 @@ msgstr ""
 
 #: src/plugins/sources/history.c:639
 msgid "Enable Blacklist"
-msgstr ""
+msgstr "Abilita blacklist"
 
 #: src/plugins/sources/history.c:644
 msgid "General"
-msgstr ""
+msgstr "Generale"
 
 #: src/plugins/sources/history.c:649
 msgid "Blacklisted Applications"
-msgstr ""
+msgstr "Applicazioni nella blacklist"
 
 #: src/plugins/sources/history.c:660 src/plugins/sources/launcher.c:571
 msgid "Add"
@@ -249,16 +249,15 @@ msgstr "Elimina"
 
 #: src/plugins/sources/history.c:714
 msgid "Add Blacklisted Application"
-msgstr ""
+msgstr "Aggiungi applicazione nella blacklist"
 
 #: src/plugins/sources/history.c:715
-#, fuzzy
 msgid "Enter application name"
-msgstr "Ordina applicazioni per data"
+msgstr "Inserisci nome applicazione"
 
 #: src/plugins/sources/launcher.c:182
 msgid "Launcher settings"
-msgstr "Impostazioni lanciatore"
+msgstr "Impostazioni launcher"
 
 #: src/plugins/sources/launcher.c:327
 #, c-format
@@ -267,7 +266,7 @@ msgstr "sorgente %s"
 
 #: src/plugins/sources/launcher.c:507
 msgid "Drawer Plugin : Launcher"
-msgstr "Plugin di Drawer: lanciatore"
+msgstr "Plugin di Drawer: Launcher"
 
 #: src/plugins/sources/launcher.c:563
 msgid "Selected Bar Source"
@@ -291,11 +290,11 @@ msgstr "Ordina applicazioni per popolarità generale"
 
 #: src/plugins/sources/launcher.c:625
 msgid "Create new Launcher source"
-msgstr "Crea nuova sorgente per lanciatore"
+msgstr "Crea nuova sorgente per il launcher"
 
 #: src/plugins/sources/launcher.c:626
 msgid "Enter a name for this new source:"
-msgstr "Inserire un nome per questa sorgente:"
+msgstr "Inserire un nome per questa nuova sorgente:"
 
 #: src/plugins/sources/launcher.c:639
 #, c-format
@@ -320,7 +319,7 @@ msgstr "Plugin di Drawer: Elenco"
 
 #: src/plugins/views/list.c:814
 msgid "Item size options"
-msgstr "Opzioni dimensioni oggetti"
+msgstr "Opzioni dimensione oggetto"
 
 #: src/plugins/views/list.c:815
 msgid "Large"
