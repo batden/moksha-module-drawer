@@ -225,7 +225,7 @@ msgstr "Ordina applicazioni per popolarità"
 
 #: src/plugins/sources/history.c:638 src/plugins/sources/history.c:670
 msgid "Blacklist"
-msgstr ""
+msgstr "Blacklist"
 
 #: src/plugins/sources/history.c:639
 msgid "Enable Blacklist"
