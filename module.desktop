@@ -1,0 +1,23 @@
+[Desktop Entry]
+Type=Link
+Name=Drawer
+Name[de]=Ablage
+Name[el]=Συρτάρι
+Name[eo]=Entenilo
+Name[fr]=Tiroir
+Name[pl]=Szuflada
+Name[pt]=Gaveta
+Name[ru]=Ящик
+Icon=e-module-drawer
+Comment=A Gadget that acts as a container for data.
+Comment[cs]=Gadget sloužící jako kontejner pro data.
+Comment[de]=Helfer, der als Datenablage fungiert.
+Comment[el]=Ένα συστατικό που λειτουργεί ως χώρος αποθήκευσης δεδομένων.
+Comment[eo]=Akcesoraĵo kiu agas kiel recivilo.
+Comment[fr]=Un gadget faisant office de réceptacle.
+Comment[it]=Un gadget che fa da contenitore per dati.
+Comment[pl]=Gadżet pełniący rolę pojemnika na dane.
+Comment[pt]=Um Gadget que atua como um contentor de dados.
+Comment[ru]=Гаджет, который действует как контейнер для данных.
+Comment[sk]=Gadget slúžiaci ako kontajner pre rôzne zobrazenia dát.
+X-Enlightenment-ModuleType=utils
