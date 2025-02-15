@@ -1,15 +1,15 @@
 # Russian translations for drawer package.
 # This file is put in the public domain.
 #
-# Automatically generated, 2025.
+# R0bur <robursw@gmail.com>, 2025.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: drawer\n"
 "Report-Msgid-Bugs-To: moksha@bodhilinux.com\n"
 "POT-Creation-Date: 2025-02-02 06:18-0500\n"
-"PO-Revision-Date: 2025-02-02 06:18-0500\n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2025-02-15 10:00+0300\n"
+"Last-Translator: R0bur <robursw@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -20,39 +20,39 @@ msgstr ""
 
 #: src/e_mod_config.c:52
 msgid "Drawer Module"
-msgstr ""
+msgstr "Модуль Комод"
 
 #: src/e_mod_config.c:106
 msgid "Plugins selection"
-msgstr ""
+msgstr "Выбор плагинов"
 
 #: src/e_mod_config.c:109
 msgid "Plugins settings"
-msgstr ""
+msgstr "Настройка плагинов"
 
 #: src/e_mod_config.c:171
 msgid "Source plugins"
-msgstr ""
+msgstr "Источники"
 
 #: src/e_mod_config.c:197
 msgid "View plugins"
-msgstr ""
+msgstr "Просмотр"
 
 #: src/e_mod_config.c:245 src/e_mod_config.c:266
 msgid "Description: Unavailable"
-msgstr ""
+msgstr "Описание: Недоступно"
 
 #: src/e_mod_config.c:292
 msgid "Source settings"
-msgstr ""
+msgstr "Настройка источников"
 
 #: src/e_mod_config.c:297
 msgid "View settings"
-msgstr ""
+msgstr "Настройка просмотра"
 
 #: src/e_mod_config.c:299
 msgid "Moksha theme"
-msgstr ""
+msgstr "Тема Moksha"
 
 #: src/e_mod_main.c:216
 msgid ""
@@ -64,6 +64,13 @@ msgid ""
 "set of defaults will fix<br>that by adding it in. You can re-configure "
 "things now to your<br>liking. Sorry for the inconvenience.<br>"
 msgstr ""
+"Требуется обновить конфигурацию модуля Комод. Ваша старая "
+"конфигурация<br> была стёрта, а новые настройки установлены."
+"Это<br>будет происходить регулярно в ходе разработки, так что не "
+"сообщайте<br>об ошибке. Просто модулю нужны новые настройки<br> для "
+"продолжения работы, поскольку старых недостаточно.<br>Внесённые "
+"значения по умолчанию позволят работать дальше.<br>Если хотите, "
+"можете изменить настройки по своему вкусу.<br>Извините за неудобства.<br>"
 
 #: src/e_mod_main.c:234
 msgid ""
@@ -73,215 +80,220 @@ msgid ""
 "module was running. This is bad and<br>as a precaution your configuration "
 "has been now restored to<br>defaults. Sorry for the inconvenience.<br>"
 msgstr ""
+"Конфигурация вашего модуля Комод новее, чем версия модуля. Это очень<br>"
+"странно. Так не должно быть, если только вы не вернули старую<br>версию "
+"модуля или скопировали конфигурацию из места, где<br>работает новая версия."
+" Это плохо, и поэтому<br> настройки были сброшены к значениям по умолчанию."
+"<br>Извините за неудобства.<br>"
 
 #: src/e_mod_main.c:459
 msgid "The plugin is not configurable"
-msgstr ""
+msgstr "Плагин не настраивается"
 
 #: src/e_mod_main.c:1029 src/e_mod_main.c:1037 src/e_mod_main.c:1051
 #: src/e_mod_main.c:1063 src/e_mod_main.c:1131 src/e_mod_main.c:1182
 #: src/e_mod_main.c:1228
 msgid "Drawer Plugins"
-msgstr ""
+msgstr "Плагины модуля"
 
 #: src/e_mod_main.c:1030
 #, c-format
 msgid "The plugin '%s' was not found."
-msgstr ""
+msgstr "Плагин '%s' не найден."
 
 #: src/e_mod_main.c:1038
 #, c-format
 msgid "The plugin '%s' could not be opened."
-msgstr ""
+msgstr "Плагин '%s' не открывается."
 
 #: src/e_mod_main.c:1052 src/e_mod_main.c:1132 src/e_mod_main.c:1183
 #: src/e_mod_main.c:1229
 #, c-format
 msgid "The plugin '%s' does not contain all required functions."
-msgstr ""
+msgstr "Плагин '%s' содержит не все необходимые функции."
 
 #: src/e_mod_main.c:1064
 #, c-format
 msgid "The plugin '%s' does not have the required API version."
-msgstr ""
+msgstr "Плагин '%s' не имеет требуемой версии API."
 
 #: src/e_mod_main.c:1394
 msgid "Drawer"
-msgstr ""
+msgstr "Комод"
 
 #: src/e_mod_main.c:1487
 msgid "Drawer Configuration Updated"
-msgstr ""
+msgstr "Конфигурация модуля обновлена"
 
 #: src/e_mod_main.c:1854
 msgid "Settings"
-msgstr ""
+msgstr "Настройки"
 
 #: src/plugins/sources/directory_watcher.c:253
 msgid "Open Containing Directory"
-msgstr ""
+msgstr "Открыть содержащий каталог"
 
 #: src/plugins/sources/directory_watcher.c:263
 msgid "Directory Watcher settings"
-msgstr ""
+msgstr "Настройки слежения за каталогом"
 
 #: src/plugins/sources/directory_watcher.c:317
 msgid "Home"
-msgstr ""
+msgstr "Дом"
 
 #: src/plugins/sources/directory_watcher.c:380
 #, c-format
 msgid "Directory (%s)"
-msgstr ""
+msgstr "Каталог (%s)"
 
 #: src/plugins/sources/directory_watcher.c:466
 msgid "Drawer Plugin : Directory Watcher"
-msgstr ""
+msgstr "Плагин модуля : Наблюдатель за каталогом"
 
 #: src/plugins/sources/directory_watcher.c:507
 msgid "Watch path"
-msgstr ""
+msgstr "Путь наблюдения"
 
 #: src/plugins/sources/directory_watcher.c:513
 msgid "Custom file manager"
-msgstr ""
+msgstr "Менеджер файлов"
 
 #: src/plugins/sources/directory_watcher.c:519
 msgid "Sort Options"
-msgstr ""
+msgstr "Варианты сортировки"
 
 #: src/plugins/sources/directory_watcher.c:520
 msgid "Sort directories first"
-msgstr ""
+msgstr "Сначала сорт. каталоги"
 
 #: src/plugins/sources/directory_watcher.c:524
 msgid "Sort by name"
-msgstr ""
+msgstr "Сорт. по имени"
 
 #: src/plugins/sources/directory_watcher.c:526
 msgid "Sort by access time"
-msgstr ""
+msgstr "Сорт. по времени доступа"
 
 #: src/plugins/sources/directory_watcher.c:528
 msgid "Sort by modification time"
-msgstr ""
+msgstr "Сорт. по времени модификации"
 
 #: src/plugins/sources/directory_watcher.c:530
 msgid "Sort by change time"
-msgstr ""
+msgstr "Сорт. по времени изменения"
 
 #: src/plugins/sources/directory_watcher.c:532
 msgid "Sort by size"
-msgstr ""
+msgstr "Сорт. по размеру"
 
 #: src/plugins/sources/history.c:179
 msgid "History settings"
-msgstr ""
+msgstr "Настройки истории"
 
 #: src/plugins/sources/history.c:384 src/plugins/sources/launcher.c:301
 msgid "Change Item Properties"
-msgstr ""
+msgstr "Изменить свойства элемента"
 
 #: src/plugins/sources/history.c:394
 msgid "Blacklist Item"
-msgstr ""
+msgstr "Скрыть элемент"
 
 #: src/plugins/sources/history.c:400 src/plugins/sources/launcher.c:306
 msgid "Remove Item"
-msgstr ""
+msgstr "Удалить элемент"
 
 #: src/plugins/sources/history.c:583
 msgid "Drawer Plugin : History"
-msgstr ""
+msgstr "Плагин модуля : История"
 
 #: src/plugins/sources/history.c:630 src/plugins/sources/launcher.c:585
 msgid "Sorting options"
-msgstr ""
+msgstr "Варианты сортировки"
 
 #: src/plugins/sources/history.c:631
 msgid "Sort applications by executable"
-msgstr ""
+msgstr "Сорт. приложения по исполняемости"
 
 #: src/plugins/sources/history.c:633
 msgid "Sort applications by date"
-msgstr ""
+msgstr "Сорт. приложения по дате"
 
 #: src/plugins/sources/history.c:635
 msgid "Sort applications by popularity"
-msgstr ""
+msgstr "Сорт. приложения по популярности"
 
 #: src/plugins/sources/history.c:638 src/plugins/sources/history.c:670
 msgid "Blacklist"
-msgstr ""
+msgstr "Чёрный список"
 
 #: src/plugins/sources/history.c:639
 msgid "Enable Blacklist"
-msgstr ""
+msgstr "Вкл. чёрный список"
 
 #: src/plugins/sources/history.c:644
 msgid "General"
-msgstr ""
+msgstr "Общие"
 
 #: src/plugins/sources/history.c:649
 msgid "Blacklisted Applications"
-msgstr ""
+msgstr "Скрытые приложения"
 
 #: src/plugins/sources/history.c:660 src/plugins/sources/launcher.c:571
 msgid "Add"
-msgstr ""
+msgstr "Добавить"
 
 #: src/plugins/sources/history.c:663 src/plugins/sources/launcher.c:573
 msgid "Delete"
-msgstr ""
+msgstr "Удалить"
 
 #: src/plugins/sources/history.c:714
 msgid "Add Blacklisted Application"
-msgstr ""
+msgstr "Добавить скрытые приложения"
 
 #: src/plugins/sources/history.c:715
 msgid "Enter application name"
-msgstr ""
+msgstr "Введите название приложения"
 
 #: src/plugins/sources/launcher.c:182
 msgid "Launcher settings"
-msgstr ""
+msgstr "Настройки запуска"
 
 #: src/plugins/sources/launcher.c:327
 #, c-format
 msgid "%s source"
-msgstr ""
+msgstr "Источник %s"
 
 #: src/plugins/sources/launcher.c:507
 msgid "Drawer Plugin : Launcher"
-msgstr ""
+msgstr "Плагин модуля : Запуск"
 
 #: src/plugins/sources/launcher.c:563
 msgid "Selected Bar Source"
-msgstr ""
+msgstr "Выбранный источник"
 
 #: src/plugins/sources/launcher.c:575
 msgid "Configure"
-msgstr ""
+msgstr "Настройка"
 
 #: src/plugins/sources/launcher.c:586
 msgid "Unsorted"
-msgstr ""
+msgstr "Без порядка"
 
 #: src/plugins/sources/launcher.c:588
 msgid "Sort applications by local rating"
-msgstr ""
+msgstr "Сорт. приложения по локальному рейтингу"
 
 #: src/plugins/sources/launcher.c:590
 msgid "Sort applications by overall popularity"
-msgstr ""
+msgstr "Сорт. приложения по общей популярности"
 
 #: src/plugins/sources/launcher.c:625
 msgid "Create new Launcher source"
-msgstr ""
+msgstr "Создать новый источник запуска"
 
 #: src/plugins/sources/launcher.c:626
 msgid "Enter a name for this new source:"
-msgstr ""
+msgstr "Введите название для нового источника:"
 
 #: src/plugins/sources/launcher.c:639
 #, c-format
@@ -289,31 +301,33 @@ msgid ""
 "You requested to delete \"%s\".<br><br>Are you sure you want to delete this "
 "bar source?"
 msgstr ""
+"Вы запросили удаление \"%s\".<br><br>Вы действительно хотите удалить этот "
+"источник?"
 
 #: src/plugins/sources/launcher.c:643
 msgid "Are you sure you want to delete this bar source?"
-msgstr ""
+msgstr "Вы действительно хотите удалить этот источник?"
 
 #: src/plugins/views/list.c:168
 msgid "List settings"
-msgstr ""
+msgstr "Настройки списков"
 
 #: src/plugins/views/list.c:778
 msgid "Drawer Plugin : List"
-msgstr ""
+msgstr "Плагин модуля : Список"
 
 #: src/plugins/views/list.c:814
 msgid "Item size options"
-msgstr ""
+msgstr "Настройки размера элементов"
 
 #: src/plugins/views/list.c:815
 msgid "Large"
-msgstr ""
+msgstr "Большой"
 
 #: src/plugins/views/list.c:817
 msgid "Medium"
-msgstr ""
+msgstr "Средний"
 
 #: src/plugins/views/list.c:819
 msgid "Small"
-msgstr ""
+msgstr "Малый"
