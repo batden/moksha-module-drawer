@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: drawer\n"
 "Report-Msgid-Bugs-To: moksha@bodhilinux.com\n"
 "POT-Creation-Date: 2025-02-02 06:18-0500\n"
-"PO-Revision-Date: 2010-01-11 17:08+0000\n"
+"PO-Revision-Date: 2025-02-16 18:51-0600\n"
 "Last-Translator: Paco Molinero <paco@byasl.com>\n"
 "Language-Team: Spanish\n"
 "Language: es\n"
@@ -16,11 +16,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2010-01-12 04:47+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: src/e_mod_config.c:52
 msgid "Drawer Module"
-msgstr "Modulo cajón"
+msgstr "Módulo Cajón"
 
 #: src/e_mod_config.c:106
 msgid "Plugins selection"
@@ -52,7 +52,7 @@ msgstr "Configuración de vista"
 
 #: src/e_mod_config.c:299
 msgid "Moksha theme"
-msgstr ""
+msgstr "Tema de Moksha"
 
 #: src/e_mod_main.c:216
 msgid ""
@@ -102,12 +102,12 @@ msgstr "Complementos de cajón"
 #: src/e_mod_main.c:1030
 #, c-format
 msgid "The plugin '%s' was not found."
-msgstr "No se encontró el complemento «%s»"
+msgstr "No se encontró el complemento «%s»."
 
 #: src/e_mod_main.c:1038
 #, c-format
 msgid "The plugin '%s' could not be opened."
-msgstr "No se pudo abrir el complemento «%s»"
+msgstr "No se pudo abrir el complemento «%s»."
 
 #: src/e_mod_main.c:1052 src/e_mod_main.c:1132 src/e_mod_main.c:1183
 #: src/e_mod_main.c:1229
@@ -138,7 +138,7 @@ msgstr "Abrir la carpeta contenedora"
 
 #: src/plugins/sources/directory_watcher.c:263
 msgid "Directory Watcher settings"
-msgstr ""
+msgstr "Configuración del Observador de Directorio"
 
 #: src/plugins/sources/directory_watcher.c:317
 msgid "Home"
@@ -151,7 +151,7 @@ msgstr "Directorio (%s)"
 
 #: src/plugins/sources/directory_watcher.c:466
 msgid "Drawer Plugin : Directory Watcher"
-msgstr ""
+msgstr "Complemento del Cajón: Observador de Directorio"
 
 #: src/plugins/sources/directory_watcher.c:507
 msgid "Watch path"
@@ -190,9 +190,8 @@ msgid "Sort by size"
 msgstr "Ordenar por tamaño"
 
 #: src/plugins/sources/history.c:179
-#, fuzzy
 msgid "History settings"
-msgstr "Configuraciones de la lista"
+msgstr "Configuración de la historia"
 
 #: src/plugins/sources/history.c:384 src/plugins/sources/launcher.c:301
 msgid "Change Item Properties"
@@ -200,51 +199,47 @@ msgstr "Cambiar propiedades del elemento"
 
 #: src/plugins/sources/history.c:394
 msgid "Blacklist Item"
-msgstr ""
+msgstr "Bloquear elemento"
 
 #: src/plugins/sources/history.c:400 src/plugins/sources/launcher.c:306
 msgid "Remove Item"
-msgstr "Eliminar el elemento"
+msgstr "Eliminar elemento"
 
 #: src/plugins/sources/history.c:583
-#, fuzzy
 msgid "Drawer Plugin : History"
-msgstr "Complemento cajón: Lista"
+msgstr "Complemento del Cajón: Historia"
 
 #: src/plugins/sources/history.c:630 src/plugins/sources/launcher.c:585
 msgid "Sorting options"
 msgstr "Opciones de clasificación"
 
 #: src/plugins/sources/history.c:631
-#, fuzzy
 msgid "Sort applications by executable"
-msgstr "Clasificar aplicaciones por índice local"
+msgstr "Ordenar aplicaciones por ejecutable"
 
 #: src/plugins/sources/history.c:633
-#, fuzzy
 msgid "Sort applications by date"
-msgstr "Clasificar aplicaciones por índice local"
+msgstr "Ordenar aplicaciones por fecha"
 
 #: src/plugins/sources/history.c:635
-#, fuzzy
 msgid "Sort applications by popularity"
-msgstr "Clasificar aplicaciones por popularidad total"
+msgstr "Ordenar aplicaciones por popularidad"
 
 #: src/plugins/sources/history.c:638 src/plugins/sources/history.c:670
 msgid "Blacklist"
-msgstr ""
+msgstr "Bloquear"
 
 #: src/plugins/sources/history.c:639
 msgid "Enable Blacklist"
-msgstr ""
+msgstr "Activar Bloqueo"
 
 #: src/plugins/sources/history.c:644
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #: src/plugins/sources/history.c:649
 msgid "Blacklisted Applications"
-msgstr ""
+msgstr "Aplicaciones bloqueadas"
 
 #: src/plugins/sources/history.c:660 src/plugins/sources/launcher.c:571
 msgid "Add"
@@ -256,11 +251,11 @@ msgstr "Borrar"
 
 #: src/plugins/sources/history.c:714
 msgid "Add Blacklisted Application"
-msgstr ""
+msgstr "Añadir aplicación bloqueada"
 
 #: src/plugins/sources/history.c:715
 msgid "Enter application name"
-msgstr ""
+msgstr "Colocar nombre de aplicación"
 
 #: src/plugins/sources/launcher.c:182
 msgid "Launcher settings"
@@ -297,7 +292,7 @@ msgstr "Clasificar aplicaciones por popularidad total"
 
 #: src/plugins/sources/launcher.c:625
 msgid "Create new Launcher source"
-msgstr ""
+msgstr "Crear nueva fuente del Lanzador"
 
 #: src/plugins/sources/launcher.c:626
 msgid "Enter a name for this new source:"
@@ -318,7 +313,7 @@ msgstr "¿Está seguro de querer borrar la fuente de esta barra?"
 
 #: src/plugins/views/list.c:168
 msgid "List settings"
-msgstr "Configuraciones de la lista"
+msgstr "Configuración de la lista"
 
 #: src/plugins/views/list.c:778
 msgid "Drawer Plugin : List"
