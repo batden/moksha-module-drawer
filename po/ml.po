@@ -1,4 +1,4 @@
-# Malayalam translations for drawer package.
+# Malayalam translations for the Drawer module.
 # This file is put in the public domain.
 #
 # Automatically generated, 2025.
