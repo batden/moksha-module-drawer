@@ -1,15 +1,15 @@
 # Hindi translations for the Drawer module.
 # This file is put in the public domain.
 #
-# Automatically generated, 2025.
+# Luee kasaudhan, 2025.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: drawer\n"
 "Report-Msgid-Bugs-To: moksha@bodhilinux.com\n"
 "POT-Creation-Date: 2025-02-02 06:18-0500\n"
-"PO-Revision-Date: 2025-02-02 06:18-0500\n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2025-03-03 17:28-0500\n"
+"Last-Translator: Luee kasaudhan\n"
 "Language-Team: Hindi\n"
 "Language: hi\n"
 "MIME-Version: 1.0\n"
